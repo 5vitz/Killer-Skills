@@ -45,7 +45,7 @@ def main(page: ft.Page):
     page.window_height = 880
 
     # --- ESTADO GLOBAL DO COCKPIT ---
-    active_view = "storyboard"      # "storyboard", "almoxarifado", "colecoes"
+    active_view = "storyboard"      # "storyboard", "almoxarifado", "colecoes", "preview"
     active_slot = None              # Slot (0, 1, 2, 3) sendo editado
     storyboard_data = [None] * 4 
     txt_legenda = ft.TextField(
@@ -231,7 +231,7 @@ def main(page: ft.Page):
             cards.append(
                 ft.Container(
                     content=card_content,
-                    width=170, height=230, bgcolor="#0A0A0A", border_radius=15, 
+                    width=190, height=255, bgcolor="#0A0A0A", border_radius=15, 
                     border=ft.border.all(1, "greenaccent" if has_media else "white10"), 
                     alignment=ft.alignment.center,
                     data=i, on_click=on_storyboard_card_click,
@@ -240,13 +240,13 @@ def main(page: ft.Page):
             )
 
         return ft.Container(
-            expand=True, padding=30, bgcolor="#000000",
+            expand=True, padding=40, bgcolor="#000000",
             content=ft.Column([
                 # Header Espaçoso
                 ft.Row([
                     ft.Column([
-                        ft.Text("🎬 Creative Studio", size=32, weight="bold"),
-                        ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=10, weight="bold")
+                        ft.Text("🎬 Creative Studio", size=36, weight="bold"),
+                        ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=11, weight="bold")
                     ]),
                     account_dropdown
                 ], alignment="spaceBetween"),
@@ -254,20 +254,20 @@ def main(page: ft.Page):
                 
                 # Coleção Indicador
                 ft.Row([
-                    ft.Text("Coleção Ativa:", size=11, color="white30"),
+                    ft.Text("Coleção Ativa:", size=12, color="white30"),
                     ft.Container(
-                        padding=ft.padding.symmetric(horizontal=10, vertical=4),
+                        padding=ft.padding.symmetric(horizontal=12, vertical=6),
                         bgcolor="#1E60FF", border_radius=8,
-                        content=ft.Text(f"@{account_dropdown.value}", size=11, weight="bold", color="white")
+                        content=ft.Text(f"@{account_dropdown.value}", size=12, weight="bold", color="white")
                     )
                 ]),
-                ft.Container(height=10),
+                ft.Container(height=15),
                 
                 # Storyboard Cards
                 ft.Text("STORYBOARD (CLIQUE EM UM CARD PARA PROCURAR MÍDIA)", size=11, color="white30", weight="bold"),
-                ft.Row(cards, spacing=20),
+                ft.Row(cards, spacing=25),
                 
-                ft.Divider(height=30, color="transparent"),
+                ft.Divider(height=35, color="transparent"),
                 
                 # Legendas
                 ft.Text("ESCREVA A LEGENDA E SOLICITE COPILOTO IA", size=11, color="white30", weight="bold"),
@@ -277,27 +277,25 @@ def main(page: ft.Page):
                         content=ft.IconButton(ft.icons.AUTO_AWESOME, icon_color="#1E60FF", on_click=run_ai_caption, icon_size=28),
                         bgcolor="#0A0A0A", border_radius=15, width=60, height=60, alignment=ft.alignment.center
                     )
-                ], spacing=10),
+                ], spacing=15),
                 
-                ft.Container(height=10),
+                ft.Container(height=15),
                 
-                # Agendamento
+                # Botão Direto para Preview
                 ft.ElevatedButton(
-                    "AGENDAR CAMPANHA COMPLETA", bgcolor="#1E60FF", color="white", 
-                    height=55, width=320, on_click=lambda _: agendar_save()
+                    "AVANÇAR PARA PREVIEW E SIMULAÇÃO", bgcolor="#1E60FF", color="white", 
+                    height=55, width=320, on_click=lambda _: change_view("preview")
                 )
             ], scroll="auto")
         )
 
     # --- 2. CONSTRUÇÃO DA TELA: ALMOXARIFADO (BIBLIOTECA DE MÍDIA) ---
     def build_almoxarifado_view():
-        # Carrega todas as mídias da pasta de uploads e assets + seeds
         media_sources = seed_images.copy()
         
         if os.path.exists(ASSETS_DIR):
             for f in os.listdir(ASSETS_DIR):
                 if f.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
-                    # Evita duplicar links absolutos
                     media_sources.append(f"/{f}")
 
         # Monta a galeria em Grid
@@ -332,7 +330,7 @@ def main(page: ft.Page):
             content=ft.Row([
                 ft.Icon(ft.icons.INFO_OUTLINE, color="white"),
                 ft.Text(f"SELECIONANDO MÍDIA PARA O FRAME {active_slot + 1} DA CAMPANHA", weight="bold", size=13),
-                ft.Spacer(),
+                ft.Container(expand=True),
                 ft.TextButton("Cancelar e Voltar", icon=ft.icons.CLOSE, icon_color="white", on_click=lambda _: cancel_selection())
             ])
         ) if active_slot is not None else ft.Container()
@@ -343,12 +341,12 @@ def main(page: ft.Page):
             change_view("storyboard")
 
         return ft.Container(
-            expand=True, padding=30, bgcolor="#000000",
+            expand=True, padding=40, bgcolor="#000000",
             content=ft.Column([
                 ft.Row([
                     ft.Column([
-                        ft.Text("📁 Almoxarifado Central", size=32, weight="bold"),
-                        ft.Text("GERENCIADOR DE COLEÇÕES E ATIVOS VISUAIS", color="#1E60FF", size=10, weight="bold")
+                        ft.Text("📁 Almoxarifado Central", size=36, weight="bold"),
+                        ft.Text("GERENCIADOR DE COLEÇÕES E ATIVOS VISUAIS", color="#1E60FF", size=11, weight="bold")
                     ]),
                     ft.ElevatedButton("Fazer Upload", icon=ft.icons.ADD_TO_PHOTOS, on_click=lambda _: picker.pick_files(allow_multiple=True))
                 ], alignment="spaceBetween"),
@@ -362,14 +360,109 @@ def main(page: ft.Page):
             ], scroll="auto")
         )
 
-    # --- 3. CONSTRUÇÃO DA TELA: COLEÇÕES / CLIENTES ---
-    def build_colecoes_view():
-        # Mock de Coleções estilo Firestore
+    # --- 3. CONSTRUÇÃO DA TELA: PREVIEW & SIMULADOR INSTAGRAM (TOTALMENTE ESPAÇOSA) ---
+    def build_preview_view():
         return ft.Container(
-            expand=True, padding=30, bgcolor="#000000",
+            expand=True, padding=40, bgcolor="#000000",
             content=ft.Column([
-                ft.Text("💼 Gestão de Coleções", size=32, weight="bold"),
-                ft.Text("CLIENTES E CONTAS CONECTADAS NO VPS", color="#1E60FF", size=10, weight="bold"),
+                ft.Row([
+                    ft.Column([
+                        ft.Text("📱 Simulador & Fila", size=36, weight="bold"),
+                        ft.Text("PREVIEW 1:1 E AGENDAMENTO DE PUBLICIDADE", color="#1E60FF", size=11, weight="bold")
+                    ]),
+                    ft.ElevatedButton("Voltar para o Studio", icon=ft.icons.EDIT, on_click=lambda _: change_view("storyboard"))
+                ], alignment="spaceBetween"),
+                ft.Divider(color="white10", height=30),
+                
+                # Duas colunas espaçosas centralizadas na tela!
+                ft.Row([
+                    # Coluna Esquerda: O Celular Simulador
+                    ft.Container(
+                        width=380, padding=25, bgcolor="#0A0A0A", border_radius=20,
+                        border=ft.border.all(1, "white10"),
+                        content=ft.Column([
+                            ft.Text("SIMULAÇÃO DE POST MÓVEL", size=11, color="white30", weight="bold"),
+                            ft.Container(
+                                padding=12, bgcolor="#000000", border_radius=15,
+                                border=ft.border.all(1, "white10"),
+                                content=ft.Column([
+                                    # Header do Post
+                                    ft.Row([
+                                        ft.Container(
+                                            content=preview_avatar_text,
+                                            width=28, height=28, bgcolor="#C5A880", border_radius=14, alignment=ft.alignment.center
+                                        ),
+                                        ft.Column([
+                                            preview_username_top,
+                                            ft.Text("Vitória, ES", size=8, color="white30")
+                                        ], spacing=0),
+                                        ft.Container(expand=True),
+                                        ft.Icon(ft.icons.MORE_HORIZ, color="white", size=16)
+                                    ], alignment="center"),
+                                    
+                                    # Media Display
+                                    preview_media_container,
+                                    
+                                    # Action Bar
+                                    ft.Row([
+                                        ft.Icon(ft.icons.FAVORITE_BORDER, color="white", size=16),
+                                        ft.Icon(ft.icons.CHAT_BUBBLE_OUTLINE, color="white", size=16),
+                                        ft.Icon(ft.icons.SEND, color="white", size=16),
+                                        ft.Container(expand=True),
+                                        ft.Icon(ft.icons.BOOKMARK_BORDER, color="white", size=16)
+                                    ]),
+                                    
+                                    # Likes e Legenda
+                                    ft.Text("Curtido por ingrid_sinkovitz e outras pessoas", size=10, weight="w500", color="white"),
+                                    ft.Text(
+                                        spans=[
+                                            preview_username_caption,
+                                            preview_caption_text
+                                        ], size=10, max_lines=3, overflow="ellipsis"
+                                    )
+                                ], spacing=8)
+                            )
+                        ], spacing=10)
+                    ),
+                    
+                    # Coluna Direita: Painel IA e Agendamento
+                    ft.Container(
+                        expand=True, padding=30, bgcolor="#0A0A0A", border_radius=20,
+                        border=ft.border.all(1, "white10"),
+                        content=ft.Column([
+                            ft.Text("INSIGHTS DO CO-DIRETOR IA", size=11, color="white30", weight="bold"),
+                            ft.Container(
+                                padding=20, bgcolor=ft.colors.with_opacity(0.02, ft.colors.WHITE),
+                                border_radius=15, border=ft.border.all(1, ft.colors.with_opacity(0.05, ft.colors.WHITE)),
+                                content=ai_insight_text,
+                                min_height=140,
+                            ),
+                            ft.Divider(color="white10", height=25),
+                            
+                            ft.Text("STATUS DE PUBLICAÇÃO", size=11, color="white30", weight="bold"),
+                            ft.Row([
+                                ft.Icon(ft.icons.CELL_TOWER, color="green"),
+                                ft.Text("Pronto para Autopublicação VPS", size=13, color="white70")
+                            ]),
+                            ft.Container(height=20),
+                            
+                            ft.ElevatedButton(
+                                "APROVAR E AGENDAR CAMPANHA", bgcolor="#1E60FF", color="white", 
+                                height=60, width=360, on_click=lambda _: agendar_save()
+                            )
+                        ], spacing=15)
+                    )
+                ], spacing=40, alignment="start", vertical_alignment="start")
+            ], scroll="auto")
+        )
+
+    # --- 4. CONSTRUÇÃO DA TELA: COLEÇÕES / CLIENTES ---
+    def build_colecoes_view():
+        return ft.Container(
+            expand=True, padding=40, bgcolor="#000000",
+            content=ft.Column([
+                ft.Text("💼 Gestão de Coleções", size=36, weight="bold"),
+                ft.Text("CLIENTES E CONTAS CONECTADAS NO VPS", color="#1E60FF", size=11, weight="bold"),
                 ft.Divider(color="white10", height=30),
                 
                 ft.Text("CLIENTES ATIVOS (ESTILO COLOÇÕES FIRESTORE)", size=11, color="white30", weight="bold"),
@@ -412,7 +505,7 @@ def main(page: ft.Page):
             ], scroll="auto")
         )
 
-    # --- 4. CONSTRUÇÃO DO COCKPIT CENTRAL (SIDEBAR + MAIN + PREVIEW) ---
+    # --- 5. MENU LATERAL DE NAVEGAÇÃO PREMIUM ---
     def build_sidebar():
         return ft.Container(
             width=260, bgcolor="#0A0A0A", padding=20,
@@ -425,7 +518,7 @@ def main(page: ft.Page):
                 ft.Text("ÁREAS DE TRABALHO", size=10, color="white30", weight="bold"),
                 ft.Container(height=5),
                 
-                # Menu de Navegação Premium
+                # Creative Studio Link
                 ft.Container(
                     content=ft.Row([
                         ft.Icon(ft.icons.AUTO_AWESOME_MOTION, color="#1E60FF" if active_view == "storyboard" else "white30", size=18),
@@ -436,6 +529,7 @@ def main(page: ft.Page):
                     border_radius=10,
                     on_click=lambda _: change_view("storyboard")
                 ),
+                # Almoxarifado Link
                 ft.Container(
                     content=ft.Row([
                         ft.Icon(ft.icons.FOLDER_SPECIAL, color="#1E60FF" if active_view == "almoxarifado" else "white30", size=18),
@@ -446,6 +540,18 @@ def main(page: ft.Page):
                     border_radius=10,
                     on_click=lambda _: change_view("almoxarifado")
                 ),
+                # Simulador e Fila (Preview) Link
+                ft.Container(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.MOBILE_SCREEN_SHARE, color="#1E60FF" if active_view == "preview" else "white30", size=18),
+                        ft.Text("Simulador & Fila", color="white" if active_view == "preview" else "white70", size=13, weight="bold" if active_view == "preview" else "normal")
+                    ]),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
+                    bgcolor=ft.colors.with_opacity(0.05, "#1E60FF") if active_view == "preview" else "transparent",
+                    border_radius=10,
+                    on_click=lambda _: change_view("preview")
+                ),
+                # Coleções Link
                 ft.Container(
                     content=ft.Row([
                         ft.Icon(ft.icons.PEOPLE_OUTLINE, color="#1E60FF" if active_view == "colecoes" else "white30", size=18),
@@ -472,88 +578,26 @@ def main(page: ft.Page):
     # Declaramos o contêiner da barra lateral
     sidebar_container = ft.Container(content=build_sidebar())
 
-    # --- MONTAGEM DA INTERFACE PRINCIPAL ---
+    # --- MONTAGEM DA INTERFACE PRINCIPAL (SEM O PREVIEW FIXO NA DIREITA!) ---
     def build_active_view():
         if active_view == "storyboard":
             return build_storyboard_view()
         elif active_view == "almoxarifado":
             return build_almoxarifado_view()
+        elif active_view == "preview":
+            return build_preview_view()
         elif active_view == "colecoes":
             return build_colecoes_view()
 
     # Painel Principal do Studio
     main_panel_container.content = build_active_view()
 
-    # Coluna do Preview (Lado Direito)
-    preview_column = ft.Container(
-        width=360, bgcolor="#0A0A0A", padding=20,
-        border=ft.border.only(left=ft.border.BorderSide(1, "white10")),
-        content=ft.Column([
-            ft.Text("DIRETORIA & PREVIEW", color="#1E60FF", weight="bold", size=16),
-            ft.Divider(color="white10", height=15),
-            
-            # Seção 1: Insights da IA
-            ft.Text("INSIGHTS DO CO-DIRETOR", size=11, color="white30", weight="bold"),
-            ft.Container(
-                padding=15, bgcolor=ft.colors.with_opacity(0.02, ft.colors.WHITE),
-                border_radius=12, border=ft.border.all(1, ft.colors.with_opacity(0.05, ft.colors.WHITE)),
-                content=ai_insight_text,
-                height=100,
-            ),
-            ft.Divider(color="white10", height=20),
-            
-            # Seção 2: Simulador do Instagram
-            ft.Text("SIMULADOR INSTAGRAM (1:1)", size=11, color="white30", weight="bold"),
-            ft.Container(
-                padding=12, bgcolor="#000000", border_radius=15,
-                border=ft.border.all(1, "white10"),
-                content=ft.Column([
-                    # Header do Post
-                    ft.Row([
-                        ft.Container(
-                            content=preview_avatar_text,
-                            width=28, height=28, bgcolor="#C5A880", border_radius=14, alignment=ft.alignment.center
-                        ),
-                        ft.Column([
-                            preview_username_top,
-                            ft.Text("Vitória, ES", size=8, color="white30")
-                        ], spacing=0),
-                        ft.Container(expand=True),
-                        ft.Icon(ft.icons.MORE_HORIZ, color="white", size=16)
-                    ], alignment="center"),
-                    
-                    # Media Display
-                    preview_media_container,
-                    
-                    # Action Bar
-                    ft.Row([
-                        ft.Icon(ft.icons.FAVORITE_BORDER, color="white", size=16),
-                        ft.Icon(ft.icons.CHAT_BUBBLE_OUTLINE, color="white", size=16),
-                        ft.Icon(ft.icons.SEND, color="white", size=16),
-                        ft.Container(expand=True),
-                        ft.Icon(ft.icons.BOOKMARK_BORDER, color="white", size=16)
-                    ]),
-                    
-                    # Likes e Legenda
-                    ft.Text("Curtido por ingrid_sinkovitz e outras pessoas", size=10, weight="w500", color="white"),
-                    ft.Text(
-                        spans=[
-                            preview_username_caption,
-                            preview_caption_text
-                        ], size=10, max_lines=3, overflow="ellipsis"
-                    )
-                ], spacing=8)
-            )
-        ], spacing=10, scroll="auto")
-    )
-
-    # Painel Geral de Trabalho (Sidebar + Main + Preview)
+    # Painel Geral de Trabalho (Apenas Sidebar + Área de Trabalho Central Ativa!)
     studio_layout = ft.Row(
         expand=True, spacing=0,
         controls=[
             sidebar_container,
-            main_panel_container,
-            preview_column
+            main_panel_container
         ]
     )
 
@@ -578,7 +622,6 @@ def main(page: ft.Page):
         if e.progress == 1.0:
             src_p, dst_p = os.path.join(UPLOAD_DIR, e.file_name), os.path.join(ASSETS_DIR, e.file_name)
             if os.path.exists(src_p): shutil.copy(src_p, dst_p)
-            # Atualiza o almoxarifado reativamente se estiver na tela dele
             if active_view == "almoxarifado":
                 change_view("almoxarifado")
             show_snack(f"✅ Upload concluído: {e.file_name}", "#1E60FF")
