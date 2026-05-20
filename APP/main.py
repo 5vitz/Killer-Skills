@@ -166,7 +166,7 @@ def main(page: ft.Page):
                 ft.Container(width=400, height=400, bgcolor=ft.colors.with_opacity(0.05, "#1E60FF"), border_radius=200, blur=ft.Blur(100, 100), left=100, top=100),
                 ft.Column([
                     ft.Text("Killer Skills", size=72, weight="bold"),
-                    ft.Text("NOSSOS AGENTES TRABALHAM POR VOCÊ!", color="#1E60FF", size=14, weight="bold", letter_spacing=2),
+                    ft.Text("NOSSOS AGENTES TRABALHAM POR VOCÊ!", color="#1E60FF", size=14, weight="bold"),
                     ft.Divider(height=40, color="transparent"),
                     ft.Container(
                         padding=40, width=500, bgcolor=ft.colors.with_opacity(0.05, ft.colors.WHITE),
@@ -246,7 +246,7 @@ def main(page: ft.Page):
                 ft.Row([
                     ft.Column([
                         ft.Text("🎬 Creative Studio", size=32, weight="bold"),
-                        ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=10, weight="bold", letter_spacing=1)
+                        ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=10, weight="bold")
                     ]),
                     account_dropdown
                 ], alignment="spaceBetween"),
@@ -348,7 +348,7 @@ def main(page: ft.Page):
                 ft.Row([
                     ft.Column([
                         ft.Text("📁 Almoxarifado Central", size=32, weight="bold"),
-                        ft.Text("GERENCIADOR DE COLEÇÕES E ATIVOS VISUAIS", color="#1E60FF", size=10, weight="bold", letter_spacing=1)
+                        ft.Text("GERENCIADOR DE COLEÇÕES E ATIVOS VISUAIS", color="#1E60FF", size=10, weight="bold")
                     ]),
                     ft.ElevatedButton("Fazer Upload", icon=ft.icons.ADD_TO_PHOTOS, on_click=lambda _: picker.pick_files(allow_multiple=True))
                 ], alignment="spaceBetween"),
@@ -369,7 +369,7 @@ def main(page: ft.Page):
             expand=True, padding=30, bgcolor="#000000",
             content=ft.Column([
                 ft.Text("💼 Gestão de Coleções", size=32, weight="bold"),
-                ft.Text("CLIENTES E CONTAS CONECTADAS NO VPS", color="#1E60FF", size=10, weight="bold", letter_spacing=1),
+                ft.Text("CLIENTES E CONTAS CONECTADAS NO VPS", color="#1E60FF", size=10, weight="bold"),
                 ft.Divider(color="white10", height=30),
                 
                 ft.Text("CLIENTES ATIVOS (ESTILO COLOÇÕES FIRESTORE)", size=11, color="white30", weight="bold"),
@@ -419,7 +419,7 @@ def main(page: ft.Page):
             border=ft.border.only(right=ft.border.BorderSide(1, "white10")),
             content=ft.Column([
                 ft.Text("Killer Skills", size=26, weight="bold"),
-                ft.Text("STUDIO COCKPIT", color="#1E60FF", size=9, weight="bold", letter_spacing=2),
+                ft.Text("STUDIO COCKPIT", color="#1E60FF", size=9, weight="bold"),
                 ft.Divider(color="white10", height=30),
                 
                 ft.Text("ÁREAS DE TRABALHO", size=10, color="white30", weight="bold"),
