@@ -3,6 +3,7 @@
 Este arquivo registra as tarefas críticas para garantir a saúde, segurança e escalabilidade do projeto a longo prazo.
 
 ## 🔴 Prioridade Alta (Segurança e Débito Técnico)
+- [ ] **Aprofundamento Ético e Segurança (Meta API):** Desenhar a estratégia e o manual de "Brand Safety" do Killer Skills, detalhando o funcionamento da conexão segura sem senhas via Meta OAuth e a governança ética de aprovação (Human-in-the-Loop) para clientes corporativos (Grupo Orletti).
 - [ ] **Mapeamento de Serviços:** Listar quais os tipos de serviços que vamos oferecer.
 - [ ] **Renomear Projeto:** Alterar o nome da pasta e referências de `meu-agente-insta` para `killer-skills` (Caminhos, imports, prompts e configs).
 - [ ] **Desvincular Chaves de API:** Criar um projeto separado no Google Cloud para o "Killer Skills", removendo a dependência da chave do site "Ingrid Sinkovitz".
