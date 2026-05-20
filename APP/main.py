@@ -50,11 +50,63 @@ def main(page: ft.Page):
     txt_legenda = ft.TextField(label="Legenda Estratégica", multiline=True, min_lines=3, border_color="#1E60FF", expand=True)
     ai_insight_text = ft.Text("Selecione fotos para análise...", size=13, italic=True)
     
+    # --- SIMULADOR INSTAGRAM REATIVO ---
+    preview_avatar_text = ft.Text("GO", size=10, weight="bold", color="white")
+    preview_username_top = ft.Text("grupoorletti", size=11, weight="bold", color="white")
+    preview_username_caption = ft.TextSpan("grupoorletti ", ft.TextStyle(weight="bold", color="white"))
+    preview_caption_text = ft.TextSpan("Legenda do post...", ft.TextStyle(color="white"))
+    
+    preview_media = ft.Image(src=None, fit="cover", border_radius=10)
+    preview_media_container = ft.Container(
+        content=ft.Text("Nenhuma mídia selecionada", color="white30", size=11),
+        width=300, height=260, bgcolor="#141414", border_radius=10, alignment=ft.alignment.center
+    )
+
+    def on_caption_change(e):
+        preview_caption_text.text = txt_legenda.value if txt_legenda.value else "Legenda do post..."
+        page.update()
+    
+    txt_legenda.on_change = on_caption_change
+
+    # Dropdown de Contas do Grupo Orletti (09 Contas Mapeadas)
+    account_dropdown = ft.Dropdown(
+        label="Selecionar Canal (Grupo Orletti)",
+        border_color="#1E60FF",
+        width=280,
+        options=[
+            ft.dropdown.Option("grupoorletti", "Grupo Orletti (@grupoorletti)"),
+            ft.dropdown.Option("orlettiseminovos", "Orletti Seminovos (@orlettiseminovos)"),
+            ft.dropdown.Option("jeeporletti", "Jeep Orletti (@jeeporletti)"),
+            ft.dropdown.Option("hyundaiorletti", "Hyundai Orletti (@hyundaiorletti)"),
+            ft.dropdown.Option("fiatorletti", "Fiat Orletti (@fiatorletti)"),
+            ft.dropdown.Option("bydorletti", "BYD Orletti (@bydorletti)"),
+            ft.dropdown.Option("gwmorletti", "GWM Orletti (@gwmorletti)"),
+            ft.dropdown.Option("renaultorletti", "Renault Orletti (@renaultorletti)"),
+            ft.dropdown.Option("toyotaorletti", "Toyota Orletti (@toyotaorletti)"),
+        ],
+        value="grupoorletti",
+    )
+
+    def on_account_change(e):
+        val = account_dropdown.value
+        username = f"{val}"
+        preview_username_top.value = username
+        preview_username_caption.text = f"{username} "
+        
+        # Iniciais para o avatar circular
+        initials = "".join([part[0] for part in val.split("orletti") if part]).upper()
+        if not initials: initials = val[:2].upper()
+        preview_avatar_text.value = initials[:2]
+        page.update()
+
+    account_dropdown.on_change = on_account_change
+    
     selected_src = None
     selected_card = None
 
     # --- NAVEGAÇÃO ---
     main_container = ft.AnimatedSwitcher(
+        content=ft.Container(),
         expand=True, transition=ft.AnimatedSwitcherTransition.FADE, duration=800
     )
 
@@ -87,6 +139,7 @@ def main(page: ft.Page):
             def task():
                 res = ai.sugerir_legenda(storyboard_data)
                 txt_legenda.value = res
+                preview_caption_text.text = res
                 page.update()
             
             threading.Thread(target=task).start()
@@ -132,6 +185,11 @@ def main(page: ft.Page):
             storyboard_data[idx] = selected_src
             e.control.content = ft.Image(src=selected_src, expand=True, fit="cover", border_radius=15)
             e.control.border = ft.border.all(2, "greenaccent")
+            
+            # Atualiza o simulador visual do Instagram com a imagem
+            preview_media.src = selected_src
+            preview_media_container.content = preview_media
+            
             page.update() # Atualiza a foto IMEDIATAMENTE
             
             # Inicia a análise da IA em segundo plano para não travar
@@ -152,7 +210,7 @@ def main(page: ft.Page):
                             ft.Text("STORYBOARD STUDIO", size=32, weight="bold"),
                             ft.Text("DIREÇÃO DE ARTE ATIVA", color="#1E60FF", size=12, weight="bold")
                         ]),
-                        ft.OutlinedButton("NOVA CAMPANHA", icon="refresh", on_click=lambda _: page.update())
+                        account_dropdown
                     ], alignment="spaceBetween"),
                     ft.Divider(color="white10", height=40),
                     ft.Row([
@@ -170,15 +228,63 @@ def main(page: ft.Page):
                     ]),
                     ft.ElevatedButton("AGENDAR CAMPANHA COMPLETA", bgcolor="#1E60FF", color="white", height=60, width=400, on_click=lambda _: agendar_save())
                 ], scroll="auto")),
-                ft.Container(width=280, bgcolor="#0A0A0A", padding=25, content=ft.Column([
-                    ft.Text("CO-DIRETOR AI", color="#1E60FF", weight="bold", size=16),
-                    ft.Divider(color="white10", height=30),
+                ft.Container(width=360, bgcolor="#0A0A0A", padding=20, content=ft.Column([
+                    ft.Text("DIRETORIA & PREVIEW", color="#1E60FF", weight="bold", size=16),
+                    ft.Divider(color="white10", height=15),
+                    
+                    # Seção 1: Insights da IA
+                    ft.Text("INSIGHTS DO CO-DIRETOR", size=11, color="white30", weight="bold"),
                     ft.Container(
-                        padding=20, bgcolor=ft.colors.with_opacity(0.02, ft.colors.WHITE),
-                        border_radius=15, border=ft.border.all(1, ft.colors.with_opacity(0.05, ft.colors.WHITE)),
-                        content=ai_insight_text
+                        padding=15, bgcolor=ft.colors.with_opacity(0.02, ft.colors.WHITE),
+                        border_radius=12, border=ft.border.all(1, ft.colors.with_opacity(0.05, ft.colors.WHITE)),
+                        content=ai_insight_text,
+                        height=100,
+                    ),
+                    ft.Divider(color="white10", height=20),
+                    
+                    # Seção 2: Simulador do Instagram
+                    ft.Text("SIMULADOR INSTAGRAM (1:1)", size=11, color="white30", weight="bold"),
+                    ft.Container(
+                        padding=12, bgcolor="#000000", border_radius=15,
+                        border=ft.border.all(1, "white10"),
+                        content=ft.Column([
+                            # Header do Post
+                            ft.Row([
+                                ft.Container(
+                                    content=preview_avatar_text,
+                                    width=28, height=28, bgcolor="#C5A880", border_radius=14, alignment=ft.alignment.center
+                                ),
+                                ft.Column([
+                                    preview_username_top,
+                                    ft.Text("Vitória, ES", size=8, color="white30")
+                                ], spacing=0),
+                                ft.Spacer(),
+                                ft.Icon(ft.icons.MORE_HORIZ, color="white", size=16)
+                            ], alignment="center"),
+                            
+                            # Media Display
+                            preview_media_container,
+                            
+                            # Action Bar
+                            ft.Row([
+                                ft.Icon(ft.icons.FAVORITE_BORDER, color="white", size=16),
+                                ft.Icon(ft.icons.CHAT_BUBBLE_OUTLINE, color="white", size=16),
+                                ft.Icon(ft.icons.SEND, color="white", size=16),
+                                ft.Spacer(),
+                                ft.Icon(ft.icons.BOOKMARK_BORDER, color="white", size=16)
+                            ]),
+                            
+                            # Likes e Legenda
+                            ft.Text("Curtido por ingrid_sinkovitz e outras pessoas", size=10, weight="w500", color="white"),
+                            ft.Text(
+                                spans=[
+                                    preview_username_caption,
+                                    preview_caption_text
+                                ], size=10, max_lines=3, overflow="ellipsis"
+                            )
+                        ], spacing=8)
                     )
-                ]))
+                ], spacing=10, scroll="auto"))
             ]
         )
 
