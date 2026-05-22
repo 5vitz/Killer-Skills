@@ -20,11 +20,7 @@ if command -v lsof >/dev/null 2>&1; then
     fi
 fi
 
-# Executa o aplicativo usando diretamente o executável python3 do venv para evitar falhas de shell no Ubuntu
-if [ -f "./venv/bin/python3" ]; then
-    ./venv/bin/python3 APP/main.py
-elif [ -f "./venv/bin/python" ]; then
-    ./venv/bin/python APP/main.py
-else
-    python3 APP/main.py
-fi
+# Abre a versão Web Real oficial no navegador padrão do Ubuntu (latência zero no deploy e conexão direta)
+echo "🌐 Abrindo o Killer Skills oficial na Web..."
+xdg-open "https://www.killerskills.com.br"
+
