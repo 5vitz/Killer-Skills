@@ -262,7 +262,7 @@ def main(page: ft.Page):
             height=530,
             bgcolor="#0A0A0A",
             border_radius=35,
-            border=ft.border.all(3, "#1E60FF"),
+            border=ft.border.all(1, "#1E60FF"),
             padding=15,
             content=ft.Stack([
                 # Dynamic Notch (Ilha Dinâmica)
@@ -347,12 +347,13 @@ def main(page: ft.Page):
                 border=ft.border.all(1, "white10"),
                 expand=True
             )
-        ], width=330, spacing=15)
+        ], width=290, spacing=15)
 
-        # 2. Coluna Central: O Smartphone Player 3D (Subiu e centralizado horizontalmente no Ponto Mediano!)
+        # 2. Coluna Central: O Smartphone Player 3D (Desceu um pouco para dar ar ao logo e centralizado!)
         center_side = ft.Container(
             content=player_panel,
             alignment=ft.alignment.center,
+            padding=ft.padding.only(top=40), # Desloca o player levemente para baixo!
             width=330
         )
 
@@ -375,13 +376,13 @@ def main(page: ft.Page):
             
             ft.Container(expand=True), # Empurra o botão de Preview para o rodapé
             
-            # Botão de Preview enxuto ("PREVIEW")
+            # Botão de Preview enxuto ("PREVIEW") com largura proporcional de 290px
             ft.ElevatedButton(
                 "PREVIEW", bgcolor="#1E60FF", color="white", 
-                height=55, width=330, on_click=lambda _: change_view("preview"),
+                height=55, width=290, on_click=lambda _: change_view("preview"),
                 icon=ft.icons.MOBILE_SCREEN_SHARE
             )
-        ], width=330, spacing=15)
+        ], width=290, spacing=15)
 
         return ft.Container(
             expand=True, padding=ft.padding.only(left=40, right=40, top=30, bottom=30), bgcolor="#000000",
