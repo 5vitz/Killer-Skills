@@ -318,8 +318,46 @@ def main(page: ft.Page):
             navigation_controls
         ], horizontal_alignment="center", spacing=0)
 
-        # Painel de Controles e IA (Coluna Direita)
-        controls_panel = ft.Column([
+        # 1. Coluna Esquerda: O Header (Logo + Título "Direção de Arte" enxuto) e o Card-Legenda Verticalizado!
+        left_side = ft.Column([
+            ft.Row([
+                ft.Image(src="/killer_skills_logo.png", height=70, fit="contain"),
+                ft.Column([
+                    ft.Text("Killer Skills", size=30, weight="bold"),
+                    ft.Text("DIREÇÃO DE ARTE", color="#1E60FF", size=11, weight="bold")
+                ], spacing=0)
+            ], spacing=15, vertical_alignment="center"),
+            ft.Divider(color="white10", height=15),
+            
+            ft.Text("LEGENDA E CAPTIONS", size=11, color="white30", weight="bold"),
+            ft.Container(
+                content=ft.Column([
+                    txt_legenda, # O campo de texto se expande verticalmente
+                    ft.Row([
+                        ft.Container(expand=True), # Empurra o botão para a direita!
+                        ft.Container(
+                            content=ft.IconButton(ft.icons.AUTO_AWESOME, icon_color="#1E60FF", on_click=run_ai_caption, icon_size=24),
+                            bgcolor="#050505", border_radius=12, width=50, height=50, alignment=ft.alignment.center
+                        )
+                    ], spacing=10)
+                ], expand=True, spacing=15),
+                padding=15,
+                bgcolor="#0A0A0A",
+                border_radius=15,
+                border=ft.border.all(1, "white10"),
+                expand=True
+            )
+        ], width=330, spacing=15)
+
+        # 2. Coluna Central: O Smartphone Player 3D (Subiu e centralizado horizontalmente no Ponto Mediano!)
+        center_side = ft.Container(
+            content=player_panel,
+            alignment=ft.alignment.center,
+            width=330
+        )
+
+        # 3. Coluna Direita: Diretrizes da Coleção, Selecionar Canal e Botão PREVIEW enxuto!
+        right_side = ft.Column([
             ft.Text("DIRETRIZES DA COLEÇÃO", size=11, color="white30", weight="bold"),
             ft.Row([
                 ft.Text("Coleção Ativa:", size=12, color="white70"),
@@ -329,55 +367,27 @@ def main(page: ft.Page):
                     content=ft.Text(f"@{account_dropdown.value}", size=12, weight="bold", color="white")
                 )
             ], alignment="start", vertical_alignment="center"),
-            ft.Container(height=10),
+            ft.Divider(color="white10", height=15),
             
-            ft.Text("LEGENDA E COPILOTO IA", size=11, color="white30", weight="bold"),
-            ft.Row([
-                txt_legenda, 
-                ft.Container(
-                    content=ft.IconButton(ft.icons.AUTO_AWESOME, icon_color="#1E60FF", on_click=run_ai_caption, icon_size=28),
-                    bgcolor="#0A0A0A", border_radius=15, width=60, height=60, alignment=ft.alignment.center
-                )
-            ], spacing=15),
+            ft.Text("SELECIONAR CANAL", size=11, color="white30", weight="bold"),
+            account_dropdown,
+            ft.Divider(color="white10", height=30),
             
-            ft.Container(height=25),
+            ft.Container(expand=True), # Empurra o botão de Preview para o rodapé
             
-            # Botão Direto para Preview
+            # Botão de Preview enxuto ("PREVIEW")
             ft.ElevatedButton(
-                "AVANÇAR PARA PREVIEW E SIMULAÇÃO", bgcolor="#1E60FF", color="white", 
-                height=55, width=320, on_click=lambda _: change_view("preview")
+                "PREVIEW", bgcolor="#1E60FF", color="white", 
+                height=55, width=330, on_click=lambda _: change_view("preview"),
+                icon=ft.icons.MOBILE_SCREEN_SHARE
             )
-        ], expand=True, spacing=15, horizontal_alignment="start")
-
-        # Nova disposição de altíssimo luxo side-by-side:
-        # Coluna Esquerda: O Header (Logo + Título) e os Controles e Legenda.
-        left_side = ft.Column([
-            ft.Row([
-                ft.Row([
-                    ft.Image(src="/killer_skills_logo.png", height=85, fit="contain"),
-                    ft.Column([
-                        ft.Text("Killer Skills", size=36, weight="bold"),
-                        ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=11, weight="bold")
-                    ], spacing=0)
-                ], spacing=20, vertical_alignment="center"),
-                account_dropdown
-            ], alignment="spaceBetween", vertical_alignment="center"),
-            ft.Divider(color="white10", height=20),
-            controls_panel
-        ], expand=True, spacing=15, scroll="auto")
-
-        # Coluna Direita: O Smartphone Player 3D (Subiu e foi para a direita, alinhado com V!)
-        right_side = ft.Container(
-            content=player_panel,
-            alignment=ft.alignment.center,
-            padding=ft.padding.only(left=20, right=20)
-        )
+        ], width=330, spacing=15)
 
         return ft.Container(
             expand=True, padding=ft.padding.only(left=40, right=40, top=30, bottom=30), bgcolor="#000000",
             content=ft.Row([
                 left_side,
-                ft.VerticalDivider(color="white10", width=40),
+                center_side,
                 right_side
             ], alignment="spaceBetween", vertical_alignment="center")
         )
