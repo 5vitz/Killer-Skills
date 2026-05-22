@@ -1,11 +1,22 @@
 #!/bin/bash
 echo "🚀 INICIANDO DEPLOY AUTOMÁTICO — KILLER SKILLS"
 echo "--------------------------------------------------"
+# Carrega as variáveis do arquivo .env local
+if [ -f .env ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+fi
+
 echo "📦 1. Enviando alterações locais para o GitHub..."
 git add .
 if ! git diff-index --quiet HEAD --; then
     git commit -m "deploy: automatic sync $(date '+%Y-%m-%d %H:%M:%S')"
-    git push
+    if [ ! -z "$GITHUB_TOKEN" ]; then
+        echo "🔑 Autenticando com Token do GitHub de forma segura..."
+        git push https://$GITHUB_TOKEN@github.com/5vitz/Killer-Skills.git main
+    else
+        echo "⚠️ GITHUB_TOKEN não configurado no .env! Tentando push padrão..."
+        git push
+    fi
 else
     echo "ℹ️ Nenhuma alteração pendente para commitar."
 fi
