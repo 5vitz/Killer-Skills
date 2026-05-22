@@ -353,7 +353,7 @@ def main(page: ft.Page):
         center_side = ft.Container(
             content=player_panel,
             alignment=ft.alignment.center,
-            padding=ft.padding.only(top=40), # Desloca o player levemente para baixo!
+            padding=ft.padding.only(top=10), # Calibragem milimétrica para alinhamento perfeito na base!
             width=330
         )
 
