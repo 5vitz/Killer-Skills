@@ -1,98 +1,120 @@
-# 🗺️ Mapeamento de Jornada dos Clientes e Consumo de Créditos
+# 🗺️ Mapeamento de Jornada dos Clientes, Presets e Consumo de Créditos
 ## Projeto Killer Skills — Versão Estratégica 1.0 (Maio de 2026)
 
-Este documento detalha o funcionamento prático do modelo de cobrança **Pay-per-Use (Créditos Pré-Pagos)** sob a ótica de **5 Personas de Clientes**. Ele serve como guia conceitual para o desenvolvimento da lógica de negócio no Backend, definindo a função de cada agente de IA e a precificação de cada ação.
+Este documento detalha o funcionamento prático do modelo de cobrança **Pay-per-Use (Créditos Pré-Pagos)** integrado com a **Categorização Real de Clientes (Pessoal vs. Comercial)** implementada no Construtor de Prompts. Ele serve como guia conceitual para o desenvolvimento da lógica de negócio e da dinâmica de UX adaptativa.
 
 ---
 
-## 🧠 1. A Equipe de Agentes e Suas Funções Técnicas
+## 🎭 1. A Categorização de Clientes (Estrutura Real do Produto)
 
-No modelo de Créditos Pré-Pagos, o ecossistema opera com **5 agentes integrados** sob o controle do app:
+A jornada no Killer Skills é dividida em **duas grandes Camadas de Atuação**, cada uma com seus respectivos **Presets de Posicionamento** que guiam os Agentes de IA:
 
-1. **O Estrategista (Orchestrator):** A mente controladora (a interface Flet). Ele recebe o comando do cliente, consulta se há saldo suficiente no banco de dados local, recruta os agentes necessários e divide a campanha em tarefas. *(Custo: 0 créditos — gerencia a engrenagem)*.
-2. **O Narrador (Narrative Engine):** Especialista em texto e voz. Responsável por gerar as legendas altamente persuasivas (via OpenRouter), roteirizar carrosséis e gerar a voz clonada do usuário (Text-to-Speech). *(Consome de 2 a 10 créditos)*.
-3. **O Criativo (Media Engine):** O artista visual. Ele se conecta às APIs (como Fal.ai ou Replicate) para gerar imagens ultra-realistas (Flux.1) ou renderizar vídeos cinemáticos (Luma/Runway). *(Consome de 50 a 300 créditos)*.
-4. **O Técnico/Editor (Curator Engine):** Para quem já tem conteúdo bruto. Ele redimensiona mídias (4:5 ou 9:16), aplica presets estéticos da marca, comprime para WebP de alta performance e trata áudios. *(Consome de 10 a 20 créditos)*.
-5. **O Executor (Postador Automatizado):** O robô operacional. Responsável por autenticar com segurança no Instagram (via PM2 no VPS), fazer o upload perfeito e disparar a notificação de "Campanha Publicada". *(Consome 20 créditos)*.
+### 👤 1.1. Camada Pessoal (Identidade & Prestígio)
+Focada em profissionais liberais, formadores de opinião, advogados, investidores e médicos que desejam projetar autoridade, inteligência ou status social nas redes.
+*   **Intelectual / Culto:** Tom sofisticado, ganchos filosóficos e referências clássicas.
+*   **Criativo / Rebelde:** Roteiros disruptivos, tom provocativo e design futurista.
+*   **Autoridade / Vitorioso:** Foco em bastidores ricos, lifestyle magnético e depoimentos de sucesso corporativo.
+*   **Alegre / Carismático:** Legendas amigáveis, humor sutil e forte conexão emocional com seguidores.
+*   **Narcisista:** Fotos tratadas em cenários luxuosos e legendas poéticas para engajamento em lotes.
+*   **Outros (Descrever abaixo):** Aciona um campo dinâmico de texto onde o usuário digita sua própria identidade customizada (ex: *Minimalista Filosófico*, *Aventureiro Tecnológico*).
 
----
-
-## 🗺️ 2. As 5 Jornadas de Clientes e Seus Consumos
-
-Abaixo estão detalhados os fluxos de consumo de cada persona dentro do dashboard do aplicativo:
-
-### 👤 Persona A: O Intelectual de Vitrine (Ex: Dr. Thiago, Advogado)
-*   **A Dor:** Quer projetar sabedoria, profundidade e cultura nas redes sociais para atrair clientes de alta renda, mas não tem tempo de ler livros clássicos ou escrever textos reflexivos.
-*   **O Ritual de Entrada:** Thiago faz um PIX de **R$ 50,00** (adiciona 5.000 créditos à sua carteira) e seleciona o template de Persona: *"O Intelectual"*.
-*   **O Fluxo de Ação (Jornada):**
-    1. **Entrada:** Thiago digita na caixa de texto do app apenas: *"Quero falar sobre a importância do foco no trabalho hoje"*.
-    2. **Intelectualização (Texto):** **O Narrador** cria uma legenda impecável com tom sofisticado, iniciando com uma frase de Marco Aurélio e terminando com um gancho estratégico sobre produtividade no mundo moderno. *(Débito: 5 créditos)*.
-    3. **Ambientação (Imagem):** **O Criativo** aciona a API e gera uma imagem minimalista de uma mesa de madeira escura com um livro aberto antigo, óculos de leitura finos e uma xícara de café com fumaça realista sob luz suave de estúdio. *(Débito: 50 créditos)*.
-    4. **Execução:** **O Executor** agenda o post para as 07:30 da manhã seguinte. *(Débito: 20 créditos)*.
-*   **Custo da Campanha:** **75 créditos** (aproximadamente R$ 0,75 centavos).
+### 🏢 1.2. Camada Comercial (Consistência & Mercado)
+Focada em empresas, e-commerces e prestadores de serviços de marketing que buscam escala, campanhas estruturadas e conversão em massa.
+*   **Vertente A (Agências Digitais & Curadores):** Lote de carrosséis, automações complexas e relatórios estatísticos.
+*   **Vertente B (Pequenos Negócios & Euquipe):** Foco em provas sociais de estoque dinâmico, promoções rápidas e engajamento local.
 
 ---
 
-### 👤 Persona B: O Lifestyle Magnético (Ex: Gustavo, Investidor/Trader)
-*   **A Dor:** Precisa projetar sucesso de alto padrão, lazer luxuoso e status social para gerar atração e vendas (inveja aspiracional), mas sua rotina real de trabalho é comum e diante de computadores.
-*   **O Ritual de Entrada:** Gustavo deposita **R$ 200,00** (20.000 créditos) e activa o template: *"Vencedor de Lifestyle"*.
-*   **O Fluxo de Ação (Jornada):**
-    1. **Entrada:** Gustavo faz upload de uma selfie simples que tirou no espelho da academia (conteúdo bruto).
-    2. **Curadoria Visual:** **O Editor** recorta o fundo da foto, aplica um preset de cores quentes e ricas (estética premium Cyber-Luxury) e melhora a definição facial via IA. *(Débito: 15 créditos)*.
-    3. **Fabricação de Veracidade:** **O Criativo** pega a imagem tratada e faz uma fusão de cenários (Inpainting) de altíssima precisão: insere a silhueta de Gustavo em um lounge de aeroporto executivo de luxo, com um jato executivo visível pela janela de vidro ao fundo. *(Débito: 100 créditos)*.
-    4. **Narrativa:** **O Narrador** escreve a legenda perfeita: *"O sucesso não é o que você faz quando todos olham, mas as decisões silenciosas de bastidores. Próxima parada: SP."* *(Débito: 5 créditos)*.
-    5. **Execução:** **O Executor** faz o agendamento da publicação. *(Débito: 20 créditos)*.
-*   **Custo da Campanha:** **140 créditos** (aproximadamente R$ 1,40).
+## 🍽️ 2. O Cardápio de Serviços AI & Custos de Consumo
+
+| Camada | Preset Selecionado | Custo em Créditos | Operações de IA Acionadas |
+| :--- | :--- | :--- | :--- |
+| **Pessoal** | Intelectual / Culto | **75 créditos** | Narrador AI (Marco Aurélio/Sêneca) + Imagens minimalistas Flux. |
+| **Pessoal** | Autoridade / Vitorioso | **140 créditos** | Editor facial de alta fidelidade + Inpainting de cenários de luxo. |
+| **Pessoal** | Narcisista | **105 créditos** | Recorte de silhueta + Fusão de fundos turísticos (Maldivas/Paris). |
+| **Comercial**| Vertente B (Pequenos Negócios) | **330 créditos** | Luma Video API (mãos embalando produtos) + Copywriting de escassez. |
+| **Comercial**| Vertente A (Agências/Mentores) | **200 créditos** | Transcrição Whisper + Roteirizador de Carrossel de 4 páginas + Flux. |
 
 ---
 
-### 👤 Persona C: A Marca em Ascensão (Ex: Mariana, E-commerce de Moda)
-*   **A Dor:** Quer criar a ilusão de que sua loja está bombando, despachando dezenas de mercadorias diariamente, para gerar segurança de compra e efeito manada em novos clientes.
-*   **O Ritual de Entrada:** Mariana carrega **R$ 100,00** (10.000 créditos).
-*   **O Fluxo de Ação (Jornada):**
-    1. **Entrada:** Mariana não tem nenhuma mídia disponível para hoje. Ela seleciona o comando: *"Geração Dinâmica de Movimentação de Estoque"*.
-    2. **Produção Cinemática (Vídeo):** **O Criativo** aciona o gerador de vídeo (Luma/Kling via Fal.ai) e renderiza um vídeo de 5 segundos de mãos elegantes selando caixas de envio minimalistas com uma fita preta luxuosa em cima de uma mesa de mármore. *(Débito: 300 créditos)*.
-    3. **Narrativa Comercial:** **O Narrador** cria a legenda com forte chamada para ação: *"Mais um lote de outono embalado e saindo para entrega hoje! Restam apenas 7 unidades em estoque. Link na bio."* *(Débito: 5 créditos)*.
-    4. **Execução:** **O Executor** publica o post em formato Reels no horário de pico (18:00). *(Débito: 25 créditos)*.
-*   **Custo da Campanha:** **330 créditos** (aproximadamente R$ 3,30).
+## 🗺️ 3. Fluxograma BPMN Geral (Página Inteira)
+
+O processo conceitual mapeia a jornada operacional do cliente e a **adequação reativa das telas** conforme as suas seleções:
+
+```mermaid
+flowchart TD
+    %% Estilos e Temas do Diagrama (Premium Dark/Blue/Gold)
+    classDef default fill:#0A0A0A,stroke:#1E60FF,stroke-width:1px,color:#FFFFFF;
+    classDef start_stop fill:#1E60FF,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF;
+    classDef gateway fill:#d4af37,stroke:#FFFFFF,stroke-width:1.5px,color:#000000;
+    classDef task fill:#141414,stroke:#1E60FF,stroke-width:1.5px,color:#FFFFFF;
+    classDef subprocess fill:#1F2937,stroke:#d4af37,stroke-width:1.5px,color:#FFFFFF;
+
+    Start([🚀 LOGIN NO COCKPIT]) --> Task1[🔑 Inserir / Validar API Key ou Créditos]
+    Task1 --> Gate1{💳 Possui Créditos / Chave Válida?}
+    
+    %% Gateway de Combustível
+    Gate1 -- NÃO --> TaskRecarga[🛒 Portal de Checkout / Pix de Recarga] --> Task1
+    Gate1 -- SIM --> Task2[🍽️ Abrir Cardápio de Serviços SaaS]
+    
+    %% Seleção da Camada de Atuação
+    Task2 --> SelectionCamada{🛎️ Seleção de Camada}
+    
+    SelectionCamada -- Pessoal --> TaskPresetsP[Exibir Perfis Pessoais]
+    SelectionCamada -- Comercial --> TaskPresetsC[Exibir Vertentes Comerciais]
+    
+    %% Gateway da Opção Outros
+    TaskPresetsP --> GateOther{🤔 Selecionou 'Outros'? }
+    GateOther -- SIM --> TaskCustom[🔓 Habilitar Input: Descreva seu Perfil Customizado] --> TaskAdapt
+    GateOther -- NÃO --> TaskAdapt[🎭 Adequação Reativa da Interface - Dynamic UX]
+    TaskPresetsC --> TaskAdapt
+    
+    %% Adequação de Telas Conforme Demanda
+    TaskAdapt --> GateDemand{🛠️ Tipo de Preset Selecionado}
+    
+    GateDemand -- Pessoais de Imagem/Lifestyle --> ScreenA[📸 UI Adaptada: Foco em Selfies, Filtros e Inpaint de Cenário]
+    GateDemand -- Pessoais de Filosofia/Culto --> ScreenB[✍️ UI Adaptada: Foco em Prompt de Texto e Seletor de Autor]
+    GateDemand -- Comerciais Vertente B --> ScreenC[🎬 UI Adaptada: Foco em Vídeos de Produto e Copy de Escassez]
+    GateDemand -- Comerciais Vertente A --> ScreenD[🎙️ UI Adaptada: Foco em Gravação de Voz e Layout de Carrossel]
+    
+    %% Processamento e Visualização
+    ScreenA & ScreenB & ScreenC & ScreenD --> PreAuth[👁️ Co-Diretor AI: Pre-Visualização 3D no Smartphone]
+    
+    %% Aprovação de Faturamento
+    PreAuth --> TaskConfirm[💰 Autorizar Gasto de Créditos]
+    TaskConfirm --> GateConfirm{🤝 Usuário Aprovou?}
+    
+    GateConfirm -- NÃO --> TaskCancel[❌ Cancelar Operação / Retornar ao Cardápio] --> Task2
+    GateConfirm -- SIM --> SubProcessPost[[⚡ Executar post em Segundo Plano via PM2/Worker]]
+    
+    %% Finalização
+    SubProcessPost --> TaskDeduct[📉 Debitar Créditos da Carteira Local SQLite]
+    TaskDeduct --> End([🎉 Post Publicado / Agendado no Instagram])
+
+    %% Aplicando Estilos aos nós
+    class Start,End start_stop;
+    class Gate1,SelectionCamada,GateOther,GateConfirm gateway;
+    class Task1,TaskRecarga,Task2,TaskPresetsP,TaskPresetsC,TaskCustom,TaskAdapt,ScreenA,ScreenB,ScreenC,ScreenD,PreAuth,TaskConfirm,TaskCancel,TaskDeduct task;
+    class SubProcessPost subprocess;
+```
 
 ---
 
-### 👤 Persona D: O Especialista de Autoridade (Ex: Amanda, Mentora Corporativa)
-*   **A Dor:** Precisa demonstrar extrema competência e conhecimento técnico para vender mentorias de alto valor (High-Ticket), sem ter que passar horas criando slides ou designs complexos.
-*   **O Ritual de Entrada:** Amanda faz uma recarga de **R$ 150,00** (15.000 créditos).
-*   **O Fluxo de Ação (Jornada):**
-    1. **Entrada:** Amanda grava um áudio simples de WhatsApp de 40 segundos comentando uma notícia do setor de negócios e sobe o arquivo no app.
-    2. **Transcrição:** **O Editor** transcreve o áudio perfeitamente usando a API Whisper e remove ruídos de respiração. *(Débito: 10 créditos)*.
-    3. **Estruturação:** **O Narrador** pega o texto bruto e o resume de forma estruturada em um roteiro educativo de Carrossel de 4 páginas (Ganchos, Métodos e Chamada para Ação). *(Débito: 10 créditos)*.
-    4. **Montagem Estética:** **O Criativo** gera os fundos texturizados elegantes em tons de azul corporativo e cinza escuro para cada um dos 4 slides (Flux.1) e o editor estampa o texto diagramado por cima. *(Débito: 150 créditos)*.
-    5. **Execução:** **O Executor** monta o carrossel e realiza o agendamento para terça às 19:00. *(Débito: 30 créditos)*.
-*   **Custo da Campanha:** **200 créditos** (aproximadamente R$ 2,00).
+## 🔍 4. Detalhamento Técnico das Etapas
 
----
+### 🔑 Etapa 1: Validação de Combustível
+O processo inicia validando se o usuário possui saldo no banco SQLite local (`killer_skills.db`). Caso a conta esteja zerada, a tela bloqueia a criação e exibe um painel de faturamento Pix.
 
-### 👤 Persona E: O Ego-Booster (Ex: Arthur, Validação Social)
-*   **A Dor:** Busca validação social rápida (curtidas e comentários rápidos para massagear o ego), mas não tem viajado ou tirado fotos interessantes ultimamente.
-*   **O Ritual de Entrada:** Arthur adiciona **R$ 30,00** (3.000 créditos).
-*   **O Fluxo de Ação (Jornada):**
-    1. **Entrada:** Arthur sobe uma foto comum dele sentado no sofá de sua casa.
-    2. **Recorte:** **O Editor** remove o fundo da sala comum. *(Débito: 0 créditos - processo local)*.
-    3. **Criação de Contexto:** **O Criativo** o coloca sentado em uma espreguiçadeira na varanda de um resort luxuoso nas Maldivas, com o mar azul ao fundo, adaptando a luz solar ao corpo de Arthur de forma realista (AI Light Synthesis). *(Débito: 80 créditos)*.
-    4. **Legenda Provocativa:** **O Narrador** redige uma legenda enigmática e poética que convida a interações rápidas. *(Débito: 5 créditos)*.
-    5. **Execução:** **O Executor** posta a foto imediatamente na rede. *(Débito: 20 créditos)*.
-*   **Custo da Campanha:** **105 créditos** (aproximadamente R$ 1,05).
+### 🛎️ Etapa 2: A Escolha das Camadas (Pessoal vs. Comercial)
+O usuário seleciona se a sua postagem de hoje é de natureza **Pessoal** ou **Comercial**.
+*   Se **Pessoal**: A interface exibe os presets de Identidade (Culto, Rebelde, Vitorioso, Narcisista).
+*   Se **Comercial**: Exibe as Vertentes Comerciais A e B.
+*   **O Gatilho "Outros":** Caso o usuário selecione "Outros (Descrever abaixo)", o Flet destrava dinamicamente o campo `custom_preset_input`, alterando a sua borda para dourado (`#d4af37`) e permitindo a digitação livre da identidade customizada.
 
----
+### 🎭 Etapa 3: Adequação Reativa das Telas (Dynamic UX)
+A tela se molda automaticamente conforme o preset selecionado:
+*   Se **Narcisista**: Oculta inputs textuais pesados e foca na interface de upload de fotos de rosto com dropdown de cenários de ostentação.
+*   Se **Especialista/Vertente A**: Mostra o player de áudio para carregar recados de voz e diagramador de slides.
 
-## 📈 3. Resumo da Arbitragem Financeira (Para a Plataforma)
-
-| Persona | Custo de API Real (Estimativa) | Créditos Cobrados | Valor Cobrado do Cliente | Margem de Lucro Bruta |
-| :--- | :--- | :--- | :--- | :--- |
-| **Intelectual** | R$ 0,08 (Texto + Flux) | 75 | R$ 0,75 | **~837%** |
-| **Lifestyle** | R$ 0,22 (Tratamento + Inpaint) | 140 | R$ 1,40 | **~536%** |
-| **Marca** | R$ 0,85 (Vídeo Luma) | 330 | R$ 3,30 | **~288%** |
-| **Especialista** | R$ 0,30 (Whisper + 4x Flux) | 200 | R$ 2,00 | **~566%** |
-| **Ego-Booster** | R$ 0,15 (Inpaint Maldivas) | 105 | R$ 1,05 | **~600%** |
-
-> [!TIP]
-> Este modelo garante que o faturamento da Killer Skills seja diretamente proporcional à satisfação e ao volume de postagens do usuário, criando uma máquina sustentável de micro-transações de alto valor agregado.
+### 👁️ Etapa 4: Pré-Visualização no Smartphone 3D & Débito
+A IA do **Co-Diretor** monta o storyboard, exibe o mockup no celular central e solicita a aprovação do faturamento em créditos. Uma vez aprovada, a tarefa é executada de forma silenciosa no background via PM2 e o banco de dados realiza o débito final.

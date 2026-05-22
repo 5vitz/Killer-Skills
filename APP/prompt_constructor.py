@@ -88,7 +88,7 @@ def build_prompt_constructor_view(is_admin: bool, page: ft.Page):
             ft.dropdown.Option("Criativo / Rebelde", "Pessoal: Criativo / Rebelde"),
             ft.dropdown.Option("Autoridade / Vitorioso", "Pessoal: Autoridade / Vitorioso"),
             ft.dropdown.Option("Alegre / Carismático", "Pessoal: Alegre / Carismático"),
-            ft.dropdown.Option("Narcisista (Ego-Booster)", "Pessoal: Narcisista (Ego-Booster)"),
+            ft.dropdown.Option("Narcisista", "Pessoal: Narcisista"),
             # Vertentes Comerciais
             ft.dropdown.Option("Vertente A: Agências Digitais", "Comercial: Vertente A (Agências/Curadores)"),
             ft.dropdown.Option("Vertente B: Pequenos Negócios (Euquipe)", "Comercial: Vertente B (Pequenos Negócios/Euquipe)"),
