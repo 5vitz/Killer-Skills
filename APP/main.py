@@ -357,7 +357,7 @@ def main(page: ft.Page):
                     ft.Row([
                         ft.Image(src="/killer_skills_logo.png", height=95, fit="contain"),
                         ft.Column([
-                            ft.Text("Creative Studio", size=36, weight="bold"),
+                            ft.Text("Killer Skills", size=36, weight="bold"),
                             ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=11, weight="bold")
                         ], spacing=0)
                     ], spacing=20, vertical_alignment="center"),
@@ -836,7 +836,7 @@ def main(page: ft.Page):
     # --- 5. MENU LATERAL DE NAVEGAÇÃO PREMIUM ---
     def build_sidebar():
         sidebar_controls = [
-            ft.Text("Killer Skills", size=26, weight="bold"),
+            ft.Text("Creative Studio", size=26, weight="bold"),
             ft.Text("ADMIN COCKPIT" if is_admin_mode else "STUDIO COCKPIT", color="#d4af37" if is_admin_mode else "#1E60FF", size=9, weight="bold"),
             ft.Divider(color="white10", height=30),
         ]
