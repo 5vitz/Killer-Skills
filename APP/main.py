@@ -349,29 +349,37 @@ def main(page: ft.Page):
             )
         ], expand=True, spacing=15, horizontal_alignment="start")
 
+        # Nova disposição de altíssimo luxo side-by-side:
+        # Coluna Esquerda: O Header (Logo + Título) e os Controles e Legenda.
+        left_side = ft.Column([
+            ft.Row([
+                ft.Row([
+                    ft.Image(src="/killer_skills_logo.png", height=85, fit="contain"),
+                    ft.Column([
+                        ft.Text("Killer Skills", size=36, weight="bold"),
+                        ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=11, weight="bold")
+                    ], spacing=0)
+                ], spacing=20, vertical_alignment="center"),
+                account_dropdown
+            ], alignment="spaceBetween", vertical_alignment="center"),
+            ft.Divider(color="white10", height=20),
+            controls_panel
+        ], expand=True, spacing=15, scroll="auto")
+
+        # Coluna Direita: O Smartphone Player 3D (Subiu e foi para a direita, alinhado com V!)
+        right_side = ft.Container(
+            content=player_panel,
+            alignment=ft.alignment.center,
+            padding=ft.padding.only(left=20, right=20)
+        )
+
         return ft.Container(
-            expand=True, padding=40, bgcolor="#000000",
-            content=ft.Column([
-                # Header Espaçoso
-                ft.Row([
-                    ft.Row([
-                        ft.Image(src="/killer_skills_logo.png", height=95, fit="contain"),
-                        ft.Column([
-                            ft.Text("Killer Skills", size=36, weight="bold"),
-                            ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=11, weight="bold")
-                        ], spacing=0)
-                    ], spacing=20, vertical_alignment="center"),
-                    account_dropdown
-                ], alignment="spaceBetween"),
-                ft.Divider(color="white10", height=30),
-                
-                # Layout Bifurcado (Player na Esquerda, Controles na Direita)
-                ft.Row([
-                    player_panel,
-                    ft.Container(width=40), # Espaçador
-                    controls_panel
-                ], alignment="start", vertical_alignment="start")
-            ], scroll="auto")
+            expand=True, padding=ft.padding.only(left=40, right=40, top=30, bottom=30), bgcolor="#000000",
+            content=ft.Row([
+                left_side,
+                ft.VerticalDivider(color="white10", width=40),
+                right_side
+            ], alignment="spaceBetween", vertical_alignment="center")
         )
 
     # --- 2. CONSTRUÇÃO DA TELA: ALMOXARIFADO (BIBLIOTECA DE MÍDIA) ---
