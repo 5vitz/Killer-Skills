@@ -673,8 +673,8 @@ def main(page: ft.Page):
         
         txt_custom_email = ft.TextField(
             label="Ou digite outra conta de e-mail...",
-            border_color="#1E60FF",
-            bgcolor="#0A0A0A",
+            border_color="#d4af37",
+            bgcolor="#000000",
             text_size=12,
             height=45,
             content_padding=10
@@ -725,7 +725,7 @@ def main(page: ft.Page):
             threading.Thread(target=run_auth).start()
 
         dialog = ft.AlertDialog(
-            bgcolor="#0F111A",
+            bgcolor="#050505",
             shape=ft.RoundedRectangleBorder(radius=15),
             content=ft.Container(
                 width=380, height=420, padding=10,
@@ -748,7 +748,7 @@ def main(page: ft.Page):
                                 ft.Text("artz.genera@gmail.com", size=11, color="white30")
                             ], spacing=0)
                         ], spacing=12),
-                        padding=10, border_radius=10, border=ft.border.all(1, "white10"),
+                        padding=10, border_radius=10, bgcolor="#0F0F12", border=ft.border.all(1, "white10"),
                         on_click=lambda _: trigger_google_auth_sequence("artz.genera@gmail.com")
                     ),
                     ft.Container(height=5),
@@ -763,7 +763,7 @@ def main(page: ft.Page):
                                 ft.Text("sinkando@gmail.com", size=11, color="white30")
                             ], spacing=0)
                         ], spacing=12),
-                        padding=10, border_radius=10, border=ft.border.all(1, "white10"),
+                        padding=10, border_radius=10, bgcolor="#0F0F12", border=ft.border.all(1, "white10"),
                         on_click=lambda _: trigger_google_auth_sequence("sinkando@gmail.com")
                     ),
                     ft.Container(height=5),
