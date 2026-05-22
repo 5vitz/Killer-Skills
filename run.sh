@@ -5,9 +5,9 @@
 # Navega para a pasta raiz do projeto
 cd /home/artz/Documentos/Antigravity/Killer-Skills/
 
-# Executa o deploy automático para a nuvem Contabo antes de carregar o app local
+# Executa o deploy automático em uma janela de terminal visível para diagnóstico de erros
 if [ -f "./deploy.sh" ]; then
-    bash ./deploy.sh
+    gnome-terminal --wait -- bash -c "bash ./deploy.sh; echo ''; echo '--------------------------------------------------'; echo 'Pressione [ENTER] para fechar esta janela...'; read"
 fi
 
 # Libera a porta 8081 se estiver ocupada por alguma instância antiga travada no Ubuntu
