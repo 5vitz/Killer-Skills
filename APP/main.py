@@ -311,11 +311,11 @@ def main(page: ft.Page):
             ft.IconButton(ft.icons.ARROW_FORWARD_IOS, icon_color="white", icon_size=18, on_click=lambda _: next_frame()),
         ], alignment="center", spacing=20)
         
-        # Painel do Player (Coluna Esquerda)
+        # Painel do Player (Coluna Esquerda) - Navegador em cima para alinhamento perfeito pela base!
         player_panel = ft.Column([
-            smartphone_player,
+            navigation_controls,
             ft.Container(height=10),
-            navigation_controls
+            smartphone_player
         ], horizontal_alignment="center", spacing=0)
 
         # 1. Coluna Esquerda: O Header (Logo + Título "Direção de Arte" enxuto) e o Card-Legenda Verticalizado!
