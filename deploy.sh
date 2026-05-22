@@ -22,9 +22,10 @@ else
     git push
 fi
 echo "🖥️ 2. Conectando via SSH ao VPS e atualizando a web..."
-ssh root@31.220.102.2 << 'EOF'
+ssh root@31.220.102.2 << EOF
   cd ~/Killer-Skills
-  git checkout APP/main.py
+  git remote set-url origin https://$GITHUB_TOKEN@github.com/5vitz/Killer-Skills.git
+  git reset --hard
   git pull
   pm2 restart killer-skills
   echo "✅ DEPLOY CONCLUÍDO COM 100% DE SUCESSO NA WEB!"
