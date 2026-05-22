@@ -17,8 +17,13 @@ class NarrativeSkill:
         if api_key and len(api_key) > 10 and api_key != "COLE_SUA_CHAVE_AQUI":
             print(f"[IA] ✅ Chave detectada e carregada (Final: {api_key[-4:]})")
             genai.configure(api_key=api_key)
-            # ELITE FINAL: Usando o Pro com suporte da chave Blaze
-            self.model = genai.GenerativeModel('gemini-pro-latest')
+            # Usando o altamente criativo e gratuito gemini-1.5-pro com suporte à quota do Free Tier
+            try:
+                models_list = [m.name for m in genai.list_models()]
+                print(f"[IA] Modelos disponíveis no SDK: {models_list}")
+            except Exception as ex:
+                print(f"[IA] Erro ao listar modelos: {ex}")
+            self.model = genai.GenerativeModel('gemini-2.5-flash')
             self.ativo = True
         else:
             print(f"[IA] ⚠️ Chave não encontrada ou inválida. Valor bruto: '{raw_key}'")

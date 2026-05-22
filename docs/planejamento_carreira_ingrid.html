@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Estratégico - Ingrid Sinkovitz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1E60FF;
+            --primary-light: #F0F4FF;
+            --accent: #d4af37;
+            --dark: #0F111A;
+            --gray: #6A6E7D;
+            --light-bg: #F8F9FC;
+            --border: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 50px 60px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .meta {
+            font-size: 13px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--primary);
+            margin-top: 35px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            page-break-after: avoid;
+        }
+
+        p, ul {
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: #334155;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .quote-box {
+            background: var(--light-bg);
+            border-left: 4px solid var(--accent);
+            padding: 24px 30px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        .nicho-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+
+        .nicho-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .nicho-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-box {
+            background: #0F111A;
+            color: #E2E8F0;
+            padding: 25px 30px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            border-left: 4px solid var(--primary);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .print-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            box-shadow: 0 4px 12px rgba(30, 96, 255, 0.2);
+        }
+
+        .print-btn:hover {
+            background: #164FD4;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--gray);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Otimizações de Impressão */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="button-container no-print">
+        <button class="print-btn" onclick="window.print()">Salvar / Imprimir como PDF</button>
+    </div>
+
+    <header>
+        <div class="badge">Orquestração de Imagem</div>
+        <h1>MANUAL ESTRATÉGICO DE POSICIONAMENTO</h1>
+        <div class="meta">Preparado exclusivamente para Ingrid Sinkovitz por Lincoln</div>
+    </header>
+
+    <h2>🧠 1. Diagnóstico de Persona: O Fator "Unicórnio"</h2>
+    <p>Ingrid, a sua trajetória é uma mina de ouro. Você possui um perfil extremamente raro no mercado de comunicação — o que o mercado corporativo de alta renda chama de <strong>Unicórnio</strong>: uma profissional que combina a vivência de campo em negócios (operação e gestão gastronômica) com bagagem executiva e artística tradicional (rádio, TV Globo e design).</p>
+    
+    <p><strong>O Grande Desafio:</strong> Se você focar apenas em "fazer posts", você se desvaloriza. Seu grande ativo é a bagagem de bastidor. A ex-dona de restaurante sabe a dor real do dono de restaurante com 100 mil seguidores; a ex-diretora de bandas e locutora entende a complexidade de marcas de entretenimento e formadores de opinião.</p>
+
+    <h2>🎨 2. A Linha Narrativa de Ouro (Fio Condutor)</h2>
+    <p>Para unir a Jovem Pan Vitória, a turnê na Itália com a banda Lion Jump no programa SuperStar, a fundação e gestão de um restaurante físico na Bahia e o marketing de tecnologia em São Paulo, criamos este fio condutor:</p>
+
+    <div class="quote-box">
+        "Seja coordenando a audiência matinal da maior rádio local, gerenciando a logística e a imagem de uma turnê internacional de rock na Itália, abrindo o meu próprio restaurante do zero na Bahia ou orquestrando a presença digital de marcas de 100 mil seguidores... eu nunca mudei de profissão. Meu trabalho sempre foi arquitetar conexões humanas autênticas e converter percepção estética em faturamento."
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2>🎯 3. Os Dois Nichos de Alta Conversão</h2>
+    <p>Para se posicionar como uma parceira de alto ticket e afastar o trabalho braçal operacional, seu foco estratégico de negócios deve residir em dois pilares bem definidos:</p>
+
+    <div class="nicho-grid">
+        <div class="nicho-card">
+            <h3>🍽️ NICHO A: Experience & Lifestyle</h3>
+            <p><strong>Foco:</strong> Alta Gastronomia, Bistrôs, Hotelaria Boutique e Cicloturismo de Aventura.</p>
+            <p><strong>Diferencial:</strong> Você já teve e geriu um restaurante físico. Você conhece de verdade o front de cozinha e salão, e atende contas de até 100k+ de seguidores.</p>
+        </div>
+        <div class="nicho-card">
+            <h3>🎸 NICHO B: Art & Influence</h3>
+            <p><strong>Foco:</strong> Artistas, Influenciadores, Marcas de Moda/Design e Criadores de Conteúdo.</p>
+            <p><strong>Diferencial:</strong> Coordenação de PR na TV Globo, assessoria de imprensa nacional e pós-graduação ativa em Marketing de Influência Digital.</p>
+        </div>
+    </div>
+
+    <h2>📱 4. Posicionamento Proposto para o LinkedIn</h2>
+    
+    <p><strong>Headline (Título Profissional) Sugerido:</strong></p>
+    <p><em>Estrategista de Posicionamento & Direção de Conteúdo | Social Media Architect | Gestão e Narrativa de Marcas de Alta Performance (Gastronomia, Turismo & Entretenimento)</em></p>
+
+    <p><strong>Texto do Campo "Sobre" (About Storytelling):</strong></p>
+    <div class="copy-box">Eu já estive em palcos que a maioria dos profissionais de marketing só vê pelas telas. 
+
+Em 2011, assumi o microfone da rádio Jovem Pan Vitória. Entrando ao vivo no campo, coordenando equipes de promotores de eventos e aprendendo, sob a pressão de segundos do rádio, o que faz uma pessoa parar para ouvir. 
+
+Em 2014, assumi a direção executiva e de comunicação de um projeto artístico incrível. O resultado? Dois videoclipes produzidos, participação no reality show 'SuperStar' na TV Globo, cobertura de mídia nacional e uma turnê internacional na Itália cobrindo 12 cidades. 
+
+Depois, gerenciei estúdio, apresentando a manhã de maior audiência da rádio Cidade. E quando muitos achavam que eu seguiria apenas nesse trilho, dei um pause. Mudei-me para o sul da Bahia e mergulhei na Gastronomia. Fui cozinheira, gerente de restaurante e fundei a minha própria marca, que escalou de um delivery na pandemia para um restaurante físico.
+
+Por que essa jornada importa para você e para a sua marca?
+
+Porque eu não sou apenas uma profissional que "agenda posts" no Instagram. Eu estive no front real dos negócios. Eu sei a dor de um dono de restaurante para fechar o caixa no final do mês, e sei o que é gerenciar a reputação de um artista na maior emissora do país. 
+
+Hoje, como Estrategista de Conteúdo e Social Media Architect, eu uno esses mundos. Minha especialidade é criar sistemas de comunicação consistentes que integram contexto, identidade visual refinada, storytelling humano e resultados comerciais de verdade.
+
+Atualmente, gerencio e direciono a estratégia de conteúdo de 5 grandes marcas gastronômicas de renome (contas que variam de 10k a 100k+ seguidores) e projetos de cicloturismo de alta experiência.
+
+Minha caixa de ferramentas inclui:
+* Estratégia de Posicionamento & Storytelling de Marca (Certified Social Media Storyteller)
+* Direção Criativa e Coordenação de Equipes (Audiovisual, Design & Coprodução)
+* Gestão de Calendário Editorial & Pautas Estruturadas de Conversão
+* Planejamento de Campanhas para os nichos de Gastronomia, Turismo de Experiência e Entretenimento.
+
+Vamos desenhar o posicionamento ideal para a sua presença digital? 
+Conecte-se comigo ou envie uma mensagem no ingridsinkovitz@gmail.com</div>
+
+    <div class="page-break"></div>
+
+    <h2>🌐 5. Ajustes de Alto Ticket no Portfólio Site</h2>
+    <ul>
+        <li><strong>A Proposta da Primeira Dobra:</strong> Troque termos operacionais por: <em>"Direção Criativa & Estratégias de Conteúdo para Marcas de Experiência e Entretenimento."</em></li>
+        <li><strong>Exibição Estruturada de Cases:</strong> Não mostre apenas mídias soltas. Para cada projeto no site, responda rapidamente a três pilares: <strong>O Desafio</strong> (dor da marca), <strong>A Solução</strong> (sua sacada criativa de conteúdo) e <strong>O Impacto</strong> (crescimento e métricas).</li>
+        <li><strong>A Alavanca IA / Claude:</strong> Valorize o seu tempo de front. Indique abertamente que você usa automações de ponta baseadas em inteligência artificial no back-office, blindando a operação e liberando você para focar inteiramente no relacionamento, curadoria e estratégia com o cliente. Isso eleva muito o seu valor de marca!</li>
+    </ul>
+
+    <footer>
+        Estrategicamente construído por Lincoln para Ingrid Sinkovitz. &copy; 2026.
+    </footer>
+</div>
+
+</body>
+</html>

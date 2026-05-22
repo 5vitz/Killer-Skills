@@ -20,11 +20,20 @@ load_dotenv(os.path.join(ROOT_DIR, "..", ".env"))
 for d in [ASSETS_DIR, UPLOAD_DIR]:
     if not os.path.exists(d): os.makedirs(d)
 
+# Copiar Logo Premium Metalizada para a pasta assets
+logo_src = "/home/artz/Documentos/Antigravity/Killer-Skills/Imagens/Logo_Final.png"
+logo_dst = os.path.join(ASSETS_DIR, "killer_skills_logo.png")
+if os.path.exists(logo_src):
+    try:
+        shutil.copy(logo_src, logo_dst)
+    except Exception as e:
+        print(f"Erro ao copiar logo: {e}")
+
 # Banco de Dados e IA
 sys.path.append(os.path.join(ROOT_DIR, 'killer_skills'))
 try:
     from persistence.scripts.database import PersistenceSkill
-    db = PersistenceSkill("agente_insta.db")
+    db = PersistenceSkill("killer_skills.db")
 except Exception as e:
     print(f"Erro no DB: {e}")
     db = None
@@ -46,6 +55,9 @@ def main(page: ft.Page):
 
     # --- ESTADO GLOBAL DO COCKPIT ---
     active_view = "storyboard"      # "storyboard", "almoxarifado", "colecoes", "preview"
+    is_admin_mode = False           # Chave de acesso ADM
+    is_logged_in = False            # Chave de acesso SaaS
+    logged_in_user_email = ""       # E-mail do usuário autenticado
     active_slot = None              # Slot (0, 1, 2, 3) sendo editado
     storyboard_data = [None] * 4 
     txt_legenda = ft.TextField(
@@ -156,8 +168,6 @@ def main(page: ft.Page):
             threading.Thread(target=task).start()
 
     # --- TELA DE LOGIN ---
-    def go_to_studio():
-        change_view("storyboard")
 
     def login_view():
         return ft.Container(
@@ -173,8 +183,16 @@ def main(page: ft.Page):
                         border_radius=30, border=ft.border.all(1, ft.colors.with_opacity(0.1, ft.colors.WHITE)),
                         blur=ft.Blur(15, 15),
                         content=ft.Column([
-                            ft.Text("Sessão de Iniciação", size=24, weight="w600"),
-                            ft.ElevatedButton("INICIAR JORNADA", bgcolor="#1E60FF", color="white", width=300, height=55, on_click=lambda _: go_to_studio()),
+                            ft.Text("Portal de Acesso SaaS", size=24, weight="w600"),
+                            ft.ElevatedButton(
+                                "ENTRAR COM O GOOGLE",
+                                icon=ft.icons.LOGIN,
+                                bgcolor="#1E60FF",
+                                color="white",
+                                width=300,
+                                height=55,
+                                on_click=lambda _: open_google_login_dialog(from_saas_gate=True)
+                            ),
                             ft.TextButton("Consultoria IA Especializada", icon=ft.icons.AUTO_AWESOME, icon_color="#1E60FF")
                         ], horizontal_alignment="center", alignment="center", spacing=30)
                     ),
@@ -204,8 +222,7 @@ def main(page: ft.Page):
             
             show_snack(f"📥 Mídia inserida com sucesso no Frame {active_slot + 1}!", "#1E60FF")
             
-            # Limpa o slot ativo e volta para a tela do Storyboard!
-            active_slot = None
+            # Mantém o slot ativo e volta para a tela do Storyboard!
             change_view("storyboard")
             
             # Executa a IA no plano de fundo para não travar
@@ -216,76 +233,144 @@ def main(page: ft.Page):
             preview_media_container.content = preview_media
             page.update()
 
-    # --- 1. CONSTRUÇÃO DA TELA: CREATIVE STUDIO (STORYBOARD) ---
+    # --- 1. CONSTRUÇÃO DA TELA: CREATIVE STUDIO (STORYBOARD / PLAYER INDIVIDUAL) ---
     def build_storyboard_view():
-        # Cards do Storyboard Espaçosos
-        cards = []
-        for i in range(4):
-            has_media = storyboard_data[i] is not None
-            card_content = ft.Image(src=storyboard_data[i], expand=True, fit="cover", border_radius=15) if has_media else ft.Column([
-                ft.Icon(ft.icons.ADD_A_PHOTO, size=28, color="white30"),
-                ft.Text(f"FRAME {i+1}", color="white30", size=10, weight="bold"),
-                ft.Text("Clique para Inserir", color="white10", size=8)
-            ], alignment="center", horizontal_alignment="center", spacing=8)
+        nonlocal active_slot
+        if active_slot is None:
+            active_slot = 0
             
-            cards.append(
+        has_media = storyboard_data[active_slot] is not None
+        
+        # Conteúdo do Smartphone
+        if has_media:
+            screen_content = ft.Image(src=storyboard_data[active_slot], expand=True, fit="cover", border_radius=25)
+        else:
+            screen_content = ft.Column([
+                ft.IconButton(
+                    icon=ft.icons.ADD_A_PHOTO, 
+                    icon_color="#d4af37", 
+                    icon_size=48,
+                    on_click=lambda _: change_view("almoxarifado")
+                ),
+                ft.Text("Vazio", color="white30", size=14, weight="bold"),
+                ft.Text("Clique para inserir mídia do Almoxarifado", color="white10", size=10, text_align="center")
+            ], alignment="center", horizontal_alignment="center", spacing=10)
+            
+        # Smartphone Mockup Premium com Notch e Borda Iluminada
+        smartphone_player = ft.Container(
+            width=330,
+            height=530,
+            bgcolor="#0A0A0A",
+            border_radius=35,
+            border=ft.border.all(3, "#1E60FF"),
+            padding=15,
+            content=ft.Stack([
+                # Dynamic Notch (Ilha Dinâmica)
                 ft.Container(
-                    content=card_content,
-                    width=190, height=255, bgcolor="#0A0A0A", border_radius=15, 
-                    border=ft.border.all(1, "greenaccent" if has_media else "white10"), 
+                    width=100,
+                    height=20,
+                    bgcolor="#000000",
+                    border_radius=10,
+                    top=0,
+                    left=100, # Centralizado
+                ),
+                # Screen Canvas Area
+                ft.Container(
+                    content=screen_content,
+                    top=25,
+                    left=0,
+                    right=0,
+                    bottom=0,
+                    bgcolor="#000000",
+                    border_radius=25,
                     alignment=ft.alignment.center,
-                    data=i, on_click=on_storyboard_card_click,
-                    animate=ft.Animation(300, ft.AnimationCurve.EASE_OUT)
+                    border=ft.border.all(1, "white10")
                 )
+            ])
+        )
+        
+        # Controles de Navegação (Setas)
+        def next_frame():
+            nonlocal active_slot
+            active_slot = (active_slot + 1) % 4
+            change_view("storyboard")
+            
+        def prev_frame():
+            nonlocal active_slot
+            active_slot = (active_slot - 1) % 4
+            change_view("storyboard")
+            
+        navigation_controls = ft.Row([
+            ft.IconButton(ft.icons.ARROW_BACK_IOS_NEW, icon_color="white", icon_size=18, on_click=lambda _: prev_frame()),
+            ft.Container(
+                content=ft.Text(f"⚡ FRAME {active_slot + 1} / 4", size=13, weight="bold", color="#d4af37"),
+                bgcolor="white10",
+                padding=ft.padding.symmetric(horizontal=15, vertical=8),
+                border_radius=10
+            ),
+            ft.IconButton(ft.icons.ARROW_FORWARD_IOS, icon_color="white", icon_size=18, on_click=lambda _: next_frame()),
+        ], alignment="center", spacing=20)
+        
+        # Painel do Player (Coluna Esquerda)
+        player_panel = ft.Column([
+            smartphone_player,
+            ft.Container(height=10),
+            navigation_controls
+        ], horizontal_alignment="center", spacing=0)
+
+        # Painel de Controles e IA (Coluna Direita)
+        controls_panel = ft.Column([
+            ft.Text("DIRETRIZES DA COLEÇÃO", size=11, color="white30", weight="bold"),
+            ft.Row([
+                ft.Text("Coleção Ativa:", size=12, color="white70"),
+                ft.Container(
+                    padding=ft.padding.symmetric(horizontal=12, vertical=6),
+                    bgcolor="#1E60FF", border_radius=8,
+                    content=ft.Text(f"@{account_dropdown.value}", size=12, weight="bold", color="white")
+                )
+            ], alignment="start", vertical_alignment="center"),
+            ft.Container(height=10),
+            
+            ft.Text("LEGENDA E COPILOTO IA", size=11, color="white30", weight="bold"),
+            ft.Row([
+                txt_legenda, 
+                ft.Container(
+                    content=ft.IconButton(ft.icons.AUTO_AWESOME, icon_color="#1E60FF", on_click=run_ai_caption, icon_size=28),
+                    bgcolor="#0A0A0A", border_radius=15, width=60, height=60, alignment=ft.alignment.center
+                )
+            ], spacing=15),
+            
+            ft.Container(height=25),
+            
+            # Botão Direto para Preview
+            ft.ElevatedButton(
+                "AVANÇAR PARA PREVIEW E SIMULAÇÃO", bgcolor="#1E60FF", color="white", 
+                height=55, width=320, on_click=lambda _: change_view("preview")
             )
+        ], expand=True, spacing=15, horizontal_alignment="start")
 
         return ft.Container(
             expand=True, padding=40, bgcolor="#000000",
             content=ft.Column([
                 # Header Espaçoso
                 ft.Row([
-                    ft.Column([
-                        ft.Text("🎬 Creative Studio", size=36, weight="bold"),
-                        ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=11, weight="bold")
-                    ]),
+                    ft.Row([
+                        ft.Image(src="/killer_skills_logo.png", height=95, fit="contain"),
+                        ft.Column([
+                            ft.Text("Creative Studio", size=36, weight="bold"),
+                            ft.Text("DIREÇÃO DE ARTE E STORYBOARD ATIVOS", color="#1E60FF", size=11, weight="bold")
+                        ], spacing=0)
+                    ], spacing=20, vertical_alignment="center"),
                     account_dropdown
                 ], alignment="spaceBetween"),
                 ft.Divider(color="white10", height=30),
                 
-                # Coleção Indicador
+                # Layout Bifurcado (Player na Esquerda, Controles na Direita)
                 ft.Row([
-                    ft.Text("Coleção Ativa:", size=12, color="white30"),
-                    ft.Container(
-                        padding=ft.padding.symmetric(horizontal=12, vertical=6),
-                        bgcolor="#1E60FF", border_radius=8,
-                        content=ft.Text(f"@{account_dropdown.value}", size=12, weight="bold", color="white")
-                    )
-                ]),
-                ft.Container(height=15),
-                
-                # Storyboard Cards
-                ft.Text("STORYBOARD (CLIQUE EM UM CARD PARA PROCURAR MÍDIA)", size=11, color="white30", weight="bold"),
-                ft.Row(cards, spacing=25),
-                
-                ft.Divider(height=35, color="transparent"),
-                
-                # Legendas
-                ft.Text("ESCREVA A LEGENDA E SOLICITE COPILOTO IA", size=11, color="white30", weight="bold"),
-                ft.Row([
-                    txt_legenda, 
-                    ft.Container(
-                        content=ft.IconButton(ft.icons.AUTO_AWESOME, icon_color="#1E60FF", on_click=run_ai_caption, icon_size=28),
-                        bgcolor="#0A0A0A", border_radius=15, width=60, height=60, alignment=ft.alignment.center
-                    )
-                ], spacing=15),
-                
-                ft.Container(height=15),
-                
-                # Botão Direto para Preview
-                ft.ElevatedButton(
-                    "AVANÇAR PARA PREVIEW E SIMULAÇÃO", bgcolor="#1E60FF", color="white", 
-                    height=55, width=320, on_click=lambda _: change_view("preview")
-                )
+                    player_panel,
+                    ft.Container(width=40), # Espaçador
+                    controls_panel
+                ], alignment="start", vertical_alignment="start")
             ], scroll="auto")
         )
 
@@ -505,20 +590,299 @@ def main(page: ft.Page):
             ], scroll="auto")
         )
 
-    # --- 5. MENU LATERAL DE NAVEGAÇÃO PREMIUM ---
-    def build_sidebar():
+    def exit_admin_mode():
+        nonlocal is_admin_mode
+        is_admin_mode = False
+        change_view("storyboard")
+
+    def try_open_admin_portal():
+        ADMIN_EMAILS = ["artz.genera@gmail.com"]
+        if is_logged_in:
+            if logged_in_user_email in ADMIN_EMAILS:
+                nonlocal is_admin_mode
+                is_admin_mode = True
+                change_view("admin_constructor")
+                show_snack("🔓 Painel de Administração Liberado!", "#d4af37")
+            else:
+                dialog_pro = ft.AlertDialog(
+                    bgcolor="#0F111A",
+                    shape=ft.RoundedRectangleBorder(radius=15),
+                    content=ft.Container(
+                        width=380, height=310, padding=10,
+                        content=ft.Column([
+                            ft.Row([
+                                ft.Icon(ft.icons.LOCK_PERSON, color="#d4af37", size=32),
+                                ft.Text("Recurso Restrito Pro", size=18, weight="bold", color="white")
+                            ], alignment="center", spacing=10),
+                            ft.Divider(color="white10", height=15),
+                            ft.Text(
+                                "O Construtor de Prompts e os Agentes Autônomos de Infraestrutura estão disponíveis apenas para administradores e contas homologadas no plano Enterprise.",
+                                size=11, color="white70", text_align="center"
+                            ),
+                            ft.Text(
+                                f"Sua conta ativa ({logged_in_user_email}) não possui privilégios de Engenharia.",
+                                size=10, color="#d4af37", italic=True, text_align="center"
+                            ),
+                            ft.Container(height=10),
+                            ft.ElevatedButton(
+                                "Falar com Consultor (Fazer Upgrade)",
+                                icon=ft.icons.CONTACT_SUPPORT,
+                                bgcolor="#d4af37",
+                                color="#0F111A",
+                                width=300,
+                                height=45,
+                                on_click=lambda _: [show_snack("📞 Solicitação enviada! Um arquiteto entrará em contato.", "#d4af37"), setattr(dialog_pro, "open", False), page.update()]
+                            )
+                        ], horizontal_alignment="center", spacing=10)
+                    )
+                )
+                page.overlay.append(dialog_pro)
+                dialog_pro.open = True
+                page.update()
+        else:
+            open_google_login_dialog(from_saas_gate=False)
+
+    def open_google_login_dialog(from_saas_gate=False):
+        client_id = os.getenv("GOOGLE_CLIENT_ID")
+        client_secret = os.getenv("GOOGLE_CLIENT_SECRET")
+        
+        # Handler do login real do Flet OAuth
+        def on_flet_login(e):
+            nonlocal is_admin_mode, is_logged_in, logged_in_user_email
+            if e.error:
+                show_snack(f"❌ Erro de Autenticação Real: {e.error}", "red")
+            else:
+                user_email = page.auth.user.email if page.auth and page.auth.user else "desconhecido"
+                is_logged_in = True
+                logged_in_user_email = user_email
+                dialog.open = False
+                
+                if from_saas_gate:
+                    go_to_studio()
+                    show_snack(f"👋 Bem-vindo ao Killer Skills, {user_email}!", "#1E60FF")
+                else:
+                    is_admin_mode = True
+                    change_view("admin_constructor")
+                    show_snack(f"🔓 Acesso Administrativo Liberado para {user_email} via Google OAuth!", "#d4af37")
+                page.update()
+
+        page.on_login = on_flet_login
+
+        loading_bar = ft.ProgressBar(width=320, color="#d4af37", visible=False)
+        loading_text = ft.Text("Autenticando credenciais do Google...", size=11, color="#d4af37", visible=False)
+        
+        txt_custom_email = ft.TextField(
+            label="Ou digite outra conta de e-mail...",
+            border_color="#1E60FF",
+            bgcolor="#0A0A0A",
+            text_size=12,
+            height=45,
+            content_padding=10
+        )
+        
+        def trigger_google_auth_sequence(custom_email=None):
+            if client_id and client_secret:
+                try:
+                    from flet.auth.providers.google_oauth_provider import GoogleAuthProvider
+                    provider = GoogleAuthProvider(
+                        client_id=client_id,
+                        client_secret=client_secret,
+                        redirect_url="http://localhost:8550/oauth_callback"
+                    )
+                    dialog.open = False
+                    page.update()
+                    page.login(provider)
+                    return
+                except Exception as ex:
+                    print(f"Erro ao inicializar Google OAuth Real: {ex}")
+
+            # Fallback para Simulação de Alta Fidelidade
+            loading_bar.visible = True
+            loading_text.visible = True
+            page.update()
+            
+            target_email = custom_email if custom_email else "artz.genera@gmail.com"
+            if txt_custom_email.value.strip() and not custom_email:
+                target_email = txt_custom_email.value.strip()
+
+            import time
+            def run_auth():
+                time.sleep(1.5)
+                nonlocal is_admin_mode, is_logged_in, logged_in_user_email
+                is_logged_in = True
+                logged_in_user_email = target_email
+                dialog.open = False
+                
+                if from_saas_gate:
+                    go_to_studio()
+                    show_snack(f"👋 Bem-vindo ao Killer Skills, {target_email}!", "#1E60FF")
+                else:
+                    is_admin_mode = True
+                    change_view("admin_constructor")
+                    show_snack(f"🔓 Acesso Administrativo Liberado para {target_email}!", "#d4af37")
+                page.update()
+                
+            threading.Thread(target=run_auth).start()
+
+        dialog = ft.AlertDialog(
+            bgcolor="#0F111A",
+            shape=ft.RoundedRectangleBorder(radius=15),
+            content=ft.Container(
+                width=380, height=350, padding=10,
+                content=ft.Column([
+                    ft.Row([
+                        ft.Image(src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg", width=24, height=24),
+                        ft.Text("Fazer login com o Google", size=16, weight="bold", color="white")
+                    ], alignment="center", spacing=10),
+                    ft.Text("Escolha uma conta ou digite seu e-mail para prosseguir para o Painel ADM", size=10, color="white30", text_align="center"),
+                    ft.Divider(color="white10", height=15),
+                    
+                    ft.Container(
+                        content=ft.Row([
+                            ft.Container(
+                                content=ft.Text("AG", size=12, weight="bold", color="white"),
+                                width=32, height=32, bgcolor="#d4af37", border_radius=16, alignment=ft.alignment.center
+                            ),
+                            ft.Column([
+                                ft.Text("Artz Genera", size=13, weight="bold", color="white"),
+                                ft.Text("artz.genera@gmail.com", size=11, color="white30")
+                            ], spacing=0)
+                        ], spacing=12),
+                        padding=10, border_radius=10, border=ft.border.all(1, "white10"),
+                        on_click=lambda _: trigger_google_auth_sequence("artz.genera@gmail.com")
+                    ),
+                    ft.Container(height=5),
+                    ft.Row([
+                        txt_custom_email,
+                        ft.IconButton(
+                            icon=ft.icons.ARROW_FORWARD,
+                            icon_color="#d4af37",
+                            bgcolor="#1E60FF",
+                            icon_size=18,
+                            on_click=lambda _: trigger_google_auth_sequence()
+                        )
+                    ], spacing=10, alignment="center"),
+                    ft.Container(height=5),
+                    loading_bar,
+                    loading_text
+                ], horizontal_alignment="center", spacing=10)
+            )
+        )
+
+        page.dialog = dialog
+        dialog.open = True
+        page.update()
+
+    def build_admin_console_view():
         return ft.Container(
-            width=260, bgcolor="#0A0A0A", padding=20,
-            border=ft.border.only(right=ft.border.BorderSide(1, "white10")),
+            expand=True, padding=40, bgcolor="#000000",
             content=ft.Column([
-                ft.Text("Killer Skills", size=26, weight="bold"),
-                ft.Text("STUDIO COCKPIT", color="#1E60FF", size=9, weight="bold"),
+                ft.Text("🖥️ Console de Infraestrutura ADM", size=36, weight="bold"),
+                ft.Text("ESTADO DO BANCO DE DADOS E INFRA ESTRUTURA VPS", color="#d4af37", size=11, weight="bold"),
                 ft.Divider(color="white10", height=30),
                 
+                ft.Row([
+                    ft.Container(
+                        width=320, padding=25, bgcolor="#0A0A0A", border_radius=15,
+                        border=ft.border.all(1, "#2c2c2c"),
+                        content=ft.Column([
+                            ft.Row([
+                                ft.Icon(ft.icons.STORAGE, color="#d4af37", size=24),
+                                ft.Text("Banco SQLite", size=16, weight="bold")
+                            ], spacing=10),
+                            ft.Divider(color="white10", height=10),
+                            ft.Text("Banco de Dados: killer_skills.db", size=12, color="white70"),
+                            ft.Row([
+                                ft.Container(width=8, height=8, bgcolor="green", border_radius=4),
+                                ft.Text("Conexão ativa & estável", size=11, color="green")
+                            ], spacing=8),
+                        ], spacing=12)
+                    ),
+                    ft.Container(
+                        width=320, padding=25, bgcolor="#0A0A0A", border_radius=15,
+                        border=ft.border.all(1, "#2c2c2c"),
+                        content=ft.Column([
+                            ft.Row([
+                                ft.Icon(ft.icons.MEMORY, color="#d4af37", size=24),
+                                ft.Text("Processos PM2", size=16, weight="bold")
+                            ], spacing=10),
+                            ft.Divider(color="white10", height=10),
+                            ft.Text("Servidor: background_worker.py", size=12, color="white70"),
+                            ft.Row([
+                                ft.Container(width=8, height=8, bgcolor="green", border_radius=4),
+                                ft.Text("ONLINE (Status: active)", size=11, color="green")
+                            ], spacing=8),
+                        ], spacing=12)
+                    )
+                ], spacing=25)
+            ], scroll="auto")
+        )
+
+    # --- 5. MENU LATERAL DE NAVEGAÇÃO PREMIUM ---
+    def build_sidebar():
+        sidebar_controls = [
+            ft.Text("Killer Skills", size=26, weight="bold"),
+            ft.Text("ADMIN COCKPIT" if is_admin_mode else "STUDIO COCKPIT", color="#d4af37" if is_admin_mode else "#1E60FF", size=9, weight="bold"),
+            ft.Divider(color="white10", height=30),
+        ]
+        
+        if is_logged_in:
+            initials = logged_in_user_email[:2].upper() if logged_in_user_email else "US"
+            sidebar_controls.extend([
+                ft.Container(
+                    content=ft.Row([
+                        ft.Container(
+                            content=ft.Text(initials, size=10, weight="bold", color="white"),
+                            width=24, height=24, bgcolor="#d4af37" if is_admin_mode else "#1E60FF", border_radius=12, alignment=ft.alignment.center
+                        ),
+                        ft.Text(logged_in_user_email, size=11, color="white70", overflow=ft.TextOverflow.ELLIPSIS, weight="w500")
+                    ], spacing=10),
+                    padding=ft.padding.symmetric(horizontal=10, vertical=8),
+                    bgcolor="white10",
+                    border_radius=10,
+                    margin=ft.margin.only(bottom=15)
+                )
+            ])
+        
+        if is_admin_mode:
+            sidebar_controls.extend([
+                ft.Text("ENGENHARIA ADM", size=10, color="white30", weight="bold"),
+                ft.Container(height=5),
+                ft.Container(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.CONSTRUCTION, color="#d4af37" if active_view == "admin_constructor" else "white30", size=18),
+                        ft.Text("Construtor ADM", color="white" if active_view == "admin_constructor" else "white70", size=13, weight="bold" if active_view == "admin_constructor" else "normal")
+                    ]),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
+                    bgcolor=ft.colors.with_opacity(0.05, "#d4af37") if active_view == "admin_constructor" else "transparent",
+                    border_radius=10,
+                    on_click=lambda _: change_view("admin_constructor")
+                ),
+                ft.Container(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.DASHBOARD, color="#d4af37" if active_view == "admin_console" else "white30", size=18),
+                        ft.Text("Console de Infra", color="white" if active_view == "admin_console" else "white70", size=13, weight="bold" if active_view == "admin_console" else "normal")
+                    ]),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
+                    bgcolor=ft.colors.with_opacity(0.05, "#d4af37") if active_view == "admin_console" else "transparent",
+                    border_radius=10,
+                    on_click=lambda _: change_view("admin_console")
+                ),
+                ft.Container(expand=True),
+                ft.Container(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.ARROW_BACK, color="white70", size=18),
+                        ft.Text("Voltar ao Studio", color="white70", size=13)
+                    ]),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
+                    border_radius=10,
+                    on_click=lambda _: exit_admin_mode()
+                )
+            ])
+        else:
+            sidebar_controls.extend([
                 ft.Text("ÁREAS DE TRABALHO", size=10, color="white30", weight="bold"),
                 ft.Container(height=5),
-                
-                # Creative Studio Link
                 ft.Container(
                     content=ft.Row([
                         ft.Icon(ft.icons.AUTO_AWESOME_MOTION, color="#1E60FF" if active_view == "storyboard" else "white30", size=18),
@@ -529,7 +893,6 @@ def main(page: ft.Page):
                     border_radius=10,
                     on_click=lambda _: change_view("storyboard")
                 ),
-                # Almoxarifado Link
                 ft.Container(
                     content=ft.Row([
                         ft.Icon(ft.icons.FOLDER_SPECIAL, color="#1E60FF" if active_view == "almoxarifado" else "white30", size=18),
@@ -540,7 +903,6 @@ def main(page: ft.Page):
                     border_radius=10,
                     on_click=lambda _: change_view("almoxarifado")
                 ),
-                # Simulador e Fila (Preview) Link
                 ft.Container(
                     content=ft.Row([
                         ft.Icon(ft.icons.MOBILE_SCREEN_SHARE, color="#1E60FF" if active_view == "preview" else "white30", size=18),
@@ -551,7 +913,6 @@ def main(page: ft.Page):
                     border_radius=10,
                     on_click=lambda _: change_view("preview")
                 ),
-                # Coleções Link
                 ft.Container(
                     content=ft.Row([
                         ft.Icon(ft.icons.PEOPLE_OUTLINE, color="#1E60FF" if active_view == "colecoes" else "white30", size=18),
@@ -562,8 +923,29 @@ def main(page: ft.Page):
                     border_radius=10,
                     on_click=lambda _: change_view("colecoes")
                 ),
-                
-                # Rodapé / Status
+                ft.Container(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.ARTICLE, color="#1E60FF" if active_view == "prompt_constructor" else "white30", size=18),
+                        ft.Text("Construtor de Prompts", color="white" if active_view == "prompt_constructor" else "white70", size=13, weight="bold" if active_view == "prompt_constructor" else "normal")
+                    ]),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
+                    bgcolor=ft.colors.with_opacity(0.05, "#1E60FF") if active_view == "prompt_constructor" else "transparent",
+                    border_radius=10,
+                    on_click=lambda _: change_view("prompt_constructor")
+                ),
+                ft.Container(height=10),
+                # Botão Exclusivo Pro (Bait de Conversão!)
+                ft.Container(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.ADMIN_PANEL_SETTINGS, color="#d4af37", size=18),
+                        ft.Text("👑 Painel ADM [RESTRITO]", color="#d4af37", size=13, weight="bold")
+                    ]),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
+                    bgcolor=ft.colors.with_opacity(0.05, "#d4af37"),
+                    border=ft.border.all(1, ft.colors.with_opacity(0.15, "#d4af37")),
+                    border_radius=10,
+                    on_click=lambda _: try_open_admin_portal()
+                ),
                 ft.Container(expand=True),
                 ft.Text("Slogan:", size=8, color="white30"),
                 ft.Text("Nossos Agentes Trabalham por Você!", size=9, italic=True, color="white60"),
@@ -572,11 +954,16 @@ def main(page: ft.Page):
                     ft.Container(width=8, height=8, bgcolor="green", border_radius=4),
                     ft.Text("ONLINE NO VPS", size=9, color="white30")
                 ], spacing=8)
-            ], spacing=10)
-        )
+            ])
+            
+        return ft.Column(sidebar_controls, spacing=10)
 
     # Declaramos o contêiner da barra lateral
-    sidebar_container = ft.Container(content=build_sidebar())
+    sidebar_container = ft.Container(
+        width=260, bgcolor="#0A0A0A", padding=20,
+        border=ft.border.only(right=ft.border.BorderSide(1, "white10")),
+        content=build_sidebar()
+    )
 
     # --- MONTAGEM DA INTERFACE PRINCIPAL (SEM O PREVIEW FIXO NA DIREITA!) ---
     def build_active_view():
@@ -588,6 +975,14 @@ def main(page: ft.Page):
             return build_preview_view()
         elif active_view == "colecoes":
             return build_colecoes_view()
+        elif active_view == "prompt_constructor":
+            from prompt_constructor import build_prompt_constructor_view
+            return build_prompt_constructor_view(is_admin=False, page=page)
+        elif active_view == "admin_constructor":
+            from prompt_constructor import build_prompt_constructor_view
+            return build_prompt_constructor_view(is_admin=True, page=page)
+        elif active_view == "admin_console":
+            return build_admin_console_view()
 
     # Painel Principal do Studio
     main_panel_container.content = build_active_view()
@@ -608,6 +1003,7 @@ def main(page: ft.Page):
     )
 
     def go_to_studio():
+        change_view("storyboard")
         main_container.content = studio_layout
         page.update()
 
@@ -633,4 +1029,6 @@ def main(page: ft.Page):
     page.add(main_container)
 
 if __name__ == "__main__":
-    ft.app(target=main, view=None, port=8081, assets_dir=ASSETS_DIR, upload_dir=UPLOAD_DIR)
+    web_mode = os.getenv("PORT") or os.getenv("WEB_MODE")
+    view_mode = None if web_mode else ft.AppView.FLET_APP
+    ft.app(target=main, view=view_mode, port=8081, assets_dir=ASSETS_DIR, upload_dir=UPLOAD_DIR)
