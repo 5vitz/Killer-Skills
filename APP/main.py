@@ -728,7 +728,7 @@ def main(page: ft.Page):
             bgcolor="#0F111A",
             shape=ft.RoundedRectangleBorder(radius=15),
             content=ft.Container(
-                width=380, height=350, padding=10,
+                width=380, height=420, padding=10,
                 content=ft.Column([
                     ft.Row([
                         ft.Image(src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg", width=24, height=24),
@@ -750,6 +750,21 @@ def main(page: ft.Page):
                         ], spacing=12),
                         padding=10, border_radius=10, border=ft.border.all(1, "white10"),
                         on_click=lambda _: trigger_google_auth_sequence("artz.genera@gmail.com")
+                    ),
+                    ft.Container(height=5),
+                    ft.Container(
+                        content=ft.Row([
+                            ft.Container(
+                                content=ft.Text("SK", size=12, weight="bold", color="white"),
+                                width=32, height=32, bgcolor="#1E60FF", border_radius=16, alignment=ft.alignment.center
+                            ),
+                            ft.Column([
+                                ft.Text("Sinkando", size=13, weight="bold", color="white"),
+                                ft.Text("sinkando@gmail.com", size=11, color="white30")
+                            ], spacing=0)
+                        ], spacing=12),
+                        padding=10, border_radius=10, border=ft.border.all(1, "white10"),
+                        on_click=lambda _: trigger_google_auth_sequence("sinkando@gmail.com")
                     ),
                     ft.Container(height=5),
                     ft.Row([
