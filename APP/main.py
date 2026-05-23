@@ -53,6 +53,10 @@ def main(page: ft.Page):
     page.padding = 0
     page.window_width = 1350
     page.window_height = 880
+    
+    # Inicializa o FilePicker no overlay no topo exato para evitar erros do Flet
+    picker = ft.FilePicker()
+    page.overlay.append(picker)
 
     # --- ESTADO GLOBAL DO COCKPIT ---
     active_view = "storyboard"      # "storyboard", "almoxarifado", "colecoes", "preview"
@@ -330,7 +334,7 @@ def main(page: ft.Page):
         else:
             screen_content = ft.Column([
                 ft.IconButton(
-                    icon="add_a_photo", 
+                    icon=ft.icons.ADD_A_PHOTO, 
                     icon_color="#d4af37", 
                     icon_size=48,
                     on_click=lambda _: change_view("almoxarifado")
@@ -384,14 +388,14 @@ def main(page: ft.Page):
             change_view("storyboard")
             
         navigation_controls = ft.Row([
-            ft.IconButton(icon="arrow_back_ios_new", icon_color="white", icon_size=18, on_click=lambda _: prev_frame()),
+            ft.IconButton(icon=ft.icons.ARROW_BACK_IOS_NEW, icon_color="white", icon_size=18, on_click=lambda _: prev_frame()),
             ft.Container(
                 content=ft.Text(f"⚡ FRAME {active_slot + 1} / 4", size=13, weight="bold", color="#d4af37"),
                 bgcolor="white10",
                 padding=ft.Padding.symmetric(horizontal=15, vertical=8),
                 border_radius=10
             ),
-            ft.IconButton(icon="arrow_forward_ios", icon_color="white", icon_size=18, on_click=lambda _: next_frame()),
+            ft.IconButton(icon=ft.icons.ARROW_FORWARD_IOS, icon_color="white", icon_size=18, on_click=lambda _: next_frame()),
         ], alignment="center", spacing=20)
         
         # Painel do Player (Coluna Esquerda) - Navegador em cima para alinhamento perfeito pela base!
@@ -477,7 +481,7 @@ def main(page: ft.Page):
             # Coluna Esquerda: Legenda e Captons posicionados à esquerda (deslocado da sidebar!)
             ft.Container(
                 content=left_side,
-                left=290, # 260 da sidebar + 30 de margem!
+                left=30, # Ajustado de 290 para 30 (Row do layout cuida do offset da sidebar)
                 top=40,
                 bottom=40,
                 width=280
@@ -485,7 +489,7 @@ def main(page: ft.Page):
             # Coluna Direita: Diretrizes da Coleção posicionadas à direita!
             ft.Container(
                 content=right_side,
-                right=40,
+                right=30, # Ajustado de 40 para 30
                 top=40,
                 bottom=40,
                 width=280
@@ -888,7 +892,7 @@ def main(page: ft.Page):
                     ft.Row([
                         txt_custom_email,
                         ft.IconButton(
-                            icon="arrow_forward",
+                            icon=ft.icons.ARROW_FORWARD,
                             icon_color="#d4af37",
                             bgcolor="#1E60FF",
                             icon_size=18,
@@ -1247,9 +1251,9 @@ ORDEM_DE_SERVICO:
                         
                         # Reel navigation overlay on the right side of the visor
                         ft.Column([
-                            ft.IconButton(icon="arrow_upward", icon_color="white", icon_size=20, bgcolor="black87", on_click=lambda _: scroll_persona("up")),
+                            ft.IconButton(icon=ft.icons.ARROW_UPWARD, icon_color="white", icon_size=20, bgcolor="black87", on_click=lambda _: scroll_persona("up")),
                             ft.Container(height=5),
-                            ft.IconButton(icon="arrow_downward", icon_color="white", icon_size=20, bgcolor="black87", on_click=lambda _: scroll_persona("down")),
+                            ft.IconButton(icon=ft.icons.ARROW_DOWNWARD, icon_color="white", icon_size=20, bgcolor="black87", on_click=lambda _: scroll_persona("down")),
                         ], alignment="center", right=0, top=60)
                     ])
                 ),
@@ -1303,9 +1307,9 @@ ORDEM_DE_SERVICO:
 
         smartphone_player_wrapper = ft.Column([
             ft.Row([
-                ft.IconButton(icon="arrow_upward", icon_color="white30", on_click=lambda _: scroll_persona("up")),
+                ft.IconButton(icon=ft.icons.ARROW_UPWARD, icon_color="white30", on_click=lambda _: scroll_persona("up")),
                 ft.Text("RODANTE REELS", size=9, weight="bold", color="white30"),
-                ft.IconButton(icon="arrow_downward", icon_color="white30", on_click=lambda _: scroll_persona("down"))
+                ft.IconButton(icon=ft.icons.ARROW_DOWNWARD, icon_color="white30", on_click=lambda _: scroll_persona("down"))
             ], alignment="center", spacing=10),
             ft.Container(height=5),
             smartphone_player
@@ -1326,7 +1330,7 @@ ORDEM_DE_SERVICO:
                 # Coluna Esquerda: Dossiê Estratégico posicionado à esquerda (deslocado da sidebar!)
                 ft.Container(
                     content=left_side,
-                    left=290,
+                    left=30, # Ajustado de 290 para 30 (Row do layout cuida do offset da sidebar)
                     top=40,
                     bottom=40,
                     width=280
@@ -1334,7 +1338,7 @@ ORDEM_DE_SERVICO:
                 # Coluna Direita: A Forja posicionada à direita!
                 ft.Container(
                     content=right_side,
-                    right=40,
+                    right=30, # Ajustado de 40 para 30
                     top=40,
                     bottom=40,
                     width=280
@@ -1485,6 +1489,20 @@ ORDEM_DE_SERVICO:
                     on_click=None if disabled else (lambda _: try_open_admin_portal())
                 ),
                 ft.Container(expand=True),
+                
+                # Botão VOLTAR provisório para testar a imobilidade absoluta do Player central!
+                ft.Container(
+                    content=ft.Row([
+                        ft.Icon("logout", color="#E91E63", size=18),
+                        ft.Text("VOLTAR (TELA 0)", color="#E91E63", size=13, weight="bold")
+                    ]),
+                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    bgcolor="#1AE91E63",
+                    border_radius=10,
+                    on_click=None if disabled else (lambda _: go_to_login())
+                ),
+                ft.Container(height=5),
+                
                 ft.Text("Slogan:", size=8, color="white30"),
                 ft.Text("Nossos Agentes Trabalham por Você!", size=9, italic=True, color="white30" if disabled else "white60"),
                 ft.Container(height=10),
@@ -1494,13 +1512,14 @@ ORDEM_DE_SERVICO:
                 ], spacing=8)
             ])
             
-        return ft.Column(sidebar_controls, spacing=10)
+        return ft.Column(sidebar_controls, spacing=10, expand=True) # expand=True para evitar colapsos verticais
 
-    # Declaramos o contêiner da barra lateral
+    # Declaramos o contêiner da barra lateral (trancado de cima a baixo na Row)
     sidebar_container = ft.Container(
         width=260, bgcolor="#0A0A0A", padding=20,
         border=ft.Border(right=ft.BorderSide(1, "white10")),
-        content=build_sidebar()
+        content=build_sidebar(),
+        expand=False # Ocupa exatamente 260px fixos
     )
 
     # --- MONTAGEM DA INTERFACE PRINCIPAL (SEM O PREVIEW FIXO NA DIREITA!) ---
@@ -1525,26 +1544,35 @@ ORDEM_DE_SERVICO:
         elif active_view == "admin_console":
             view_control = build_admin_console_view()
 
-        # Para todas as telas normais que não são o Storyboard do Celular Central,
-        # adicionamos uma margem à esquerda de 260px para dar espaço para a Sidebar!
+        # O main_panel_container agora é posicionado automaticamente pela Row,
+        # sem a necessidade do hack de margem de 260px!
         if view_control:
             return ft.Container(
                 content=view_control,
-                margin=ft.Padding.only(left=260),
                 expand=True
             )
 
     # Painel Principal do Studio
     main_panel_container.content = build_active_view()
 
-    # Painel Geral de Trabalho baseado em Stack: O smartphone fica perfeitamente centrado na tela do VPS!
-    studio_layout = ft.Stack(
+    # Painel Geral de Trabalho baseado em ROW responsiva: 
+    # O smartphone fica perfeitamente centrado no vácuo restante à direita da sidebar!
+    studio_layout = ft.Row(
+        spacing=0,
         expand=True,
         controls=[
-            main_panel_container,  # Renderizado por baixo (ocupa a tela cheia e centraliza o celular)
-            sidebar_container      # Renderizado por cima na lateral esquerda
+            sidebar_container,      # Lado esquerdo fixo
+            main_panel_container   # Lado direito responsivo restante
         ]
     )
+    
+    # --- VOLTAR AO LOGIN (TELA 0) ---
+    def go_to_login():
+        nonlocal is_logged_in, logged_in_user_email
+        is_logged_in = False
+        logged_in_user_email = ""
+        main_container.content = login_view()
+        page.update()
 
     # --- ANIMAÇÃO DE TROCA DE TELA ---
     main_container = ft.AnimatedSwitcher(
@@ -1575,10 +1603,9 @@ ORDEM_DE_SERVICO:
                 change_view("almoxarifado")
             show_snack(f"✅ Upload concluído: {e.file_name}", "#1E60FF")
 
-    picker = ft.FilePicker()
+    # Configura os manipuladores do FilePicker que foi registrado precocemente no topo
     picker.on_result = lambda e: picker.upload([ft.FilePickerUploadFile(f.name, upload_url=page.get_upload_url(f.name, 600)) for f in e.files]) if e.files else None
     picker.on_upload = on_upload
-    # page.overlay.append(picker) # Removido para evitar 'Unknown control: FilePicker' na arquitetura de serviço do Flet
 
     main_container.content = login_view()
     page.add(main_container)
