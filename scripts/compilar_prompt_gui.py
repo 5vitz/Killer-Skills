@@ -15,7 +15,6 @@ Autor: Lincoln (Sargento de Tecnologia)
 import os
 import sys
 import flet as ft
-
 # Diretórios padrão
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS_DIR = os.path.join(BASE_DIR, "docs")

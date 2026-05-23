@@ -23,7 +23,7 @@ Este arquivo contém as regras fundamentais para o desenvolvimento deste projeto
 2. **Estado "Em Planejamento":** Sempre que o usuário digitar "Em Planejamento", o agente entra em um estado estrito de diálogo e análise. Neste estado, o agente **NÃO deve programar nem realizar alterações em arquivos de código**, focando exclusivamente na especificação técnica, planejamento e troca de ideias.
 3. **Regra "Apenas responda":** Quando o usuário utilizar o termo "Apenas responda", qualquer programação fica suspensa. O agente deve apenas explicar seu entendimento da tarefa e o roteiro planejado, aguardando validação antes de agir.
 4. **Respeito ao Contexto:** Evitar alterações em componentes globais ou estilos de menu/rodapé se a tarefa for pontual em uma seção específica.
-4. **Pausa para Validação:** O agente deve explicar o caminho técnico que pretende seguir antes de executar a tarefa, permitindo ao usuário analisar a estratégia.
+5. **Pausa para Validação:** O agente deve explicar o caminho técnico que pretende seguir antes de executar a tarefa, permitindo ao usuário analisar a estratégia.
 
 ## Idioma
 - Toda a comunicação e documentação interna de instruções deve ser em **Português do Brasil (pt-BR)**.

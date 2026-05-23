@@ -27,6 +27,12 @@ ssh root@31.220.102.2 << EOF
   git remote set-url origin https://$GITHUB_TOKEN@github.com/5vitz/Killer-Skills.git
   git reset --hard
   git pull
+  # Garante que a biblioteca do Firebase esteja instalada no VPS (seja global ou no venv)
+  if [ -f "venv/bin/pip" ]; then
+      venv/bin/pip install firebase-admin
+  else
+      pip3 install firebase-admin || pip install firebase-admin
+  fi
   pm2 restart killer-skills
   echo "✅ DEPLOY CONCLUÍDO COM 100% DE SUCESSO NA WEB!"
 EOF

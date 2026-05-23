@@ -4,7 +4,21 @@ from playwright.async_api import async_playwright
 
 class AutomationSkill:
     def __init__(self, session_path="sessao.json"):
-        self.session_path = session_path
+        """
+        Inicializa a engine de automação reativa Playwright.
+        Resolve inteligentemente o caminho absoluto do arquivo sessao.json.
+        """
+        if not os.path.isabs(session_path):
+            if os.path.exists(session_path):
+                self.session_path = os.path.abspath(session_path)
+            else:
+                # O script pode estar em subpastas. Resolve a raiz do projeto (5 níveis acima)
+                base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+                self.session_path = os.path.join(base_dir, session_path)
+        else:
+            self.session_path = session_path
+            
+        print(f"🤖 AutomationSkill: Utilizando arquivo de sessão em: {self.session_path}")
 
     async def publicar_carrossel(self, lista_arquivos, legenda, headless=True):
         """

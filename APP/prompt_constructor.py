@@ -285,7 +285,7 @@ def build_prompt_constructor_view(is_admin: bool, page: ft.Page):
 
     compile_button = ft.ElevatedButton(
         text="Compilar e Copiar Ordem" if is_admin else "Compilar Briefing de Post",
-        icon=ft.icons.BOLT,
+        icon="bolt",
         color="#000000",
         bgcolor="#d4af37",
         style=ft.ButtonStyle(
@@ -329,7 +329,7 @@ def build_prompt_constructor_view(is_admin: bool, page: ft.Page):
         bgcolor="#0F111A",
         padding=25,
         border_radius=15,
-        border=ft.border.all(1, "#2c2c2c"),
+        border=ft.Border.all(1, "#2c2c2c"),
     )
 
     preview_card = ft.Container(
@@ -344,7 +344,7 @@ def build_prompt_constructor_view(is_admin: bool, page: ft.Page):
         bgcolor="#0F111A",
         padding=25,
         border_radius=15,
-        border=ft.border.all(1, "#2c2c2c"),
+        border=ft.Border.all(1, "#2c2c2c"),
         expand=True,
     )
 
@@ -355,7 +355,7 @@ def build_prompt_constructor_view(is_admin: bool, page: ft.Page):
         content=ft.Column([
             ft.Row([
                 ft.Column([
-                    ft.Text("🛠️ Construtor ADM" if is_admin else "📝 Construtor de Prompts", size=36, weight="bold"),
+                    ft.Text("🛠️ Construtor ADM" if is_admin else "📝 Construtor de Prompt", size=36, weight="bold"),
                     ft.Text("ENGENHARIA E DIRETRIZES DE CÓDIGO" if is_admin else "DIREÇÃO NARRATIVA E DIRETRIZES IA", color="#d4af37", size=11, weight="bold")
                 ]),
             ], alignment="spaceBetween"),
