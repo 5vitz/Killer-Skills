@@ -388,14 +388,14 @@ def main(page: ft.Page):
             change_view("storyboard")
             
         navigation_controls = ft.Row([
-            ft.IconButton(icon=ft.icons.ARROW_BACK_IOS_NEW, icon_color="white", icon_size=18, on_click=lambda _: prev_frame()),
+            ft.IconButton(icon="arrow_back_ios", icon_color="white", icon_size=18, on_click=lambda _: prev_frame()),
             ft.Container(
                 content=ft.Text(f"⚡ FRAME {active_slot + 1} / 4", size=13, weight="bold", color="#d4af37"),
                 bgcolor="white10",
                 padding=ft.Padding.symmetric(horizontal=15, vertical=8),
                 border_radius=10
             ),
-            ft.IconButton(icon=ft.icons.ARROW_FORWARD_IOS, icon_color="white", icon_size=18, on_click=lambda _: next_frame()),
+            ft.IconButton(icon="arrow_forward_ios", icon_color="white", icon_size=18, on_click=lambda _: next_frame()),
         ], alignment="center", spacing=20)
         
         # Painel do Player (Coluna Esquerda) - Navegador em cima para alinhamento perfeito pela base!
@@ -892,7 +892,7 @@ def main(page: ft.Page):
                     ft.Row([
                         txt_custom_email,
                         ft.IconButton(
-                            icon=ft.icons.ARROW_FORWARD,
+                            icon="arrow_forward",
                             icon_color="#d4af37",
                             bgcolor="#1E60FF",
                             icon_size=18,
@@ -1251,9 +1251,9 @@ ORDEM_DE_SERVICO:
                         
                         # Reel navigation overlay on the right side of the visor
                         ft.Column([
-                            ft.IconButton(icon=ft.icons.ARROW_UPWARD, icon_color="white", icon_size=20, bgcolor="black87", on_click=lambda _: scroll_persona("up")),
+                            ft.IconButton(icon="arrow_upward", icon_color="white", icon_size=20, bgcolor="black87", on_click=lambda _: scroll_persona("up")),
                             ft.Container(height=5),
-                            ft.IconButton(icon=ft.icons.ARROW_DOWNWARD, icon_color="white", icon_size=20, bgcolor="black87", on_click=lambda _: scroll_persona("down")),
+                            ft.IconButton(icon="arrow_downward", icon_color="white", icon_size=20, bgcolor="black87", on_click=lambda _: scroll_persona("down")),
                         ], alignment="center", right=0, top=60)
                     ])
                 ),
@@ -1307,9 +1307,9 @@ ORDEM_DE_SERVICO:
 
         smartphone_player_wrapper = ft.Column([
             ft.Row([
-                ft.IconButton(icon=ft.icons.ARROW_UPWARD, icon_color="white30", on_click=lambda _: scroll_persona("up")),
+                ft.IconButton(icon="arrow_upward", icon_color="white30", on_click=lambda _: scroll_persona("up")),
                 ft.Text("RODANTE REELS", size=9, weight="bold", color="white30"),
-                ft.IconButton(icon=ft.icons.ARROW_DOWNWARD, icon_color="white30", on_click=lambda _: scroll_persona("down"))
+                ft.IconButton(icon="arrow_downward", icon_color="white30", on_click=lambda _: scroll_persona("down"))
             ], alignment="center", spacing=10),
             ft.Container(height=5),
             smartphone_player
