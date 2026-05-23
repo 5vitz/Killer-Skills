@@ -334,7 +334,7 @@ def main(page: ft.Page):
         else:
             screen_content = ft.Column([
                 ft.IconButton(
-                    icon=ft.icons.ADD_A_PHOTO, 
+                    icon="add_a_photo", 
                     icon_color="#d4af37", 
                     icon_size=48,
                     on_click=lambda _: change_view("almoxarifado")
