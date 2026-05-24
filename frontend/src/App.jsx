@@ -244,7 +244,7 @@ export default function App() {
       {/* Glow Reativo da Persona Ativa (Esquerda Superior) */}
       <div 
         className="absolute w-[450px] h-[450px] rounded-full blur-[120px] left-[15%] top-[10%] pointer-events-none opacity-20 transition-all duration-1000 ease-in-out z-0"
-        style={{ backgroundColor: currentPersona.color }}
+        style={{ backgroundColor: "#1E60FF" }}
       />
       {/* Glow de Contraste Dourado/Bronze (Direita Inferior) */}
       <div className="absolute w-[350px] h-[350px] bg-brand-gold/10 rounded-full blur-[140px] right-[15%] bottom-[10%] pointer-events-none z-0" />
@@ -379,20 +379,22 @@ export default function App() {
               {/* Botões Esquerda/Direita para Navegação do Carrossel (Aparecem somente quando o portal está aberto) */}
               {isPortalOpen && (
                 <>
-                  <button 
-                    onClick={() => setCurrentSlideIdx(prev => Math.max(0, prev - 1))}
-                    disabled={currentSlideIdx === 0}
-                    className="absolute right-[calc(100%+8px)] top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40 disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    <ChevronLeft className="w-4.5 h-4.5 text-white/60" />
-                  </button>
-                  <button 
-                    onClick={() => setCurrentSlideIdx(prev => Math.min(5, prev + 1))}
-                    disabled={currentSlideIdx === 5}
-                    className="absolute left-[calc(100%+8px)] top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40 disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    <ChevronRight className="w-4.5 h-4.5 text-white/60" />
-                  </button>
+                  {currentSlideIdx > 0 && (
+                    <button 
+                      onClick={() => setCurrentSlideIdx(prev => Math.max(0, prev - 1))}
+                      className="absolute right-[calc(100%+8px)] top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
+                    >
+                      <ChevronLeft className="w-4.5 h-4.5 text-white/60" />
+                    </button>
+                  )}
+                  {currentSlideIdx < 5 && (
+                    <button 
+                      onClick={() => setCurrentSlideIdx(prev => Math.min(5, prev + 1))}
+                      className="absolute left-[calc(100%+8px)] top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
+                    >
+                      <ChevronRight className="w-4.5 h-4.5 text-white/60" />
+                    </button>
+                  )}
                 </>
               )}
               
