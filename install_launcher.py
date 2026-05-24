@@ -49,6 +49,7 @@ StartupNotify=true
     # 3. Salvar na Área de Trabalho (Desktop) se existir
     desktop_paths = [
         "/home/artz/Área de Trabalho",
+        "/home/artz/Área de trabalho",
         "/home/artz/Desktop",
         "/home/artz/Desktop-Folders"
     ]
