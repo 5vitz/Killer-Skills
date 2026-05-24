@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Menu, Play, BookOpen, Layers, Settings, ChevronUp, ChevronDown, ChevronLeft,
+  Menu, Play, BookOpen, Layers, Settings, ChevronUp, ChevronDown, ChevronLeft, ChevronRight,
   Sparkles, CheckCircle2, Circle, LogOut, ArrowRight, ShieldCheck, 
   Info, Cpu, FolderOpen, Image as ImageIcon, Send, Sliders, RefreshCw, User
 } from 'lucide-react';
