@@ -360,7 +360,7 @@ export default function App() {
             </button>
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: currentPersona.color }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
@@ -422,17 +422,17 @@ export default function App() {
                       {/* Glow interno reativo sutil */}
                       <div 
                         className="absolute inset-0 opacity-10 blur-xl pointer-events-none group-hover:scale-110 transition duration-500" 
-                        style={{ background: `radial-gradient(circle, ${currentPersona.color} 0%, transparent 70%)` }}
+                        style={{ background: "radial-gradient(circle, #1E60FF 0%, transparent 70%)" }}
                       />
                       
                       <div className="flex flex-col items-center gap-2 mt-2">
                         <div 
                           className="w-10 h-10 rounded-2xl flex justify-center items-center font-bold text-sm shadow-lg mb-1"
-                          style={{ backgroundColor: `${currentPersona.color}25`, color: currentPersona.color, border: `1px solid ${currentPersona.color}40` }}
+                          style={{ backgroundColor: "#1E60FF25", color: "#1E60FF", border: "1px solid #1E60FF40" }}
                         >
                           <User className="w-5 h-5" />
                         </div>
-                        <div className="text-lg font-black tracking-tight" style={{ color: currentPersona.color }}>
+                        <div className="text-lg font-black tracking-tight" style={{ color: "#1E60FF" }}>
                           {currentPersona.title}
                         </div>
                         <div className="text-[9px] font-bold text-white/40 uppercase tracking-widest">
@@ -451,7 +451,7 @@ export default function App() {
                         }}
                         className="w-full h-10 bg-white/5 hover:bg-white/10 active:scale-95 border border-white/10 group-hover:border-white/20 rounded-xl font-extrabold text-xs tracking-wider flex justify-center items-center gap-2 transition duration-200 mt-4 shadow-inner"
                       >
-                        <Sparkles className="w-3.5 h-3.5" style={{ color: currentPersona.color }} />
+                        <Sparkles className="w-3.5 h-3.5" style={{ color: "#1E60FF" }} />
                         🔮 Entrar no Portal
                       </button>
                     </div>
@@ -478,13 +478,13 @@ export default function App() {
                       {/* Luz ambiente interna do carrossel */}
                       <div 
                         className="absolute w-[200px] h-[200px] rounded-full blur-[80px] opacity-10 pointer-events-none"
-                        style={{ backgroundColor: currentPersona.color }}
+                        style={{ backgroundColor: "#1E60FF" }}
                       />
                       
                       {/* Código Mágico do Slide no Topo */}
                       <div 
                         className="px-3 py-1 rounded-full text-[9px] font-black tracking-widest border"
-                        style={{ borderColor: `${currentPersona.color}30`, backgroundColor: `${currentPersona.color}15`, color: currentPersona.color }}
+                        style={{ borderColor: "#1E60FF30", backgroundColor: "#1E60FF15", color: "#1E60FF" }}
                       >
                         SLIDE {selectedPersonaIdx + 1}.{currentSlideIdx + 1}
                       </div>
@@ -535,7 +535,7 @@ export default function App() {
                               ? "w-4" 
                               : "w-1.5"
                           }`}
-                          style={{ backgroundColor: idx === currentSlideIdx ? currentPersona.color : "rgba(255,255,255,0.15)" }}
+                          style={{ backgroundColor: idx === currentSlideIdx ? "#1E60FF" : "rgba(255,255,255,0.15)" }}
                         />
                       ))}
                     </div>
@@ -558,7 +558,7 @@ export default function App() {
             </button>
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: currentPersona.color }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
@@ -599,7 +599,7 @@ export default function App() {
             </button>
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: currentPersona.color }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
