@@ -45,6 +45,13 @@ ssh root@31.220.102.2 << 'EOF'
       pip3 install firebase-admin || pip install firebase-admin
   fi
   
+  # Compila o novo Frontend React no VPS
+  echo "📦 Compilando o novo Frontend React (Vite)..."
+  cd frontend
+  npm install --legacy-peer-deps || { echo "❌ ERRO: Falha ao rodar npm install no VPS!"; exit 1; }
+  npm run build || { echo "❌ ERRO: Falha ao rodar npm run build no VPS!"; exit 1; }
+  cd ..
+  
   # Carrega variáveis de ambiente comuns para garantir que o PM2 seja localizado
   export PATH=$PATH:/usr/local/bin:/usr/bin:/root/.nvm/versions/node/*/bin
   [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"

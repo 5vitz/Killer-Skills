@@ -1,24 +1,37 @@
 import os
-import flet as ft
-from datetime import datetime
 import sys
-import shutil
-import threading
-from dotenv import load_dotenv
+import http.server
+import socketserver
 
-# Segurança
-os.environ["FLET_SECRET_KEY"] = "GENERA_STRATEGY_2026"
+# Determine paths
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__)) # APP folder
+BASE_DIR = os.path.dirname(ROOT_DIR) # Root folder
+DIRECTORY = os.path.join(BASE_DIR, "frontend", "dist")
 
-# Estrutura de Pastas
-ROOT_DIR = os.path.dirname(__file__)
-ASSETS_DIR = os.path.join(ROOT_DIR, "assets")
-UPLOAD_DIR = os.path.join(ROOT_DIR, "uploads")
+# If the React dist folder is not generated yet, let's gracefully create a placeholder
+if not os.path.exists(DIRECTORY):
+    os.makedirs(DIRECTORY, exist_ok=True)
+    with open(os.path.join(DIRECTORY, "index.html"), "w") as f:
+        f.write("<h1>Compiling React Frontend... Please wait a few seconds and reload the page!</h1>")
 
-# Carregar configurações do cofre .env (subindo um nível para a raiz)
-load_dotenv(os.path.join(ROOT_DIR, "..", ".env"))
+# Run simple HTTP Server on port 8081 serving the React Vite build
+PORT = 8081
+class Handler(http.server.SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=DIRECTORY, **kwargs)
 
-for d in [ASSETS_DIR, UPLOAD_DIR]:
-    if not os.path.exists(d): os.makedirs(d)
+# Allow port reuse to avoid '[Errno 98] Address already in use'
+socketserver.TCPServer.allow_reuse_address = True
+print(f"Serving React Frontend from {DIRECTORY} at port {PORT}")
+try:
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        httpd.serve_forever()
+except Exception as e:
+    print(f"Server error: {e}")
+    sys.exit(1)
+
+# Exit script to bypass Flet completely
+sys.exit(0)
 
 
 # Copiar Logo Premium Metalizada para a pasta assets
