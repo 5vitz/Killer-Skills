@@ -149,6 +149,7 @@ export default function App() {
 
   const scrollPersona = (direction) => {
     if (activePersonasList.length === 0) return;
+    setIsPortalOpen(false); // Fechar portal ao rolar verticalmente para ver o Card da nova persona
     if (direction === "up") {
       setSelectedPersonaIdx((prev) => (prev - 1 + activePersonasList.length) % activePersonasList.length);
     } else {
