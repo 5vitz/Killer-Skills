@@ -1,0 +1,185 @@
+import os
+import sys
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import List, Optional, Dict
+from datetime import datetime
+
+# Ajustando o caminho do Python para carregar o módulo killer_skills com suporte a caminhos novos e legados
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(BACKEND_DIR)
+
+if os.path.exists(os.path.join(BACKEND_DIR, "killer_skills")):
+    sys.path.append(BACKEND_DIR)
+    sys.path.append(os.path.join(BACKEND_DIR, "killer_skills"))
+else:
+    sys.path.append(os.path.join(ROOT_DIR, "APP"))
+    sys.path.append(os.path.join(ROOT_DIR, "APP", "killer_skills"))
+
+try:
+    from persistence.scripts.database import PersistenceSkill
+    db = PersistenceSkill("killer_skills.db")
+except Exception as e:
+    print(f"⚠️ Erro ao carregar PersistenceSkill: {e}")
+    db = None
+
+try:
+    from narrative.scripts.narrative_engine import NarrativeSkill
+    ai = NarrativeSkill()
+except Exception as e:
+    print(f"⚠️ Erro ao carregar NarrativeSkill: {e}")
+    ai = None
+
+app = FastAPI(title="Killer Skills API", version="1.0.0")
+
+# Habilitando CORS para permitir conexões do React Frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# --- MODELOS DE ENTRADA ---
+class LoginRequest(BaseModel):
+    email: str
+
+class CaptionRequest(BaseModel):
+    storyboard: List[Optional[str]]
+
+class AnalysisRequest(BaseModel):
+    storyboard: List[str]
+
+class ForgeRequest(BaseModel):
+    persona_title: str
+    persona_tag: str
+    micro_services: Dict[str, bool]
+
+# --- PERSONAS DATA SEED ---
+PESSOAL_DATA = [
+    {"title": "Intelectual / Culto", "subtitle": "Erudição & Sobriedade", "desc": "Ideias profundas, referências históricas e artísticas em um tom culto de autoridade intelectual.", "icon": "menu_book", "color": "#1E60FF", "tag": "Pessoal"},
+    {"title": "Criativo / Disruptivo", "subtitle": "Ousadia & Inovação", "desc": "Quebra de padrões tradicionais, originalidade extrema e linguagem altamente autêntica.", "icon": "auto_awesome", "color": "#E91E63", "tag": "Pessoal"},
+    {"title": "Autoridade / Líder", "subtitle": "Assertividade & Inspiração", "desc": "Compartilhamento de marcos profissionais (milestones) e tom inspirador de liderança.", "icon": "workspace_premium", "color": "#d4af37", "tag": "Pessoal"},
+    {"title": "Carismático / Empático", "subtitle": "Conexão Humana & Leveza", "desc": "Histórias cotidianas do dia a dia (life stories), empatia e tom altamente conversacional.", "icon": "favorite", "color": "#FF5722", "tag": "Pessoal"},
+    {"title": "Narcisista / Estético", "subtitle": "Luxo & Impacto Visual", "desc": "Estética cinematográfica, sofisticação de alto padrão e enquadramentos de luxo absoluto.", "icon": "diamond", "color": "#E040FB", "tag": "Pessoal"},
+    {"title": "Mentor / Educador", "subtitle": "Valor Didático & Tutoriais", "desc": "Geração de valor prático, compartilhamento de conhecimento e tutoriais passo a passo.", "icon": "school", "color": "#00E676", "tag": "Pessoal"},
+    {"title": "Visionário / Futurista", "subtitle": "Tecnologia & Tendências", "desc": "Análise de tendências tecnológicas, inovações disruptivas e otimismo com o futuro.", "icon": "psychology", "color": "#00BCD4", "tag": "Pessoal"},
+    {"title": "Pragmático / Direto", "subtitle": "Minimalismo & Foco", "desc": "Linguagem cirúrgica, produtividade máxima e comunicação direta ao ponto sem rodeios.", "icon": "flash_on", "color": "#FFEB3B", "tag": "Pessoal"},
+    {"title": "Lifestyle / Aventureiro", "subtitle": "Liberdade & Bastidores", "desc": "Liberdade geográfica, flexibilidade, bastidores de viagens e rotina dinâmica ao ar livre.", "icon": "explore", "color": "#8BC34A", "tag": "Pessoal"},
+    {"title": "Humanitário / Propósito", "subtitle": "Valores & Impacto Social", "desc": "Causas sociais, ecologia, legado humanitário e atitudes alinhadas com princípios nobres.", "icon": "public", "color": "#4CAF50", "tag": "Pessoal"},
+    {"title": "Especialista Técnico", "subtitle": "Precisão & Credibilidade", "desc": "Precisão metodológica, jargão profissional, gráficos técnicos e alta autoridade acadêmica.", "icon": "science", "color": "#9C27B0", "tag": "Pessoal"},
+    {"title": "Conectado / Pop", "subtitle": "Humor Fino & Tendências", "desc": "Memes inteligentes, sintonia rápida com as conversas do momento e linguagem super descontraída.", "icon": "forum", "color": "#FFC107", "tag": "Pessoal"},
+]
+
+PROFISSIONAL_DATA = [
+    {"title": "Institucional / Estúdio", "subtitle": "Autoridade Artística & Estúdio", "desc": "Portfólio de alto padrão e produções de bastidores premium (ideal para a Scalla Records).", "icon": "business", "color": "#1E60FF", "tag": "Profissional"},
+    {"title": "Profissional Liberal / Especialista", "subtitle": "Credibilidade & Segurança", "desc": "Conformidade ética, segurança profissional e alta conversão para agendamentos e consultas.", "icon": "medical_services", "color": "#00E676", "tag": "Profissional"},
+    {"title": "Agência Criativa / Branding", "subtitle": "Sofisticação Visual & Luxo", "desc": "Posicionamento estético de altíssimo nível para atrair clientes premium e valorizar a arte.", "icon": "palette", "color": "#d4af37", "tag": "Profissional"},
+    {"title": "Agência de Performance / Tráfego", "subtitle": "Métricas, ROI & Leads", "desc": "Foco absoluto em funis de marketing, captação ágil de clientes em escala e métricas de vendas.", "icon": "trending_up", "color": "#00E676", "tag": "Profissional"},
+    {"title": "Infoprodutor / Educador Digital", "subtitle": "Lançamentos & Comuniade", "desc": "Estratégia de lançamento de cursos digitais, captação de alunos e autoridade comunitária.", "icon": "cast_for_education", "color": "#E91E63", "tag": "Profissional"},
+    {"title": "E-commerce / Loja Virtual", "subtitle": "Catálogos & Provas Sociais", "desc": "Visualização atrativa de produtos físicos, unboxing, novidades de catálogo e avaliações.", "icon": "shopping_bag", "color": "#FF9800", "tag": "Profissional"},
+    {"title": "Comércio Local / Varejo", "subtitle": "Atendimento & Ofertas do Dia", "desc": "Atração regional, ofertas locais, endereço físico, atendimento humano e horários.", "icon": "storefront", "color": "#00BCD4", "tag": "Profissional"},
+    {"title": "Prestador de Serviços / Freelancer", "subtitle": "Portfólios & Orçamentos", "desc": "Apresentação prática de trabalhos anteriores, simplificação de orçamentos e depoimentos.", "icon": "design_services", "color": "#9E9E9E", "tag": "Profissional"},
+    {"title": "Corporativo / B2B", "subtitle": "Comunicação de Alto Nível", "desc": "Estudos de caso (case studies), tom formal e relacionamento estratégico com executivos.", "icon": "handshake", "color": "#607D8B", "tag": "Profissional"},
+    {"title": "Portal de Notícias / Curador", "subtitle": "Notícias & Curadoria Rápida", "desc": "Alto volume de postagens informativas diárias, compilações rápidas e notícias de última hora.", "icon": "feed", "color": "#F44336", "tag": "Profissional"},
+    {"title": "Empreendedor / Fundador", "subtitle": "Bastidores & Cultura da Marca", "desc": "Liderança humana, cultura da empresa e o lado humano dos bastidores da construção de marca.", "icon": "rocket_launch", "color": "#FFEB3B", "tag": "Profissional"},
+    {"title": "Euquipe / Solopreneur", "subtitle": "Otimização & Bastidores Reais", "desc": "Produtividade máxima com tempo restrito, rotina sem filtros e venda direta simplificada.", "icon": "self_improvement", "color": "#795548", "tag": "Profissional"},
+]
+
+ALL_PERSONAS = PESSOAL_DATA + PROFISSIONAL_DATA
+
+# --- ENDPOINTS API ---
+
+@app.get("/")
+def index():
+    return {"status": "online", "message": "Killer Skills API is up and running!"}
+
+@app.post("/api/login")
+def login(req: LoginRequest):
+    email = req.email.strip().lower()
+    if not email:
+        raise HTTPException(status_code=400, detail="E-mail inválido")
+    
+    # Mock de autenticação SaaS simples
+    return {
+        "success": True,
+        "email": email,
+        "is_admin": email in ["artz.genera@gmail.com", "sinkando@gmail.com"]
+    }
+
+@app.get("/api/personas")
+def get_personas():
+    return ALL_PERSONAS
+
+@app.post("/api/ai/caption")
+def get_ai_caption(req: CaptionRequest):
+    if not ai:
+        return {"caption": "IA Indisponível no momento. Adicione a chave no arquivo .env."}
+    try:
+        # Preenche os slots vazios para passar para a Skill
+        slots = [x if x else None for x in req.storyboard]
+        caption = ai.sugerir_legenda(slots)
+        return {"caption": caption}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/ai/analysis")
+def get_ai_analysis(req: AnalysisRequest):
+    if not ai:
+        return {"insight": "IA offline no momento. Adicione sua chave GEMINI_API_KEY no .env."}
+    try:
+        insight = ai.analisar_storyboard(req.storyboard)
+        return {"insight": insight}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/forge")
+def forge_order(req: ForgeRequest):
+    legendas_label = "Legendas Didáticas" if req.persona_tag == "Pessoal" else "Legendas Corporativas"
+    os_id = f"OS-2026-KS-{req.persona_title[:4].upper()}"
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    manifest_yaml = f"""---
+ORDEM_DE_SERVICO:
+  ID: "{os_id}"
+  TIMESTAMP: "{timestamp}"
+  
+  AGENTE_ATIVADO:
+    NOME: "{req.persona_title}"
+    CATEGORIA: "{req.persona_tag}"
+    STATUS: "CONVOCADO"
+  
+  MICRO_SERVICOS_SOLICITADOS:
+    - {legendas_label}: {"ATIVO 🟢" if req.micro_services.get("legendas") else "INATIVO 🔴"}
+    - Roteiro de Carrossel: {"ATIVO 🟢" if req.micro_services.get("roteiro") else "INATIVO 🔴"}
+    - Compressor WebP: {"ATIVO 🟢" if req.micro_services.get("webp") else "INATIVO 🔴"}
+    - Vídeo Generativo AI: {"ATIVO 🟢" if req.micro_services.get("video") else "INATIVO 🔴"}
+  
+  ORQUESTRADOR: "Central-AI-v4"
+  STATUS_ORDEM: "PRONTO_PARA_FORJA"
+---"""
+
+    # Se a conexão com o banco de dados Firebase/Firestore estiver ativa, salvamos o agendamento
+    if db:
+        try:
+            # Recupera as mídias ativas e legenda de exemplo
+            db.agendar_post(
+                data_hora=timestamp,
+                arquivos="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500",
+                legenda=f"OS Forjada para a persona {req.persona_title}!"
+            )
+        except Exception as e:
+            print(f"⚠️ Erro ao salvar agendamento no Firestore: {e}")
+
+    return {
+        "success": True,
+        "os_id": os_id,
+        "manifest": manifest_yaml,
+        "timestamp": timestamp
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)

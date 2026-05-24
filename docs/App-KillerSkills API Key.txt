@@ -1,1 +1,0 @@
-REMOVIDO POR SEGURANÇA. A chave de API do Gemini foi exposta publicamente e apagada para proteção de faturamento e governança do projeto. A nova chave de API gerada deve ser salva estritamente no arquivo local '.env' (que está no .gitignore), nunca em arquivos de texto na pasta 'docs/'.

@@ -15,24 +15,48 @@ else
 fi
 
 if [ ! -z "$GITHUB_TOKEN" ]; then
-    echo "🔑 Autenticando com Token do GitHub de forma segura..."
+    echo "🔑 Autenticando com Token do GitHub..."
     git push https://$GITHUB_TOKEN@github.com/5vitz/Killer-Skills.git main
+    if [ $? -ne 0 ]; then
+        echo "❌ ERRO: Falha ao enviar alterações para o GitHub (git push). Verifique se há conflitos!"
+        exit 1
+    fi
 else
     echo "⚠️ GITHUB_TOKEN não configurado no .env! Tentando push padrão..."
     git push
+    if [ $? -ne 0 ]; then
+        echo "❌ ERRO: Falha ao enviar alterações para o GitHub. Configure o GITHUB_TOKEN!"
+        exit 1
+    fi
 fi
+
 echo "🖥️ 2. Conectando via SSH ao VPS e atualizando a web..."
-ssh root@31.220.102.2 << EOF
-  cd ~/Killer-Skills
-  git remote set-url origin https://$GITHUB_TOKEN@github.com/5vitz/Killer-Skills.git
+ssh root@31.220.102.2 << 'EOF'
+  cd ~/Killer-Skills || { echo "❌ ERRO: Pasta ~/Killer-Skills não encontrada no VPS!"; exit 1; }
+  
+  # Força a atualização do repositório
   git reset --hard
-  git pull
-  # Garante que a biblioteca do Firebase esteja instalada no VPS (seja global ou no venv)
+  git pull || { echo "❌ ERRO: Falha ao rodar git pull no VPS!"; exit 1; }
+  
+  # Garante que a biblioteca do Firebase esteja instalada no VPS
   if [ -f "venv/bin/pip" ]; then
       venv/bin/pip install firebase-admin
   else
       pip3 install firebase-admin || pip install firebase-admin
   fi
-  pm2 restart killer-skills
-  echo "✅ DEPLOY CONCLUÍDO COM 100% DE SUCESSO NA WEB!"
+  
+  # Carrega variáveis de ambiente comuns para garantir que o PM2 seja localizado
+  export PATH=$PATH:/usr/local/bin:/usr/bin:/root/.nvm/versions/node/*/bin
+  [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+  [ -s "$HOME/.profile" ] && \. "$HOME/.profile"
+  [ -s "$HOME/.bashrc" ] && \. "$HOME/.bashrc"
+  
+  echo "🔄 Reiniciando serviço PM2..."
+  pm2 restart killer-skills || /usr/local/bin/pm2 restart killer-skills || /usr/bin/pm2 restart killer-skills || {
+      echo "⚠️ AVISO: Não foi possível reiniciar via PM2 automaticamente. Tentando matar processo Python antigo..."
+      pkill -f "main.py" || true
+      nohup python3 APP/main.py > /dev/null 2>&1 &
+  }
+  
+  echo "✅ DEPLOY CONCLUÍDO COM SUCESSO NO VPS!"
 EOF
