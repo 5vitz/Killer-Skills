@@ -388,7 +388,7 @@ def main(page: ft.Page):
             ft.Container(
                 content=ft.Text(f"⚡ FRAME {active_slot + 1} / 4", size=13, weight="bold", color="#d4af37"),
                 bgcolor="white10",
-                padding=ft.Padding.symmetric(horizontal=15, vertical=8),
+                padding=ft.padding.symmetric(horizontal=15, vertical=8),
                 border_radius=10
             ),
             ft.IconButton(icon="arrow_forward_ios", icon_color="white", icon_size=18, on_click=lambda _: next_frame()),
@@ -446,7 +446,7 @@ def main(page: ft.Page):
             ft.Row([
                 ft.Text("Coleção Ativa:", size=12, color="white70"),
                 ft.Container(
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=6),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=6),
                     bgcolor="#1E60FF", border_radius=8,
                     content=ft.Text(f"@{account_dropdown.value}", size=12, weight="bold", color="white")
                 )
@@ -1190,7 +1190,7 @@ ORDEM_DE_SERVICO:
                     ft.Container(
                         content=ft.Text(p_tag.upper(), size=8, weight="bold", color="black"),
                         bgcolor=p_color,
-                        padding=ft.Padding.symmetric(horizontal=8, vertical=3),
+                        padding=ft.padding.symmetric(horizontal=8, vertical=3),
                         border_radius=8
                     ),
                     ft.Container(expand=True),
@@ -1371,7 +1371,7 @@ ORDEM_DE_SERVICO:
                         ),
                         ft.Text(logged_in_user_email, size=11, color="white70", overflow=ft.TextOverflow.ELLIPSIS, weight="w500")
                     ], spacing=10),
-                    padding=ft.Padding.symmetric(horizontal=10, vertical=8),
+                    padding=ft.padding.symmetric(horizontal=10, vertical=8),
                     bgcolor="white10",
                     border_radius=10,
                     margin=ft.Padding.only(bottom=15)
@@ -1387,7 +1387,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("construction", color="#d4af37" if effective_active_view == "admin_constructor" else "white30", size=18),
                         ft.Text("Construtor ADM", color="white" if effective_active_view == "admin_constructor" else "white70", size=13, weight="bold" if effective_active_view == "admin_constructor" else "normal")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="#2A2210" if effective_active_view == "admin_constructor" else "transparent",
                     border_radius=10,
                     on_click=None if disabled else (lambda _: change_view("admin_constructor"))
@@ -1397,7 +1397,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("dashboard", color="#d4af37" if effective_active_view == "admin_console" else "white30", size=18),
                         ft.Text("Console de Infra", color="white" if effective_active_view == "admin_console" else "white70", size=13, weight="bold" if effective_active_view == "admin_console" else "normal")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="#2A2210" if effective_active_view == "admin_console" else "transparent",
                     border_radius=10,
                     on_click=None if disabled else (lambda _: change_view("admin_console"))
@@ -1408,7 +1408,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("arrow_back", color="white70", size=18),
                         ft.Text("Voltar ao Studio", color="white70", size=13)
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     border_radius=10,
                     on_click=None if disabled else (lambda _: exit_admin_mode())
                 )
@@ -1422,7 +1422,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("widgets", color="white30" if disabled else ("#1E60FF" if effective_active_view == "servicos" else "white30"), size=18),
                         ft.Text("Serviços AI", color="white30" if disabled else ("white" if effective_active_view == "servicos" else "white70"), size=13, weight="bold" if effective_active_view == "servicos" else "normal")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="transparent" if disabled else ("#102040" if effective_active_view == "servicos" else "transparent"),
                     border_radius=10,
                     on_click=None if disabled else (lambda _: change_view("servicos"))
@@ -1432,7 +1432,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("auto_awesome", color="white30" if disabled else ("#1E60FF" if effective_active_view == "storyboard" else "white30"), size=18),
                         ft.Text("Creative Studio", color="white30" if disabled else ("white" if effective_active_view == "storyboard" else "white70"), size=13, weight="bold" if effective_active_view == "storyboard" else "normal")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="transparent" if disabled else ("#102040" if effective_active_view == "storyboard" else "transparent"),
                     border_radius=10,
                     on_click=None if disabled else (lambda _: change_view("storyboard"))
@@ -1442,7 +1442,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("folder_special", color="white30" if disabled else ("#1E60FF" if effective_active_view == "almoxarifado" else "white30"), size=18),
                         ft.Text("Almoxarifado", color="white30" if disabled else ("white" if effective_active_view == "almoxarifado" else "white70"), size=13, weight="bold" if effective_active_view == "almoxarifado" else "normal")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="transparent" if disabled else ("#102040" if effective_active_view == "almoxarifado" else "transparent"),
                     border_radius=10,
                     on_click=None if disabled else (lambda _: change_view("almoxarifado"))
@@ -1452,7 +1452,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("mobile_screen_share", color="white30" if disabled else ("#1E60FF" if effective_active_view == "preview" else "white30"), size=18),
                         ft.Text("Simulador & Fila", color="white30" if disabled else ("white" if effective_active_view == "preview" else "white70"), size=13, weight="bold" if effective_active_view == "preview" else "normal")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="transparent" if disabled else ("#102040" if effective_active_view == "preview" else "transparent"),
                     border_radius=10,
                     on_click=None if disabled else (lambda _: change_view("preview"))
@@ -1462,7 +1462,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("people_outline", color="white30" if disabled else ("#1E60FF" if effective_active_view == "colecoes" else "white30"), size=18),
                         ft.Text("Coleções / Clientes", color="white30" if disabled else ("white" if effective_active_view == "colecoes" else "white70"), size=13, weight="bold" if effective_active_view == "colecoes" else "normal")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="transparent" if disabled else ("#102040" if effective_active_view == "colecoes" else "transparent"),
                     border_radius=10,
                     on_click=None if disabled else (lambda _: change_view("colecoes"))
@@ -1472,7 +1472,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("article", color="white30" if disabled else ("#1E60FF" if effective_active_view == "prompt_constructor" else "white30"), size=18),
                         ft.Text("Construtor de Prompt", color="white30" if disabled else ("white" if effective_active_view == "prompt_constructor" else "white70"), size=13, weight="bold" if effective_active_view == "prompt_constructor" else "normal")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="transparent" if disabled else ("#102040" if effective_active_view == "prompt_constructor" else "transparent"),
                     border_radius=10,
                     on_click=None if disabled else (lambda _: change_view("prompt_constructor"))
@@ -1484,7 +1484,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("admin_panel_settings", color="white30" if disabled else "#d4af37", size=18),
                         ft.Text("👑 Painel ADM [RESTRITO]", color="white30" if disabled else "#d4af37", size=13, weight="bold")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="transparent" if disabled else "#1F1A0A",
                     border=ft.Border.all(1, "white10" if disabled else "#403010"),
                     border_radius=10,
@@ -1498,7 +1498,7 @@ ORDEM_DE_SERVICO:
                         ft.Icon("logout", color="#E91E63", size=18),
                         ft.Text("VOLTAR (TELA 0)", color="#E91E63", size=13, weight="bold")
                     ]),
-                    padding=ft.Padding.symmetric(horizontal=12, vertical=10),
+                    padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="#1E080C",
                     border_radius=10,
                     on_click=None if disabled else (lambda _: go_to_login())
