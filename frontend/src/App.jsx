@@ -366,14 +366,34 @@ export default function App() {
                 onClick={() => scrollPersona("up")}
                 className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
               >
-                <ChevronUp className="w-4.5 h-4.5 text-white" />
+                <ChevronUp className="w-4.5 h-4.5 text-white/60" />
               </button>
               <button 
                 onClick={() => scrollPersona("down")}
                 className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
               >
-                <ChevronDown className="w-4.5 h-4.5 text-white" />
+                <ChevronDown className="w-4.5 h-4.5 text-white/60" />
               </button>
+
+              {/* Botões Esquerda/Direita para Navegação do Carrossel (Aparecem somente quando o portal está aberto) */}
+              {isPortalOpen && (
+                <>
+                  <button 
+                    onClick={() => setCurrentSlideIdx(prev => Math.max(0, prev - 1))}
+                    disabled={currentSlideIdx === 0}
+                    className="absolute right-[calc(100%+8px)] top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40 disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    <ChevronLeft className="w-4.5 h-4.5 text-white/60" />
+                  </button>
+                  <button 
+                    onClick={() => setCurrentSlideIdx(prev => Math.min(5, prev + 1))}
+                    disabled={currentSlideIdx === 5}
+                    className="absolute left-[calc(100%+8px)] top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40 disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    <ChevronRight className="w-4.5 h-4.5 text-white/60" />
+                  </button>
+                </>
+              )}
               
               {/* Ilha Dinâmica */}
               <div className="absolute w-[110px] h-6 bg-black rounded-2xl top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
@@ -490,41 +510,16 @@ export default function App() {
 
                       {/* Controles de Slide e Ação de Finalização */}
                       <div className="w-full mt-3">
-                        {currentSlideIdx === 5 ? (
+                        {currentSlideIdx === 5 && (
                           <button 
                             onClick={() => {
                               setActiveView("servicos_escolha");
                               setIsPortalOpen(false);
                             }}
-                            className="w-full h-10 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg hover:shadow-brand-gold/20 duration-200 animate-pulse"
+                            className="w-full h-10 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg hover:shadow-brand-gold/20 duration-200 animate-pulse cursor-pointer"
                           >
                             <CheckCircle2 className="w-4 h-4" /> OK: Convocação Concluída
                           </button>
-                        ) : (
-                          <div className="flex justify-between items-center gap-3">
-                            <button 
-                              onClick={() => setCurrentSlideIdx(prev => Math.max(0, prev - 1))}
-                              disabled={currentSlideIdx === 0}
-                              className={`flex-1 h-8 rounded-lg border text-[9px] font-bold flex justify-center items-center gap-1 transition duration-150 ${
-                                currentSlideIdx === 0 
-                                  ? "border-white/5 text-white/20 bg-transparent cursor-not-allowed" 
-                                  : "border-white/10 text-white hover:bg-white/5 active:scale-95"
-                              }`}
-                            >
-                              <ChevronLeft className="w-3 h-3" /> Anterior
-                            </button>
-                            <button 
-                              onClick={() => setCurrentSlideIdx(prev => Math.min(5, prev + 1))}
-                              disabled={currentSlideIdx === 5}
-                              className={`flex-1 h-8 rounded-lg border text-[9px] font-bold flex justify-center items-center gap-1 transition duration-150 ${
-                                currentSlideIdx === 5 
-                                  ? "border-white/5 text-white/20 bg-transparent cursor-not-allowed" 
-                                  : "border-white/10 text-white hover:bg-white/5 active:scale-95"
-                              }`}
-                            >
-                              Próximo <ArrowRight className="w-3 h-3" />
-                            </button>
-                          </div>
                         )}
                       </div>
                     </div>
@@ -569,13 +564,13 @@ export default function App() {
                 onClick={() => scrollPersona("up")}
                 className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
               >
-                <ChevronUp className="w-4.5 h-4.5 text-white" />
+                <ChevronUp className="w-4.5 h-4.5 text-white/60" />
               </button>
               <button 
                 onClick={() => scrollPersona("down")}
                 className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
               >
-                <ChevronDown className="w-4.5 h-4.5 text-white" />
+                <ChevronDown className="w-4.5 h-4.5 text-white/60" />
               </button>
               
               {/* Ilha Dinâmica */}
@@ -610,13 +605,13 @@ export default function App() {
                 onClick={() => scrollPersona("up")}
                 className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
               >
-                <ChevronUp className="w-4.5 h-4.5 text-white" />
+                <ChevronUp className="w-4.5 h-4.5 text-white/60" />
               </button>
               <button 
                 onClick={() => scrollPersona("down")}
                 className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
               >
-                <ChevronDown className="w-4.5 h-4.5 text-white" />
+                <ChevronDown className="w-4.5 h-4.5 text-white/60" />
               </button>
               
               {/* Ilha Dinâmica */}
