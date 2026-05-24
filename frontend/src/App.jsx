@@ -361,22 +361,19 @@ export default function App() {
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
             <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: currentPersona.color }}>
               
-              {/* Header Acima do Smartphone (Absoluto para não empurrar o player!) */}
-              <div className="absolute bottom-[calc(100%+16px)] left-1/2 -translate-x-1/2 flex items-center gap-4 whitespace-nowrap z-40">
+              {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid) */}
+              <div className="absolute left-[calc(100%+24px)] top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
                 <button 
                   onClick={() => scrollPersona("up")}
-                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 active:scale-90 duration-100"
+                  className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer"
                 >
-                  <ChevronUp className="w-4 h-4" />
+                  <ChevronUp className="w-5 h-5 text-white" />
                 </button>
-                <div className="text-[10px] font-bold tracking-widest text-white/30 uppercase">
-                  Rodante Reels ({String(selectedPersonaIdx + 1).padStart(2, '0')} / {activePersonasList.length})
-                </div>
                 <button 
                   onClick={() => scrollPersona("down")}
-                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 active:scale-90 duration-100"
+                  className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer"
                 >
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5 text-white" />
                 </button>
               </div>
               
@@ -569,22 +566,19 @@ export default function App() {
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
             <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: currentPersona.color }}>
               
-              {/* Header Acima do Smartphone (Absoluto para não empurrar o player!) */}
-              <div className="absolute bottom-[calc(100%+16px)] left-1/2 -translate-x-1/2 flex items-center gap-4 whitespace-nowrap z-40">
+              {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid) */}
+              <div className="absolute left-[calc(100%+24px)] top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
                 <button 
                   onClick={() => scrollPersona("up")}
-                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 active:scale-90 duration-100"
+                  className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer"
                 >
-                  <ChevronUp className="w-4 h-4" />
+                  <ChevronUp className="w-5 h-5 text-white" />
                 </button>
-                <div className="text-[10px] font-bold tracking-widest text-white/30 uppercase">
-                  Rodante Reels ({String(selectedPersonaIdx + 1).padStart(2, '0')} / {personas.length || 24})
-                </div>
                 <button 
                   onClick={() => scrollPersona("down")}
-                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 active:scale-90 duration-100"
+                  className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer"
                 >
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5 text-white" />
                 </button>
               </div>
               
@@ -615,22 +609,19 @@ export default function App() {
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
             <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: currentPersona.color }}>
               
-              {/* Header Acima do Smartphone (Absoluto para não empurrar o player!) */}
-              <div className="absolute bottom-[calc(100%+16px)] left-1/2 -translate-x-1/2 flex items-center gap-4 whitespace-nowrap z-40">
+              {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid) */}
+              <div className="absolute left-[calc(100%+24px)] top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
                 <button 
                   onClick={() => scrollPersona("up")}
-                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 active:scale-90 duration-100"
+                  className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer"
                 >
-                  <ChevronUp className="w-4 h-4" />
+                  <ChevronUp className="w-5 h-5 text-white" />
                 </button>
-                <div className="text-[10px] font-bold tracking-widest text-white/30 uppercase">
-                  Rodante Reels ({String(selectedPersonaIdx + 1).padStart(2, '0')} / {personas.length || 24})
-                </div>
                 <button 
                   onClick={() => scrollPersona("down")}
-                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex justify-center items-center hover:bg-white/10 active:scale-90 duration-100"
+                  className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer"
                 >
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5 text-white" />
                 </button>
               </div>
               
