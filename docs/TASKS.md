@@ -15,12 +15,12 @@ gantt
     Infraestrutura FastAPI & React   :done,    t1, 2026-05-23, 2026-05-23
     section Fase 2: Login
     Tela 0 - Acesso Social           :done,    t2, 2026-05-23, 2026-05-23
-    section Fase 3: Portal
-    Tela 1 - Cards e Carrossel Portal:active,  t3, 2026-05-23, 2026-05-24
+    section Fase 3: Onboarding
+    Simplificação (Vídeo + Matriz)   :done,    t3, 2026-05-24, 2026-05-25
     section Fase 4: Serviços
-    Tela 2 - Serviços & Prompt Forger:todo,    t4, 2026-05-24, 2026-05-24
+    Tela 2 - Construtor de Prompts    :todo,    t4, 2026-05-25, 2026-05-25
     section Fase 5: Studio
-    Tela 3 - KS Studio & Feed Sandbox:todo,    t5, 2026-05-24, 2026-05-25
+    Tela 3 - KS Studio & Reels        :todo,    t5, 2026-05-25, 2026-05-25
 ```
 
 ---
@@ -35,50 +35,57 @@ gantt
 *   [x] **Interface do Celular de Login:** Simulação do smartphone virtual no centro da tela com o glow reativo. *(Concluído em 23 de Maio)*
 *   [x] **Unidade Estática de Borda:** Ajuste de bordas (`border-2`) e cor azul (`#1E60FF`) para garantir a ilusão de permanência física do celular durante a transição para a Tela 1. *(Concluído em 23 de Maio)*
 
-### ⏳ FASE 3: TELA 1 - O RITUAL DE GERAR PERSONA (Módulo Onboarding) — [EM ANDAMENTO]
-*   [ ] **Os 3 Carrosséis Horizontais (Fórmula 3x4):**
-    *   Desenhar o fluxo contendo os 3 carrosséis correspondentes às dimensões internas: *Dimensão da Alma*, *Dimensão da Ação* e *Dimensão Social*.
-    *   Implementar a navegação horizontal interna dos 4 cards de cada dimensão utilizando o familiar sistema de "bolinhas" (dots).
-*   [ ] **Sliders de Dosagem Vertical:**
-    *   Desenvolver o controle de slider vertical estilizado na lateral direita de cada card do arquétipo (0 a 100, padrão em 50% para neutralidade ergonômica).
-*   [ ] **Painel de Síntese Matriz:**
-    *   Desenhar no visor a tela consolidada com o gráfico diagramático consolidado e totalmente editável das dosagens imputadas.
-*   [ ] **Botão Gerar Persona e Persistência:**
-    *   Inserir o botão dourado **`GERAR PERSONA`** no rodapé do painel de síntese.
-    *   Implementar o salvamento real do objeto JSON `dosagem_persona` na coleção `clientes` do Firestore.
-    *   Desenvolver a verificação de primeiro acesso (Router Guard) em `App.jsx` para pular o onboarding se a Persona já existir.
-*   [ ] **Expurgador Automático de Mídias (Free Users):**
-    *   Programar o background worker assíncrono no FastAPI VPS para higienização e remoção de blobs/arquivos de usuários free 12 dias após postagem.
+### 🟢 FASE 3: ONBOARDING SIMPLIFICADO & MATRIZ DIRETA (Módulo Onboarding) — [CONCLUÍDO]
+*   [x] **Morte dos Carrosséis Lineares:** Expurgada toda a estrutura complexa de cartões individuais 3x4 que gerava fadiga de interação no usuário.
+*   [x] **Passo 1: Player da Guia de IA (Didática):**
+    *   Exibição estritamente minimalista de um player de vídeo cenográfico de luxo com avatar virtual realista e descrição didática das regras de dosagem.
+    *   Injeção do botão de transição `IR PARA A MATRIZ ➔`.
+*   [x] **Passo 2: Matriz Arquetípica Direta:**
+    *   Exibição consolidada dos 12 sliders arquetípicos em lista única e compacta, permitindo calibração instantânea de gradações (0% a 100%).
+    *   Pílula reativa `VER VÍDEO` na barra de título permitindo retroceder para rever a introdução.
+    *   **Custom Scrollbar Permanente:** Estilização da barra de rolagem jateada (`.custom-scrollbar-visible`), mantendo-a sempre visível para sinalizar mais dados abaixo da tela.
+    *   **Cálculo Dinâmico da Persona:** Computação em tempo real e visualização da Persona Resultante baseada na combinação dos dois arquétipos de maior dosagem.
+*   [x] **Roteamento Inteligente (Router Guard):**
+    *   Configuração condicional de acesso na autenticação:
+        *   *Primeiro Acesso / Novo Usuário:* Roteia para o Onboarding (Vídeo Explicativo).
+        *   *Usuário Recorrente Free:* Pula onboarding e vai direto para o **KS Studio** (`activeView === "storyboard"`).
+        *   *Usuário Recorrente Premium:* Pula onboarding e vai direto para o **Construtor de Prompts** (`activeView === "servicos_escolha"`).
 
-### ⏳ FASE 3.5: PRODUÇÃO DE CONTEÚDO & IMAGENS (Forja de Mídias) — [EM ANDAMENTO]
-*   [ ] **Forja de Prompts e Imagens via Google One (Gemini Advanced / AI):**
-    *   Produzir os prompts estruturados e artísticos para as **12 Imagens Master de Portais dos Arquétipos** (divididas pelas 3 Dimensões Internas: Alma, Ação, Social).
-    *   Garantir que a direção de arte das 12 imagens integre previamente uma zona de sombra ou gradiente (volumetric dark vignette) projetada para abrigar o Slider UI de dosagem.
-    *   Testar e co-criar os prompts em parceria ativa entre Genera e Lincoln, alinhando a estética ao mercado de luxo e marcas premium.
+### 🟢 FASE 3.5: IDENTIDADE VISUAL & POLIMENTO DA SIDEBAR (Sincronia Estética) — [CONCLUÍDO]
+*   [x] **Fundo Preto Puro Global:** Background configurado em preto sólido `#000000` em toda a interface do aplicativo para destacar o visor central do smartphone.
+*   [x] **Centralização do Topo:** Título principal **Killer Skills** e sub-rótulo **KS Studio** perfeitamente centralizados horizontalmente no topo da Sidebar.
+*   [x] **Alinhamento Geométrico Lateral:**
+    *   Rótulos auxiliares removidos para proporcionar visual clean.
+    *   Botões **PAINEL ADM** e **ENCERRAR SESSÃO** (em caixa alta) perfeitamente alinhados na mesma coluna de ícones dos menus principais, sem contornos ou bordas artificiais.
+    *   Luz verde piscante do indicador **ONLINE NA WEB** (ajustado ao português do Brasil e com tamanho otimizado para 10px) alinhada exatamente na margem dos ícones.
 
-### ⏳ FASE 4: TELA 2 - SERVIÇOS & CONSTRUTOR DE PROMPT (Módulo Serviços) — [PENDENTE]
-*   [ ] **Bifurcação de Valor:**
-    *   Estruturar no visor interno a divisão entre serviço Grátis e Premium.
-    *   *Opção A (Serviço Grátis):* Encaminha imediatamente para a Tela 3 (KS Studio).
-    *   *Opção B (Serviço Premium):* Expande no mesmo visor da Tela 2 para abrir o Construtor de Prompt.
-*   [ ] **Painel do Construtor de Prompt (Modo Premium):**
-    *   Criar os toggles reativos para selecionar micro-serviços (Redator de Legendas, Roteirista de Reels, Compressor WebP, Vídeo AI).
-*   [ ] **Feedback de Agentes Trabalhando (Live Work):**
-    *   Renderizar no visor uma área de logs retro-futurista simulando o trabalho ativo e a digitação em tempo real dos agentes inteligentes (*O Estrategista*, *O Redator*, *O WebP Compressor*) enquanto a OS é compilada.
-*   [ ] **Manifesto da OS & Forja:**
-    *   Exibir reativamente o código JSON/YAML da Ordem de Serviço.
-    *   Botão dourado **`FORJAR ORDEM DE SERVIÇO`** para disparar o envio e direcionar para o KS Studio Premium.
-
-### ⏳ FASE 5: TELA 3 - O COCKPIT KS STUDIO (Módulo Sandbox) — [PENDENTE]
-*   [ ] **Simulador 1:1 de Feed do Instagram:**
-    *   Reconstruir a simulação reativa do Reels/Carrossel permitindo ao usuário passar o carrossel de fotos lateralmente e ler a legenda polida gerada pela IA.
-*   [ ] **Botões de Agendamento e Postagem:**
-    *   Implementar botões minimalistas reativos para postar direto ou agendar no Planner da Scalla Records.
-
-### ⏳ FASE 6: CONEXÕES DE APIS & PERSISTÊNCIA EM NUVEM (Módulo Cérebro) — [PENDENTE]
-*   [ ] **Engrenagem NarrativeSkill (Gemini):** Conectar os inputs e micro-serviços aos endpoints reais da API FastAPI para redação e análise de imagem real pelo modelo Gemini Pro.
-*   [ ] **Banco de Dados Firestore NoSQL:** Configurar o salvamento real dos dados de campanha agendada na subcoleção NoSQL da nuvem Firebase em tempo real.
+### 🟢 FASE 3.8: VOCABULÁRIO PREMIUM & ESTÚDIO DE CRIAÇÃO (Eliminação de "Forja") — [CONCLUÍDO]
+*   [x] **Sanitização de Ambiguidade de Termos:** Remoção completa dos termos industriais "forja" e "forjar" no frontend, blindando o visual de mercado de luxo.
+*   [x] **Substituição de Rótulos no Cockpit:**
+    *   Atualização de *Cockpit de Forja* para **ESTÚDIO DE CRIAÇÃO**.
+    *   Atualização de *Legenda Forjada* para **LEGENDA LAPIDADA**.
+    *   Atualização de *FORJAR ORDEM DE SERVIÇO* para **EMITIR ORDEM DE SERVIÇO** no botão dourado principal.
+    *   Atualização de *A Forja está ativada* para **A Criação está ativada...** no modal do manifesto.
 
 ---
-*Assinado em Conformidade com as Diretrizes da Mesa Redonda.*  
-*Lincoln (Orquestrador Geral) — Maio de 2026.*
+
+## 🎯 PONTO DE PARADA OPERACIONAL (ONDE PARAMOS HOJE)
+O aplicativo está com toda a **estrutura e simetria técnica de frontend 100% finalizada, polida e livre de bugs**. A sidebar de controle e os passos do Onboarding estão integrados com o roteamento automático guardado. O roteiro de vídeo de onboarding foi ajustado para 32 segundos (4 blocos de 8 segundos) com consistência estética indiana de luxo.
+
+---
+
+## 🚀 PLANO DE TRABALHO PARA AMANHÃ (TERÇA-FEIRA — DIA DA DEMO)
+
+### 🎙️ 1. Geração das Mídias no Estúdio (Sua parte):
+*   [ ] **Voz da Guia:** Gerar a voz feminina jovem Neural2 em português via console Google Cloud TTS usando os 4 textos de 8 segundos.
+*   [ ] **Trilha no Pro Tools:** Mixar a voz gerada com sua biblioteca/samples de **Tabla e Cítara** em loop contínuo de 40 segundos.
+*   [ ] **Geração dos 4 Vídeos:** Enviar os áudios e prompts em inglês para o gerador de vídeo com Lip-Sync para obter os clipes da modelo indiana falando em perfeita sincronia.
+
+### 💻 2. Integração Técnica no Código (Nossa parte):
+*   [ ] **Substituição dos Vídeos Finais:** Substituir o mockup de vídeo estático pelos clipes MP4 gerados com áudio no visor do smartphone.
+*   [ ] **Adição do Ícone de Som/Mute:** Programar o ícone de alto-falante interativo com slider de volume e toggle de mute na tela de Onboarding.
+*   [ ] **Manutenção de Trilha Sonora Contínua:** Configurar o loop contínuo do áudio tocando suavemente em segundo plano durante a fase de ajuste fino dos 12 sliders da Matriz.
+*   [ ] **Build de Produção e Deploy:** Rodar o comando final de compilação e deploy na VPS (`bash ./deploy.sh`) para atualizar a demonstração oficial na web para a reunião!
+
+---
+*Lincoln (Orquestrador Geral) & Armando — Maio de 2026.*

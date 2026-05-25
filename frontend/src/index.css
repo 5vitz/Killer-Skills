@@ -5,7 +5,7 @@
 @layer base {
   body {
     font-family: 'Outfit', sans-serif;
-    background-color: #050505;
+    background-color: #000000;
   }
   
   code, pre {
@@ -20,7 +20,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -30,6 +30,25 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #2f2f35;
+}
+
+/* Custom visible scrollbar specifically for the Archetype Matrix */
+.custom-scrollbar-visible::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar-visible::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 3px;
+}
+
+.custom-scrollbar-visible::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 3px;
+}
+
+.custom-scrollbar-visible::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.38);
 }
 
 /* Premium Metallic Prateado Escovado animation & styling */

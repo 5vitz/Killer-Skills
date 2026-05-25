@@ -47,6 +47,10 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  
+  // Router Guard de Roteamento Dinâmico
+  const [hasPersonaDefined, setHasPersonaDefined] = useState(false);
+  const [onboardingStep, setOnboardingStep] = useState("video"); // "video" ou "matriz"
 
   // Novo Onboarding de Dosagem de Personas
   const [dosagemPersona, setDosagemPersona] = useState({
@@ -98,6 +102,24 @@ export default function App() {
     setUserEmail(email);
     setIsLoggedIn(true);
     setIsAdminMode(email === "artz.genera@gmail.com" || email === "sinkando@gmail.com");
+
+    // Simulação do Router Guard de Roteamento Dinâmico (Maio de 2026):
+    // Se for artz.genera@gmail.com, já possui persona e plano Premium -> Vai direto para Construtor de Prompt
+    if (email === "artz.genera@gmail.com") {
+      setHasPersonaDefined(true);
+      setActiveView("servicos_escolha");
+    } 
+    // Se for scalla_records@gmail.com, já possui persona e plano Free -> Vai direto para KS Studio
+    else if (email === "scalla_records@gmail.com") {
+      setHasPersonaDefined(true);
+      setActiveView("storyboard");
+    } 
+    // Outros e novos logins -> Primeiro acesso, entra no vídeo explicativo do Onboarding
+    else {
+      setHasPersonaDefined(false);
+      setOnboardingStep("video");
+      setActiveView("servicos");
+    }
   };
 
   const handleLogout = () => {
@@ -214,11 +236,11 @@ export default function App() {
   // 1. TELA DE LOGIN (SMARTPHONE DE GLOWS AZUL/DOURADO)
   if (!isLoggedIn) {
     return (
-      <div className="relative w-screen h-screen flex justify-center items-center bg-[#050505] overflow-hidden select-none">
-        {/* Glow Neon Azul */}
-        <div className="absolute w-[400px] h-[400px] bg-brand-blue/20 rounded-full blur-[120px] left-[15%] top-[10%] pointer-events-none" />
-        {/* Glow Neon Dourado */}
-        <div className="absolute w-[350px] h-[350px] bg-brand-gold/10 rounded-full blur-[140px] right-[15%] bottom-[10%] pointer-events-none" />
+      <div className="relative w-screen h-screen flex justify-center items-center bg-black overflow-hidden select-none">
+        {/* Glow Neon Azul - Desativado para teste de fundo preto puro */}
+        {/* <div className="absolute w-[400px] h-[400px] bg-brand-blue/20 rounded-full blur-[120px] left-[15%] top-[10%] pointer-events-none" /> */}
+        {/* Glow Neon Dourado - Desativado para teste de fundo preto puro */}
+        {/* <div className="absolute w-[350px] h-[350px] bg-brand-gold/10 rounded-full blur-[140px] right-[15%] bottom-[10%] pointer-events-none" /> */}
 
         {/* Smartphone Container */}
         <div 
@@ -253,7 +275,7 @@ export default function App() {
             </button>
 
             <div className="text-[9px] font-bold text-white/10 tracking-widest uppercase">
-              STUDIO COCKPIT v4.0
+              KS STUDIO v4.0
             </div>
           </div>
         </div>
@@ -274,24 +296,24 @@ export default function App() {
   const currentPersona = activePersonasList[selectedPersonaIdx] || activePersonasList[0];
 
   return (
-    <div className="relative w-screen h-screen bg-[#050505] flex overflow-hidden text-white antialiased select-none">
-      {/* Esferas de Luz Ambiente Reativas (Aceleração por Hardware GPU) */}
+    <div className="relative w-screen h-screen bg-black flex overflow-hidden text-white antialiased select-none">
+      {/* Esferas de Luz Ambiente Reativas (Aceleração por Hardware GPU) - Desativadas para teste de fundo preto puro */}
       {/* Glow Reativo da Persona Ativa (Esquerda Superior) */}
-      <div 
+      {/* <div 
         className="absolute w-[450px] h-[450px] rounded-full blur-[120px] left-[15%] top-[10%] pointer-events-none opacity-20 transition-all duration-1000 ease-in-out z-0"
         style={{ backgroundColor: "#1E60FF" }}
-      />
+      /> */}
       {/* Glow de Contraste Dourado/Bronze (Direita Inferior) */}
-      <div className="absolute w-[350px] h-[350px] bg-brand-gold/10 rounded-full blur-[140px] right-[15%] bottom-[10%] pointer-events-none z-0" />
+      {/* <div className="absolute w-[350px] h-[350px] bg-brand-gold/10 rounded-full blur-[140px] right-[15%] bottom-[10%] pointer-events-none z-0" /> */}
 
       {/* 1. BARRA LATERAL METÁLICA PREMIUM */}
       <div className="w-[260px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A]">
         <div className="flex flex-col gap-6">
           {/* Título do Cockpit */}
-          <div>
+          <div className="text-center">
             <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
             <div className={`text-[9px] font-bold tracking-wider uppercase ${isAdminMode ? "text-brand-gold" : "text-brand-blue"}`}>
-              {isAdminMode ? "ADMIN COCKPIT" : "STUDIO COCKPIT"}
+              {isAdminMode ? "ADMIN COCKPIT" : "KS STUDIO"}
             </div>
           </div>
 
@@ -308,8 +330,7 @@ export default function App() {
           </div>
 
           {/* Menu de Áreas de Trabalho */}
-          <div className="flex flex-col gap-1.5">
-            <div className="text-[9px] font-bold text-white/30 tracking-widest uppercase mb-2">Painel de Controle</div>
+          <div className="flex flex-col gap-1.5 pt-2">
             
             <button 
               onClick={() => setActiveView("servicos")}
@@ -347,7 +368,7 @@ export default function App() {
         </div>
 
         {/* Rodapé da Sidebar */}
-        <div className="flex flex-col gap-2.5">
+        <div className="flex flex-col gap-1.5 border-t border-white/10 pt-4">
           {/* Alternador Administrativo de Cockpit */}
           <button 
             onClick={() => {
@@ -357,10 +378,10 @@ export default function App() {
                 triggerGoogleAuthSequence("artz.genera@gmail.com");
               }
             }}
-            className={`w-full h-10 border hover:scale-[1.02] active:scale-95 duration-200 rounded-xl font-bold text-xs tracking-wider flex justify-center items-center gap-2 ${
+            className={`w-full h-11 px-4 rounded-xl text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
               isAdminMode 
-                ? "bg-brand-gold/10 border-brand-gold/20 text-brand-gold hover:bg-brand-gold/20 animate-pulse" 
-                : "bg-white/5 border-white/10 text-white/50 hover:bg-white/10 hover:text-white"
+                ? "bg-brand-gold/15 border border-brand-gold/30 text-brand-gold" 
+                : "text-white/60 hover:bg-white/5 hover:text-white"
             }`}
           >
             <ShieldCheck className="w-4 h-4" /> PAINEL ADM
@@ -368,14 +389,16 @@ export default function App() {
 
           <button 
             onClick={handleLogout}
-            className="w-full h-10 bg-brand-pink/15 hover:bg-brand-pink/25 border border-brand-pink/30 hover:scale-[1.02] active:scale-95 duration-200 text-brand-pink rounded-xl font-bold text-xs tracking-wider flex justify-center items-center gap-2"
+            className="w-full h-11 px-4 rounded-xl text-left text-xs font-semibold uppercase flex items-center gap-3 duration-200 text-white/60 hover:bg-brand-pink/10 hover:text-brand-pink"
           >
-            <LogOut className="w-4 h-4" /> Sair da Sessão
+            <LogOut className="w-4 h-4" /> ENCERRAR SESSÃO
           </button>
 
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 bg-green-500 rounded-full active-pulse" />
-            <span className="text-[10px] text-white/40 font-bold uppercase tracking-wider">ONLINE NO WEB</span>
+          <div className="w-full h-11 px-4 flex items-center gap-3 text-white/40 select-none">
+            <div className="w-4 flex justify-center items-center">
+              <span className="w-2 h-2 bg-green-500 rounded-full active-pulse" />
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-widest">ONLINE NA WEB</span>
           </div>
         </div>
       </div>
@@ -385,11 +408,7 @@ export default function App() {
         
         {/* TELA 1: SERVIÇOS AI (SMARTPHONE DE PLAYBACK - RITUAL GERAR PERSONA) */}
         {activeView === "servicos" && (() => {
-          const activeDim = DIMENSOES[Math.min(currentDimIndex, 2)];
-          const activeCards = ARCHETYPES.filter(a => a.dim === activeDim.title);
-          const activeArchetype = activeCards[currentCardIndex];
-
-          // Lógica do Título de Persona Combinado para a Matriz de Síntese (Dim Index === 3)
+          // Lógica do Título de Persona Combinado para a Matriz de Síntese
           const sortedDosagens = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
           const archTop1 = ARCHETYPES.find(a => a.id === sortedDosagens[0][0]) || ARCHETYPES[0];
           const archTop2 = ARCHETYPES.find(a => a.id === sortedDosagens[1][0]) || ARCHETYPES[1];
@@ -397,146 +416,97 @@ export default function App() {
 
           return (
             <div className="relative w-full h-full flex justify-center items-center">
-              {/* Seta sutil absoluta para voltar ao Login (Tela 0) */}
-              <button 
-                onClick={handleLogout}
-                className="absolute top-0 left-0 flex items-center gap-1.5 text-white/20 hover:text-white/60 transition duration-200 text-xs font-semibold p-2 z-40"
-              >
-                <ChevronLeft className="w-4.5 h-4.5" /> Voltar ao Login
-              </button>
+
 
               {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
               <div 
                 className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
-                style={{ borderColor: currentDimIndex === 3 ? "#D4AF37" : activeDim.color }}
+                style={{ borderColor: onboardingStep === "video" ? "#1E60FF" : "#D4AF37" }}
               >
-                {/* Botões Esquerda/Direita Flutuantes de Navegação por Chapa (Estilo Ingrid Sinkovitz) */}
-                {currentDimIndex < 3 && (
-                  <>
-                    {/* Botão Esquerda (Anterior) */}
-                    {currentCardIndex > 0 && (
-                      <button 
-                        onClick={() => setCurrentCardIndex(prev => prev - 1)}
-                        className="absolute right-[calc(100%+8px)] top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
-                      >
-                        <ChevronLeft className="w-4.5 h-4.5 text-white/60" />
-                      </button>
-                    )}
-                    {/* Botão Direita (Próximo / Avançar Bloco) */}
-                    {currentCardIndex < 3 ? (
-                      <button 
-                        onClick={() => setCurrentCardIndex(prev => prev + 1)}
-                        className="absolute left-[calc(100%+8px)] top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
-                      >
-                        <ChevronRight className="w-4.5 h-4.5 text-white/60" />
-                      </button>
-                    ) : (
-                      <button 
-                        onClick={() => {
-                          if (currentDimIndex < 2) {
-                            setCurrentDimIndex(prev => prev + 1);
-                            setCurrentCardIndex(0);
-                          } else {
-                            setCurrentDimIndex(3);
-                          }
-                        }}
-                        className="absolute left-[calc(100%+8px)] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-gold border border-brand-gold/30 flex justify-center items-center hover:scale-105 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40 text-black font-bold text-xs"
-                        title={currentDimIndex === 2 ? "Concluir para Síntese" : "Avançar para Próxima Dimensão"}
-                      >
-                        <ArrowRight className="w-5 h-5" />
-                      </button>
-                    )}
-                  </>
-                )}
-
                 {/* Ilha Dinâmica */}
                 <div className="absolute w-[110px] h-6 bg-black rounded-2xl top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
                   <div className="w-2.5 h-2.5 bg-[#030303] rounded-full border border-white/5" />
                 </div>
 
                 {/* Visor Interno */}
-                <div className="w-full h-full bg-[#050505] rounded-[35px] border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10 select-none text-white">
-                  {currentDimIndex < 3 ? (
-                    /* FASE DE DOSAGEM (CARROSSÉIS 3X4) */
-                    <div className="w-full h-full flex flex-col justify-between relative select-none animate-fade-in">
-                      {/* Imagem de Fundo do Portal com Vignette de UI Pré-Planejado */}
-                      <img 
-                        src={activeArchetype.seedUrl} 
-                        className="absolute inset-0 w-full h-full object-cover rounded-[30px] brightness-[0.6] pointer-events-none transition-all duration-500" 
-                        alt={activeArchetype.name}
-                      />
-                      {/* Vignette Gradiente Escuro na base e no topo (UI Shadow Overlay) */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 rounded-[30px] pointer-events-none" />
-
-                      {/* Header do Card Overlay */}
-                      <div className="absolute top-4 inset-x-4 flex flex-col gap-1 z-20 text-left pointer-events-none">
-                        <div className="flex justify-between items-center">
-                          <span className="text-[8px] font-black uppercase tracking-widest text-[#FFD966]">
-                            Dimensão {activeDim.title}
-                          </span>
-                          <span className="text-[7.5px] font-bold text-white/50 bg-black/40 border border-white/10 px-2 py-0.5 rounded-full uppercase">
-                            CARD {currentCardIndex + 1} / 4
-                          </span>
-                        </div>
-                        <h2 className="text-xl font-black tracking-tight text-white mt-1">
-                          {activeArchetype.name}
-                        </h2>
+                <div className="w-full h-full bg-black rounded-[35px] border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10 select-none text-white">
+                  {onboardingStep === "video" ? (
+                    /* PASSO 1: VÍDEO EXPLICATIVO DA GUIA DE IA */
+                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in">
+                      {/* Header da Guia */}
+                      <div className="flex flex-col gap-1 border-b border-white/10 pb-3 text-left">
+                        <div className="text-[8px] font-black text-brand-blue uppercase tracking-widest">Iniciação AI</div>
+                        <h2 className="text-base font-black text-white leading-tight">Apresentação das Regras</h2>
                       </div>
 
-                      {/* Conteúdo Filosófico e de Sombra */}
-                      <div className="absolute bottom-28 inset-x-4 flex flex-col gap-1.5 z-20 text-left pointer-events-none">
-                        <p className="text-[10px] text-white/90 leading-relaxed font-semibold">
-                          {activeArchetype.desc}
-                        </p>
-                        <p className="text-[9px] text-[#FFD966]/80 leading-relaxed font-medium italic">
-                          {activeArchetype.shadow}
-                        </p>
-                      </div>
-
-                      {/* O Slider de Vidro sobre o Card (Pre-designed bottom UI glassmorphic bar) */}
-                      <div className="absolute bottom-12 inset-x-4 bg-black/65 backdrop-blur-md border border-white/10 rounded-2xl p-3 flex flex-col gap-1.5 z-20">
-                        <div className="flex justify-between items-center text-[10px] font-bold text-white/80">
-                          <span className="uppercase tracking-widest text-[8px] text-white/40 font-bold">Gradação</span>
-                          <span className="text-brand-gold font-black text-xs">{dosagemPersona[activeArchetype.id]}%</span>
-                        </div>
-                        <input 
-                          type="range" 
-                          min="0" 
-                          max="100" 
-                          value={dosagemPersona[activeArchetype.id]}
-                          onChange={(e) => {
-                            const val = parseInt(e.target.value);
-                            setDosagemPersona(prev => ({ ...prev, [activeArchetype.id]: val }));
-                          }}
-                          className="w-full accent-brand-gold h-1 bg-white/20 rounded-lg cursor-pointer appearance-none"
+                      {/* Mockup de Vídeo Player da Guia de IA */}
+                      <div className="relative w-full h-[180px] rounded-2xl overflow-hidden border border-white/10 group cursor-pointer my-3 bg-black">
+                        {/* Imagem de Fundo da Guia AI (Uma modelo elegante em tons futuristas de azul/dourado) */}
+                        <img 
+                          src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500" 
+                          className="w-full h-full object-cover brightness-[0.5] group-hover:scale-105 duration-700" 
+                          alt="AI Guide"
                         />
+                        {/* overlay de luz */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+                        
+                        {/* Pulse Play Button */}
+                        <div className="absolute inset-0 flex justify-center items-center">
+                          <div className="w-12 h-12 rounded-full bg-brand-blue/90 text-white flex justify-center items-center shadow-lg group-hover:scale-110 active:scale-95 duration-200 animate-pulse">
+                            <Play className="w-5 h-5 ml-1 fill-white" />
+                          </div>
+                        </div>
+
+                        {/* Player HUD Overlay */}
+                        <div className="absolute bottom-3 inset-x-3 flex flex-col gap-1.5 pointer-events-none">
+                          <div className="flex justify-between items-center text-[8px] font-bold text-white/50">
+                            <span>Mesa Redonda AI</span>
+                            <span>01:12 / 01:12</span>
+                          </div>
+                          {/* Progress Bar Mock */}
+                          <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
+                            <div className="h-full bg-brand-blue w-full rounded-full" />
+                          </div>
+                        </div>
                       </div>
 
-                      {/* Dots do Sistema de "Bolinhas" (Navegação Horizontal) */}
-                      <div className="absolute bottom-3 inset-x-0 flex justify-center items-center gap-2 z-20">
-                        {activeCards.map((_, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => setCurrentCardIndex(idx)}
-                            className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                              idx === currentCardIndex ? 'w-4' : 'w-1.5'
-                            }`}
-                            style={{ backgroundColor: idx === currentCardIndex ? activeDim.color : 'rgba(255,255,255,0.25)' }}
-                          />
-                        ))}
+                      {/* Descrição Didática */}
+                      <div className="flex-1 flex flex-col gap-2 text-left mb-3">
+                        <div className="text-[10px] text-white/70 font-semibold leading-relaxed">
+                          Assista à locução da nossa **Guia Virtual de Inteligência Artificial** para aprender a dosar sua Persona.
+                        </div>
+                        <div className="text-[9px] text-[#1E60FF]/80 leading-relaxed font-bold bg-[#1E60FF]/10 border border-[#1E60FF]/20 p-2.5 rounded-xl">
+                          💡 "O tom e a alma do seu Co-Diretor AI serão definidos pela calibração perfeita dos 12 sliders na próxima tela."
+                        </div>
                       </div>
+
+                      {/* Botão de Avanço para a Matriz */}
+                      <button 
+                        onClick={() => setOnboardingStep("matriz")}
+                        className="w-full h-11 bg-brand-blue hover:bg-brand-blue/90 active:scale-95 text-white rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer"
+                      >
+                        IR PARA A MATRIZ <ArrowRight className="w-4 h-4" />
+                      </button>
                     </div>
                   ) : (
-                    /* PAINEL MATRIZ DE SÍNTESE (RESULTADO FINAL DA PERSONA) */
+                    /* PASSO 2: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA) */
                     <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in">
                       {/* Header da Síntese */}
                       <div className="flex flex-col gap-1 border-b border-white/10 pb-3 text-left">
-                        <div className="text-[8px] font-black text-brand-gold uppercase tracking-widest">Matriz Arquetípica</div>
+                        <div className="text-[8px] font-black text-brand-gold uppercase tracking-widest flex justify-between items-center">
+                          <span>Matriz Arquetípica</span>
+                          <button 
+                            onClick={() => setOnboardingStep("video")}
+                            className="text-[7.5px] font-bold text-white/40 hover:text-white/70 tracking-normal border border-white/10 px-2 py-0.5 rounded-full uppercase"
+                          >
+                            Ver Vídeo
+                          </button>
+                        </div>
                         <h2 className="text-base font-black text-white leading-tight">Síntese da Sua Persona</h2>
                       </div>
 
-                      {/* Lista de Gradações dos 12 Sliders (Grid Compacto Scrollable) */}
-                      <div className="flex-1 my-3 overflow-y-auto pr-1 flex flex-col gap-2.5 max-h-[220px]">
+                      {/* Lista de Gradações dos 12 Sliders (Grid Compacto Scrollable com Scrollbar Sempre Visível) */}
+                      <div className="flex-1 my-3 overflow-y-auto pr-1 flex flex-col gap-2.5 max-h-[220px] custom-scrollbar-visible">
                         {ARCHETYPES.map((arch) => {
                           const dimColor = arch.dim === "Alma" ? "#D4AF37" : arch.dim === "Ação" ? "#E06666" : "#8E7CC3";
                           return (
@@ -576,8 +546,15 @@ export default function App() {
                       {/* Botão de Finalização Gerar Persona */}
                       <button 
                         onClick={() => {
-                          // Conclui e direciona à Tela 2
-                          setActiveView("servicos_escolha");
+                          // Conclui Onboarding, salva e roteia com base no plano do usuário!
+                          setHasPersonaDefined(true);
+                          
+                          // Verificação inteligente do plano para rotear:
+                          if (userEmail === "scalla_records@gmail.com") {
+                            setActiveView("storyboard"); // Free vai para o KS Studio
+                          } else {
+                            setActiveView("servicos_escolha"); // Premium vai para Construtor de Prompt
+                          }
                         }}
                         className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg hover:shadow-brand-gold/20 duration-200 cursor-pointer"
                       >
@@ -594,13 +571,7 @@ export default function App() {
         {/* TELA 2: SERVIÇOS & CONSTRUTOR DE PROMPT */}
         {activeView === "servicos_escolha" && (
           <div className="relative w-full h-full flex justify-center items-center">
-            {/* Seta sutil absoluta para voltar ao Login (Tela 0) */}
-            <button 
-              onClick={handleLogout}
-              className="absolute top-0 left-0 flex items-center gap-1.5 text-white/20 hover:text-white/60 transition duration-200 text-xs font-semibold p-2 z-40"
-            >
-              <ChevronLeft className="w-4.5 h-4.5" /> Voltar ao Login
-            </button>
+
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
             <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
@@ -635,13 +606,7 @@ export default function App() {
         {/* TELA 3: KS STUDIO (STORYBOARD + INSIGHTS + SIMULADOR DE FEED) */}
         {activeView === "storyboard" && (
           <div className="relative w-full h-full flex justify-center items-center">
-            {/* Seta sutil absoluta para voltar ao Login (Tela 0) */}
-            <button 
-              onClick={handleLogout}
-              className="absolute top-0 left-0 flex items-center gap-1.5 text-white/20 hover:text-white/60 transition duration-200 text-xs font-semibold p-2 z-40"
-            >
-              <ChevronLeft className="w-4.5 h-4.5" /> Voltar ao Login
-            </button>
+
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
             <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
@@ -835,7 +800,7 @@ export default function App() {
                   <div>
                     <div className="flex items-center gap-2">
                       <Sliders className="w-5 h-5 text-brand-blue" />
-                      <span className="text-xs font-black uppercase tracking-widest text-brand-blue">Cockpit de Forja</span>
+                      <span className="text-xs font-black uppercase tracking-widest text-brand-blue">Estúdio de Criação</span>
                     </div>
                     <div className="text-[10px] font-bold text-white/40 uppercase mt-0.5">Editor de Legenda e Micro-Serviços</div>
                   </div>
@@ -846,7 +811,7 @@ export default function App() {
                 {/* Textarea Legenda */}
                 <div className="flex flex-col gap-2 flex-1">
                   <div className="flex justify-between items-center">
-                    <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Legenda Forjada</span>
+                    <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Legenda Lapidada</span>
                     <button 
                       onClick={runAiCaption}
                       disabled={isLegendaLoading}
@@ -894,7 +859,7 @@ export default function App() {
                 onClick={triggerForge}
                 className="w-full h-12 bg-brand-gold text-black font-black text-xs tracking-widest uppercase rounded-xl hover:scale-[1.02] active:scale-95 duration-150 mt-5 shadow-lg shadow-brand-gold/15 flex justify-center items-center gap-2 cursor-pointer"
               >
-                🔥 FORJAR ORDEM DE SERVIÇO
+                ✨ EMITIR ORDEM DE SERVIÇO
               </button>
             </div>
           </div>
@@ -947,7 +912,7 @@ export default function App() {
           <div className="bg-[#0A0A0C] border border-white/15 rounded-[30px] p-8 max-w-lg w-full flex flex-col items-center gap-6 shadow-2xl">
             <Cpu className="w-14 h-14 text-brand-gold active-pulse" />
             <div className="text-center">
-              <h2 className="text-2xl font-bold">A Forja está ativada...</h2>
+              <h2 className="text-2xl font-bold">A Criação está ativada...</h2>
               <p className="text-[10px] font-bold text-brand-blue uppercase tracking-widest mt-1">Orquestrador Central assimilando agentes</p>
             </div>
 
