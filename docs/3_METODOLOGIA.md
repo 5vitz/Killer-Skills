@@ -32,7 +32,7 @@ Para eliminar a sobrecarga cognitiva e garantir a excelência técnica, o desenv
 *   **Função:** Coordenador central e interface de coprodução direta com o Genera. Traduz os desejos criativos em planos operacionais detalhados e zela pela integridade das regras da Mesa Redonda.
 
 ### K.3. Conselho Consultivo (Os Conselheiros Especialistas — IA)
-*   **🧠 O Estrategista (Viés Ontológico):** Alinha os textos e prompts gerados com a alma e tom dos 24 Perfis (Arquétipos Junguianos e Forças de Conversão).
+*   **🧠 O Estrategista (Viés Ontológico):** Alinha os textos e prompts gerados com a dosagem arquetípica e tom da Persona do usuário (dosagem dos 12 Arquétipos Junguianos).
 *   **📐 O Arquiteto (Viés Epistemológico):** Garante a pureza da arquitetura técnica (React SPA, banco NoSQL Firestore, APIs REST).
 *   **🛠️ O Inspetor Metodológico (Viés Metodológico):** Audita a conduta do Executor, garantindo o respeito estrito às diretrizes de codificação e escrita.
 

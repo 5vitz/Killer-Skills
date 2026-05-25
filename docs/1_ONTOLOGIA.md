@@ -17,68 +17,36 @@ O **Killer Skills** atua como uma engine inteligente de coprodução criativa (C
 
 ---
 
-## 🔮 CLASSE B: ARQUÉTIPOS JUNGUIANOS (CATEGORIA PESSOAL)
+## 🔮 CLASSE B: ARQUÉTIPOS JUNGUIANOS (NOMENCLATURA & DOSAGEM PESSOAL)
 
-Os 12 perfis da **Categoria Pessoal** são estruturados como **Arquétipos de Carl Jung**, projetando prestígio, alma e autoridade individual. Cada perfil funciona de forma modular e possui um **Portal de Iniciação** visual e filosófico no visor do celular:
+Os 12 perfis são estruturados a partir dos **Arquétipos de Carl Jung**. Sob a nova premissa de que nenhuma pessoa é 100% representada por um único arquétipo, a Persona do usuário é definida como uma **dosagem/gradação modular** de todos os 12 arquétipos.
 
-### B.1. O Sábio (🎓 Perfil Intelectual / Culto)
-*   **A Filosofia:** Busca pela verdade absoluta, erudição e tom clássico/reflexivo.
-*   **A Metáfora do Portal:** Biblioteca antiga em tons terrosos, pedras de arenito e luz de velas douradas.
-*   **Luz & Sombra:** Revela sabedoria profunda; protege a vulnerabilidade emocional por trás de dados acadêmicos.
+Para fins de organização e nomenclatura interna de engenharia do ecossistema, os arquétipos são classificados em 3 dimensões psicológicas:
+1. **Dimensão da Alma (Mente & Significado):** Sábio, Inocente, Explorador e Cuidador.
+2. **Dimensão da Ação (Poder & Transformação):** Herói, Mago, Rebelde e Criador.
+3. **Dimensão Social (Conexão & Sociedade):** Amante, Tolo, Homem Comum e Governante.
 
-### B.2. O Criador (⚡ Perfil Criativo / Disruptivo)
-*   **A Filosofia:** Imaginação fértil, quebra de padrões tradicionais e caos artístico.
-*   **A Metáfora do Portal:** Swirls de poeira de bronze escovado, respingos de tinta e telas flutuantes.
-*   **Luz & Sombra:** Revela genialidade e inovação; protege o medo constante de mediocridade.
+Abaixo segue a identidade conceitual e filosófica de cada um dos 12 arquétipos:
 
-### B.3. O Governante (🏆 Perfil Autoridade / Líder)
-*   **A Filosofia:** Controle, assertividade, poder de decisão e compartilhamento de conquistas de elite.
-*   **A Metáfora do Portal:** Trono de basalto negro minimalista, metais polidos e reflexos dourados secos.
-*   **Luz & Sombra:** Revela ordem e estabilidade; protege o pavor oculto da perda de controle.
+### B.1. Dimensão da Alma (Mente & Significado)
+*   **🎓 O Sábio:** Busca o conhecimento e pratica a autorreflexão. Analisa e age com sabedoria. *(Sombra: Distanciamento emocional e altivez intelectual)*. Metáfora: Biblioteca antiga em tons terrosos, pedras de arenito e luz de velas douradas.
+*   **☀️ O Inocente:** Enxerga os aspectos positivos em tudo. Espontâneo, confiante e otimista. *(Sombra: Ingenuidade ou negação de realidades dolorosas)*. Metáfora: Fachos de luz solar pura filtrados através de pilares de mármore claro e areia fina.
+*   **🌍 O Explorador:** Busca liberdade para agir e descobrir o mundo. Gosta de novidades constantes. *(Sombra: Inconstância, dispersão e medo de criar raízes)*. Metáfora: Solo seco rachado de deserto, areia de cobre soprando e horizontes distantes.
+*   **❤️ O Cuidador:** Gosta de cuidar dos outros. Prestativo e focado no bem-estar de todos. *(Sombra: Esgotamento por negligência de si próprio)*. Metáfora: Luz de velas quentes refletida em paredes de taipa e argila texturizada com toque de musgo.
 
-### B.4. O Amante / Companheiro (🤝 Perfil Carismático / Empático)
-*   **A Filosofia:** Conexão emocional imediata, histórias cotidianas sinceras e tom conversacional amigável.
-*   **A Metáfora do Portal:** Tons quentes de terracota, iluminação suave de golden hour e texturas orgânicas de argila.
-*   **Luz & Sombra:** Revela empatia e calor humano; protege o medo profundo da rejeição social.
+### B.2. Dimensão da Ação (Poder & Transformação)
+*   **🎯 O Herói:** Guerreiro e destemido. Luta para proteger os seus e não teme obstáculos. *(Sombra: Obsessão por combate e necessidade de provar valor)*. Metáfora: Lâmina de aço escovado cortando um bloco de pedra escura com iluminação fria precisa.
+*   **🔮 O Mago:** Acredita na transformação profunda. Focado na mudança de estado e revolução. *(Sombra: Manipulação mental e fuga da realidade factual)*. Metáfora: Circuitos de cobre brilhantes cravados em pedras pré-históricas sob poeira de estrelas.
+*   **⚡ O Rebelde:** Pensa fora dos padrões. Acredita na quebra de regras e convenções tradicionais. *(Sombra: Destruição sem causa e autodestruição)*. Metáfora: Grafites e texturas rústicas urbanas contrastadas com chapa metálica de cobre e neon vermelho-âmbar.
+*   **🎨 O Criador:** Dá vida à imaginação. O artista e inventor de coisas inexistentes. *(Sombra: Perfeccionismo extremo que impede a conclusão)*. Metáfora: Swirls de poeira de bronze escovado, respingos de tinta e telas flutuantes.
 
-### B.5. A Persona (💎 Perfil Narcisista / Estético)
-*   **A Filosofia:** Impacto visual supremo, enquadramentos cinemáticos de luxo e legendas curtas e poéticas.
-*   **A Metáfora do Portal:** Espelhos de bronze clássicos, jogo dramático de luzes e sombras puras.
-*   **Luz & Sombra:** Revela simetria e beleza divina; protege as inseguranças da imagem real por trás da máscara.
+### B.3. Dimensão Social (Conexão & Sociedade)
+*   **🤝 O Amante:** Valoriza as conexões humanas de alta sensibilidade. Feliz ao amar e ser amado. *(Sombra: Perda de identidade e anulação pelo outro)*. Metáfora: Tons quentes de terracota, iluminação suave de golden hour e texturas orgânicas de argila.
+*   **🗣️ O Tolo:** Alegre, dinâmico, gosta de divertir as pessoas. Autêntico e descontraído. *(Sombra: Frivolidade e mascarar dores com humor constante)*. Metáfora: Padrões dinâmicos de luzes coloridas dançando sobre paredes de pedra escura texturizada.
+*   **👤 O Homem Comum:** Age em conformidade com o grupo. Empático, prático e excelente vizinho. *(Sombra: Perda de individualidade para pertencer à massa)*. Metáfora: Placas geométricas de ardósia escura, linhas e formas de concreto rústico cinza-argila.
+*   **🏆 O Governante:** Líder natural. Assume autoridade para gerar estabilidade e ordem. *(Sombra: Rigidez extrema e autoritarismo)*. Metáfora: Trono de basalto negro minimalista, metais polidos e reflexos dourados secos.
 
-### B.6. O Guia / Inocente (🧠 Perfil Mentor / Educador)
-*   **A Filosofia:** Compartilhamento didático de valor, revelação de "segredos" e otimismo prático.
-*   **A Metáfora do Portal:** Fachos de luz solar pura filtrados através de pilares de mármore claro e areia fina.
-*   **Luz & Sombra:** Revela clareza e direção; protege a frustração oculta com a lentidão do aprendizado alheio.
-
-### B.7. O Mago (🚀 Perfil Visionário / Futurista)
-*   **A Filosofia:** Domínio das trends do amanhã, transições tecnológicas e disrupção lógica.
-*   **A Metáfora do Portal:** Circuitos de cobre brilhantes cravados em pedras pré-históricas sob poeira de estrelas.
-*   **Luz & Sombra:** Revela inovação mágica; protege o receio do caos técnico e da obsolescência.
-
-### B.8. O Herói (🎯 Perfil Pragmático / Direto)
-*   **A Filosofia:** Produtividade cirúrgica, hábitos de elite, foco extremo no objetivo e zero rodeios.
-*   **A Metáfora do Portal:** Lâmina de aço escovado cortando um bloco de pedra escura com iluminação fria precisa.
-*   **Luz & Sombra:** Revela coragem e superação técnica; protege a exaustão física do perfeccionismo cego.
-
-### B.9. O Explorador (🌍 Perfil Lifestyle / Aventureiro)
-*   **A Filosofia:** Liberdade, quebra de fronteiras físicas, bastidores dinâmicos e conexão com a natureza.
-*   **A Metáfora do Portal:** Solo seco rachado de deserto, areia de cobre soprando e horizontes distantes em bronze.
-*   **Luz & Sombra:** Revela autenticidade e independência; protege a solidão do desapego constante.
-
-### B.10. O Cuidador (❤️ Perfil Humanitário / Propósito)
-*   **A Filosofia:** Causas sociais, sustentabilidade real, legado para as próximas gerações e espiritualidade ética.
-*   **A Metáfora do Portal:** Luz de velas quentes refletida em paredes de taipa e argila texturizada com toque de musgo.
-*   **Luz & Sombra:** Revela bondade e propósito de alma; protege o esgotamento por excesso de empatia.
-
-### B.11. O Cientista (🔬 Perfil Especialista Técnico)
-*   **A Filosofia:** Análises ricas, métricas exatas, terminologia avançada do segmento e credibilidade baseada em dados.
-*   **A Metáfora do Portal:** Placas geométricas de ardósia escura, linhas douradas de gráficos suspensos no ar.
-*   **Luz & Sombra:** Revela autoridade comprovada; protege a dificuldade em se conectar com emoções simples.
-
-### B.12. O Bobo da Corte / Jester (🗣️ Perfil Conectado / Pop)
-*   **A Filosofia:** Agilidade social, humor inteligente sobre o cotidiano corporativo, leveza e conexão com trends.
-*   **A Metáfora do Portal:** Padrões dinâmicos de luzes coloridas dançando sobre paredes de pedra escura texturizada.
+---A Metáfora do Portal:** Padrões dinâmicos de luzes coloridas dançando sobre paredes de pedra escura texturizada.
 *   **Luz & Sombra:** Revela alegria e engajamento reativo; protege o cansaço da exigência constante por novidades.
 
 ---

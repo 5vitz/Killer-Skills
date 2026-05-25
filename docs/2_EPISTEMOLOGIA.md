@@ -12,16 +12,17 @@ Toda a interação é estruturada em torno da **Unidade Estática Suprema**, ond
 *   **Componentes do Visor:** Logotipo metalizado esculpido em baixo-relevo e o botão de login social unificado Google.
 *   **Vincular:** Ao autenticar, capta reativamente o primeiro nome do usuário (`firstName`) e sua imagem de perfil (`userAvatar`).
 
-### E.2. Módulo Tela 1 (Navegação de Personas e O Portal de Iniciação)
-*   **Finalidade:** Escolha do arquétipo de posicionamento e imersão psicológica.
+### E.2. Módulo Tela 1 (Navegação de Personas e Ritual Onboarding)
+*   **Finalidade:** Determinação da dosagem/gradação arquetípica da Persona do usuário no primeiro acesso.
 *   **Componentes do Visor:**
-    *   *Card 1 (Saudação):* Texto estilizado reativo: *"Saudações, [Nome]. Como você se posiciona socialmente?"*.
-    *   *Card 2 (Ativo):* Exibição do Arquétipo de Carl Jung ativo na roda de scroll.
-    *   *O Portal (Carrossel Horizontal):* O visor sofre transição horizontal contendo 3 slides descrevendo a Filosofia, Luz & Sombra, e a Estética Recomendada.
-*   **Botão Finais:** Botão dourado **`OK: Convocação Concluída`** no final do carrossel direcionando para a Tela 2 (Serviços).
+    *   *Fluxo de Carrosséis Horizontais (Fórmula 3x4):* O visor exibe sequencialmente 3 carrosséis horizontais com 4 cards cada (divididos internamente entre as dimensões Alma, Ação e Social).
+    *   *Navegação por Bolinhas:* O deslocamento entre os 4 cards de cada carrossel é guiado pelo familiar sistema de indicadores de "bolinhas".
+    *   *Slider Vertical:* Cada card individual do carrossel arquetípico possui um controle deslizante vertical graduado de 0 a 100 para o usuário dosar o quanto aquele arquétipo o representa.
+    *   *Painel Matriz de Síntese:* Após a conclusão dos 3 carrosséis, o visor renderiza uma tela consolidada exibindo o diagrama com as gradações editáveis atribuídas a cada um dos 12 arquétipos.
+    *   *Botão de Ação:* Botão dourado **`GERAR PERSONA`** que salva a dosagem no Firestore e direciona o usuário para a Tela 2 (Serviços).
 
 ### E.3. Módulo Tela 2 (Serviços & Construtor de Prompt)
-*   **Finalidade:** Escolha da modalidade e forja da Ordem de Serviço (OS) com feedback interativo dos agentes.
+*   **Finalidade:** Escolha da modalidade e forja da Ordem de Serviço (OS) com feedback interativo dos agentes baseada na Persona gerada.
 *   **Componentes do Visor:**
     *   *A Bifurcação:* Usuário escolhe entre **Grátis** (direciona imediatamente para Tela 3 - KS Studio) e **Premium (Pago)**.
     *   *O Construtor de Prompt (Modo Premium):* Se selecionado Premium, a interface expande no mesmo visor revelando toggles táteis (Redator, Roteirista, Compressor, Vídeo AI).
@@ -74,7 +75,7 @@ Toda a infraestrutura é baseada em banco de dados NoSQL thread-safe no Cloud Fi
 ```
 [Coleção Principal: clientes]
       |
-      +---> Documento: {cliente_id} (Campos: nome, créditos, preset_ativo)
+      +---> Documento: {cliente_id} (Campos: nome, créditos, dosagem_persona)
                  |
                  +---> [Subcoleção: contas]
                              |
@@ -90,8 +91,11 @@ Toda a infraestrutura é baseada em banco de dados NoSQL thread-safe no Cloud Fi
 {
   "id": "os_98127391823",
   "data_programada": "2026-05-24T18:00:00Z",
-  "persona_id": "o_sabio",
-  "categoria": "Pessoal",
+  "dosagem_persona": {
+    "sabio": 80,
+    "mago": 40,
+    "tolo": 15
+  },
   "status": "pendente",
   "ordem_servico": {
     "servicos_solicitados": ["legendas", "webp_compress"],

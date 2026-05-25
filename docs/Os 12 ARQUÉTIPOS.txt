@@ -1,0 +1,42 @@
+Esse documento descreve uma visão, para uma parte da construção, do app Killer Skills 
+
+PREMISSA 1 - Jung está certo, e já mapeou, para nós, os 12 arquétipos que representam os 12 papeis sociais que um indivíduo pode desempenhar (representar). Essa estrutura se encontra no inconsciente coletivo, portanto, todo individuo,  tem acesso.
+Abaixo segue a lista dos 12 ARQUÉTIPOS:
+
+1 - Sábio: pessoa que busca o conhecimento e pratica a autorreflexão. Ela analisa as situações e age com sabedoria e inteligência.
+2 - Mago: acredita que o mundo pode ser diferente, crê na transformação e na revolução, age no sentido de renovar as relações.
+3 - Explorador: gosta de liberdade para agir e descobrir o mundo. Busca por experiências novas e foge das situações rotineiras.
+4 - Criador: é o arquétipo do artista, do inventor. Essa pessoa dá vida à imaginação e às coisas que ainda não existem.
+5 - Herói: arquétipo presente em filmes e lendas, o herói é o guerreiro e destemido. Luta para proteger os seus e não teme os perigos.
+6 - Rebelde: pensa de maneiras diferentes, foge dos padrões. Acredita que as regras podem ser quebradas.
+7 - Amante: dá grande importância para as relações. É sensível e se sente feliz ao amar e ser amado.
+8 - Tolo: é alegre e gosta de se divertir, de aproveitar a vida e fazer piadas. Também conhecido como louco, é autêntico e não tem vergonha de rir de si mesmo.
+9 - Cuidador: gosta de cuidar dos outros e faz o possível para que todos estejam bem. Costuma ser muito prestativo e ajudar quem precisa.
+10 - Homem comum: age em conformidade com o que a sociedade espera. É bom para quem o rodeia, mas pode perder sua individualidade.
+11 - Inocente: sabe enxergar os aspectos positivos em todas as situações. É espontâneo, mas pode ser ingênuo às vezes.
+12 - Governante: é o arquétipo do líder. Tem autoridade e sabe se impor, mas pode se tornar autoritário para fazer valer a sua vontade.
+
+Premissa 2 - Nenhuma pessoa é 100% identificada com apenas um dos 12 Arquétipos. A dosagem desses Arquétipos no indivíduo, que define sua Persona
+
+Visão operacional:
+Não se trata mais de dscobrir com qual Persona o User se identifica, e depois, no o Portal da Persona, ir colhendo informações em um Carrosel, com 6 cards
+A Estratégia mudou:
+Agora os cards são apresentados em formal de Reels apenas, navegação vertical
+Card01 - SÁBIO - 
+Todos os 12 cards vão ter um Slider vertical, graduados de 0 a 100, pode ser uma barra vertical ao lado direito do player
+Nesse Slider o User vai dosando o grau de importância que cada arquétipo representa para ele
+Quando o User percorrer os 12 cards do Reel, o sistema coloca numa visão única, dentro do Player, um diagrama mostrando as gradações que ele atribuiu durante o processo. Esse diagrama é editável, se ele quiser, altera algum percentual, e clica ENTER
+Uma lógica matricial analisa os percentuais imputados pelo User, e traça o Perfil da Persona, já bem detalhado
+Essa análise trás as informações necessárias para a criação do Prompt
+Então, quando o User clica ENTER, ele é direcionado ao Construtor de Prompt, que é onde ele vai selecionar, gratis ou premium, e caso seja premium, quais micro-serviços vai utilizar, e assim temos os dados para a Ordem de Serviço, que vai para o KS STUDIO
+Esse processo se realiza apenas a primeira vez que o User entrar no App
+Uma vez definido o Perfil da Persona, gravado no BD, daí é sempre só criar, manual, ou com AI, e postar
+As mídias dos clientes premium permanecem na biblioteca
+Os User Free terão as mídias deletadas 12 dias após as postagens
+
+
+
+
+
+
+

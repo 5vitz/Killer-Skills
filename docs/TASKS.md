@@ -35,14 +35,26 @@ gantt
 *   [x] **Interface do Celular de Login:** Simulação do smartphone virtual no centro da tela com o glow reativo. *(Concluído em 23 de Maio)*
 *   [x] **Unidade Estática de Borda:** Ajuste de bordas (`border-2`) e cor azul (`#1E60FF`) para garantir a ilusão de permanência física do celular durante a transição para a Tela 1. *(Concluído em 23 de Maio)*
 
-### ⏳ FASE 3: TELA 1 - O PORTAL DE PERSONAS (Módulo Portal) — [EM ANDAMENTO]
-*   [ ] **Cards do Visor Interno:**
-    *   Desenhar o **Card 1 (Saudação Reativa):** exibindo o primeiro nome do usuário vindo do Login e a pergunta estratégica *"Como você se posiciona socialmente?"*.
-    *   Desenhar o **Card 2 (Exibidor do Arquétipo):** exibindo a persona ativa na roda de rolagem do smartphone.
-*   [ ] **O Portal da Iniciação (Horizontal Swipe):**
-    *   Implementar o botão tátil **`🔮 Entrar no Portal da Persona`**.
-    *   Desenvolver o carrossel horizontal de 3 slides (Filosofia, Luz/Sombra, Força Estética) com crossfades cinemáticos inspirados na psicologia profunda de Carl Jung.
-*   [ ] **Botão de Convocação:** Inserir o botão dourado **`OK: Convocação Concluída`** no final do carrossel direcionando linearmente para a Tela 2.
+### ⏳ FASE 3: TELA 1 - O RITUAL DE GERAR PERSONA (Módulo Onboarding) — [EM ANDAMENTO]
+*   [ ] **Os 3 Carrosséis Horizontais (Fórmula 3x4):**
+    *   Desenhar o fluxo contendo os 3 carrosséis correspondentes às dimensões internas: *Dimensão da Alma*, *Dimensão da Ação* e *Dimensão Social*.
+    *   Implementar a navegação horizontal interna dos 4 cards de cada dimensão utilizando o familiar sistema de "bolinhas" (dots).
+*   [ ] **Sliders de Dosagem Vertical:**
+    *   Desenvolver o controle de slider vertical estilizado na lateral direita de cada card do arquétipo (0 a 100, padrão em 50% para neutralidade ergonômica).
+*   [ ] **Painel de Síntese Matriz:**
+    *   Desenhar no visor a tela consolidada com o gráfico diagramático consolidado e totalmente editável das dosagens imputadas.
+*   [ ] **Botão Gerar Persona e Persistência:**
+    *   Inserir o botão dourado **`GERAR PERSONA`** no rodapé do painel de síntese.
+    *   Implementar o salvamento real do objeto JSON `dosagem_persona` na coleção `clientes` do Firestore.
+    *   Desenvolver a verificação de primeiro acesso (Router Guard) em `App.jsx` para pular o onboarding se a Persona já existir.
+*   [ ] **Expurgador Automático de Mídias (Free Users):**
+    *   Programar o background worker assíncrono no FastAPI VPS para higienização e remoção de blobs/arquivos de usuários free 12 dias após postagem.
+
+### ⏳ FASE 3.5: PRODUÇÃO DE CONTEÚDO & IMAGENS (Forja de Mídias) — [EM ANDAMENTO]
+*   [ ] **Forja de Prompts e Imagens via Google One (Gemini Advanced / AI):**
+    *   Produzir os prompts estruturados e artísticos para as **12 Imagens Master de Portais dos Arquétipos** (divididas pelas 3 Dimensões Internas: Alma, Ação, Social).
+    *   Garantir que a direção de arte das 12 imagens integre previamente uma zona de sombra ou gradiente (volumetric dark vignette) projetada para abrigar o Slider UI de dosagem.
+    *   Testar e co-criar os prompts em parceria ativa entre Genera e Lincoln, alinhando a estética ao mercado de luxo e marcas premium.
 
 ### ⏳ FASE 4: TELA 2 - SERVIÇOS & CONSTRUTOR DE PROMPT (Módulo Serviços) — [PENDENTE]
 *   [ ] **Bifurcação de Valor:**
