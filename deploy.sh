@@ -35,6 +35,7 @@ ssh root@31.220.102.2 << 'EOF'
   cd ~/Killer-Skills || { echo "❌ ERRO: Pasta ~/Killer-Skills não encontrada no VPS!"; exit 1; }
   
   # Força a atualização do repositório
+  rm -rf frontend/dist
   git reset --hard
   git pull || { echo "❌ ERRO: Falha ao rodar git pull no VPS!"; exit 1; }
   
