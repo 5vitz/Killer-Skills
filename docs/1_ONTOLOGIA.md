@@ -14,14 +14,20 @@ O **Killer Skills** atua como uma engine inteligente de coprodução criativa (C
 ### A.3. Doutrina de Amplificação Estética
 *   **O Princípio:** Receber mídias brutas e genuínas do usuário e submetê-las a um tratamento técnico (compressão local WebP, inpainting de cenários de apoio e harmonização de layout).
 *   **A Diretriz:** Garantir que as peças finais atinjam o patamar estético exigido pelo mercado de luxo e marcas premium, mantendo a verdade e a integridade ética do material original.
+*   **A Estética da Subtração (O Senso Mínimo):** Inspirada na máxima atribuída a Antoine de Saint-Exupéry:
+    > *"A obra de arte está pronta, quando não se pode retirar mais nada dela!"*
+    O ecossistema Killer Skills adota rigorosamente a filosofia *clean* e minimalista. Poucos elementos, sofisticação silenciosa, ausência de ruído e foco na mensagem essencial. Esse senso estético deve prevalecer em todas as interfaces, layouts e pautas geradas.
 
 ---
 
-## 🔮 CLASSE B: ARQUÉTIPOS JUNGUIANOS (NOMENCLATURA & DOSAGEM PESSOAL)
+## 🔮 CLASSE B: ARQUÉTIPOS JUNGUIANOS & MODELO MEVA (NOMENCLATURA HÍBRIDA & DOSAGEM VETORIAL)
 
-Os 12 perfis são estruturados a partir dos **Arquétipos de Carl Jung**. Sob a nova premissa de que nenhuma pessoa é 100% representada por um único arquétipo, a Persona do usuário é definida como uma **dosagem/gradação modular** de todos os 12 arquétipos.
+Os 12 perfis são estruturados a partir dos **Arquétipos de Carl Jung**. Sob a premissa de que nenhuma pessoa é 100% representada por um único arquétipo (sendo isso uma exceção radical), a Persona do usuário é definida pelo **Modelo de Espectro Vetorial Arquetípico (MEVA)**, que integra a gradação relativa de todos os 12 arquétipos de forma holística.
 
-Para fins de organização e nomenclatura interna de engenharia do ecossistema, os arquétipos são classificados em 3 dimensões psicológicas:
+### B.1. A Lógica da Nomenclatura Híbrida
+A Persona resultante é exibida e tratada sob uma assinatura de **Título Duplo Híbrido** (ex: `SÁBIO / CRIADOR` ou `MAGO / EXPLORADOR`), separando a **Essência Primária** (Top 1 de maior dosagem) e o **Co-Piloto de Expressão** (Top 2 de suporte) por uma barra espacada em caixa alta. Os valores menores (abaixo de 15%, como Explorador 8% ou Inocente 6%) atuam como **Pinceladas de Subtom** ou moduladores psicológicos finos que suavizam a sombra e temperam a voz da persona.
+
+Para fins de engenharia do ecossistema, os arquétipos são classificados em 3 dimensões psicológicas:
 1. **Dimensão da Alma (Mente & Significado):** Sábio, Inocente, Explorador e Cuidador.
 2. **Dimensão da Ação (Poder & Transformação):** Herói, Mago, Rebelde e Criador.
 3. **Dimensão Social (Conexão & Sociedade):** Amante, Tolo, Homem Comum e Governante.

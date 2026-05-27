@@ -1,40 +1,50 @@
 # 📐 VIÉS EPISTEMOLÓGICO: O SABER (ESTRUTURA & ENGENHARIA)
-## Projeto Killer Skills — Versão Unificada 2.0 (Maio de 2026)
+## Projeto Killer Skills — Versão Unificada 2.0 (Maio de 2026)## 🏛️ CLASSE E: TOPOLOGIA OPERACIONAL (SIMETRIA EM 3 COLUNAS & DUALIDADE DE DISPOSITIVO)
 
----
+Toda a interação em Desktop é estruturada sob a **Simetria Estática de Três Colunas**, mantendo o smartphone virtual perfeitamente centralizado fisicamente no centro da tela (`fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`). As transições de tela ocorrem por crossfade exclusivo dentro do visor do celular virtual, enquanto os metadados, instruções de onboarding, relatórios de persona e botões de avanço são delegados à barra lateral direita.
 
-## 🏛️ CLASSE E: TOPOLOGIA OPERACIONAL (4 TELAS EM 3 VIEWS DO MENU)
-
-Toda a interação é estruturada em torno da **Unidade Estática Suprema**, onde o smartphone virtual permanece 100% imóvel no centro físico da tela monitor (`fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`). As transições de tela ocorrem por crossfade exclusivo dentro do visor do celular virtual.
+### E.0. Lógica de Dispositivo Dual (isMobile Viewport)
+*   **Desktop (`isMobile === false`):** Exibe a simetria de 3 colunas com o smartphone virtual centralizado de luxo.
+*   **Mobile (`isMobile === true`):** Destrói o smartphone virtual. A própria tela do dispositivo físico do usuário torna-se a viewport principal de forma nativa e ergonômica, utilizando um menu inferior e sliders táteis robustos de ponta a ponta.
 
 ### E.1. Módulo Tela 0 (O Portal de Acesso Social)
 *   **Finalidade:** Autenticação unificada de usuários.
 *   **Componentes do Visor:** Logotipo metalizado esculpido em baixo-relevo e o botão de login social unificado Google.
-*   **Vincular:** Ao autenticar, capta reativamente o primeiro nome do usuário (`firstName`) e sua imagem de perfil (`userAvatar`).
 
-### E.2. Módulo Tela 1 (Navegação de Personas e Ritual Onboarding)
-*   **Finalidade:** Determinação da dosagem/gradação arquetípica da Persona do usuário no primeiro acesso.
-*   **Componentes do Visor:**
-    *   *Fluxo de Carrosséis Horizontais (Fórmula 3x4):* O visor exibe sequencialmente 3 carrosséis horizontais com 4 cards cada (divididos internamente entre as dimensões Alma, Ação e Social).
-    *   *Navegação por Bolinhas:* O deslocamento entre os 4 cards de cada carrossel é guiado pelo familiar sistema de indicadores de "bolinhas".
-    *   *Slider Vertical:* Cada card individual do carrossel arquetípico possui um controle deslizante vertical graduado de 0 a 100 para o usuário dosar o quanto aquele arquétipo o representa.
-    *   *Painel Matriz de Síntese:* Após a conclusão dos 3 carrosséis, o visor renderiza uma tela consolidada exibindo o diagrama com as gradações editáveis atribuídas a cada um dos 12 arquétipos.
-    *   *Botão de Ação:* Botão dourado **`GERAR PERSONA`** que salva a dosagem no Firestore e direciona o usuário para a Tela 2 (Serviços).
+### E.1.5. Router Guard & Controle de Acesso (Fluxo por Nível de Conta)
+O redirecionamento pós-login é governado de forma estrita pelo tipo de conta (`accountType`) e contagem de acessos (`acesso`) do usuário consultados no Firestore:
+1. **Fluxo do Usuário Premium:**
+   * **Primeiro Acesso (`acesso === 1`):** Redirecionado compulsoriamente para a **Tela 1 (Elaborar Persona)** para calibrar sua Persona Híbrida.
+   * **Acessos Recorrentes (`acesso > 1`):** Redirecionado diretamente para a **Tela 2 (Serviços & Construtor de Prompt)**.
+   * **Reelaboração:** O usuário Premium pode, a qualquer momento, clicar no menu lateral **"1 - PERSONAS"** para recalibrar os sliders e atualizar sua persona em definitivo no banco de dados.
+2. **Fluxo do Usuário Free:**
+   * **Acesso Direto:** Redirecionado **sempre** de forma direta para a **Tela 3 (KS Studio)**.
+   * **Restrição de IA:** O usuário Free não tem acesso a "Elaborar Persona". O menu lateral "1 - PERSONAS" fica trancado/desativado no cockpit.
+   * **Foco no Manual:** Cria manualmente o flow de storyboard, realiza upload e utiliza o **Simulador de Feed do Instagram** (visualização 1:1) para postar ou agendar postagens manuais.
+
+### E.2. Módulo Tela 1 (Onboarding Simétrico & Diagnóstico Híbrido MEVA)
+*   **Finalidade:** Determinação da dosagem arquetípica e elaboração da Persona Híbrida.
+*   **Componentes do Desktop:**
+    *   *Sidebar Esquerda:* Menu de navegação e status online (já existente).
+    *   *Smartphone Central (O Player):*
+        *   No passo `video`: Contém **apenas** o player de vídeo cenográfico com controles de som.
+        *   No passo `matriz`: Contém **unicamente** os 12 sliders dosadores (ocupando toda a área útil do visor para máximo conforto tátil).
+    *   *Sidebar Direita (O Relatório):*
+        *   No passo `video`: Exibe textos instrucionais e o botão **`IR PARA A MATRIZ ➔`**.
+        *   No passo `matriz`: Exibe a **Persona Resultante** (ex: `SÁBIO / CRIADOR`), o **Relatório Detalhado** (Doutrina de Voz, Luz/Sombra e Nuances de Subtom de menores dosagens) e o botão dourado **`ELABORAR PERSONA ✨`**.
 
 ### E.3. Módulo Tela 2 (Serviços & Construtor de Prompt)
-*   **Finalidade:** Escolha da modalidade e forja da Ordem de Serviço (OS) com feedback interativo dos agentes baseada na Persona gerada.
-*   **Componentes do Visor:**
-    *   *A Bifurcação:* Usuário escolhe entre **Grátis** (direciona imediatamente para Tela 3 - KS Studio) e **Premium (Pago)**.
-    *   *O Construtor de Prompt (Modo Premium):* Se selecionado Premium, a interface expande no mesmo visor revelando toggles táteis (Redator, Roteirista, Compressor, Vídeo AI).
-    *   *Feedback dos Agentes (Live Work):* **Enquanto o prompt é construído e a OS é forjada**, o visor renderiza o console técnico mostrando os **Agentes de Coprodução trabalhando em tempo real** (ex: *Redator polindo gancho...*, *Estrategista validando copy...*).
-    *   *O Manifesto:* Exibição reativa da OS formatada em JSON/YAML.
-    *   *OK de Envio:* Botão dourado **`FORJAR ORDEM DE SERVIÇO`** para disparar os agentes operacionais no KS Studio.
+*   **Finalidade:** Escolha da modalidade e emissão da Ordem de Serviço (OS) com feedback interativo dos agentes baseada na Persona gerada.
+*   **Componentes:**
+    *   *O Construtor de Prompt:* Toggles táteis de micro-serviços (Redator, Roteirista, Compressor, Vídeo AI).
+    *   *Feedback dos Agentes (Live Work):* Console técnico mostrando os Agentes trabalhando em tempo real no visor central do smartphone.
+    *   *OK de Envio:* Botão dourado **`EMITIR ORDEM DE SERVIÇO`** na barra direita.
 
 ### E.4. Módulo Tela 3 (O KS Studio)
 *   **Finalidade:** Sandbox interativa de visualização 1:1, simulação de feed e controle de publicação.
 *   **Componentes do Visor:**
-    *   *Simulador de Feed:* O próprio celular exibe a miniatura real e interativa (Reels ou Carrossel) que o usuário pode rodar e ler.
-    *   *Controles Finais:* Botões rápidos de `Publicar Agora` ou `Agendar Post`.
+    *   *Simulador de Feed:* O próprio visor do celular exibe a miniatura real e interativa (Reels ou Carrossel) que o usuário pode rodar e ler.
+    *   *Controles Finais:* Botões rápidos de `Publicar Agora` ou `Agendar Post` no painel lateral.
 
 ---
 

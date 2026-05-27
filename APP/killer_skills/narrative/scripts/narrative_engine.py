@@ -29,7 +29,7 @@ class NarrativeSkill:
             print(f"[IA] ⚠️ Chave não encontrada ou inválida. Valor bruto: '{raw_key}'")
             self.ativo = False
 
-    def analisar_storyboard(self, imagens_path):
+    def analisar_storyboard(self, imagens_path, dosagem=None):
         if not self.ativo:
             return "IA em modo offline. Verifique o terminal para erros de chave."
         
@@ -37,12 +37,34 @@ class NarrativeSkill:
             return "Aguardando mídias para análise..."
 
         try:
-            print(f"[IA] Analisando {len(imagens_path)} imagens...")
-            prompt = "Analise estas imagens de carrossel de Instagram e dê um insight curto (2 frases) sobre o que elas comunicam e como impactam o público."
+            print(f"[IA] Analisando {len(imagens_path)} imagens com MEVA...")
+            
+            # Construção de contexto arquetípico baseado no MEVA
+            meva_context = ""
+            if dosagem:
+                sorted_meva = sorted(dosagem.items(), key=lambda x: x[1], reverse=True)
+                essencia = sorted_meva[0]
+                co_piloto = sorted_meva[1]
+                subtons = [f"{k} ({v}%)" for k, v in sorted_meva[2:] if v >= 15]
+                
+                meva_context = f"""
+[CONTEXTO ARQUETÍPICO MEVA]
+O usuário possui a seguinte assinatura psicológica de Carl Jung:
+- Essência Dominante (Principal): {essencia[0].upper()} ({essencia[1]}%)
+- Co-Piloto (Expressão): {co_piloto[0].upper()} ({co_piloto[1]}%)
+- Subtons Complementares Ativos: {', '.join(subtons) if subtons else 'Nenhum'}
+
+Por favor, adote um tom que combine a autoridade intelectual da Essência com a dinâmica de atração do Co-Piloto.
+"""
+
+            prompt = f"""{meva_context}
+Você é o Co-Diretor Criativo de Luxo do Killer Skills.
+Analise estas imagens de carrossel de Instagram e forneça uma análise curta (máximo 2 frases) de alto impacto estético e intelectual.
+Descreva o que elas comunicam e como impactam o público premium sob o viés do posicionamento arquetípico ativo.
+"""
             
             conteudo = [prompt]
             for path in imagens_path:
-                # Ajuste no caminho da imagem para garantir que encontre em APP/assets
                 full_path = os.path.join(os.path.dirname(__file__), "..", "..", "..", "assets", os.path.basename(path))
                 print(f"[IA] Lendo imagem: {full_path}")
                 
@@ -62,11 +84,39 @@ class NarrativeSkill:
             print(f"[IA] ❌ Falha crítica: {str(e)}")
             return f"Erro na análise: {str(e)}"
 
-    def sugerir_legenda(self, imagens_path):
+    def sugerir_legenda(self, imagens_path, dosagem=None):
         if not self.ativo: return "Ative a chave para sugestão real."
         try:
-            print("[IA] Gerando legenda mágica...")
-            prompt = "Escreva uma legenda curta, magnética e profissional para este post. Use emojis e hashtags."
+            print("[IA] Gerando legenda mágica com MEVA...")
+            
+            meva_context = ""
+            if dosagem:
+                sorted_meva = sorted(dosagem.items(), key=lambda x: x[1], reverse=True)
+                essencia = sorted_meva[0]
+                co_piloto = sorted_meva[1]
+                subtons = [f"{k.upper()} ({v}%)" for k, v in sorted_meva[2:] if v >= 15]
+                
+                subtons_instr = ""
+                if subtons:
+                    subtons_instr = f"Incorpore as nuances sutis dos subtons complementares ativos: {', '.join(subtons)} para enriquecer o texto, modular sombras e refinar o vocabulário."
+
+                meva_context = f"""
+[DIRETRIZ DE VOZ - SPECTRO ARQUETÍPICO MEVA]
+Sua escrita deve ser calibrada cirurgicamente com base na assinatura psíquica do usuário:
+- Essência Dominante (Espinha dorsal do texto): {essencia[0].upper()} ({essencia[1]}%)
+- Co-Piloto (Transformação/Engajamento): {co_piloto[0].upper()} ({co_piloto[1]}%)
+{subtons_instr}
+
+A voz deve soar como a mescla de {essencia[0].upper()} e {co_piloto[0].upper()}. Evite generalizações. Use a sofisticação da essência com a atração de expressão do co-piloto.
+"""
+
+            prompt = f"""{meva_context}
+Você é o Cérebro Narrativo de Luxo do Killer Skills.
+Escreva uma legenda curta, magnética, premium e com alto poder de retenção para este post.
+Use emojis selecionados de forma sutil e hashtags pertinentes ao nicho de luxo/arte.
+Foque na autenticidade e na voz expressiva da assinatura do usuário.
+"""
+            
             conteudo = [prompt]
             for path in imagens_path:
                 if path:

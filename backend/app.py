@@ -41,6 +41,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+ 
+from fastapi.staticfiles import StaticFiles
+app.mount("/uploads", StaticFiles(directory=os.path.join(ROOT_DIR, "APP", "uploads")), name="uploads")
 
 # --- MODELOS DE ENTRADA ---
 class LoginRequest(BaseModel):
@@ -48,14 +51,17 @@ class LoginRequest(BaseModel):
 
 class CaptionRequest(BaseModel):
     storyboard: List[Optional[str]]
+    dosagem: Optional[Dict[str, float]] = None
 
 class AnalysisRequest(BaseModel):
     storyboard: List[str]
+    dosagem: Optional[Dict[str, float]] = None
 
 class ForgeRequest(BaseModel):
     persona_title: str
     persona_tag: str
     micro_services: Dict[str, bool]
+    dosagem: Optional[Dict[str, float]] = None
 
 # --- PERSONAS DATA SEED ---
 PESSOAL_DATA = [
@@ -118,9 +124,8 @@ def get_ai_caption(req: CaptionRequest):
     if not ai:
         return {"caption": "IA Indisponível no momento. Adicione a chave no arquivo .env."}
     try:
-        # Preenche os slots vazios para passar para a Skill
         slots = [x if x else None for x in req.storyboard]
-        caption = ai.sugerir_legenda(slots)
+        caption = ai.sugerir_legenda(slots, req.dosagem)
         return {"caption": caption}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -130,16 +135,21 @@ def get_ai_analysis(req: AnalysisRequest):
     if not ai:
         return {"insight": "IA offline no momento. Adicione sua chave GEMINI_API_KEY no .env."}
     try:
-        insight = ai.analisar_storyboard(req.storyboard)
+        insight = ai.analisar_storyboard(req.storyboard, req.dosagem)
         return {"insight": insight}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/forge")
 def forge_order(req: ForgeRequest):
-    legendas_label = "Legendas Didáticas" if req.persona_tag == "Pessoal" else "Legendas Corporativas"
     os_id = f"OS-2026-KS-{req.persona_title[:4].upper()}"
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    # Se houver dosagem MEVA, compila em string YAML
+    meva_signature_yaml = "N/A"
+    if req.dosagem:
+        sorted_meva = sorted(req.dosagem.items(), key=lambda x: x[1], reverse=True)
+        meva_signature_yaml = "\n" + "\n".join([f"      {k.upper()}: {v}%" for k, v in sorted_meva])
 
     manifest_yaml = f"""---
 ORDEM_DE_SERVICO:
@@ -150,12 +160,18 @@ ORDEM_DE_SERVICO:
     NOME: "{req.persona_title}"
     CATEGORIA: "{req.persona_tag}"
     STATUS: "CONVOCADO"
+    
+  ASSINATURA_ARQUETIPICA_MEVA: {meva_signature_yaml}
   
   MICRO_SERVICOS_SOLICITADOS:
-    - {legendas_label}: {"ATIVO 🟢" if req.micro_services.get("legendas") else "INATIVO 🔴"}
-    - Roteiro de Carrossel: {"ATIVO 🟢" if req.micro_services.get("roteiro") else "INATIVO 🔴"}
-    - Compressor WebP: {"ATIVO 🟢" if req.micro_services.get("webp") else "INATIVO 🔴"}
-    - Vídeo Generativo AI: {"ATIVO 🟢" if req.micro_services.get("video") else "INATIVO 🔴"}
+    - Postagem Automática: {"ATIVO 🟢" if req.micro_services.get("post_automatica") else "INATIVO 🔴"}
+    - Agendamento de Post: {"ATIVO 🟢" if req.micro_services.get("agendamento") else "INATIVO 🔴"}
+    - Tratamento de Imagens: {"ATIVO 🟢" if req.micro_services.get("tratamento") else "INATIVO 🔴"}
+    - Criação de Flow: {"ATIVO 🟢" if req.micro_services.get("criacao_flow") else "INATIVO 🔴"}
+    - Criação de Textos: {"ATIVO 🟢" if req.micro_services.get("criacao_textos") else "INATIVO 🔴"}
+    - Criação de Imagem: {"ATIVO 🟢" if req.micro_services.get("criacao_imagem") else "INATIVO 🔴"}
+    - Criação de Vídeo: {"ATIVO 🟢" if req.micro_services.get("criacao_video") else "INATIVO 🔴"}
+    - Compressor WebP (Sistema): ATIVO 🟢 (Padrão de Infraestrutura)
   
   ORQUESTRADOR: "Central-AI-v4"
   STATUS_ORDEM: "PRONTO_PARA_FORJA"
@@ -168,7 +184,7 @@ ORDEM_DE_SERVICO:
             db.agendar_post(
                 data_hora=timestamp,
                 arquivos="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500",
-                legenda=f"OS Forjada para a persona {req.persona_title}!"
+                legenda=f"OS Forjada para a persona {req.persona_title}! Assinatura arquetípica unificada ativa."
             )
         except Exception as e:
             print(f"⚠️ Erro ao salvar agendamento no Firestore: {e}")

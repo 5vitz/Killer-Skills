@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { 
   Menu, Play, BookOpen, Layers, Settings, ChevronUp, ChevronDown, ChevronLeft, ChevronRight,
   Sparkles, CheckCircle2, Circle, LogOut, ArrowRight, ShieldCheck, 
-  Info, Cpu, FolderOpen, Image as ImageIcon, Send, Sliders, RefreshCw, User
+  Info, Cpu, FolderOpen, Image as ImageIcon, Send, Sliders, RefreshCw, User,
+  Volume2, VolumeX
 } from 'lucide-react';
 
 const API_BASE = "http://localhost:8000";
@@ -35,6 +36,93 @@ const ARCHETYPES = [
   { id: 'governante', name: 'Governante', dim: 'Social', desc: 'Líder natural, assume a autoridade e sabe impor a ordem e a estabilidade.', color: '#E09E25', shadow: 'Sombra: Rigidez extrema e medo irracional do caos.', seedUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500' }
 ];
 
+const ARCHETYPE_DETAILS = {
+  sabio: {
+    desejo: "Encontrar a verdade",
+    medo: "Ser enganado ou ignorante",
+    superpoder: "Sabedoria e análise profunda",
+    imagem: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=500",
+    sombra: "Distanciamento emocional e altivez intelectual"
+  },
+  inocente: {
+    desejo: "Experimentar o paraíso e ser feliz",
+    medo: "Fazer algo errado e ser punido",
+    superpoder: "Fé e otimismo inabaláveis",
+    imagem: "https://images.unsplash.com/photo-1498843053639-170ff2122f35?w=500",
+    sombra: "Ingenuidade excessiva e negação da realidade"
+  },
+  explorador: {
+    desejo: "Viver uma vida livre e autêntica",
+    medo: "Ficar preso ou se conformar",
+    superpoder: "Autenticidade e coragem de desbravar",
+    imagem: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500",
+    sombra: "Inconstância, dispersão e pânico de criar raízes"
+  },
+  cuidador: {
+    desejo: "Proteger e cuidar dos outros",
+    medo: "Egoísmo e ingratidão",
+    superpoder: "Compaixão e generosidade pura",
+    imagem: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=500",
+    sombra: "Martírio e esgotamento por negligência de si próprio"
+  },
+  heroi: {
+    desejo: "Provar seu valor através de ações difíceis",
+    medo: "Fraqueza e vulnerabilidade",
+    superpoder: "Competência, coragem e determinação",
+    imagem: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500",
+    sombra: "Obsessão por combate e necessidade de provar valor"
+  },
+  mago: {
+    desejo: "Compreender as leis fundamentais do universo",
+    medo: "Consequências negativas não intencionais",
+    superpoder: "Transformação e manifestação da visão",
+    imagem: "https://images.unsplash.com/photo-1519074069444-1ba4e5663a43?w=500",
+    sombra: "Manipulação mental e distanciamento da realidade física"
+  },
+  rebelde: {
+    desejo: "Revolucionar o que não funciona",
+    medo: "Ser comum ou impotente",
+    superpoder: "Liberdade radical e pensamento disruptivo",
+    imagem: "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=500",
+    sombra: "Destruição sem causa legítima e rebeldia improdutiva"
+  },
+  criador: {
+    desejo: "Criar algo de valor duradouro",
+    medo: "Mediocridade ou falta de visão",
+    superpoder: "Criatividade sem limites e habilidade técnica",
+    imagem: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500",
+    sombra: "Perfeccionismo extremo que paralisa a entrega"
+  },
+  amante: {
+    desejo: "Estar em conexão com quem e o que ama",
+    medo: "Ficar sozinho ou não ser desejado",
+    superpoder: "Sensualidade, empatia e compromisso profundo",
+    imagem: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500",
+    sombra: "Anulação pessoal para agradar ao parceiro"
+  },
+  tolo: {
+    desejo: "Viver no momento com alegria plena",
+    medo: "Ser chato ou passar despercebido",
+    superpoder: "Humor, leveza e inteligência espontânea",
+    imagem: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500",
+    sombra: "Frivolidade e irresponsabilidade diante de crises"
+  },
+  homem_comum: {
+    desejo: "Pertencer e conectar-se com os outros",
+    medo: "Ser deixado de fora ou se destacar demais",
+    superpoder: "Empatia, realismo e ausência de pretensão",
+    imagem: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500",
+    sombra: "Perda da própria voz em nome do consenso do grupo"
+  },
+  governante: {
+    desejo: "Criar uma família ou comunidade próspera",
+    medo: "O caos e a perda do controle",
+    superpoder: "Liderança, responsabilidade e estabilidade",
+    imagem: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500",
+    sombra: "Autoritarismo rígido e incapacidade de delegar"
+  }
+};
+
 const DIMENSOES = [
   { id: 'alma', title: 'Alma', color: '#D4AF37' },
   { id: 'acao', title: 'Ação', color: '#E06666' },
@@ -51,6 +139,39 @@ export default function App() {
   // Router Guard de Roteamento Dinâmico
   const [hasPersonaDefined, setHasPersonaDefined] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState("video"); // "video" ou "matriz"
+
+  // --- AUDIO & ARQUÉTIPOS DINÂMICOS ---
+  const [focusedArchetype, setFocusedArchetype] = useState(null);
+  const [hoveredArchetype, setHoveredArchetype] = useState(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [volume, setVolume] = useState(0.35);
+
+  const [audio] = useState(() => {
+    const a = new Audio('/audios/Trilha_Arquetipos.mp3');
+    a.loop = true;
+    return a;
+  });
+
+  useEffect(() => {
+    audio.muted = isMuted;
+    audio.volume = volume;
+  }, [isMuted, volume, audio]);
+
+  useEffect(() => {
+    if (!isMuted) {
+      audio.play().catch(err => {
+        console.log("Autoplay bloqueado pelo navegador:", err);
+      });
+    } else {
+      audio.pause();
+    }
+  }, [isMuted, audio]);
+
+  useEffect(() => {
+    return () => {
+      audio.pause();
+    };
+  }, [audio]);
 
   // Novo Onboarding de Dosagem de Personas
   const [dosagemPersona, setDosagemPersona] = useState({
@@ -237,10 +358,12 @@ export default function App() {
   if (!isLoggedIn) {
     return (
       <div className="relative w-screen h-screen flex justify-center items-center bg-black overflow-hidden select-none">
-        {/* Glow Neon Azul - Desativado para teste de fundo preto puro */}
-        {/* <div className="absolute w-[400px] h-[400px] bg-brand-blue/20 rounded-full blur-[120px] left-[15%] top-[10%] pointer-events-none" /> */}
-        {/* Glow Neon Dourado - Desativado para teste de fundo preto puro */}
-        {/* <div className="absolute w-[350px] h-[350px] bg-brand-gold/10 rounded-full blur-[140px] right-[15%] bottom-[10%] pointer-events-none" /> */}
+        {/* Breathing Lilac & Emerald Sacred Background */}
+        <div className="smoke-bg-container">
+          <div className="smoke-cloud-1" />
+          <div className="smoke-cloud-2" />
+          <div className="smoke-cloud-3" />
+        </div>
 
         {/* Smartphone Container */}
         <div 
@@ -296,15 +419,13 @@ export default function App() {
   const currentPersona = activePersonasList[selectedPersonaIdx] || activePersonasList[0];
 
   return (
-    <div className="relative w-screen h-screen bg-black flex overflow-hidden text-white antialiased select-none">
-      {/* Esferas de Luz Ambiente Reativas (Aceleração por Hardware GPU) - Desativadas para teste de fundo preto puro */}
-      {/* Glow Reativo da Persona Ativa (Esquerda Superior) */}
-      {/* <div 
-        className="absolute w-[450px] h-[450px] rounded-full blur-[120px] left-[15%] top-[10%] pointer-events-none opacity-20 transition-all duration-1000 ease-in-out z-0"
-        style={{ backgroundColor: "#1E60FF" }}
-      /> */}
-      {/* Glow de Contraste Dourado/Bronze (Direita Inferior) */}
-      {/* <div className="absolute w-[350px] h-[350px] bg-brand-gold/10 rounded-full blur-[140px] right-[15%] bottom-[10%] pointer-events-none z-0" /> */}
+    <div className="relative w-screen h-screen bg-black flex overflow-hidden text-white antialiased select-none z-10">
+      {/* Breathing Lilac & Emerald Sacred Background */}
+      <div className="smoke-bg-container">
+        <div className="smoke-cloud-1" />
+        <div className="smoke-cloud-2" />
+        <div className="smoke-cloud-3" />
+      </div>
 
       {/* 1. BARRA LATERAL METÁLICA PREMIUM */}
       <div className="w-[260px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A]">
@@ -414,9 +535,50 @@ export default function App() {
           const archTop2 = ARCHETYPES.find(a => a.id === sortedDosagens[1][0]) || ARCHETYPES[1];
           const combinedTitle = `${archTop1.name} ${archTop2.name}`;
 
+          const activeArch = hoveredArchetype || focusedArchetype;
+
           return (
             <div className="relative w-full h-full flex justify-center items-center">
 
+              {/* LETREIRO MARQUEE TICKER (DINÂMICO E COMPARTILHADO) */}
+              <div className="absolute top-[3%] left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[3px] py-2 border-y border-white/[0.06] shadow-2xl z-20">
+                <div className="inline-block whitespace-nowrap animate-marquee">
+                  <span className="text-[17px] font-poppins-light text-gold-dress leading-relaxed px-4 drop-shadow-[0_2px_5px_rgba(0,0,0,0.85)]">
+                    {onboardingStep === "video" ? (
+                      <>
+                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                      </>
+                    ) : (
+                      <>
+                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                      </>
+                    )}
+                  </span>
+                  <span className="text-[17px] font-poppins-light text-gold-dress leading-relaxed px-4 drop-shadow-[0_2px_5px_rgba(0,0,0,0.85)]">
+                    {onboardingStep === "video" ? (
+                      <>
+                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                      </>
+                    ) : (
+                      <>
+                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                      </>
+                    )}
+                  </span>
+                </div>
+              </div>
 
               {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
               <div 
@@ -509,8 +671,16 @@ export default function App() {
                       <div className="flex-1 my-3 overflow-y-auto pr-1 flex flex-col gap-2.5 max-h-[220px] custom-scrollbar-visible">
                         {ARCHETYPES.map((arch) => {
                           const dimColor = arch.dim === "Alma" ? "#D4AF37" : arch.dim === "Ação" ? "#E06666" : "#8E7CC3";
+                          const isFocused = focusedArchetype?.id === arch.id;
                           return (
-                            <div key={arch.id} className="flex flex-col gap-1 text-left bg-white/[0.02] border border-white/5 p-2 rounded-xl">
+                            <div 
+                              key={arch.id} 
+                              onMouseEnter={() => setHoveredArchetype(arch)}
+                              onMouseLeave={() => setHoveredArchetype(null)}
+                              onClick={() => setFocusedArchetype(isFocused ? null : arch)}
+                              className="flex flex-col gap-1 text-left bg-white/[0.02] border p-2 rounded-xl hover:bg-white/[0.06] active:scale-[0.98] transition-all duration-200 cursor-pointer"
+                              style={{ borderColor: isFocused ? "#D5A370" : "rgba(255, 255, 255, 0.05)" }}
+                            >
                               <div className="flex justify-between items-center text-[9px] font-bold">
                                 <span style={{ color: dimColor }} className="flex items-center gap-1.5">
                                   <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dimColor }} />
@@ -564,6 +734,112 @@ export default function App() {
                   )}
                 </div>
               </div>
+
+              {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Portal do Arquétipo) */}
+              <div className="absolute right-0 top-0 bottom-0 w-[300px] border-l border-white/10 bg-[#0A0A0C]/90 backdrop-blur-md p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
+                {activeArch ? (
+                  /* PORTAL DO ARQUÉTIPO ATIVO (HOVERED OU FOCUSED) */
+                  <div className="flex flex-col gap-4 flex-1 overflow-y-auto pr-1 custom-scrollbar-visible">
+                    {/* Header */}
+                    <div>
+                      <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold">
+                        Portal do Arquétipo
+                      </h2>
+                      <p className="text-[9px] text-white/40 uppercase mt-0.5 font-bold">
+                        {focusedArchetype?.id === activeArch.id ? "Fixo - Clique para Liberar" : "Visualização Temporária"}
+                      </p>
+                    </div>
+
+                    {/* Image Card (9:16) */}
+                    <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 shadow-lg group">
+                      <img 
+                        src={ARCHETYPE_DETAILS[activeArch.id]?.imagem || activeArch.seedUrl} 
+                        className="w-full h-full object-cover group-hover:scale-105 duration-700 brightness-[0.8] contrast-[1.05]"
+                        alt={activeArch.name}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-black/20 pointer-events-none" />
+                      <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
+                        <span 
+                          className="text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/60 border"
+                          style={{ color: activeArch.color, borderColor: activeArch.color }}
+                        >
+                          {activeArch.dim}
+                        </span>
+                        <h3 className="text-lg font-black text-white mt-2 leading-tight drop-shadow-md">
+                          {activeArch.name}
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* Text Details Card */}
+                    <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 flex flex-col gap-3 text-left">
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Desejo Central</span>
+                        <p className="text-[10.5px] font-semibold text-white/90">
+                          {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Medo Primordial</span>
+                        <p className="text-[10.5px] font-semibold text-white/90">
+                          {ARCHETYPE_DETAILS[activeArch.id]?.medo}
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Superpoder</span>
+                        <p className="text-[10.5px] font-bold text-gold-dress">
+                          {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  /* WELCOME PANEL (QUANDO NENHUM ARQUÉTIPO ESTÁ ATIVO) */
+                  <div className="flex-1 flex flex-col justify-center items-center text-center p-6 gap-4 border border-white/5 bg-white/[0.01] rounded-3xl my-auto">
+                    <div className="w-12 h-12 rounded-full bg-brand-blue/10 border border-brand-blue/20 flex justify-center items-center active-pulse">
+                      <Sparkles className="w-5 h-5 text-brand-blue" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-black uppercase tracking-wider text-white">
+                        Portal do Arquétipo
+                      </h3>
+                      <p className="text-[10px] text-white/40 mt-2 leading-relaxed">
+                        Passe o mouse ou clique em qualquer um dos 12 sliders arquetípicos para revelar a sua arte sacra digital e essência mística.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* ALWAYS-VISIBLE AUDIO CONTROLS & BRAND SIGNATURE */}
+                <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4">
+                  <div className="flex items-center justify-between text-white/40">
+                    <div className="flex items-center gap-1.5">
+                      <button 
+                        onClick={() => setIsMuted(!isMuted)} 
+                        className="p-1 rounded-lg hover:bg-white/5 hover:text-white transition duration-200"
+                      >
+                        {isMuted ? <VolumeX className="w-3.5 h-3.5 text-brand-pink" /> : <Volume2 className="w-3.5 h-3.5 text-brand-blue" />}
+                      </button>
+                      <span className="text-[9px] font-black uppercase tracking-wider">
+                        {isMuted ? "Áudio Mutado" : "Trilha Sonora"}
+                      </span>
+                    </div>
+                    <input 
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value={volume}
+                      onChange={(e) => setVolume(parseFloat(e.target.value))}
+                      className="w-16 h-1 accent-brand-blue bg-white/15 rounded-lg appearance-none cursor-pointer"
+                    />
+                  </div>
+                  <div className="text-[8px] font-black tracking-widest text-center text-white/15 uppercase mt-1">
+                    Killer Skills v4.0 • Direção de Arte AI
+                  </div>
+                </div>
+              </div>
+
             </div>
           );
         })()}

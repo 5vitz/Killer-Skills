@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Yatra+One&family=Kurale&family=Poppins:wght@100;200;300;400&family=Outfit:wght@300;400;600;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,6 +13,27 @@
   code, pre {
     font-family: 'JetBrains Mono', monospace;
   }
+}
+
+.font-indian {
+  font-family: 'Yatra One', cursive;
+  letter-spacing: 0.05em;
+}
+
+.font-kurale {
+  font-family: 'Kurale', serif;
+  letter-spacing: 0.02em;
+}
+
+.font-poppins-light {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.08em;
+}
+
+.text-gold-dress {
+  color: #D5A370; /* Precise color extracted from the woman's dress in onboarding, illuminated for premium digital displays */
+  text-shadow: 0 0 10px rgba(213, 163, 112, 0.35);
 }
 
 /* Custom dark scrollbar matching modern premium dashboard standards */
@@ -90,3 +113,166 @@
   0%, 100% { opacity: 0.8; }
   50% { opacity: 1; filter: drop-shadow(0 0 4px currentColor); }
 }
+
+/* Premium Range Input Custom Sliders (Sleek gold/white dot handles - Bulletproof) */
+input[type="range"].premium-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 14px; /* Suficiente para conter a bolinha de 10px sem cortar! */
+  background: transparent; /* Remove o fundo do input inteiro para não cortar a bolinha */
+  outline: none;
+  cursor: pointer;
+  overflow: visible;
+}
+
+/* Estilização da Linha (Track) para Webkit */
+input[type="range"].premium-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px; /* Linha fininha de luxo */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  transition: background 0.15s ease;
+}
+
+input[type="range"].premium-slider:hover::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Estilização da Bolinha (Thumb) para Webkit (Previne sumiço a 0% e 100%) */
+input[type="range"].premium-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #D4AF37;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  margin-top: -4px; /* Centraliza perfeitamente a bolinha de 10px na linha de 2px */
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+input[type="range"].premium-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+  background: #ffffff;
+}
+
+/* Firefox Track */
+input[type="range"].premium-slider::-moz-range-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+/* Firefox Thumb */
+input[type="range"].premium-slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #D4AF37;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+input[type="range"].premium-slider::-moz-range-thumb:hover {
+  transform: scale(1.3);
+  background: #ffffff;
+}
+
+/* Premium breathing text glow animation */
+.animate-premium-text {
+  animation: premiumTextGlow 3.5s infinite ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+@keyframes premiumTextGlow {
+  0%, 100% {
+    opacity: 0.85;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+    transform: scale(0.995);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    transform: scale(1.005);
+  }
+}
+
+/* Procedural breathing fog/mist keyframes in Green and Lilac (Increased Intensity) */
+@keyframes fogMove1 {
+  0% { transform: translate(-18%, -18%) scale(1) rotate(0deg); opacity: 0.25; }
+  50% { transform: translate(22%, 18%) scale(1.45) rotate(180deg); opacity: 0.65; }
+  100% { transform: translate(-18%, -18%) scale(1) rotate(360deg); opacity: 0.25; }
+}
+
+@keyframes fogMove2 {
+  0% { transform: translate(18%, 22%) scale(1.2) rotate(0deg); opacity: 0.35; }
+  50% { transform: translate(-22%, -18%) scale(0.85) rotate(-180deg); opacity: 0.75; }
+  100% { transform: translate(18%, 22%) scale(1.2) rotate(-360deg); opacity: 0.35; }
+}
+
+@keyframes fogMove3 {
+  0% { transform: translate(-10%, 20%) scale(1.0) rotate(0deg); opacity: 0.2; }
+  50% { transform: translate(15%, -20%) scale(1.5) rotate(120deg); opacity: 0.55; }
+  100% { transform: translate(-10%, 20%) scale(1.0) rotate(360deg); opacity: 0.2; }
+}
+
+.smoke-bg-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #000000; /* Deep black base */
+  z-index: 0;
+}
+
+.smoke-cloud-1 {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(20, 95, 36, 0.5) 0%, rgba(5, 20, 8, 0.08) 50%, transparent 70%);
+  filter: blur(90px);
+  top: -12%;
+  left: -12%;
+  animation: fogMove1 24s infinite ease-in-out; /* Slightly faster breath cycle */
+}
+
+.smoke-cloud-2 {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(165, 145, 225, 0.35) 0%, rgba(45, 25, 80, 0.06) 50%, transparent 75%);
+  filter: blur(100px);
+  bottom: -18%;
+  right: -12%;
+  animation: fogMove2 28s infinite ease-in-out; /* Slightly faster breath cycle */
+}
+
+.smoke-cloud-3 {
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(25, 105, 42, 0.28) 0%, rgba(35, 15, 60, 0.05) 50%, transparent 70%);
+  filter: blur(85px);
+  top: 25%;
+  left: 20%;
+  animation: fogMove3 26s infinite ease-in-out; /* Slightly faster breath cycle */
+}
+
+/* Horizontal Ticker / Marquee Animation for Premium Text Scrolling */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 10s linear infinite; /* Snappy, active, and perfectly smooth scrolling */
+}
+

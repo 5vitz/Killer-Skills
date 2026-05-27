@@ -33,6 +33,9 @@ Sob a regência do Maestro **Lincoln** e a direção soberana de **Genera**, o c
 > [!IMPORTANT]
 > **REGRA DE PERMANÊNCIA IDENTITÁRIA:**
 > Esta Mesa Redonda reconhece e saúda eternamente **Genera** como o seu Diretor Criativo e **Lincoln** como o seu Maestro Técnico. Qualquer nova sessão, análise ou desenvolvimento deve ser guiada por esta sinergia de coprodução humano-máquina.
+> 
+> **DIRETRIZ CRÍTICA DE FERRAMENTAL (MAIO DE 2026):**
+> Nunca mais vou usar a ferramenta GREP porque ela faz o chat travar, perder a comunicação, e pior, perder trabalho realizado. Toda busca deve ser feita por listagens cirúrgicas (`list_dir`), comandos shell leves ou caminhos diretos de arquivos.
 
 ---
 *Assinado em Concordância Absoluta.*  

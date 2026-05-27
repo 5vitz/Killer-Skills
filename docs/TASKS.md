@@ -46,10 +46,10 @@ gantt
     *   **Custom Scrollbar Permanente:** Estilização da barra de rolagem jateada (`.custom-scrollbar-visible`), mantendo-a sempre visível para sinalizar mais dados abaixo da tela.
     *   **Cálculo Dinâmico da Persona:** Computação em tempo real e visualização da Persona Resultante baseada na combinação dos dois arquétipos de maior dosagem.
 *   [x] **Roteamento Inteligente (Router Guard):**
-    *   Configuração condicional de acesso na autenticação:
-        *   *Primeiro Acesso / Novo Usuário:* Roteia para o Onboarding (Vídeo Explicativo).
-        *   *Usuário Recorrente Free:* Pula onboarding e vai direto para o **KS Studio** (`activeView === "storyboard"`).
-        *   *Usuário Recorrente Premium:* Pula onboarding e vai direto para o **Construtor de Prompts** (`activeView === "servicos_escolha"`).
+    *   Configuração condicional de acesso na autenticação por nível de conta e acessos (`acesso`):
+        *   *Premium, Primeiro Acesso (`acesso === 1`):* Roteia obrigatoriamente para a Tela 1 (Onboarding / Vídeo + Sliders).
+        *   *Premium, Recorrente (`acesso > 1`):* Pula o onboarding e vai direto ao Construtor de Prompts (Tela 2).
+        *   *Usuário Free:* Pula onboarding e vai direto ao KS Studio (Tela 3) para storyboard e simulação manual de feed, com acesso à Tela 1 permanentemente trancado.
 
 ### 🟢 FASE 3.5: IDENTIDADE VISUAL & POLIMENTO DA SIDEBAR (Sincronia Estética) — [CONCLUÍDO]
 *   [x] **Fundo Preto Puro Global:** Background configurado em preto sólido `#000000` em toda a interface do aplicativo para destacar o visor central do smartphone.
@@ -69,23 +69,32 @@ gantt
 
 ---
 
-## 🎯 PONTO DE PARADA OPERACIONAL (ONDE PARAMOS HOJE)
-O aplicativo está com toda a **estrutura e simetria técnica de frontend 100% finalizada, polida e livre de bugs**. A sidebar de controle e os passos do Onboarding estão integrados com o roteamento automático guardado. O roteiro de vídeo de onboarding foi ajustado para 32 segundos (4 blocos de 8 segundos) com consistência estética indiana de luxo.
+### 🟢 FASE 3.9: SIMETRIA EM 3 COLUNAS & NOMENCLATURA HIBRIDA (Módulo Onboarding) — [CONCLUÍDO]
+*   [x] **Planejamento Ontológico e Epistemológico (MEVA):** Criação da especificação do Modelo de Espectro Vetorial Arquetípico (MEVA) e dos Títulos Duplos Híbridos (ex: `SÁBIO / CRIADOR`). *(Concluído em 25 de Maio)*
+*   [x] **Reengenharia de Grid em App.jsx:** Implementação do layout de 3 colunas em Desktop (Menu Esquerdo + Celular Central + Painel Direito). *(Concluído)*
+*   [x] **Limpeza Completa do Smartphone Central:** Mover todos os botões de ação e textos informativos para a nova barra lateral direita, mantendo o visor central puramente focado em vídeo/sliders. *(Concluído)*
+*   [x] **Implementação do Diagnóstico Detalhado:** Renderização da Doutrina Híbrida e Modulação de Subtons baseada nas menores calibrações. *(Concluído)*
+*   [x] **Botão "Elaborar Persona":** Substituição final do botão "Gerar Persona". *(Concluído)*
+*   [x] **Integração da Trilha Sonora dos Arquétipos:** Carregamento automático do arquivo `Trilha_Arquetipos.mp3` na entrada de Tela 1 - Elaborar Persona com mute/unmute e slider de volume visível o tempo todo na base da Coluna 3. *(Concluído)*
+*   [x] **Interface Letreiro Marquee e Atmosfera Respirante:** Implementação de letreiro dinâmico em loop horizontal *"Os 12 Arquétipos de Jung"* com tipografia caligráfica indiana *Yatra One* e fundo respirante de auras intensas em verde e lilás sob aceleração de hardware por CSS. *(Concluído)*
+
+### 🔵 FASE 4.0: RESPONSIVIDADE MOBILE NATIVA (Fórmula da Gaveta) — [PLANEJADO]
+*   [ ] **Hook isMobile Viewport:** Detecção em tempo real do dispositivo do usuário.
+*   [ ] **Destruição do Smartphone Virtual no Mobile:** Eliminação das bordas falsas para dar espaço à tela cheia do dispositivo real do usuário.
+*   [ ] **Sliders Táteis Ergonômicos:** Ampliação de sliders para preenchimento de tela no mobile real.
+*   [ ] **Drawer / Bottom Sheet:** Gaveta de visualização para o relatório expandido do diagnóstico.
 
 ---
 
-## 🚀 PLANO DE TRABALHO PARA AMANHÃ (TERÇA-FEIRA — DIA DA DEMO)
+## 🎯 PONTO DE PARADA OPERACIONAL (ONDE PARAMOS HOJE)
+O planejamento conceitual e ontológico do Modelo MEVA e da nomenclatura arquetípica híbrida foi **100% acordado, homologado e documentado** nos arquivos mestre de viés. A reengenharia visual de 3 colunas desktop está pronta para ser executada fisicamente em `frontend/src/App.jsx`.
 
-### 🎙️ 1. Geração das Mídias no Estúdio (Sua parte):
-*   [ ] **Voz da Guia:** Gerar a voz feminina jovem Neural2 em português via console Google Cloud TTS usando os 4 textos de 8 segundos.
-*   [ ] **Trilha no Pro Tools:** Mixar a voz gerada com sua biblioteca/samples de **Tabla e Cítara** em loop contínuo de 40 segundos.
-*   [ ] **Geração dos 4 Vídeos:** Enviar os áudios e prompts em inglês para o gerador de vídeo com Lip-Sync para obter os clipes da modelo indiana falando em perfeita sincronia.
+---
 
-### 💻 2. Integração Técnica no Código (Nossa parte):
-*   [ ] **Substituição dos Vídeos Finais:** Substituir o mockup de vídeo estático pelos clipes MP4 gerados com áudio no visor do smartphone.
-*   [ ] **Adição do Ícone de Som/Mute:** Programar o ícone de alto-falante interativo com slider de volume e toggle de mute na tela de Onboarding.
-*   [ ] **Manutenção de Trilha Sonora Contínua:** Configurar o loop contínuo do áudio tocando suavemente em segundo plano durante a fase de ajuste fino dos 12 sliders da Matriz.
-*   [ ] **Build de Produção e Deploy:** Rodar o comando final de compilação e deploy na VPS (`bash ./deploy.sh`) para atualizar a demonstração oficial na web para a reunião!
+## 🚀 PLANO DE TRABALHO IMEDIATO (CÓDIGO & INTEGRAÇÃO)
+*   [ ] **Execução de Layout em App.jsx:** Implementar a lógica de 3 colunas e a individualidade de viewports no código React.
+*   [ ] **Substituição de Mídias:** Integração do player e controles de som.
+*   [ ] **Build de Produção e Deploy:** Rodar o comando final na VPS Contabo.
 
 ---
 *Lincoln (Orquestrador Geral) & Armando — Maio de 2026.*
