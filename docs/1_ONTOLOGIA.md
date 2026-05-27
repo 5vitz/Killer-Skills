@@ -123,5 +123,20 @@ As 12 personas da **Categoria Profissional** focam em conversão de leads, autor
 *   **Alavancagem de Tempo:** O esforço operacional cai de **54 horas** para apenas **3,5 horas mensais** de revisão no visor central, elevando o valor da hora de Ingrid para **R$ 3.421,37**.
 
 ---
+
+## 📱 CLASSE E: NOMENCLATURA DO PLAYER COCKPIT (TELAS & FLUXOS)
+
+Para alinhar com precisão cirúrgica a comunicação criativa e técnica dentro da Mesa Redonda, fica estabelecida a nomenclatura oficial das telas que compõem o simulador de smartphone (Player) do Killer Skills:
+
+### E.1. A Jornada de Acesso (Login)
+*   **🔒 Tela 0:** Login Inicial — Etapa do E-mail (smartphone com glows neon azul/dourado e botão ENTRAR).
+*   **🔑 Tela 0A:** Login do Google — Etapa de Senha (visor simétrico com e-mail de somente leitura, input de senha, botão VOLTAR/ENTRAR e esferas ambientais azul/dourada).
+
+### E.2. A Jornada de Iniciação e Calibração (Onboarding)
+*   **🎥 Tela 1A (Letreiro 1):** Apresentação das Regras / Iniciação AI. Exibe o Player de Vídeo explicativo e o letreiro horizontal *"Os 12 Arquétipos de Jung"*.
+*   **✨ Tela 1B (Letreiro 2):** Matriz de Síntese / Identificação de Perfis. Exibe a tela com a imagem conceitual das mãos de IA e o letreiro horizontal *"Com quais Arquétipos você se identifica?"*.
+*   **🎛️ Tela 1C (Dosador):** Calibração Vetorial Fina. Exibe a tela interativa com os 12 sliders arquetípicos para o ajuste percentual de dosagem do Modelo MEVA.
+
+---
 *Documento Ontológico Modular homologado para orientar os algoritmos de geração de pautas.*  
 *Genera & Lincoln — Maio de 2026.*

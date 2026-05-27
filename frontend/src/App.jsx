@@ -135,6 +135,11 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+
+  // Google Morph Login Sequence States
+  const [loginStage, setLoginStage] = useState("email"); // "email" ou "google"
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   
   // Router Guard de Roteamento Dinâmico
   const [hasPersonaDefined, setHasPersonaDefined] = useState(false);
@@ -224,23 +229,10 @@ export default function App() {
     setIsLoggedIn(true);
     setIsAdminMode(email === "artz.genera@gmail.com" || email === "sinkando@gmail.com");
 
-    // Simulação do Router Guard de Roteamento Dinâmico (Maio de 2026):
-    // Se for artz.genera@gmail.com, já possui persona e plano Premium -> Vai direto para Construtor de Prompt
-    if (email === "artz.genera@gmail.com") {
-      setHasPersonaDefined(true);
-      setActiveView("servicos_escolha");
-    } 
-    // Se for scalla_records@gmail.com, já possui persona e plano Free -> Vai direto para KS Studio
-    else if (email === "scalla_records@gmail.com") {
-      setHasPersonaDefined(true);
-      setActiveView("storyboard");
-    } 
-    // Outros e novos logins -> Primeiro acesso, entra no vídeo explicativo do Onboarding
-    else {
-      setHasPersonaDefined(false);
-      setOnboardingStep("video");
-      setActiveView("servicos");
-    }
+    // Todos os acessos passam pelo Onboarding Perfeito de 5 telas (Login 1, Login 2, Vídeo, Contemplação, Sliders)
+    setHasPersonaDefined(false);
+    setOnboardingStep("video");
+    setActiveView("servicos");
   };
 
   const handleLogout = () => {
@@ -248,6 +240,8 @@ export default function App() {
     setUserEmail("");
     setIsAdminMode(false);
     setActiveView("storyboard");
+    setLoginStage("email");
+    setLoginPassword("");
   };
 
   const runAiAnalysis = async () => {
@@ -357,7 +351,7 @@ export default function App() {
   // 1. TELA DE LOGIN (SMARTPHONE DE GLOWS AZUL/DOURADO)
   if (!isLoggedIn) {
     return (
-      <div className="relative w-screen h-screen flex justify-center items-center bg-black overflow-hidden select-none">
+      <div className="relative w-screen h-screen flex justify-center items-center bg-black overflow-hidden select-none animate-fade-in">
         {/* Breathing Lilac & Emerald Sacred Background */}
         <div className="smoke-bg-container">
           <div className="smoke-cloud-1" />
@@ -367,8 +361,8 @@ export default function App() {
 
         {/* Smartphone Container */}
         <div 
-          className="relative w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl"
-          style={{ borderColor: "#1E60FF" }}
+          className="relative w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
+          style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}
         >
           {/* Ilha Dinâmica */}
           <div className="absolute w-[110px] h-6 bg-black rounded-2xl top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
@@ -376,26 +370,126 @@ export default function App() {
           </div>
 
           {/* Visor Interno */}
-          <div className="w-full h-full bg-[#050505] rounded-[35px] border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10">
-            {/* Logo Metálica */}
-            <div className="text-3xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-white to-brand-blue mb-2">
-              KILLER SKILLS
-            </div>
-            <div className="text-[9px] font-bold tracking-widest text-[#1E60FF] uppercase mb-10">
-              Direção de Arte AI
-            </div>
+          <div className="w-full h-full bg-[#050505] rounded-[35px] border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10 text-white relative">
+            {loginStage === "email" ? (
+              /* ETAPA 1: DIGITAR E-MAIL DE ACESSO */
+              <div className="w-full flex flex-col items-center justify-center animate-fade-in">
+                {/* Logo Metálica */}
+                <div className="text-3xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-white to-brand-blue mb-2">
+                  KILLER SKILLS
+                </div>
+                <div className="text-[9px] font-bold tracking-widest text-[#1E60FF] uppercase mb-10">
+                  Direção de Arte AI
+                </div>
 
-            <div className="text-[11px] text-white/30 font-bold uppercase tracking-wider mb-6">
-              CONECTAR COM KS STUDIO
-            </div>
+                <div className="text-[11px] text-white/30 font-bold uppercase tracking-wider mb-6">
+                  CONECTAR COM KS STUDIO
+                </div>
 
-            {/* Login com Google (Apenas Entrar) */}
-            <button 
-              onClick={() => triggerGoogleAuthSequence("scalla_records@gmail.com")}
-              className="w-full h-12 bg-brand-blue hover:bg-brand-blue/90 hover:scale-105 active:scale-95 duration-200 text-white rounded-xl font-bold text-xs tracking-wider flex justify-center items-center gap-2 mb-10 shadow-lg"
-            >
-              <Send className="w-4 h-4" /> ENTRAR
-            </button>
+                {/* Entrada de Email */}
+                <div className="w-full flex flex-col gap-2 mb-6">
+                  <label className="text-[8px] font-black tracking-wider text-white/40 uppercase text-left">Escolha ou Digite seu E-mail</label>
+                  <input 
+                    type="email" 
+                    value={enteredEmail}
+                    onChange={(e) => setEnteredEmail(e.target.value)}
+                    placeholder="nome@exemplo.com"
+                    className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-xl px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
+                  />
+                  {/* Atalhos rápidos para facilitar o teste no browser */}
+                  <div className="flex flex-wrap gap-1.5 mt-2 justify-center">
+                    {['sinkando@gmail.com', 'artz.genera@gmail.com', 'scalla_records@gmail.com'].map(email => (
+                      <button 
+                        key={email}
+                        onClick={() => setEnteredEmail(email)}
+                        className="text-[8.5px] px-2.5 py-1 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full text-white/60 hover:text-white transition-all duration-150 cursor-pointer"
+                      >
+                        {email.split('@')[0]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Botão de Avanço */}
+                <button 
+                  onClick={() => {
+                    if (enteredEmail.trim() === "" || !enteredEmail.includes("@")) {
+                      alert("Por favor, insira ou selecione um e-mail válido!");
+                      return;
+                    }
+                    setLoginStage("google");
+                  }}
+                  className="w-full h-12 bg-brand-blue hover:bg-brand-blue/90 hover:scale-105 active:scale-95 duration-200 text-white rounded-xl font-bold text-xs tracking-wider flex justify-center items-center gap-2 mb-6 shadow-lg cursor-pointer"
+                >
+                  AVANÇAR <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              /* ETAPA 2: GOOGLE SIGN-IN MORPH (A SUA TELA0A SUPREMA) */
+              <div className="w-full h-full flex flex-col items-center justify-center animate-fade-in relative z-10">
+                {/* Esferas de Luz Ambiente Reativas exclusivas da Tela0A */}
+                <div className="absolute w-[160px] h-[160px] bg-[#4285F4]/15 rounded-full blur-[40px] -left-[10%] -top-[10%] pointer-events-none z-0 animate-pulse" />
+                <div className="absolute w-[160px] h-[160px] bg-[#D4AF37]/10 rounded-full blur-[50px] -right-[10%] -bottom-[10%] pointer-events-none z-0 animate-pulse" style={{ animationDuration: '4s' }} />
+
+                <div className="w-full flex flex-col items-center justify-center z-10">
+                  {/* Google Logo SVG (Redimensionada e Premium) */}
+                  <svg className="w-11 h-11 mb-2 mt-4 hover-scale duration-300 select-none cursor-pointer" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                  </svg>
+
+                  <h3 className="text-lg font-normal text-white tracking-tight mt-1 mb-0.5">Fazer login</h3>
+                  <p className="text-[10px] text-white/50 tracking-wider mb-8">Use sua Conta do Google</p>
+
+                  {/* Card de E-mail (Exatamente com o mesmo padrão visual de input) */}
+                  <div className="w-full flex flex-col gap-1.5 text-left mb-4">
+                    <span className="text-[8px] font-black text-white/35 uppercase tracking-widest pl-1">E-mail</span>
+                    <div className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-xl px-4 text-xs text-white/70 flex items-center select-none cursor-not-allowed">
+                      {enteredEmail}
+                    </div>
+                  </div>
+
+                  {/* Entrada de Senha (Symmetric styling) */}
+                  <div className="w-full flex flex-col gap-1.5 text-left mb-6">
+                    <span className="text-[8px] font-black text-white/35 uppercase tracking-widest pl-1">Senha</span>
+                    <input 
+                      type="password"
+                      value={loginPassword}
+                      onChange={(e) => setLoginPassword(e.target.value)}
+                      placeholder="Digite sua Senha"
+                      className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-xl px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
+                    />
+                  </div>
+
+                  {/* Botões de Ação */}
+                  <div className="w-full flex gap-2 mb-6">
+                    <button 
+                      onClick={() => {
+                        setLoginStage("email");
+                        setLoginPassword("");
+                      }}
+                      className="flex-1 h-11 bg-white/5 hover:bg-white/10 border border-white/5 text-white rounded-xl font-bold text-xs tracking-wider flex justify-center items-center gap-1 cursor-pointer duration-150"
+                    >
+                      VOLTAR
+                    </button>
+                    <button 
+                      onClick={() => {
+                        if (loginPassword.trim() === "") {
+                          alert("Por favor, digite sua senha para entrar!");
+                          return;
+                        }
+                        triggerGoogleAuthSequence(enteredEmail);
+                      }}
+                      className="flex-[2] h-11 bg-brand-blue hover:bg-brand-blue/90 active:scale-95 text-white rounded-xl font-bold text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg cursor-pointer duration-150"
+                    >
+                      ENTRAR
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="text-[9px] font-bold text-white/10 tracking-widest uppercase">
               KS STUDIO v4.0
@@ -465,14 +559,10 @@ export default function App() {
             </button>
 
             <button 
-              onClick={() => setActiveView("servicos_escolha")}
-              className={`w-full h-11 px-4 rounded-xl text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-                activeView === "servicos_escolha" 
-                  ? "bg-brand-blue/15 border border-brand-blue/30 text-white" 
-                  : "text-white/60 hover:bg-white/5 hover:text-white"
-              }`}
+              disabled
+              className="w-full h-11 px-4 rounded-xl text-left text-xs font-semibold flex items-center gap-3 duration-200 text-white/20 border border-dashed border-white/[0.05] cursor-not-allowed select-none"
             >
-              <Cpu className="w-4 h-4" /> 2 - SERVIÇOS
+              <Cpu className="w-4 h-4" /> 2 - EM BREVE (🔒)
             </button>
 
             <button 
@@ -540,50 +630,10 @@ export default function App() {
           return (
             <div className="relative w-full h-full flex justify-center items-center">
 
-              {/* LETREIRO MARQUEE TICKER (DINÂMICO E COMPARTILHADO) */}
-              <div className="absolute top-[3%] left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[3px] py-2 border-y border-white/[0.06] shadow-2xl z-20">
-                <div className="inline-block whitespace-nowrap animate-marquee">
-                  <span className="text-[17px] font-poppins-light text-gold-dress leading-relaxed px-4 drop-shadow-[0_2px_5px_rgba(0,0,0,0.85)]">
-                    {onboardingStep === "video" ? (
-                      <>
-                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                      </>
-                    ) : (
-                      <>
-                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                      </>
-                    )}
-                  </span>
-                  <span className="text-[17px] font-poppins-light text-gold-dress leading-relaxed px-4 drop-shadow-[0_2px_5px_rgba(0,0,0,0.85)]">
-                    {onboardingStep === "video" ? (
-                      <>
-                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                      </>
-                    ) : (
-                      <>
-                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                        ♥ O quanto você se identifica com esses Arquétipos? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                      </>
-                    )}
-                  </span>
-                </div>
-              </div>
-
               {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
               <div 
                 className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
-                style={{ borderColor: onboardingStep === "video" ? "#1E60FF" : "#D4AF37" }}
+                style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}
               >
                 {/* Ilha Dinâmica */}
                 <div className="absolute w-[110px] h-6 bg-black rounded-2xl top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
@@ -591,77 +641,87 @@ export default function App() {
                 </div>
 
                 {/* Visor Interno */}
-                <div className="w-full h-full bg-black rounded-[35px] border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10 select-none text-white">
+                {/* Visor Interno (Fundo preto removido em Tela1A e Tela1B para renderização direta no Player) */}
+                <div 
+                  className={`w-full h-full flex flex-col justify-between transition-all duration-300 relative overflow-hidden z-10 select-none text-white ${
+                    (onboardingStep === "video" || onboardingStep === "identificacao") 
+                      ? "bg-transparent border-0 p-0" 
+                      : "bg-black rounded-[35px] border border-white/5 p-4"
+                  }`}
+                >
                   {onboardingStep === "video" ? (
-                    /* PASSO 1: VÍDEO EXPLICATIVO DA GUIA DE IA */
-                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in">
-                      {/* Header da Guia */}
-                      <div className="flex flex-col gap-1 border-b border-white/10 pb-3 text-left">
-                        <div className="text-[8px] font-black text-brand-blue uppercase tracking-widest">Iniciação AI</div>
-                        <h2 className="text-base font-black text-white leading-tight">Apresentação das Regras</h2>
-                      </div>
-
-                      {/* Mockup de Vídeo Player da Guia de IA */}
-                      <div className="relative w-full h-[180px] rounded-2xl overflow-hidden border border-white/10 group cursor-pointer my-3 bg-black">
-                        {/* Imagem de Fundo da Guia AI (Uma modelo elegante em tons futuristas de azul/dourado) */}
+                    /* TELA 1A - LETREIRO 1 (OS ARQUÉTIPOS DE JUNG) */
+                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
+                      
+                      {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
+                      <div className="relative w-full flex-1 rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
-                          src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500" 
-                          className="w-full h-full object-cover brightness-[0.5] group-hover:scale-105 duration-700" 
+                          src="/images/Gemini_Generated_Image_6tumtq6tumtq6tum.png" 
+                          className="w-full h-full object-cover brightness-[0.6]" 
                           alt="AI Guide"
                         />
-                        {/* overlay de luz */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-                        
-                        {/* Pulse Play Button */}
-                        <div className="absolute inset-0 flex justify-center items-center">
-                          <div className="w-12 h-12 rounded-full bg-brand-blue/90 text-white flex justify-center items-center shadow-lg group-hover:scale-110 active:scale-95 duration-200 animate-pulse">
-                            <Play className="w-5 h-5 ml-1 fill-white" />
-                          </div>
-                        </div>
-
-                        {/* Player HUD Overlay */}
-                        <div className="absolute bottom-3 inset-x-3 flex flex-col gap-1.5 pointer-events-none">
-                          <div className="flex justify-between items-center text-[8px] font-bold text-white/50">
-                            <span>Mesa Redonda AI</span>
-                            <span>01:12 / 01:12</span>
-                          </div>
-                          {/* Progress Bar Mock */}
-                          <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
-                            <div className="h-full bg-brand-blue w-full rounded-full" />
+                        {/* Letreiro 1 Overlay Inside Card (Top Position) */}
+                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
+                          <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
+                            ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                           </div>
                         </div>
                       </div>
 
-                      {/* Descrição Didática */}
-                      <div className="flex-1 flex flex-col gap-2 text-left mb-3">
-                        <div className="text-[10px] text-white/70 font-semibold leading-relaxed">
-                          Assista à locução da nossa **Guia Virtual de Inteligência Artificial** para aprender a dosar sua Persona.
-                        </div>
-                        <div className="text-[9px] text-[#1E60FF]/80 leading-relaxed font-bold bg-[#1E60FF]/10 border border-[#1E60FF]/20 p-2.5 rounded-xl">
-                          💡 "O tom e a alma do seu Co-Diretor AI serão definidos pela calibração perfeita dos 12 sliders na próxima tela."
+                      {/* Botão de Avanço para a Identificação */}
+                      <button 
+                        onClick={() => setOnboardingStep("identificacao")}
+                        className="w-full h-11 hover:bg-[#1E60FF]/40 active:scale-95 text-white rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto border"
+                        style={{ backgroundColor: "rgba(30, 96, 255, 0.3)", borderColor: "rgba(30, 96, 255, 0.3)" }}
+                      >
+                        AVANÇAR <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : onboardingStep === "identificacao" ? (
+                    /* TELA 1B - LETREIRO 2 (COM QUAIS ARQUÉTIPOS VOCÊ SE IDENTIFICA?) */
+                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
+                      
+                      {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
+                      <div className="relative w-full flex-1 rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
+                        <img 
+                          src="/images/Gemini_Generated_Image_e65dque65dque65d.png" 
+                          className="w-full h-full object-cover brightness-[0.6]" 
+                          alt="Archetype Study"
+                        />
+                        {/* Letreiro 2 Overlay Inside Card (Top Position) */}
+                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
+                          <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
+                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                          </div>
                         </div>
                       </div>
 
                       {/* Botão de Avanço para a Matriz */}
                       <button 
                         onClick={() => setOnboardingStep("matriz")}
-                        className="w-full h-11 bg-brand-blue hover:bg-brand-blue/90 active:scale-95 text-white rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer"
+                        className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
                       >
                         IR PARA A MATRIZ <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   ) : (
-                    /* PASSO 2: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA) */
-                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in">
+                    /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
+                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in relative bg-black rounded-[30px]">
                       {/* Header da Síntese */}
                       <div className="flex flex-col gap-1 border-b border-white/10 pb-3 text-left">
                         <div className="text-[8px] font-black text-brand-gold uppercase tracking-widest flex justify-between items-center">
                           <span>Matriz Arquetípica</span>
                           <button 
-                            onClick={() => setOnboardingStep("video")}
+                            onClick={() => setOnboardingStep("identificacao")}
                             className="text-[7.5px] font-bold text-white/40 hover:text-white/70 tracking-normal border border-white/10 px-2 py-0.5 rounded-full uppercase"
                           >
-                            Ver Vídeo
+                            Voltar
                           </button>
                         </div>
                         <h2 className="text-base font-black text-white leading-tight">Síntese da Sua Persona</h2>
@@ -716,15 +776,9 @@ export default function App() {
                       {/* Botão de Finalização Gerar Persona */}
                       <button 
                         onClick={() => {
-                          // Conclui Onboarding, salva e roteia com base no plano do usuário!
+                          // Conclui Onboarding e envia diretamente ao KS Studio (Tela 3)
                           setHasPersonaDefined(true);
-                          
-                          // Verificação inteligente do plano para rotear:
-                          if (userEmail === "scalla_records@gmail.com") {
-                            setActiveView("storyboard"); // Free vai para o KS Studio
-                          } else {
-                            setActiveView("servicos_escolha"); // Premium vai para Construtor de Prompt
-                          }
+                          setActiveView("storyboard");
                         }}
                         className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg hover:shadow-brand-gold/20 duration-200 cursor-pointer"
                       >
@@ -850,7 +904,7 @@ export default function App() {
 
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}>
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
@@ -885,7 +939,7 @@ export default function App() {
 
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}>
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
