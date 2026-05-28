@@ -361,13 +361,8 @@ export default function App() {
 
         {/* Smartphone Container */}
         <div 
-<<<<<<< HEAD
-          className="relative w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-[8px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
-          style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}
-=======
           className="relative w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
           style={{ borderColor: loginStage === "google" ? "#4285F4" : "#1E60FF" }}
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
         >
           {/* Ilha Dinâmica */}
           <div className="absolute w-[110px] h-6 bg-black rounded-lg top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
@@ -375,11 +370,7 @@ export default function App() {
           </div>
 
           {/* Visor Interno */}
-<<<<<<< HEAD
-          <div className="w-full h-full bg-[#050505] rounded-[6px] border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10 text-white relative">
-=======
           <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10 text-white relative">
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
             {loginStage === "email" ? (
               /* ETAPA 1: DIGITAR E-MAIL DE ACESSO */
               <div className="w-full flex flex-col items-center justify-center animate-fade-in">
@@ -403,11 +394,7 @@ export default function App() {
                     value={enteredEmail}
                     onChange={(e) => setEnteredEmail(e.target.value)}
                     placeholder="nome@exemplo.com"
-<<<<<<< HEAD
-                    className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-xl px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
-=======
                     className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-lg px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
                   />
                   {/* Atalhos rápidos para facilitar o teste no browser */}
                   <div className="flex flex-wrap gap-1.5 mt-2 justify-center">
@@ -432,80 +419,12 @@ export default function App() {
                     }
                     setLoginStage("google");
                   }}
-<<<<<<< HEAD
-                  className="w-full h-12 bg-brand-blue hover:bg-brand-blue/90 hover:scale-105 active:scale-95 duration-200 text-white rounded-xl font-bold text-xs tracking-wider flex justify-center items-center gap-2 mb-6 shadow-lg cursor-pointer"
-=======
                   className="w-full h-12 bg-brand-blue hover:bg-brand-blue/90 hover:scale-105 active:scale-95 duration-200 text-white rounded-lg font-bold text-xs tracking-wider flex justify-center items-center gap-2 mb-6 shadow-lg cursor-pointer"
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
                 >
                   AVANÇAR <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             ) : (
-<<<<<<< HEAD
-              /* ETAPA 2: GOOGLE SIGN-IN MORPH (A SUA TELA0A SUPREMA) */
-              <div className="w-full h-full flex flex-col items-center justify-center animate-fade-in relative z-10">
-                {/* Esferas de Luz Ambiente Reativas exclusivas da Tela0A */}
-                <div className="absolute w-[160px] h-[160px] bg-[#4285F4]/15 rounded-full blur-[40px] -left-[10%] -top-[10%] pointer-events-none z-0 animate-pulse" />
-                <div className="absolute w-[160px] h-[160px] bg-[#D4AF37]/10 rounded-full blur-[50px] -right-[10%] -bottom-[10%] pointer-events-none z-0 animate-pulse" style={{ animationDuration: '4s' }} />
-
-                <div className="w-full flex flex-col items-center justify-center z-10">
-                  {/* Google Logo SVG (Redimensionada e Premium) */}
-                  <svg className="w-11 h-11 mb-2 mt-4 hover-scale duration-300 select-none cursor-pointer" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                  </svg>
-
-                  <h3 className="text-lg font-normal text-white tracking-tight mt-1 mb-0.5">Fazer login</h3>
-                  <p className="text-[10px] text-white/50 tracking-wider mb-8">Use sua Conta do Google</p>
-
-                  {/* Card de E-mail (Exatamente com o mesmo padrão visual de input) */}
-                  <div className="w-full flex flex-col gap-1.5 text-left mb-4">
-                    <span className="text-[8px] font-black text-white/35 uppercase tracking-widest pl-1">E-mail</span>
-                    <div className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-xl px-4 text-xs text-white/70 flex items-center select-none cursor-not-allowed">
-                      {enteredEmail}
-                    </div>
-                  </div>
-
-                  {/* Entrada de Senha (Symmetric styling) */}
-                  <div className="w-full flex flex-col gap-1.5 text-left mb-6">
-                    <span className="text-[8px] font-black text-white/35 uppercase tracking-widest pl-1">Senha</span>
-                    <input 
-                      type="password"
-                      value={loginPassword}
-                      onChange={(e) => setLoginPassword(e.target.value)}
-                      placeholder="Digite sua Senha"
-                      className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-xl px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
-                    />
-                  </div>
-
-                  {/* Botões de Ação */}
-                  <div className="w-full flex gap-2 mb-6">
-                    <button 
-                      onClick={() => {
-                        setLoginStage("email");
-                        setLoginPassword("");
-                      }}
-                      className="flex-1 h-11 bg-white/5 hover:bg-white/10 border border-white/5 text-white rounded-xl font-bold text-xs tracking-wider flex justify-center items-center gap-1 cursor-pointer duration-150"
-                    >
-                      VOLTAR
-                    </button>
-                    <button 
-                      onClick={() => {
-                        if (loginPassword.trim() === "") {
-                          alert("Por favor, digite sua senha para entrar!");
-                          return;
-                        }
-                        triggerGoogleAuthSequence(enteredEmail);
-                      }}
-                      className="flex-[2] h-11 bg-brand-blue hover:bg-brand-blue/90 active:scale-95 text-white rounded-xl font-bold text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg cursor-pointer duration-150"
-                    >
-                      ENTRAR
-                    </button>
-                  </div>
-=======
               /* ETAPA 2: GOOGLE SIGN-IN MORPH */
               <div className="w-full flex flex-col items-center justify-center animate-fade-in">
                 {/* Google Logo SVG */}
@@ -562,7 +481,6 @@ export default function App() {
                   >
                     ENTRAR
                   </button>
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
                 </div>
               </div>
             )}
@@ -636,11 +554,7 @@ export default function App() {
 
             <button 
               disabled
-<<<<<<< HEAD
-              className="w-full h-11 px-4 rounded-xl text-left text-xs font-semibold flex items-center gap-3 duration-200 text-white/20 border border-dashed border-white/[0.05] cursor-not-allowed select-none"
-=======
               className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 text-white/20 border border-dashed border-white/[0.05] cursor-not-allowed select-none"
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
             >
               <Cpu className="w-4 h-4" /> 2 - EM BREVE (🔒)
             </button>
@@ -712,13 +626,8 @@ export default function App() {
 
               {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
               <div 
-<<<<<<< HEAD
-                className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-[8px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
-                style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}
-=======
                 className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
                 style={{ borderColor: onboardingStep === "video" ? "#1E60FF" : "#D4AF37" }}
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
               >
                 {/* Ilha Dinâmica */}
                 <div className="absolute w-[110px] h-6 bg-black rounded-lg top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
@@ -726,29 +635,6 @@ export default function App() {
                 </div>
 
                 {/* Visor Interno */}
-<<<<<<< HEAD
-                {/* Visor Interno (Fundo preto removido em Tela1A e Tela1B para renderização direta no Player) */}
-                <div 
-                  className={`w-full h-full flex flex-col justify-between transition-all duration-300 relative overflow-hidden z-10 select-none text-white ${
-                    (onboardingStep === "video" || onboardingStep === "identificacao") 
-                      ? "bg-transparent border-0 p-0" 
-                      : "bg-black rounded-[6px] border border-white/5 p-4"
-                  }`}
-                >
-                  {onboardingStep === "video" ? (
-                    /* TELA 1A - LETREIRO 1 (OS ARQUÉTIPOS DE JUNG) */
-                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
-                      
-                      {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
-                      <div className="relative w-full flex-1 rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
-                        <img 
-                          src="/images/Gemini_Generated_Image_6tumtq6tumtq6tum.png" 
-                          className="w-full h-full object-cover brightness-[0.6]" 
-                          alt="AI Guide"
-                        />
-                        {/* Letreiro 1 Overlay Inside Card (Top Position) */}
-                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
-=======
                 <div className="w-full h-full bg-black rounded-lg border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10 select-none text-white">
                   {onboardingStep === "video" ? (
                     /* PASSO 1: VÍDEO EXPLICATIVO DA GUIA DE IA */
@@ -769,14 +655,11 @@ export default function App() {
                         />
                         {/* Letreiro 1 Overlay Inside Player (Em cima da Imagem!) */}
                         <div className="absolute top-2 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
                           <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-<<<<<<< HEAD
-=======
                           </div>
                         </div>
 
@@ -799,18 +682,10 @@ export default function App() {
                           {/* Progress Bar Mock */}
                           <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
                             <div className="h-full bg-brand-blue w-full rounded-full" />
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
                           </div>
                         </div>
                       </div>
 
-<<<<<<< HEAD
-                      {/* Botão de Avanço para a Identificação */}
-                      <button 
-                        onClick={() => setOnboardingStep("identificacao")}
-                        className="w-full h-11 hover:bg-[#1E60FF]/40 active:scale-95 text-white rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto border"
-                        style={{ backgroundColor: "rgba(30, 96, 255, 0.3)", borderColor: "rgba(30, 96, 255, 0.3)" }}
-=======
                       {/* Descrição Didática */}
                       <div className="flex-1 flex flex-col gap-2 text-left mb-3">
                         <div className="text-[10px] text-white/70 font-semibold leading-relaxed">
@@ -825,27 +700,11 @@ export default function App() {
                       <button 
                         onClick={() => setOnboardingStep("identificacao")}
                         className="w-full h-11 bg-brand-blue hover:bg-brand-blue/90 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer"
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
                       >
                         AVANÇAR <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   ) : onboardingStep === "identificacao" ? (
-<<<<<<< HEAD
-                    /* TELA 1B - LETREIRO 2 (COM QUAIS ARQUÉTIPOS VOCÊ SE IDENTIFICA?) */
-                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
-                      
-                      {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
-                      <div className="relative w-full flex-1 rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
-                        <img 
-                          src="/images/Gemini_Generated_Image_e65dque65dque65d.png" 
-                          className="w-full h-full object-cover brightness-[0.6]" 
-                          alt="Archetype Study"
-                        />
-                        {/* Letreiro 2 Overlay Inside Card (Top Position) */}
-                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
-                          <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
-=======
                     /* PASSO 2: CONTEMPLAÇÃO ARTÍSTICA DA IMAGEM DO GRID */
                     <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in">
                       {/* Header da Identificação */}
@@ -872,47 +731,24 @@ export default function App() {
                         {/* Letreiro 2 Overlay Inside Identificação (Em cima da imagem!) */}
                         <div className="absolute top-2 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
                           <div className="inline-block whitespace-nowrap animate-marquee text-[9px] font-poppins-light text-gold-dress tracking-wider uppercase">
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                          </div>
-<<<<<<< HEAD
-=======
+                          ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                         </div>
                       </div>
-
-                      {/* Descrição Didática */}
-                      <div className="flex-1 flex flex-col gap-2 text-left mb-3">
-                        <div className="text-[10px] text-white/70 font-semibold leading-relaxed">
-                          Sintonize sua percepção com os 12 padrões universais de comportamento humano retratados na Matriz.
-                        </div>
-                        <div className="text-[9px] text-brand-gold/80 leading-relaxed font-bold bg-brand-gold/15 border border-brand-gold/20 p-2.5 rounded-lg">
-                          ✨ "O equilíbrio perfeito da sua alma e ação será moldado na calibração fina a seguir."
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
-                        </div>
-                      </div>
-
-                      {/* Botão de Avanço para a Matriz */}
-                      <button 
-                        onClick={() => setOnboardingStep("matriz")}
-<<<<<<< HEAD
-                        className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-xl font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
-=======
-                        className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer"
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
-                      >
-                        IR PARA A MATRIZ <ArrowRight className="w-4 h-4" />
-                      </button>
                     </div>
+
+                    <button 
+                      onClick={() => setOnboardingStep("matriz")}
+                      className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer"
+                    >
+                      IR PARA A MATRIZ <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
                   ) : (
                     /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
-<<<<<<< HEAD
-                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in relative bg-black rounded-[30px]">
-=======
                     <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in relative bg-black rounded-lg">
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
                       {/* Header da Síntese */}
                       <div className="flex flex-col gap-1 border-b border-white/10 pb-3 text-left">
                         <div className="text-[8px] font-black text-brand-gold uppercase tracking-widest flex justify-between items-center">
@@ -1104,11 +940,7 @@ export default function App() {
 
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-<<<<<<< HEAD
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[8px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}>
-=======
             <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
->>>>>>> 2848e42 (style: padroniza todas as bordas em 8px (rounded-lg) no onboarding e cockpit)
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
