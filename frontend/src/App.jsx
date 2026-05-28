@@ -361,7 +361,7 @@ export default function App() {
 
         {/* Smartphone Container */}
         <div 
-          className="relative w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
+          className="relative w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-[8px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
           style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}
         >
           {/* Ilha Dinâmica */}
@@ -370,7 +370,7 @@ export default function App() {
           </div>
 
           {/* Visor Interno */}
-          <div className="w-full h-full bg-[#050505] rounded-[35px] border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10 text-white relative">
+          <div className="w-full h-full bg-[#050505] rounded-[6px] border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10 text-white relative">
             {loginStage === "email" ? (
               /* ETAPA 1: DIGITAR E-MAIL DE ACESSO */
               <div className="w-full flex flex-col items-center justify-center animate-fade-in">
@@ -632,7 +632,7 @@ export default function App() {
 
               {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
               <div 
-                className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
+                className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-[8px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
                 style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}
               >
                 {/* Ilha Dinâmica */}
@@ -646,7 +646,7 @@ export default function App() {
                   className={`w-full h-full flex flex-col justify-between transition-all duration-300 relative overflow-hidden z-10 select-none text-white ${
                     (onboardingStep === "video" || onboardingStep === "identificacao") 
                       ? "bg-transparent border-0 p-0" 
-                      : "bg-black rounded-[35px] border border-white/5 p-4"
+                      : "bg-black rounded-[6px] border border-white/5 p-4"
                   }`}
                 >
                   {onboardingStep === "video" ? (
@@ -904,7 +904,7 @@ export default function App() {
 
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[8px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}>
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
@@ -926,7 +926,7 @@ export default function App() {
               </div>
 
               {/* Visor Interno de Reels */}
-              <div className="w-full h-full bg-[#050505] rounded-[35px] border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10">
+              <div className="w-full h-full bg-[#050505] rounded-[6px] border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10">
                 {/* Esvaziado para reestruturação de layout */}
               </div>
             </div>
@@ -939,7 +939,7 @@ export default function App() {
 
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[45px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-[8px] p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}>
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
@@ -961,7 +961,7 @@ export default function App() {
               </div>
 
               {/* Visor Interno de Reels - Simulador de Feed Realista */}
-              <div className="w-full h-full bg-[#050505] rounded-[35px] border border-white/5 flex flex-col justify-between p-0 relative overflow-hidden z-10 select-none text-white">
+              <div className="w-full h-full bg-[#050505] rounded-[6px] border border-white/5 flex flex-col justify-between p-0 relative overflow-hidden z-10 select-none text-white">
                 {/* Active Frame Image Preview */}
                 <div className="absolute inset-0 w-full h-full bg-neutral-900 flex justify-center items-center">
                   {storyboardData[activeSlot !== null ? activeSlot : 0] ? (
