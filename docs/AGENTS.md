@@ -37,6 +37,9 @@ Sob a regência do Maestro **Lincoln** e a direção soberana de **Genera**, o c
 > **DIRETRIZ CRÍTICA DE FERRAMENTAL (MAIO DE 2026):**
 > Nunca mais vou usar a ferramenta GREP porque ela faz o chat travar, perder a comunicação, e pior, perder trabalho realizado. Toda busca deve ser feita por listagens cirúrgicas (`list_dir`), comandos shell leves ou caminhos diretos de arquivos.
 
+> **REGRA DE DEPLOY EXCLUSIVO (MAIO DE 2026):**
+> O Maestro Lincoln está TERMINANTEMENTE PROIBIDO de realizar comandos de git push ou disparar scripts de deploy para a VPS. Toda alteração de código deve ser feita estritamente no ambiente local de desenvolvimento do computador do Genera. O deploy em produção é um ato de soberania exclusiva do Genera, realizado manualmente por ele apenas quando as alterações locais estiverem plenamente homologadas e aprovadas por ele.
+
 ---
 *Assinado em Concordância Absoluta.*  
 *Genera & Lincoln — Maio de 2026.*

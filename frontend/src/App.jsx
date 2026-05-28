@@ -682,7 +682,7 @@ export default function App() {
                       <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
                           src="/images/Gemini_Generated_Image_e65dque65dque65d.png" 
-                          className="w-full h-full object-cover brightness-[0.6]" 
+                          className="w-full h-full object-cover brightness-[0.6] translate-y-[30px]" 
                           alt="Archetype Study"
                         />
                         {/* Letreiro 2 Overlay Inside Card (Top Position) */}
@@ -699,9 +699,10 @@ export default function App() {
                       {/* Botão de Avanço para a Matriz */}
                       <button 
                         onClick={() => setOnboardingStep("matriz")}
-                        className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
+                        className="w-full h-11 hover:bg-[#1E60FF]/40 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto border"
+                        style={{ backgroundColor: "rgba(30, 96, 255, 0.3)", borderColor: "rgba(30, 96, 255, 0.3)" }}
                       >
-                        IR PARA A MATRIZ <ArrowRight className="w-4 h-4" />
+                        DOSAR <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   ) : (
