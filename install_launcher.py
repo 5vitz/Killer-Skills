@@ -9,7 +9,7 @@ import stat
 def install():
     print("🖥️ Inicializando instalação do lançador do Killer Skills...")
     
-    root_dir = "/home/artz/Documentos/Antigravity/Killer-Skills"
+    root_dir = "/home/artz/Killer-Skills"
     run_sh = os.path.join(root_dir, "run.sh")
     logo_png = os.path.join(root_dir, "Imagens", "Logo_Final.png")
     
