@@ -361,8 +361,8 @@ export default function App() {
 
         {/* Smartphone Container */}
         <div 
-          className="relative w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
-          style={{ borderColor: loginStage === "google" ? "#4285F4" : "#1E60FF" }}
+          className="relative w-[340px] h-[550px] bg-[#0A0A0C] border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
+          style={{ borderColor: "#1E60FF" }}
         >
           {/* Ilha Dinâmica */}
           <div className="absolute w-[110px] h-6 bg-black rounded-lg top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
@@ -626,8 +626,8 @@ export default function App() {
 
               {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
               <div 
-                className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border-2 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
-                style={{ borderColor: onboardingStep === "video" ? "#1E60FF" : "#D4AF37" }}
+                className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
+                style={{ borderColor: "#1E60FF" }}
               >
                 {/* Ilha Dinâmica */}
                 <div className="absolute w-[110px] h-6 bg-black rounded-lg top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
@@ -898,7 +898,7 @@ export default function App() {
 
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
@@ -933,7 +933,7 @@ export default function App() {
 
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border-2 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "rgba(30, 96, 255, 0.3)" }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
