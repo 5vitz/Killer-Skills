@@ -87,14 +87,20 @@ gantt
 ---
 
 ## 🎯 PONTO DE PARADA OPERACIONAL (ONDE PARAMOS HOJE)
-O planejamento conceitual e ontológico do Modelo MEVA e da nomenclatura arquetípica híbrida foi **100% acordado, homologado e documentado** nos arquivos mestre de viés. A reengenharia visual de 3 colunas desktop está pronta para ser executada fisicamente em `frontend/src/App.jsx`.
+*   **Restabelecimento da Tela 1A & 1B:** A versão original visual de onboarding (imagens em tela cheia com letreiros místico-fluidos superiores e zero players duplicados) foi 100% restabelecida, mantendo a experiência estética altamente imersiva original.
+*   **Padronização Visual do Player:** Todas as 4 instâncias do celular mockup central (Login, Onboarding, Seleção de Serviços e Storyboard) foram unificadas esteticamente com espessura de borda de **1px (`border`)** e cor fixa no azul-elétrico da marca (**`#1E60FF`**), de acordo com as preferências de design.
+*   **Correção e Reinstalação do Deploy Automático:** Identificado o conflito de dois diretórios de repositório paralelos. Os scripts `run.sh` e `install_launcher.py` foram apontados com sucesso para a pasta ativa `/home/artz/Killer-Skills`. O lançador do Desktop foi recriado e está totalmente funcional pelo clique do ícone.
+*   **Zero Conflitos & Sincronização:** Todas as alterações compilam localmente sem avisos ou erros e foram commitadas e enviadas com sucesso ao GitHub principal.
 
 ---
 
 ## 🚀 PLANO DE TRABALHO IMEDIATO (CÓDIGO & INTEGRAÇÃO)
-*   [ ] **Execução de Layout em App.jsx:** Implementar a lógica de 3 colunas e a individualidade de viewports no código React.
-*   [ ] **Substituição de Mídias:** Integração do player e controles de som.
-*   [ ] **Build de Produção e Deploy:** Rodar o comando final na VPS Contabo.
+*   [ ] **Módulo de Responsividade Mobile Nativa (Fase 4.0):**
+    *   Detecção de viewport móvel (`isMobile`).
+    *   Ocultação das bordas físicas falsas do mockup no mobile para exibição em tela cheia nativa.
+    *   Implementação de *Drawer / Bottom Sheet* tátil e ergonômico para a modulação de subtons e doutrina arquetípica na lateral direita.
+*   [ ] **Aperfeiçoamento do Construtor de Prompts (Tela 2):** Revisão das chamadas de API e conexões com o backend FastAPI.
+*   [ ] **Otimizações do Módulo Reels (Tela 3):** Validação dos storyboards gerados e comportamento reativo da grid.
 
 ---
 *Lincoln (Orquestrador Geral) & Armando — Maio de 2026.*
