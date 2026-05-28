@@ -364,11 +364,6 @@ export default function App() {
           className="relative w-[340px] h-[550px] bg-[#0A0A0C] border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
           style={{ borderColor: "#1E60FF" }}
         >
-          {/* Ilha Dinâmica */}
-          <div className="absolute w-[110px] h-6 bg-black rounded-lg top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
-            <div className="w-2.5 h-2.5 bg-[#030303] rounded-full border border-white/5" />
-          </div>
-
           {/* Visor Interno */}
           <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10 text-white relative">
             {loginStage === "email" ? (
@@ -629,11 +624,6 @@ export default function App() {
                 className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
                 style={{ borderColor: "#1E60FF" }}
               >
-                {/* Ilha Dinâmica */}
-                <div className="absolute w-[110px] h-6 bg-black rounded-lg top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
-                  <div className="w-2.5 h-2.5 bg-[#030303] rounded-full border border-white/5" />
-                </div>
-
                 {/* Visor Interno */}
                 {/* Visor Interno (Fundo preto removido em Tela1A e Tela1B para renderização direta no Player) */}
                 <div 
@@ -655,7 +645,7 @@ export default function App() {
                           alt="AI Guide"
                         />
                         {/* Letreiro 1 Overlay Inside Card (Top Position) */}
-                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
+                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/80 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
                           <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
@@ -686,7 +676,7 @@ export default function App() {
                           alt="Archetype Study"
                         />
                         {/* Letreiro 2 Overlay Inside Card (Top Position) */}
-                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
+                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/80 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
                           <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
@@ -914,11 +904,6 @@ export default function App() {
               >
                 <ChevronDown className="w-4.5 h-4.5 text-white/60" />
               </button>
-              
-              {/* Ilha Dinâmica */}
-              <div className="absolute w-[110px] h-6 bg-black rounded-lg top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
-                <div className="w-2.5 h-2.5 bg-[#030303] rounded-full border border-white/5" />
-              </div>
 
               {/* Visor Interno de Reels */}
               <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10">
@@ -949,11 +934,6 @@ export default function App() {
               >
                 <ChevronDown className="w-4.5 h-4.5 text-white/60" />
               </button>
-              
-              {/* Ilha Dinâmica */}
-              <div className="absolute w-[110px] h-6 bg-black rounded-lg top-1.5 left-1/2 -translate-x-1/2 z-20 flex justify-center items-center">
-                <div className="w-2.5 h-2.5 bg-[#030303] rounded-full border border-white/5" />
-              </div>
 
               {/* Visor Interno de Reels - Simulador de Feed Realista */}
               <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-between p-0 relative overflow-hidden z-10 select-none text-white">
