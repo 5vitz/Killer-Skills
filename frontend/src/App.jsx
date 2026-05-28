@@ -635,26 +635,27 @@ export default function App() {
                 </div>
 
                 {/* Visor Interno */}
-                <div className="w-full h-full bg-black rounded-lg border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10 select-none text-white">
+                {/* Visor Interno (Fundo preto removido em Tela1A e Tela1B para renderização direta no Player) */}
+                <div 
+                  className={`w-full h-full flex flex-col justify-between transition-all duration-300 relative overflow-hidden z-10 select-none text-white ${
+                    (onboardingStep === "video" || onboardingStep === "identificacao") 
+                      ? "bg-transparent border-0 p-0" 
+                      : "bg-black rounded-[6px] border border-white/5 p-4"
+                  }`}
+                >
                   {onboardingStep === "video" ? (
-                    /* PASSO 1: VÍDEO EXPLICATIVO DA GUIA DE IA */
-                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in">
-                      {/* Header da Guia */}
-                      <div className="flex flex-col gap-1 border-b border-white/10 pb-3 text-left">
-                        <div className="text-[8px] font-black text-brand-blue uppercase tracking-widest">Iniciação AI</div>
-                        <h2 className="text-base font-black text-white leading-tight">Apresentação das Regras</h2>
-                      </div>
-
-                      {/* Mockup de Vídeo Player da Guia de IA */}
-                      <div className="relative w-full h-[180px] rounded-lg overflow-hidden border border-white/10 group cursor-pointer my-3 bg-black">
-                        {/* Imagem de Fundo da Guia AI (Sua imagem do Gemini onboarding1) */}
+                    /* TELA 1A - LETREIRO 1 (OS ARQUÉTIPOS DE JUNG) */
+                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
+                      
+                      {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
+                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
                           src="/images/Gemini_Generated_Image_6tumtq6tumtq6tum.png" 
-                          className="w-full h-full object-cover brightness-[0.5] group-hover:scale-105 duration-700" 
+                          className="w-full h-full object-cover brightness-[0.6]" 
                           alt="AI Guide"
                         />
-                        {/* Letreiro 1 Overlay Inside Player (Em cima da Imagem!) */}
-                        <div className="absolute top-2 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
+                        {/* Letreiro 1 Overlay Inside Card (Top Position) */}
+                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
                           <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
@@ -662,93 +663,50 @@ export default function App() {
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                           </div>
                         </div>
-
-                        {/* overlay de luz */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-                        
-                        {/* Pulse Play Button */}
-                        <div className="absolute inset-0 flex justify-center items-center">
-                          <div className="w-12 h-12 rounded-full bg-brand-blue/90 text-white flex justify-center items-center shadow-lg group-hover:scale-110 active:scale-95 duration-200 animate-pulse">
-                            <Play className="w-5 h-5 ml-1 fill-white" />
-                          </div>
-                        </div>
-
-                        {/* Player HUD Overlay */}
-                        <div className="absolute bottom-3 inset-x-3 flex flex-col gap-1.5 pointer-events-none">
-                          <div className="flex justify-between items-center text-[8px] font-bold text-white/50">
-                            <span>Mesa Redonda AI</span>
-                            <span>01:12 / 01:12</span>
-                          </div>
-                          {/* Progress Bar Mock */}
-                          <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
-                            <div className="h-full bg-brand-blue w-full rounded-full" />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Descrição Didática */}
-                      <div className="flex-1 flex flex-col gap-2 text-left mb-3">
-                        <div className="text-[10px] text-white/70 font-semibold leading-relaxed">
-                          Assista à locução da nossa **Guia Virtual de Inteligência Artificial** para aprender a dosar sua Persona.
-                        </div>
-                        <div className="text-[9px] text-[#1E60FF]/80 leading-relaxed font-bold bg-[#1E60FF]/10 border border-[#1E60FF]/20 p-2.5 rounded-lg">
-                          💡 "O tom e a alma do seu Co-Diretor AI serão definidos pela calibração perfeita dos 12 sliders a seguir."
-                        </div>
                       </div>
 
                       {/* Botão de Avanço para a Identificação */}
                       <button 
                         onClick={() => setOnboardingStep("identificacao")}
-                        className="w-full h-11 bg-brand-blue hover:bg-brand-blue/90 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer"
+                        className="w-full h-11 hover:bg-[#1E60FF]/40 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto border"
+                        style={{ backgroundColor: "rgba(30, 96, 255, 0.3)", borderColor: "rgba(30, 96, 255, 0.3)" }}
                       >
                         AVANÇAR <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   ) : onboardingStep === "identificacao" ? (
-                    /* PASSO 2: CONTEMPLAÇÃO ARTÍSTICA DA IMAGEM DO GRID */
-                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in">
-                      {/* Header da Identificação */}
-                      <div className="flex flex-col gap-1 border-b border-white/10 pb-3 text-left">
-                        <div className="text-[8px] font-black text-brand-gold uppercase tracking-widest flex justify-between items-center">
-                          <span>Identificação AI</span>
-                          <button 
-                            onClick={() => setOnboardingStep("video")}
-                            className="text-[7.5px] font-bold text-white/40 hover:text-white/70 tracking-normal border border-white/10 px-2 py-0.5 rounded-full uppercase"
-                          >
-                            Voltar
-                          </button>
-                        </div>
-                        <h2 className="text-base font-black text-white leading-tight">Escolha dos Arquétipos</h2>
-                      </div>
-
-                      {/* Imagem de Fundo da Identificação AI em Alta Resolução */}
-                      <div className="relative w-full h-[180px] rounded-lg overflow-hidden border border-white/10 group cursor-pointer my-3 bg-black">
+                    /* TELA 1B - LETREIRO 2 (COM QUAIS ARQUÉTIPOS VOCÊ SE IDENTIFICA?) */
+                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
+                      
+                      {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
+                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
                           src="/images/Gemini_Generated_Image_e65dque65dque65d.png" 
-                          className="w-full h-full object-cover brightness-[0.7] group-hover:scale-105 duration-700" 
+                          className="w-full h-full object-cover brightness-[0.6]" 
                           alt="Archetype Study"
                         />
-                        {/* Letreiro 2 Overlay Inside Identificação (Em cima da imagem!) */}
-                        <div className="absolute top-2 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
-                          <div className="inline-block whitespace-nowrap animate-marquee text-[9px] font-poppins-light text-gold-dress tracking-wider uppercase">
+                        {/* Letreiro 2 Overlay Inside Card (Top Position) */}
+                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/45 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
+                          <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                          ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <button 
-                      onClick={() => setOnboardingStep("matriz")}
-                      className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer"
-                    >
-                      IR PARA A MATRIZ <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </div>
+                      {/* Botão de Avanço para a Matriz */}
+                      <button 
+                        onClick={() => setOnboardingStep("matriz")}
+                        className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
+                      >
+                        IR PARA A MATRIZ <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </div>
                   ) : (
                     /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
-                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in relative bg-black rounded-lg">
+                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in relative bg-black rounded-[6px]">
                       {/* Header da Síntese */}
                       <div className="flex flex-col gap-1 border-b border-white/10 pb-3 text-left">
                         <div className="text-[8px] font-black text-brand-gold uppercase tracking-widest flex justify-between items-center">
@@ -801,7 +759,7 @@ export default function App() {
                       </div>
 
                       {/* Card de Persona Combinada (Wow Moment) */}
-                      <div className="bg-white/5 border border-white/10 rounded-lg p-3 flex flex-col gap-1 text-left select-none mb-2">
+                      <div className="bg-white/5 border border-white/10 rounded-2xl p-3 flex flex-col gap-1 text-left select-none mb-2">
                         <span className="text-[8px] font-black text-brand-gold uppercase tracking-widest">Persona Resultante</span>
                         <h3 className="text-sm font-black text-white">{combinedTitle}</h3>
                         <p className="text-[9px] text-white/50 leading-relaxed font-semibold">
