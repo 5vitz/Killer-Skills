@@ -329,7 +329,7 @@ def build_prompt_constructor_view(is_admin: bool, page: ft.Page):
         bgcolor="#0F111A",
         padding=25,
         border_radius=15,
-        border=ft.Border.all(1, "#2c2c2c"),
+        border=ft.border.all(1, "#2c2c2c"),
     )
 
     preview_card = ft.Container(
@@ -344,7 +344,7 @@ def build_prompt_constructor_view(is_admin: bool, page: ft.Page):
         bgcolor="#0F111A",
         padding=25,
         border_radius=15,
-        border=ft.Border.all(1, "#2c2c2c"),
+        border=ft.border.all(1, "#2c2c2c"),
         expand=True,
     )
 

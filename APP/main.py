@@ -243,7 +243,7 @@ def main(page: ft.Page):
             height=530,
             bgcolor="#0A0A0A",
             border_radius=35,
-            border=ft.Border.all(1, "#1E60FF"),
+            border=ft.border.all(1, "#1E60FF"),
             padding=15,
             content=ft.Stack([
                 # Dynamic Notch (Ilha Dinâmica)
@@ -265,7 +265,7 @@ def main(page: ft.Page):
                     bgcolor="#000000",
                     border_radius=25,
                     alignment=ft.Alignment(0, 0),
-                    border=ft.Border.all(1, "white10")
+                    border=ft.border.all(1, "white10")
                 )
             ])
         )
@@ -358,7 +358,7 @@ def main(page: ft.Page):
             height=530,
             bgcolor="#0A0A0A",
             border_radius=35,
-            border=ft.Border.all(1, "#1E60FF"),
+            border=ft.border.all(1, "#1E60FF"),
             padding=15,
             content=ft.Stack([
                 # Dynamic Notch (Ilha Dinâmica)
@@ -380,7 +380,7 @@ def main(page: ft.Page):
                     bgcolor="#000000",
                     border_radius=25,
                     alignment=ft.Alignment(0, 0),
-                    border=ft.Border.all(1, "white10")
+                    border=ft.border.all(1, "white10")
                 )
             ])
         )
@@ -440,7 +440,7 @@ def main(page: ft.Page):
                 padding=15,
                 bgcolor="#0A0A0A",
                 border_radius=15,
-                border=ft.Border.all(1, "white10"),
+                border=ft.border.all(1, "white10"),
                 expand=True
             )
         ], width=290, spacing=15)
@@ -535,7 +535,7 @@ def main(page: ft.Page):
                         btn_inserir
                     ], alignment="center", horizontal_alignment="center"),
                     padding=10, bgcolor="#0A0A0A", border_radius=15,
-                    border=ft.Border.all(1, "white10"),
+                    border=ft.border.all(1, "white10"),
                     width=150, height=190
                 )
             )
@@ -595,12 +595,12 @@ def main(page: ft.Page):
                     # Coluna Esquerda: O Celular Simulador
                     ft.Container(
                         width=380, padding=25, bgcolor="#0A0A0A", border_radius=20,
-                        border=ft.Border.all(1, "white10"),
+                        border=ft.border.all(1, "white10"),
                         content=ft.Column([
                             ft.Text("SIMULAÇÃO DE POST MÓVEL", size=11, color="white30", weight="bold"),
                             ft.Container(
                                 padding=12, bgcolor="#000000", border_radius=15,
-                                border=ft.Border.all(1, "white10"),
+                                border=ft.border.all(1, "white10"),
                                 content=ft.Column([
                                     # Header do Post
                                     ft.Row([
@@ -644,12 +644,12 @@ def main(page: ft.Page):
                     # Coluna Direita: Painel IA e Agendamento
                     ft.Container(
                         expand=True, padding=30, bgcolor="#0A0A0A", border_radius=20,
-                        border=ft.Border.all(1, "white10"),
+                        border=ft.border.all(1, "white10"),
                         content=ft.Column([
                             ft.Text("INSIGHTS DO CO-DIRETOR IA", size=11, color="white30", weight="bold"),
                             ft.Container(
                                 padding=20, bgcolor="#05FFFFFF",
-                                border_radius=15, border=ft.Border.all(1, "#0DFFFFFF"),
+                                border_radius=15, border=ft.border.all(1, "#0DFFFFFF"),
                                 content=ai_insight_text,
                                 min_height=140,
                             ),
@@ -685,7 +685,7 @@ def main(page: ft.Page):
                 ft.Row([
                     ft.Container(
                         width=320, padding=25, bgcolor="#0A0A0A", border_radius=15,
-                        border=ft.Border.all(1, "#1E60FF"),
+                        border=ft.border.all(1, "#1E60FF"),
                         content=ft.Column([
                             ft.Row([
                                 ft.Icon("business", color="#1E60FF", size=32),
@@ -702,7 +702,7 @@ def main(page: ft.Page):
                     ),
                     ft.Container(
                         width=320, padding=25, bgcolor="#0A0A0A", border_radius=15,
-                        border=ft.Border.all(1, "white10"),
+                        border=ft.border.all(1, "white10"),
                         content=ft.Column([
                             ft.Row([
                                 ft.Icon("add", color="white30", size=32),
@@ -879,7 +879,7 @@ def main(page: ft.Page):
                                 ft.Text("artz.genera@gmail.com", size=11, color="white30")
                             ], spacing=0)
                         ], spacing=12),
-                        padding=10, border_radius=10, bgcolor="#0F0F12", border=ft.Border.all(1, "white10"),
+                        padding=10, border_radius=10, bgcolor="#0F0F12", border=ft.border.all(1, "white10"),
                         on_click=lambda _: trigger_google_auth_sequence("artz.genera@gmail.com")
                     ),
                     ft.Container(height=5),
@@ -894,7 +894,7 @@ def main(page: ft.Page):
                                 ft.Text("sinkando@gmail.com", size=11, color="white30")
                             ], spacing=0)
                         ], spacing=12),
-                        padding=10, border_radius=10, bgcolor="#0F0F12", border=ft.Border.all(1, "white10"),
+                        padding=10, border_radius=10, bgcolor="#0F0F12", border=ft.border.all(1, "white10"),
                         on_click=lambda _: trigger_google_auth_sequence("sinkando@gmail.com")
                     ),
                     ft.Container(height=5),
@@ -930,7 +930,7 @@ def main(page: ft.Page):
                 ft.Row([
                     ft.Container(
                         width=320, padding=25, bgcolor="#0A0A0A", border_radius=15,
-                        border=ft.Border.all(1, "#2c2c2c"),
+                        border=ft.border.all(1, "#2c2c2c"),
                         content=ft.Column([
                             ft.Row([
                                 ft.Icon("storage", color="#d4af37", size=24),
@@ -946,7 +946,7 @@ def main(page: ft.Page):
                     ),
                     ft.Container(
                         width=320, padding=25, bgcolor="#0A0A0A", border_radius=15,
-                        border=ft.Border.all(1, "#2c2c2c"),
+                        border=ft.border.all(1, "#2c2c2c"),
                         content=ft.Column([
                             ft.Row([
                                 ft.Icon("memory", color="#d4af37", size=24),
@@ -1054,7 +1054,7 @@ def main(page: ft.Page):
                 padding=20,
                 bgcolor="#0A0A0A",
                 border_radius=15,
-                border=ft.Border.all(1, "white10")
+                border=ft.border.all(1, "white10")
             )
         ], width=280, spacing=15)
 
@@ -1097,7 +1097,7 @@ ORDEM_DE_SERVICO:
                         bgcolor="#050507",
                         padding=15,
                         border_radius=10,
-                        border=ft.Border.all(1, "white10"),
+                        border=ft.border.all(1, "white10"),
                         height=360 # Altura perfeita e estável para visualização no VPS
                     ),
                     ft.Container(height=5),
@@ -1111,7 +1111,7 @@ ORDEM_DE_SERVICO:
                 padding=20,
                 bgcolor="#0A0A0A",
                 border_radius=15,
-                border=ft.Border.all(1, "white10")
+                border=ft.border.all(1, "white10")
             )
         ], width=280, spacing=15)
 
@@ -1145,7 +1145,7 @@ ORDEM_DE_SERVICO:
                     width=110,
                     height=100,
                     bgcolor="#141416" if is_active else "#09090A",
-                    border=ft.Border.all(1.5, p_color if is_active else "white10"),
+                    border=ft.border.all(1.5, p_color if is_active else "white10"),
                     border_radius=12,
                     padding=10,
                     on_click=lambda _, k=key: toggle_ms(k),
@@ -1242,7 +1242,7 @@ ORDEM_DE_SERVICO:
                                     bgcolor="#0A0A0C",
                                     padding=10,
                                     border_radius=10,
-                                    border=ft.Border.all(1, "white10")
+                                    border=ft.border.all(1, "white10")
                                 ),
                                 
                                 ft.Container(height=10),
@@ -1299,7 +1299,7 @@ ORDEM_DE_SERVICO:
             height=530,
             bgcolor="#0A0A0A",
             border_radius=35,
-            border=ft.Border.all(1, p_color),
+            border=ft.border.all(1, p_color),
             padding=15,
             content=ft.Stack([
                 ft.Container(
@@ -1319,7 +1319,7 @@ ORDEM_DE_SERVICO:
                     bgcolor="#000000",
                     border_radius=25,
                     alignment=ft.Alignment(0, 0),
-                    border=ft.Border.all(1, "white10")
+                    border=ft.border.all(1, "white10")
                 )
             ])
         )
@@ -1499,7 +1499,7 @@ ORDEM_DE_SERVICO:
                     ]),
                     padding=ft.padding.symmetric(horizontal=12, vertical=10),
                     bgcolor="transparent" if disabled else "#1F1A0A",
-                    border=ft.Border.all(1, "white10" if disabled else "#403010"),
+                    border=ft.border.all(1, "white10" if disabled else "#403010"),
                     border_radius=10,
                     on_click=None if disabled else (lambda _: try_open_admin_portal())
                 ),
