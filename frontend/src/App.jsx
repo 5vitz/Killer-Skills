@@ -630,16 +630,17 @@ export default function App() {
                   className={`w-full h-full flex flex-col justify-between transition-all duration-300 relative overflow-hidden z-10 select-none text-white ${
                     (onboardingStep === "video" || onboardingStep === "identificacao") 
                       ? "bg-transparent border-0 p-0" 
-                      : "bg-black rounded-[6px] border border-white/5 p-4"
+                      : "bg-black rounded-[6px] border border-white/5 py-4 px-0"
                   }`}
                 >
                   {onboardingStep === "video" ? (
                     /* TELA 1A - LETREIRO 1 (OS ARQUÉTIPOS DE JUNG) */
-                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
+                    <div key="screen-1a" className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
                       
                       {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
                       <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
+                          key="img-1a"
                           src="/images/Gemini_Generated_Image_6tumtq6tumtq6tum.png" 
                           className="w-full h-full object-cover brightness-[0.6]" 
                           alt="AI Guide"
@@ -666,11 +667,12 @@ export default function App() {
                     </div>
                   ) : onboardingStep === "identificacao" ? (
                     /* TELA 1B - LETREIRO 2 (COM QUAIS ARQUÉTIPOS VOCÊ SE IDENTIFICA?) */
-                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
+                    <div key="screen-1b" className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
                       
                       {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
                       <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
+                          key="img-1b"
                           src="/images/Gemini_Generated_Image_e65dque65dque65d.png" 
                           className="w-full h-full object-cover brightness-[0.6] translate-y-[30px]" 
                           alt="Archetype Study"
@@ -697,23 +699,10 @@ export default function App() {
                     </div>
                   ) : (
                     /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
-                    <div className="w-full h-full flex flex-col justify-between p-1 select-none animate-fade-in relative bg-black rounded-[6px]">
-                      {/* Header da Síntese */}
-                      <div className="flex flex-col gap-1 border-b border-white/10 pb-3 text-left">
-                        <div className="text-[8px] font-black text-brand-gold uppercase tracking-widest flex justify-between items-center">
-                          <span>Matriz Arquetípica</span>
-                          <button 
-                            onClick={() => setOnboardingStep("identificacao")}
-                            className="text-[7.5px] font-bold text-white/40 hover:text-white/70 tracking-normal border border-white/10 px-2 py-0.5 rounded-full uppercase"
-                          >
-                            Voltar
-                          </button>
-                        </div>
-                        <h2 className="text-base font-black text-white leading-tight">Síntese da Sua Persona</h2>
-                      </div>
-
+                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative bg-black rounded-[6px]">
+                      
                       {/* Lista de Gradações dos 12 Sliders (Grid Compacto Scrollable com Scrollbar Sempre Visível) */}
-                      <div className="flex-1 my-3 overflow-y-auto pr-1 flex flex-col gap-2.5 max-h-[220px] custom-scrollbar-visible">
+                      <div className="flex-1 mt-0 mb-3 overflow-y-auto flex flex-col gap-0 max-h-[430px] custom-scrollbar-visible">
                         {ARCHETYPES.map((arch) => {
                           const dimColor = arch.dim === "Alma" ? "#D4AF37" : arch.dim === "Ação" ? "#E06666" : "#8E7CC3";
                           const isFocused = focusedArchetype?.id === arch.id;
@@ -723,8 +712,8 @@ export default function App() {
                               onMouseEnter={() => setHoveredArchetype(arch)}
                               onMouseLeave={() => setHoveredArchetype(null)}
                               onClick={() => setFocusedArchetype(isFocused ? null : arch)}
-                              className="flex flex-col gap-1 text-left bg-white/[0.02] border p-2 rounded-lg hover:bg-white/[0.06] active:scale-[0.98] transition-all duration-200 cursor-pointer"
-                              style={{ borderColor: isFocused ? "#D5A370" : "rgba(255, 255, 255, 0.05)" }}
+                              className="flex flex-col gap-1 text-left bg-white/[0.01] border-b border-white/[0.05] py-[7px] px-4 hover:bg-white/[0.04] transition-all duration-200 cursor-pointer"
+                              style={{ borderColor: isFocused ? "#D5A370" : "transparent" }}
                             >
                               <div className="flex justify-between items-center text-[9px] font-bold">
                                 <span style={{ color: dimColor }} className="flex items-center gap-1.5">
@@ -749,15 +738,6 @@ export default function App() {
                         })}
                       </div>
 
-                      {/* Card de Persona Combinada (Wow Moment) */}
-                      <div className="bg-white/5 border border-white/10 rounded-2xl p-3 flex flex-col gap-1 text-left select-none mb-2">
-                        <span className="text-[8px] font-black text-brand-gold uppercase tracking-widest">Persona Resultante</span>
-                        <h3 className="text-sm font-black text-white">{combinedTitle}</h3>
-                        <p className="text-[9px] text-white/50 leading-relaxed font-semibold">
-                          Mescla de seus dois arquétipos mais proeminentes.
-                        </p>
-                      </div>
-
                       {/* Botão de Finalização Gerar Persona */}
                       <button 
                         onClick={() => {
@@ -765,9 +745,10 @@ export default function App() {
                           setHasPersonaDefined(true);
                           setActiveView("storyboard");
                         }}
-                        className="w-full h-11 bg-brand-gold hover:bg-brand-gold/90 active:scale-95 text-black rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg hover:shadow-brand-gold/20 duration-200 cursor-pointer"
+                        className="w-auto mx-4 mb-2 h-11 hover:bg-[#1E60FF]/40 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30 border"
+                        style={{ backgroundColor: "rgba(30, 96, 255, 0.3)", borderColor: "rgba(30, 96, 255, 0.3)" }}
                       >
-                        <CheckCircle2 className="w-4 h-4" /> GERAR PERSONA
+                        ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   )}
@@ -776,78 +757,91 @@ export default function App() {
 
               {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Portal do Arquétipo) */}
               <div className="absolute right-0 top-0 bottom-0 w-[300px] border-l border-white/10 bg-[#0A0A0C]/90 backdrop-blur-md p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
-                {activeArch ? (
-                  /* PORTAL DO ARQUÉTIPO ATIVO (HOVERED OU FOCUSED) */
-                  <div className="flex flex-col gap-4 flex-1 overflow-y-auto pr-1 custom-scrollbar-visible">
-                    {/* Header */}
-                    <div>
-                      <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold">
-                        Portal do Arquétipo
-                      </h2>
-                      <p className="text-[9px] text-white/40 uppercase mt-0.5 font-bold">
-                        {focusedArchetype?.id === activeArch.id ? "Fixo - Clique para Liberar" : "Visualização Temporária"}
-                      </p>
-                    </div>
+                
+                {/* SEMPRE FIXADO NO TOPO: Card de Persona Combinada (Wow Moment) */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col gap-1 text-left select-none w-full mb-3 shrink-0">
+                  <span className="text-[8px] font-black text-brand-gold uppercase tracking-widest">Persona Resultante</span>
+                  <h3 className="text-sm font-black text-white">{combinedTitle}</h3>
+                  <p className="text-[9px] text-white/50 leading-relaxed font-semibold">
+                    Mescla de seus dois arquétipos mais proeminentes.
+                  </p>
+                </div>
 
-                    {/* Image Card (9:16) */}
-                    <div className="relative w-full aspect-[9/16] rounded-lg overflow-hidden border border-white/10 shadow-lg group">
-                      <img 
-                        src={ARCHETYPE_DETAILS[activeArch.id]?.imagem || activeArch.seedUrl} 
-                        className="w-full h-full object-cover group-hover:scale-105 duration-700 brightness-[0.8] contrast-[1.05]"
-                        alt={activeArch.name}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-black/20 pointer-events-none" />
-                      <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
-                        <span 
-                          className="text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/60 border"
-                          style={{ color: activeArch.color, borderColor: activeArch.color }}
-                        >
-                          {activeArch.dim}
-                        </span>
-                        <h3 className="text-lg font-black text-white mt-2 leading-tight drop-shadow-md">
-                          {activeArch.name}
+                {/* CONTEÚDO SCROLLABLE DO PORTAL ABAIXO */}
+                <div className="flex-1 overflow-y-auto pr-1 custom-scrollbar-visible flex flex-col gap-4">
+                  {activeArch ? (
+                    /* PORTAL DO ARQUÉTIPO ATIVO (HOVERED OU FOCUSED) */
+                    <div className="flex flex-col gap-4 flex-1">
+                      {/* Header */}
+                      <div>
+                        <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold">
+                          Portal do Arquétipo
+                        </h2>
+                        <p className="text-[9px] text-white/40 uppercase mt-0.5 font-bold">
+                          {focusedArchetype?.id === activeArch.id ? "Fixo - Clique para Liberar" : "Visualização Temporária"}
+                        </p>
+                      </div>
+
+                      {/* Image Card (9:16) */}
+                      <div className="relative w-full aspect-[9/16] rounded-lg overflow-hidden border border-white/10 shadow-lg group">
+                        <img 
+                          src={ARCHETYPE_DETAILS[activeArch.id]?.imagem || activeArch.seedUrl} 
+                          className="w-full h-full object-cover group-hover:scale-105 duration-700 brightness-[0.8] contrast-[1.05]"
+                          alt={activeArch.name}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-black/20 pointer-events-none" />
+                        <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
+                          <span 
+                            className="text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/60 border"
+                            style={{ color: activeArch.color, borderColor: activeArch.color }}
+                          >
+                            {activeArch.dim}
+                          </span>
+                          <h3 className="text-lg font-black text-white mt-2 leading-tight drop-shadow-md">
+                            {activeArch.name}
+                          </h3>
+                        </div>
+                      </div>
+
+                      {/* Text Details Card */}
+                      <div className="bg-white/[0.03] border border-white/10 rounded-lg p-4 flex flex-col gap-3 text-left">
+                        <div className="flex flex-col gap-0.5">
+                          <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Desejo Central</span>
+                          <p className="text-[10.5px] font-semibold text-white/90">
+                            {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
+                          </p>
+                        </div>
+                        <div className="flex flex-col gap-0.5">
+                          <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Medo Primordial</span>
+                          <p className="text-[10.5px] font-semibold text-white/90">
+                            {ARCHETYPE_DETAILS[activeArch.id]?.medo}
+                          </p>
+                        </div>
+                        <div className="flex flex-col gap-0.5">
+                          <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Superpoder</span>
+                          <p className="text-[10.5px] font-bold text-gold-dress">
+                            {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    /* WELCOME PANEL (QUANDO NENHUM ARQUÉTIPO ESTÁ ATIVO) */
+                    <div className="flex-1 flex flex-col justify-center items-center text-center p-6 gap-4 border border-white/5 bg-white/[0.01] rounded-lg my-auto">
+                      <div className="w-12 h-12 rounded-full bg-brand-blue/10 border border-brand-blue/20 flex justify-center items-center active-pulse">
+                        <Sparkles className="w-5 h-5 text-brand-blue" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-black uppercase tracking-wider text-white">
+                          Portal do Arquétipo
                         </h3>
-                      </div>
-                    </div>
-
-                    {/* Text Details Card */}
-                    <div className="bg-white/[0.03] border border-white/10 rounded-lg p-4 flex flex-col gap-3 text-left">
-                      <div className="flex flex-col gap-0.5">
-                        <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Desejo Central</span>
-                        <p className="text-[10.5px] font-semibold text-white/90">
-                          {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
-                        </p>
-                      </div>
-                      <div className="flex flex-col gap-0.5">
-                        <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Medo Primordial</span>
-                        <p className="text-[10.5px] font-semibold text-white/90">
-                          {ARCHETYPE_DETAILS[activeArch.id]?.medo}
-                        </p>
-                      </div>
-                      <div className="flex flex-col gap-0.5">
-                        <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Superpoder</span>
-                        <p className="text-[10.5px] font-bold text-gold-dress">
-                          {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
+                        <p className="text-[10px] text-white/40 mt-2 leading-relaxed">
+                          Passe o mouse ou clique em qualquer um dos 12 sliders arquetípicos para revelar a sua arte sacra digital e essência mística.
                         </p>
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  /* WELCOME PANEL (QUANDO NENHUM ARQUÉTIPO ESTÁ ATIVO) */
-                  <div className="flex-1 flex flex-col justify-center items-center text-center p-6 gap-4 border border-white/5 bg-white/[0.01] rounded-lg my-auto">
-                    <div className="w-12 h-12 rounded-full bg-brand-blue/10 border border-brand-blue/20 flex justify-center items-center active-pulse">
-                      <Sparkles className="w-5 h-5 text-brand-blue" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-black uppercase tracking-wider text-white">
-                        Portal do Arquétipo
-                      </h3>
-                      <p className="text-[10px] text-white/40 mt-2 leading-relaxed">
-                        Passe o mouse ou clique em qualquer um dos 12 sliders arquetípicos para revelar a sua arte sacra digital e essência mística.
-                      </p>
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
 
                 {/* ALWAYS-VISIBLE AUDIO CONTROLS & BRAND SIGNATURE */}
                 <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4">
