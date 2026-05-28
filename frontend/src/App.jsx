@@ -627,7 +627,7 @@ export default function App() {
                 {/* Visor Interno */}
                 {/* Visor Interno (Fundo preto removido em Tela1A e Tela1B para renderização direta no Player) */}
                 <div 
-                  className={`w-full h-full flex flex-col justify-between transition-all duration-300 relative overflow-hidden z-10 select-none text-white ${
+                  className={`w-full h-full flex flex-col justify-between relative overflow-hidden z-10 select-none text-white ${
                     (onboardingStep === "video" || onboardingStep === "identificacao") 
                       ? "bg-transparent border-0 p-0" 
                       : "bg-black rounded-[6px] border border-white/5 py-4 px-0"
@@ -635,7 +635,7 @@ export default function App() {
                 >
                   {onboardingStep === "video" ? (
                     /* TELA 1A - LETREIRO 1 (OS ARQUÉTIPOS DE JUNG) */
-                    <div key="screen-1a" className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
+                    <div key="screen-1a" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
                       
                       {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
                       <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
@@ -659,15 +659,14 @@ export default function App() {
                       {/* Botão de Avanço para a Identificação */}
                       <button 
                         onClick={() => setOnboardingStep("identificacao")}
-                        className="w-full h-11 hover:bg-[#1E60FF]/40 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto border"
-                        style={{ backgroundColor: "rgba(30, 96, 255, 0.3)", borderColor: "rgba(30, 96, 255, 0.3)" }}
+                        className="w-full h-11 bg-brand-blue/15 border border-brand-blue/30 hover:bg-brand-blue/25 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
                       >
                         AVANÇAR <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   ) : onboardingStep === "identificacao" ? (
                     /* TELA 1B - LETREIRO 2 (COM QUAIS ARQUÉTIPOS VOCÊ SE IDENTIFICA?) */
-                    <div key="screen-1b" className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative">
+                    <div key="screen-1b" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
                       
                       {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
                       <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
@@ -691,15 +690,14 @@ export default function App() {
                       {/* Botão de Avanço para a Matriz */}
                       <button 
                         onClick={() => setOnboardingStep("matriz")}
-                        className="w-full h-11 hover:bg-[#1E60FF]/40 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto border"
-                        style={{ backgroundColor: "rgba(30, 96, 255, 0.3)", borderColor: "rgba(30, 96, 255, 0.3)" }}
+                        className="w-full h-11 bg-brand-blue/15 border border-brand-blue/30 hover:bg-brand-blue/25 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
                       >
                         DOSAR <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   ) : (
                     /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
-                    <div className="w-full h-full flex flex-col justify-between p-0 select-none animate-fade-in relative bg-black rounded-[6px]">
+                    <div className="w-full h-full flex flex-col justify-between p-0 select-none relative bg-black rounded-[6px]">
                       
                       {/* Lista de Gradações dos 12 Sliders (Grid Compacto Scrollable com Scrollbar Sempre Visível) */}
                       <div className="flex-1 mt-0 mb-3 overflow-y-auto flex flex-col gap-0 max-h-[430px] custom-scrollbar-visible">
@@ -731,7 +729,7 @@ export default function App() {
                                   const val = parseInt(e.target.value);
                                   setDosagemPersona(prev => ({ ...prev, [arch.id]: val }));
                                 }}
-                                className="w-full h-0.5 accent-brand-gold bg-white/10 rounded cursor-pointer appearance-none"
+                                className="w-full premium-slider"
                               />
                             </div>
                           );
@@ -745,8 +743,7 @@ export default function App() {
                           setHasPersonaDefined(true);
                           setActiveView("storyboard");
                         }}
-                        className="w-auto mx-4 mb-2 h-11 hover:bg-[#1E60FF]/40 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30 border"
-                        style={{ backgroundColor: "rgba(30, 96, 255, 0.3)", borderColor: "rgba(30, 96, 255, 0.3)" }}
+                        className="w-auto mx-4 mb-2 h-11 bg-brand-blue/15 border border-brand-blue/30 hover:bg-brand-blue/25 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
                       >
                         ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
                       </button>
