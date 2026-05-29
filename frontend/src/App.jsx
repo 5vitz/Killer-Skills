@@ -752,16 +752,19 @@ export default function App() {
                 </div>
               </div>
 
-              {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Portal do Arquétipo) */}
-              <div className="absolute right-0 top-0 bottom-0 w-[300px] border-l border-white/10 bg-[#0A0A0C]/90 backdrop-blur-md p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
+              {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Portal da Persona) */}
+              <div className="absolute -right-10 -top-10 -bottom-10 w-[260px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
                 
-                {/* SEMPRE FIXADO NO TOPO: Card de Persona Combinada (Wow Moment) */}
-                <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col gap-1 text-left select-none w-full mb-3 shrink-0">
-                  <span className="text-[8px] font-black text-brand-gold uppercase tracking-widest">Persona Resultante</span>
-                  <h3 className="text-sm font-black text-white">{combinedTitle}</h3>
-                  <p className="text-[9px] text-white/50 leading-relaxed font-semibold">
-                    Mescla de seus dois arquétipos mais proeminentes.
-                  </p>
+                {/* TOPO FIXO: Título Geral e Card Dinâmico Centrado de Arquétipo */}
+                <div className="flex flex-col gap-3 w-full shrink-0 select-none mb-4">
+                  <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold text-center">
+                    Portal da Persona
+                  </h2>
+                  <div className="w-full h-11 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-center px-4">
+                    <span className="text-xs font-black uppercase tracking-wider text-white">
+                      {activeArch ? activeArch.name : "Arquétipo"}
+                    </span>
+                  </div>
                 </div>
 
                 {/* CONTEÚDO SCROLLABLE DO PORTAL ABAIXO */}
@@ -769,15 +772,6 @@ export default function App() {
                   {activeArch ? (
                     /* PORTAL DO ARQUÉTIPO ATIVO (HOVERED OU FOCUSED) */
                     <div className="flex flex-col gap-4 flex-1">
-                      {/* Header */}
-                      <div>
-                        <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold">
-                          Portal do Arquétipo
-                        </h2>
-                        <p className="text-[9px] text-white/40 uppercase mt-0.5 font-bold">
-                          {focusedArchetype?.id === activeArch.id ? "Fixo - Clique para Liberar" : "Visualização Temporária"}
-                        </p>
-                      </div>
 
                       {/* Image Card (9:16) */}
                       <div className="relative w-full aspect-[9/16] rounded-lg overflow-hidden border border-white/10 shadow-lg group">
