@@ -51,6 +51,7 @@ ssh root@31.220.102.2 << 'EOF'
   cd frontend
   npm install --legacy-peer-deps || { echo "❌ ERRO: Falha ao rodar npm install no VPS!"; exit 1; }
   npm run build || { echo "❌ ERRO: Falha ao rodar npm run build no VPS!"; exit 1; }
+  cp -r dist/* /var/www/killerskills/ || { echo "❌ ERRO: Falha ao copiar arquivos para /var/www/killerskills/!"; exit 1; }
   cd ..
   
   # Carrega variáveis de ambiente comuns para garantir que o PM2 seja localizado
