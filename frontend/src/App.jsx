@@ -500,97 +500,179 @@ export default function App() {
       </div>
 
       {/* 1. BARRA LATERAL METÁLICA PREMIUM */}
-      <div className="w-[260px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A]">
-        <div className="flex flex-col gap-6">
-          {/* Título do Cockpit */}
-          <div className="text-center">
-            <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
-            <div className={`text-[9px] font-bold tracking-wider uppercase ${isAdminMode ? "text-brand-gold" : "text-brand-blue"}`}>
-              {isAdminMode ? "ADMIN COCKPIT" : "KS STUDIO"}
+      <div className="w-[260px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A] transition-all duration-300">
+        {activeView === "servicos" && !hasPersonaDefined && (hoveredArchetype || focusedArchetype) ? (
+          (() => {
+            const activeArch = hoveredArchetype || focusedArchetype;
+            const details = ARCHETYPE_DETAILS[activeArch.id] || {};
+            return (
+              <div className="flex flex-col h-full justify-between select-none animate-fade-in text-white">
+                <div className="flex flex-col gap-4">
+                  {/* Letreiro Indicador */}
+                  <div className="text-center py-1 border-y border-white/[0.06] bg-white/[0.02] rounded-md">
+                    <span className="text-[9px] font-poppins-light tracking-widest text-gold-dress uppercase">
+                      ♥ GUIA DE ARQUÉTIPO ♥
+                    </span>
+                  </div>
+
+                  {/* Nome do Arquétipo */}
+                  <div className="text-center mt-1">
+                    <span 
+                      className="text-2xl font-poppins-light uppercase tracking-widest duration-300"
+                      style={{ color: activeArch.color, textShadow: `0 0 15px ${activeArch.color}33` }}
+                    >
+                      {activeArch.name}
+                    </span>
+                  </div>
+
+                  {/* Descrição Principal */}
+                  <div className="text-[11px] font-poppins-light leading-relaxed text-white/80 text-justify bg-white/[0.01] p-3 rounded-lg border border-white/[0.05]">
+                    {activeArch.desc}
+                  </div>
+
+                  {/* Ficha Técnica (Desejo e Medo) */}
+                  <div className="flex flex-col gap-2.5 bg-black/40 border border-white/10 p-3 rounded-lg">
+                    <div>
+                      <div className="text-[9px] font-black text-brand-gold uppercase tracking-wider mb-0.5">
+                        Desejo Central
+                      </div>
+                      <div className="text-[11px] text-white/95 leading-snug">
+                        {details.desejo}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-[9px] font-black text-brand-pink uppercase tracking-wider mb-0.5">
+                        Maior Medo
+                      </div>
+                      <div className="text-[11px] text-white/90 leading-snug">
+                        {details.medo}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Superpoder & Sombra */}
+                  <div className="flex flex-col gap-2.5 bg-white/[0.02] border border-white/[0.05] p-3 rounded-lg">
+                    <div>
+                      <div className="text-[9px] font-black text-green-400 uppercase tracking-wider mb-0.5">
+                        Superpoder
+                      </div>
+                      <div className="text-[11px] text-white/95 leading-snug">
+                        {details.superpoder}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-[9px] font-black text-amber-500 uppercase tracking-wider mb-0.5">
+                        Sombra
+                      </div>
+                      <div className="text-[11px] text-white/85 leading-snug">
+                        {details.sombra || activeArch.shadow}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dica de interação no rodapé */}
+                <div className="text-center pt-3 border-t border-white/5 text-[9px] font-poppins-light text-white/40 tracking-wider uppercase">
+                  Mova o cursor para mudar
+                </div>
+              </div>
+            );
+          })()
+        ) : (
+          <div className="flex flex-col justify-between h-full w-full">
+            <div className="flex flex-col gap-6">
+              {/* Título do Cockpit */}
+              <div className="text-center">
+                <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
+                <div className={`text-[9px] font-bold tracking-wider uppercase ${isAdminMode ? "text-brand-gold" : "text-brand-blue"}`}>
+                  {isAdminMode ? "ADMIN COCKPIT" : "KS STUDIO"}
+                </div>
+              </div>
+
+              <hr className="border-white/10" />
+
+              {/* Card do Usuário */}
+              <div className="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/5">
+                <div className={`w-8 h-8 rounded-full flex justify-center items-center font-bold text-xs ${isAdminMode ? "bg-brand-gold text-black" : "bg-brand-blue text-white"}`}>
+                  {userEmail.substring(0, 2).toUpperCase()}
+                </div>
+                <div className="text-xs font-medium text-white/70 overflow-hidden text-ellipsis whitespace-nowrap w-[150px]">
+                  {userEmail}
+                </div>
+              </div>
+
+              {/* Menu de Áreas de Trabalho */}
+              <div className="flex flex-col gap-1.5 pt-2">
+                
+                <button 
+                  onClick={() => setActiveView("servicos")}
+                  className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
+                    activeView === "servicos" 
+                      ? "bg-white/5 border border-white/5 text-white" 
+                      : "text-white/60 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  <User className="w-4 h-4" /> 1 - PERSONAS
+                </button>
+
+                <button 
+                  disabled
+                  className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 text-white/20 border border-dashed border-white/[0.05] cursor-not-allowed select-none"
+                >
+                  <Cpu className="w-4 h-4" /> 2 - EM BREVE (🔒)
+                </button>
+
+                <button 
+                  onClick={() => setActiveView("storyboard")}
+                  className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
+                    activeView === "storyboard" 
+                      ? "bg-white/5 border border-white/5 text-white" 
+                      : "text-white/60 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  <Sparkles className="w-4 h-4" /> 3 - KS STUDIO
+                </button>
+              </div>
+            </div>
+
+            {/* Rodapé da Sidebar */}
+            <div className="flex flex-col gap-1.5 border-t border-white/10 pt-4">
+              {/* Alternador Administrativo de Cockpit */}
+              <button 
+                onClick={() => {
+                  if (isAdminMode) {
+                    triggerGoogleAuthSequence("scalla_records@gmail.com");
+                  } else {
+                    triggerGoogleAuthSequence("artz.genera@gmail.com");
+                  }
+                }}
+                className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
+                  isAdminMode 
+                    ? "bg-brand-gold/15 border border-brand-gold/30 text-brand-gold" 
+                    : "text-white/60 hover:bg-white/5 hover:text-white"
+                }`}
+              >
+                <ShieldCheck className="w-4 h-4" /> PAINEL ADM
+              </button>
+
+              <button 
+                onClick={handleLogout}
+                className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold uppercase flex items-center gap-3 duration-200 text-white/60 hover:bg-brand-pink/10 hover:text-brand-pink"
+              >
+                <LogOut className="w-4 h-4" /> ENCERRAR SESSÃO
+              </button>
+
+              <div className="w-full h-11 px-4 flex items-center gap-3 text-white/40 select-none">
+                <div className="w-4 flex justify-center items-center">
+                  <span className="w-2 h-2 bg-green-500 rounded-full active-pulse" />
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-widest">ONLINE NA WEB</span>
+              </div>
             </div>
           </div>
-
-          <hr className="border-white/10" />
-
-          {/* Card do Usuário */}
-          <div className="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/5">
-            <div className={`w-8 h-8 rounded-full flex justify-center items-center font-bold text-xs ${isAdminMode ? "bg-brand-gold text-black" : "bg-brand-blue text-white"}`}>
-              {userEmail.substring(0, 2).toUpperCase()}
-            </div>
-            <div className="text-xs font-medium text-white/70 overflow-hidden text-ellipsis whitespace-nowrap w-[150px]">
-              {userEmail}
-            </div>
-          </div>
-
-          {/* Menu de Áreas de Trabalho */}
-          <div className="flex flex-col gap-1.5 pt-2">
-            
-            <button 
-              onClick={() => setActiveView("servicos")}
-              className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-                activeView === "servicos" 
-                  ? "bg-white/5 border border-white/5 text-white" 
-                  : "text-white/60 hover:bg-white/5 hover:text-white"
-              }`}
-            >
-              <User className="w-4 h-4" /> 1 - PERSONAS
-            </button>
-
-            <button 
-              disabled
-              className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 text-white/20 border border-dashed border-white/[0.05] cursor-not-allowed select-none"
-            >
-              <Cpu className="w-4 h-4" /> 2 - EM BREVE (🔒)
-            </button>
-
-            <button 
-              onClick={() => setActiveView("storyboard")}
-              className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-                activeView === "storyboard" 
-                  ? "bg-white/5 border border-white/5 text-white" 
-                  : "text-white/60 hover:bg-white/5 hover:text-white"
-              }`}
-            >
-              <Sparkles className="w-4 h-4" /> 3 - KS STUDIO
-            </button>
-          </div>
-        </div>
-
-        {/* Rodapé da Sidebar */}
-        <div className="flex flex-col gap-1.5 border-t border-white/10 pt-4">
-          {/* Alternador Administrativo de Cockpit */}
-          <button 
-            onClick={() => {
-              if (isAdminMode) {
-                triggerGoogleAuthSequence("scalla_records@gmail.com");
-              } else {
-                triggerGoogleAuthSequence("artz.genera@gmail.com");
-              }
-            }}
-            className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-              isAdminMode 
-                ? "bg-brand-gold/15 border border-brand-gold/30 text-brand-gold" 
-                : "text-white/60 hover:bg-white/5 hover:text-white"
-            }`}
-          >
-            <ShieldCheck className="w-4 h-4" /> PAINEL ADM
-          </button>
-
-          <button 
-            onClick={handleLogout}
-            className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold uppercase flex items-center gap-3 duration-200 text-white/60 hover:bg-brand-pink/10 hover:text-brand-pink"
-          >
-            <LogOut className="w-4 h-4" /> ENCERRAR SESSÃO
-          </button>
-
-          <div className="w-full h-11 px-4 flex items-center gap-3 text-white/40 select-none">
-            <div className="w-4 flex justify-center items-center">
-              <span className="w-2 h-2 bg-green-500 rounded-full active-pulse" />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest">ONLINE NA WEB</span>
-          </div>
-        </div>
-      </div>
+        )}
 
       {/* 2. CONTEÚDO PRINCIPAL (COMPLETAMENTE ADAPTÁVEL) */}
       <div className="flex-1 bg-[#050505] p-10 flex flex-col justify-center items-center overflow-hidden">
