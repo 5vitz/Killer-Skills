@@ -630,7 +630,7 @@ export default function App() {
                   className={`w-full h-full flex flex-col justify-between relative overflow-hidden z-10 select-none text-white ${
                     (onboardingStep === "video" || onboardingStep === "identificacao") 
                       ? "bg-transparent border-0 p-0" 
-                      : "bg-black rounded-[6px] border border-white/5 py-4 px-0"
+                      : "bg-black rounded-[6px] border border-white/5 pt-1 pb-3 px-0"
                   }`}
                 >
                   {onboardingStep === "video" ? (
@@ -699,8 +699,8 @@ export default function App() {
                     /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
                     <div className="w-full h-full flex flex-col justify-between p-0 select-none relative bg-black rounded-[6px]">
                       
-                      {/* Lista de Gradações dos 12 Sliders (Grid Compacto Scrollable com Scrollbar Sempre Visível) */}
-                      <div className="flex-1 mt-0 mb-3 overflow-y-auto flex flex-col gap-0 max-h-[430px] custom-scrollbar-visible">
+                      {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
+                      <div className="mt-4 mb-3 overflow-hidden flex flex-col gap-0 h-[384px]">
                         {ARCHETYPES.map((arch) => {
                           const dimColor = arch.dim === "Alma" ? "#D4AF37" : arch.dim === "Ação" ? "#E06666" : "#8E7CC3";
                           const isFocused = focusedArchetype?.id === arch.id;
@@ -710,10 +710,10 @@ export default function App() {
                               onMouseEnter={() => setHoveredArchetype(arch)}
                               onMouseLeave={() => setHoveredArchetype(null)}
                               onClick={() => setFocusedArchetype(isFocused ? null : arch)}
-                              className="flex flex-col gap-1 text-left bg-white/[0.01] border-b border-white/[0.05] py-[7px] px-4 hover:bg-white/[0.04] transition-all duration-200 cursor-pointer"
+                              className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-4 hover:bg-white/[0.04] transition-all duration-200 cursor-pointer h-[32px]"
                               style={{ borderColor: isFocused ? "#D5A370" : "transparent" }}
                             >
-                              <div className="flex justify-between items-center text-[9px] font-bold">
+                              <div className="flex justify-between items-center text-[10px] font-bold leading-none">
                                 <span style={{ color: dimColor }} className="flex items-center gap-1.5">
                                   <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dimColor }} />
                                   {arch.name}
@@ -743,7 +743,7 @@ export default function App() {
                           setHasPersonaDefined(true);
                           setActiveView("storyboard");
                         }}
-                        className="w-auto mx-4 mb-2 h-11 bg-brand-blue/15 border border-brand-blue/30 hover:bg-brand-blue/25 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
+                        className="w-auto mx-4 mb-3 h-11 bg-brand-blue/15 border border-brand-blue/30 hover:bg-brand-blue/25 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
                       >
                         ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
                       </button>

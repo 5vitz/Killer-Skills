@@ -119,7 +119,7 @@ input[type="range"].premium-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 14px; /* Suficiente para conter a bolinha de 10px sem cortar! */
+  height: 10px; /* Reduzido de 14px para 10px para máxima compactação */
   background: transparent; /* Remove o fundo do input inteiro para não cortar a bolinha */
   outline: none;
   cursor: pointer;
@@ -146,7 +146,7 @@ input[type="range"].premium-slider::-webkit-slider-thumb {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.15); /* Cor exata da barrinha */
   border: 1px solid rgba(255, 255, 255, 0.8);
   margin-top: -4px; /* Centraliza perfeitamente a bolinha de 10px na linha de 2px */
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
@@ -171,7 +171,7 @@ input[type="range"].premium-slider::-moz-range-thumb {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.15); /* Cor exata da barrinha */
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
   transition: transform 0.1s ease, background-color 0.1s ease;
