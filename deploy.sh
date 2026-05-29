@@ -38,7 +38,7 @@ connect_ssh() {
       # Garante que o sshpass esteja instalado localmente
       if ! command -v sshpass >/dev/null 2>&1; then
           echo "🔄 Instalando sshpass localmente para automação de senha..."
-          sudo apt-get update && sudo apt-get install -y sshpass || true
+          sudo apt-get install -y sshpass || true
       fi
       sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no root@31.220.102.2 "$@"
   else
