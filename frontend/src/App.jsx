@@ -504,7 +504,7 @@ export default function App() {
       </div>
 
       {/* 1. BARRA LATERAL METÁLICA PREMIUM */}
-      <div className="w-[260px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A] relative overflow-hidden transition-all duration-500">
+      <div className="w-[320px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A] relative overflow-hidden transition-all duration-500">
         
         {/* ESTADO A: MENU PADRÃO */}
         <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${isMetamorphosed ? "opacity-0 scale-95 pointer-events-none absolute inset-5" : "opacity-100 scale-100"}`}>
@@ -824,7 +824,7 @@ export default function App() {
               </div>
 
               {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Portal da Persona) */}
-              <div className="absolute -right-10 -top-10 -bottom-10 w-[260px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
+              <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
                 
                 {/* TOPO FIXO: Título Geral e Card Dinâmico Centrado de Arquétipo */}
                 <div className="flex flex-col gap-3 w-full shrink-0 select-none mb-4">
