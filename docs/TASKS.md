@@ -95,6 +95,15 @@ gantt
 ---
 
 ## 🚀 PLANO DE TRABALHO IMEDIATO (CÓDIGO & INTEGRAÇÃO)
+*   [ ] **Mapeador e Compressor de Mídia WebP (Extrator Local) — HOJE:**
+    *   Criar script utilitário para mapear as mais de 20 imagens gigantes (PNGs) na pasta local `Imagens/12_arquetipos/` e permitir a seleção das 12 imagens finais (uma para cada arquétipo).
+    *   Renomear os arquivos com códigos estranhos do Gemini para IDs limpos e padronizados (ex: `sabio.webp`, `mago.webp`).
+    *   Converter os PNGs pesados (6-8MB) para WebP leve de alta fidelidade (100-300KB) mantendo a proporção estrita de **9:16**.
+    *   Fazer o upload automático para o Firebase Storage e atualizar as URLs permanentes no Banco de Dados/código.
+*   [ ] **Refatoração Modular do Backend (Desacoplamento e Ontologia) — FUTURO:**
+    *   Migrar os seeds hardcoded de personas (`PESSOAL_DATA` e `PROFISSIONAL_DATA`) de `app.py` para um módulo de sementes dedicado (`backend/seeds/personas.py`).
+    *   Isolar os esquemas de validação do Pydantic em um arquivo de tipos próprio (`backend/models/schemas.py`).
+    *   Substituir a estrutura monolítica de endpoints em `app.py` por sub-rotas componentizadas usando `APIRouter` do FastAPI (ex: `/routers/auth.py`, `/routers/ai.py`, `/routers/services.py`).
 *   [ ] **Módulo de Responsividade Mobile Nativa (Fase 4.0):**
     *   Detecção de viewport móvel (`isMobile`).
     *   Ocultação das bordas físicas falsas do mockup no mobile para exibição em tela cheia nativa.

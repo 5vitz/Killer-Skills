@@ -15,25 +15,23 @@ const SEED_IMAGES = [
   { id: 3, url: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500", name: "BYD Song Plus (Estilo)" },
   { id: 4, url: "https://images.unsplash.com/photo-1621007947382-cc347941150e?w=500", name: "Toyota Hilux (Lamas)" },
   { id: 5, url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500", name: "Porsche Taycan (Estética)" }
-];
-
-// Os 12 Arquétipos de Carl Jung organizados pelas 3 dimensões (Alma, Ação, Social)
+];// Os 12 Arquétipos de Carl Jung organizados pelas 3 dimensões (Alma, Ação, Social)
 const ARCHETYPES = [
   // Dimensão da Alma
-  { id: 'sabio', name: 'Sábio', dim: 'Alma', desc: 'Busca o conhecimento e pratica a autorreflexão. Analisa e age com sabedoria.', color: '#D4AF37', shadow: 'Sombra: Distanciamento emocional e altivez intelectual.', seedUrl: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=500' },
-  { id: 'inocente', name: 'Inocente', dim: 'Alma', desc: 'Enxerga os aspectos positivos em tudo. Espontâneo, confiante e otimista.', color: '#4D90FE', shadow: 'Sombra: Pode ser ingênuo ou negar realidades dolorosas.', seedUrl: 'https://images.unsplash.com/photo-1498843053639-170ff2122f35?w=500' },
-  { id: 'explorador', name: 'Explorador', dim: 'Alma', desc: 'Busca liberdade para agir e descobrir o mundo. Gosta de novidades constantes.', color: '#34A853', shadow: 'Sombra: Inconstância, dispersão e medo de criar raízes.', seedUrl: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500' },
-  { id: 'cuidador', name: 'Cuidador', dim: 'Alma', desc: 'Gosta de cuidar dos outros. Prestativo e focado no bem-estar de todos.', color: '#EA4335', shadow: 'Sombra: Esgotamento emocional por negligência de si próprio.', seedUrl: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=500' },
+  { id: 'sabio', name: 'Sábio', dim: 'Alma', desc: 'Busca o conhecimento e pratica a autorreflexão. Analisa e age com sabedoria.', color: '#D4AF37', shadow: 'Sombra: Distanciamento emocional e altivez intelectual.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp' },
+  { id: 'inocente', name: 'Inocente', dim: 'Alma', desc: 'Enxerga os aspectos positivos em tudo. Espontâneo, confiante e otimista.', color: '#4D90FE', shadow: 'Sombra: Pode ser ingênuo ou negar realidades dolorosas.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp' },
+  { id: 'explorador', name: 'Explorador', dim: 'Alma', desc: 'Busca liberdade para agir e descobrir o mundo. Gosta de novidades constantes.', color: '#34A853', shadow: 'Sombra: Inconstância, dispersão e medo de criar raízes.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp' },
+  { id: 'cuidador', name: 'Cuidador', dim: 'Alma', desc: 'Gosta de cuidar dos outros. Prestativo e focado no bem-estar de todos.', color: '#EA4335', shadow: 'Sombra: Esgotamento emocional por negligência de si próprio.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp' },
   // Dimensão da Ação
-  { id: 'heroi', name: 'Herói', dim: 'Ação', desc: 'Guerreiro e destemido. Luta para proteger os seus e não teme obstáculos.', color: '#E06666', shadow: 'Sombra: Obsessão por combate e necessidade de provar valor.', seedUrl: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500' },
-  { id: 'mago', name: 'Mago', dim: 'Ação', desc: 'Acredita que o mundo pode ser diferente. Focado na transformação e revolução.', color: '#93C47D', shadow: 'Sombra: Manipulação mental e fuga da realidade física.', seedUrl: 'https://images.unsplash.com/photo-1519074069444-1ba4e5663a43?w=500' },
-  { id: 'rebelde', name: 'Rebelde', dim: 'Ação', desc: 'Pensa de maneira diferente. Foge de padrões tradicionais e regras estritas.', color: '#F6B26B', shadow: 'Sombra: Destruição sem causa e marginalização improdutiva.', seedUrl: 'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=500' },
-  { id: 'criador', name: 'Criador', dim: 'Ação', desc: 'Dá vida à imaginação e às coisas que ainda não existem. Artista e inventor.', color: '#FFD966', shadow: 'Sombra: Perfeccionismo extremo que impede a entrega.', seedUrl: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500' },
+  { id: 'heroi', name: 'Herói', dim: 'Ação', desc: 'Guerreiro e destemido. Luta para proteger os seus e não teme obstáculos.', color: '#E06666', shadow: 'Sombra: Obsessão por combate e necessidade de provar valor.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp' },
+  { id: 'mago', name: 'Mago', dim: 'Ação', desc: 'Acredita que o mundo pode ser diferente. Focado na transformação e revolução.', color: '#93C47D', shadow: 'Sombra: Manipulação mental e fuga da realidade física.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp' },
+  { id: 'rebelde', name: 'Rebelde', dim: 'Ação', desc: 'Pensa de maneira diferente. Foge de padrões tradicionais e regras estritas.', color: '#F6B26B', shadow: 'Sombra: Destruição sem causa e marginalização improdutiva.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp' },
+  { id: 'criador', name: 'Criador', dim: 'Ação', desc: 'Dá vida à imaginação e às coisas que ainda não existem. Artista e inventor.', color: '#FFD966', shadow: 'Sombra: Perfeccionismo extremo que impede a entrega.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp' },
   // Dimensão Social
-  { id: 'amante', name: 'Amante', dim: 'Social', desc: 'Valoriza as conexões humanas de alta sensibilidade. Feliz ao amar e ser amado.', color: '#C27BA0', shadow: 'Sombra: Perda de identidade e anulação em favor do outro.', seedUrl: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500' },
-  { id: 'tolo', name: 'Tolo', dim: 'Social', desc: 'Alegre, dinâmico, gosta de divertir as pessoas. Autêntico e descontraído.', color: '#8E7CC3', shadow: 'Sombra: Frivolidade e fuga de responsabilidades sérias.', seedUrl: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500' },
-  { id: 'homem_comum', name: 'Homem Comum', dim: 'Social', desc: 'Age em conformidade com o grupo. Empático, pé no chão e excelente vizinho.', color: '#858585', shadow: 'Sombra: Perda de voz ativa em nome da conformidade social.', seedUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500' },
-  { id: 'governante', name: 'Governante', dim: 'Social', desc: 'Líder natural, assume a autoridade e sabe impor a ordem e a estabilidade.', color: '#E09E25', shadow: 'Sombra: Rigidez extrema e medo irracional do caos.', seedUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500' }
+  { id: 'amante', name: 'Amante', dim: 'Social', desc: 'Valoriza as conexões humanas de alta sensibilidade. Feliz ao amar e ser amado.', color: '#C27BA0', shadow: 'Sombra: Perda de identidade e anulação em favor do outro.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp' },
+  { id: 'tolo', name: 'Tolo', dim: 'Social', desc: 'Alegre, dinâmico, gosta de divertir as pessoas. Autêntico e descontraído.', color: '#8E7CC3', shadow: 'Sombra: Frivolidade e fuga de responsabilidades sérias.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp' },
+  { id: 'homem_comum', name: 'Homem Comum', dim: 'Social', desc: 'Age em conformidade com o grupo. Empático, pé no chão e excelente vizinho.', color: '#858585', shadow: 'Sombra: Perda de voz ativa em nome da conformidade social.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp' },
+  { id: 'governante', name: 'Governante', dim: 'Social', desc: 'Líder natural, assume a autoridade e sabe impor a ordem e a estabilidade.', color: '#E09E25', shadow: 'Sombra: Rigidez extrema e medo irracional do caos.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp' }
 ];
 
 const ARCHETYPE_DETAILS = {
@@ -41,84 +39,84 @@ const ARCHETYPE_DETAILS = {
     desejo: "Encontrar a verdade",
     medo: "Ser enganado ou ignorante",
     superpoder: "Sabedoria e análise profunda",
-    imagem: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp",
     sombra: "Distanciamento emocional e altivez intelectual"
   },
   inocente: {
     desejo: "Experimentar o paraíso e ser feliz",
     medo: "Fazer algo errado e ser punido",
     superpoder: "Fé e otimismo inabaláveis",
-    imagem: "https://images.unsplash.com/photo-1498843053639-170ff2122f35?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp",
     sombra: "Ingenuidade excessiva e negação da realidade"
   },
   explorador: {
     desejo: "Viver uma vida livre e autêntica",
     medo: "Ficar preso ou se conformar",
     superpoder: "Autenticidade e coragem de desbravar",
-    imagem: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp",
     sombra: "Inconstância, dispersão e pânico de criar raízes"
   },
   cuidador: {
     desejo: "Proteger e cuidar dos outros",
     medo: "Egoísmo e ingratidão",
     superpoder: "Compaixão e generosidade pura",
-    imagem: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp",
     sombra: "Martírio e esgotamento por negligência de si próprio"
   },
   heroi: {
     desejo: "Provar seu valor através de ações difíceis",
     medo: "Fraqueza e vulnerabilidade",
     superpoder: "Competência, coragem e determinação",
-    imagem: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp",
     sombra: "Obsessão por combate e necessidade de provar valor"
   },
   mago: {
     desejo: "Compreender as leis fundamentais do universo",
     medo: "Consequências negativas não intencionais",
     superpoder: "Transformação e manifestação da visão",
-    imagem: "https://images.unsplash.com/photo-1519074069444-1ba4e5663a43?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp",
     sombra: "Manipulação mental e distanciamento da realidade física"
   },
   rebelde: {
     desejo: "Revolucionar o que não funciona",
     medo: "Ser comum ou impotente",
     superpoder: "Liberdade radical e pensamento disruptivo",
-    imagem: "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp",
     sombra: "Destruição sem causa legítima e rebeldia improdutiva"
   },
   criador: {
     desejo: "Criar algo de valor duradouro",
     medo: "Mediocridade ou falta de visão",
     superpoder: "Criatividade sem limites e habilidade técnica",
-    imagem: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp",
     sombra: "Perfeccionismo extremo que paralisa a entrega"
   },
   amante: {
     desejo: "Estar em conexão com quem e o que ama",
     medo: "Ficar sozinho ou não ser desejado",
     superpoder: "Sensualidade, empatia e compromisso profundo",
-    imagem: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp",
     sombra: "Anulação pessoal para agradar ao parceiro"
   },
   tolo: {
     desejo: "Viver no momento com alegria plena",
     medo: "Ser chato ou passar despercebido",
     superpoder: "Humor, leveza e inteligência espontânea",
-    imagem: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp",
     sombra: "Frivolidade e irresponsabilidade diante de crises"
   },
   homem_comum: {
     desejo: "Pertencer e conectar-se com os outros",
     medo: "Ser deixado de fora ou se destacar demais",
     superpoder: "Empatia, realismo e ausência de pretensão",
-    imagem: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp",
     sombra: "Perda da própria voz em nome do consenso do grupo"
   },
   governante: {
     desejo: "Criar uma família ou comunidade próspera",
     medo: "O caos e a perda do controle",
     superpoder: "Liderança, responsabilidade e estabilidade",
-    imagem: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500",
+    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp",
     sombra: "Autoritarismo rígido e incapacidade de delegar"
   }
 };
@@ -641,7 +639,7 @@ export default function App() {
                       <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
                           key="img-1a"
-                          src="/images/Gemini_Generated_Image_6tumtq6tumtq6tum.png" 
+                          src="https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tela1A.webp" 
                           className="w-full h-full object-cover brightness-[0.6]" 
                           alt="AI Guide"
                         />
@@ -672,7 +670,7 @@ export default function App() {
                       <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
                           key="img-1b"
-                          src="/images/Gemini_Generated_Image_e65dque65dque65d.png" 
+                          src="https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tela1B.webp" 
                           className="w-full h-full object-cover brightness-[0.6] translate-y-[30px]" 
                           alt="Archetype Study"
                         />
