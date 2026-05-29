@@ -3,7 +3,7 @@
 # Script de inicialização automática - Lincoln 2026
 
 # Navega para a pasta raiz do projeto
-cd /home/artz/Killer-Skills/
+cd /home/artz/Documentos/Antigravity/Killer-Skills/
 
 # Executa o deploy automático em uma janela de terminal visível para diagnóstico de erros
 if [ -f "./deploy.sh" ]; then
