@@ -626,13 +626,21 @@ export default function App() {
                 <div 
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg bg-[#090C15]/40 p-4 flex flex-col justify-between transition-all duration-500"
                 >
+                  {/* Textura de Pergaminho Místico e Suave */}
+                  <div 
+                    className="absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-overlay z-0"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+                    }}
+                  />
+
                   {/* Descrição Ontológica Poética */}
-                  <p className="font-poppins-light text-[11.5px] text-white/80 leading-relaxed text-justify overflow-y-auto max-h-[170px] pr-1 scrollbar-thin">
+                  <p className="relative z-10 font-poppins-light text-[11.5px] text-white/80 leading-relaxed text-justify overflow-y-auto max-h-[170px] pr-1 scrollbar-thin">
                     {activeArch.desc}
                   </p>
 
                   {/* Fichas Técnicas Delicadas */}
-                  <div className="flex flex-col gap-2.5 pt-3 border-t border-white/5 mt-auto">
+                  <div className="relative z-10 flex flex-col gap-2.5 pt-3 border-t border-white/5 mt-auto">
                     <div className="flex flex-col text-left">
                       <span className="text-[8px] tracking-wider text-brand-gold uppercase font-poppins-light">Desejo Central</span>
                       <span className="text-[10px] text-white/95 font-poppins-light leading-tight">
