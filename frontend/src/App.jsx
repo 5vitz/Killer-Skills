@@ -15,23 +15,19 @@ const SEED_IMAGES = [
   { id: 3, url: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500", name: "BYD Song Plus (Estilo)" },
   { id: 4, url: "https://images.unsplash.com/photo-1621007947382-cc347941150e?w=500", name: "Toyota Hilux (Lamas)" },
   { id: 5, url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500", name: "Porsche Taycan (Estética)" }
-];// Os 12 Arquétipos de Carl Jung organizados pelas 3 dimensões (Alma, Ação, Social)
-const ARCHETYPES = [
-  // Dimensão da Alma
-  { id: 'sabio', name: 'Sábio', dim: 'Alma', desc: 'Busca o conhecimento e pratica a autorreflexão. Analisa e age com sabedoria.', color: '#D4AF37', shadow: 'Sombra: Distanciamento emocional e altivez intelectual.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp' },
-  { id: 'inocente', name: 'Inocente', dim: 'Alma', desc: 'Enxerga os aspectos positivos em tudo. Espontâneo, confiante e otimista.', color: '#4D90FE', shadow: 'Sombra: Pode ser ingênuo ou negar realidades dolorosas.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp' },
-  { id: 'explorador', name: 'Explorador', dim: 'Alma', desc: 'Busca liberdade para agir e descobrir o mundo. Gosta de novidades constantes.', color: '#34A853', shadow: 'Sombra: Inconstância, dispersão e medo de criar raízes.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp' },
-  { id: 'cuidador', name: 'Cuidador', dim: 'Alma', desc: 'Gosta de cuidar dos outros. Prestativo e focado no bem-estar de todos.', color: '#EA4335', shadow: 'Sombra: Esgotamento emocional por negligência de si próprio.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp' },
-  // Dimensão da Ação
-  { id: 'heroi', name: 'Herói', dim: 'Ação', desc: 'Guerreiro e destemido. Luta para proteger os seus e não teme obstáculos.', color: '#E06666', shadow: 'Sombra: Obsessão por combate e necessidade de provar valor.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp' },
-  { id: 'mago', name: 'Mago', dim: 'Ação', desc: 'Acredita que o mundo pode ser diferente. Focado na transformação e revolução.', color: '#93C47D', shadow: 'Sombra: Manipulação mental e fuga da realidade física.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp' },
-  { id: 'rebelde', name: 'Rebelde', dim: 'Ação', desc: 'Pensa de maneira diferente. Foge de padrões tradicionais e regras estritas.', color: '#F6B26B', shadow: 'Sombra: Destruição sem causa e marginalização improdutiva.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp' },
-  { id: 'criador', name: 'Criador', dim: 'Ação', desc: 'Dá vida à imaginação e às coisas que ainda não existem. Artista e inventor.', color: '#FFD966', shadow: 'Sombra: Perfeccionismo extremo que impede a entrega.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp' },
-  // Dimensão Social
-  { id: 'amante', name: 'Amante', dim: 'Social', desc: 'Valoriza as conexões humanas de alta sensibilidade. Feliz ao amar e ser amado.', color: '#C27BA0', shadow: 'Sombra: Perda de identidade e anulação em favor do outro.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp' },
-  { id: 'tolo', name: 'Tolo', dim: 'Social', desc: 'Alegre, dinâmico, gosta de divertir as pessoas. Autêntico e descontraído.', color: '#8E7CC3', shadow: 'Sombra: Frivolidade e fuga de responsabilidades sérias.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp' },
-  { id: 'homem_comum', name: 'Homem Comum', dim: 'Social', desc: 'Age em conformidade com o grupo. Empático, pé no chão e excelente vizinho.', color: '#858585', shadow: 'Sombra: Perda de voz ativa em nome da conformidade social.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp' },
-  { id: 'governante', name: 'Governante', dim: 'Social', desc: 'Líder natural, assume a autoridade e sabe impor a ordem e a estabilidade.', color: '#E09E25', shadow: 'Sombra: Rigidez extrema e medo irracional do caos.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp' }
+];const ARCHETYPES = [
+  { id: 'sabio', name: 'Sábio', desc: 'Busca o conhecimento e pratica a autorreflexão. Analisa e age com sabedoria.', color: '#D4AF37', shadow: 'Sombra: Distanciamento emocional e altivez intelectual.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp' },
+  { id: 'inocente', name: 'Inocente', desc: 'Enxerga os aspectos positivos em tudo. Espontâneo, confiante e otimista.', color: '#4D90FE', shadow: 'Sombra: Pode ser ingênuo ou negar realidades dolorosas.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp' },
+  { id: 'explorador', name: 'Explorador', desc: 'Busca liberdade para agir e descobrir o mundo. Gosta de novidades constantes.', color: '#34A853', shadow: 'Sombra: Inconstância, dispersão e medo de criar raízes.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp' },
+  { id: 'cuidador', name: 'Cuidador', desc: 'Gosta de cuidar dos outros. Prestativo e focado no bem-estar de todos.', color: '#EA4335', shadow: 'Sombra: Esgotamento emocional por negligência de si próprio.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp' },
+  { id: 'heroi', name: 'Herói', desc: 'Guerreiro e destemido. Luta para proteger os seus e não teme obstáculos.', color: '#E06666', shadow: 'Sombra: Obsessão por combate e necessidade de provar valor.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp' },
+  { id: 'mago', name: 'Mago', desc: 'Acredita que o mundo pode ser diferente. Focado na transformação e revolução.', color: '#93C47D', shadow: 'Sombra: Manipulação mental e fuga da realidade física.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp' },
+  { id: 'rebelde', name: 'Rebelde', desc: 'Pensa de maneira diferente. Foge de padrões tradicionais e regras estritas.', color: '#F6B26B', shadow: 'Sombra: Destruição sem causa e marginalização improdutiva.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp' },
+  { id: 'criador', name: 'Criador', desc: 'Dá vida à imaginação e às coisas que ainda não existem. Artista e inventor.', color: '#FFD966', shadow: 'Sombra: Perfeccionismo extremo que impede a entrega.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp' },
+  { id: 'amante', name: 'Amante', desc: 'Valoriza as conexões humanas de alta sensibilidade. Feliz ao amar e ser amado.', color: '#C27BA0', shadow: 'Sombra: Perda de identidade e anulação em favor do outro.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp' },
+  { id: 'tolo', name: 'Tolo', desc: 'Alegre, dinâmico, gosta de divertir as pessoas. Autêntico e descontraído.', color: '#8E7CC3', shadow: 'Sombra: Frivolidade e fuga de responsabilidades sérias.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp' },
+  { id: 'homem_comum', name: 'Homem Comum', desc: 'Age em conformidade com o grupo. Empático, pé no chão e excelente vizinho.', color: '#858585', shadow: 'Sombra: Perda de voz ativa em nome da conformidade social.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp' },
+  { id: 'governante', name: 'Governante', desc: 'Líder natural, assume a autoridade e sabe impor a ordem e a estabilidade.', color: '#E09E25', shadow: 'Sombra: Rigidez extrema e medo irracional do caos.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp' }
 ];
 
 const ARCHETYPE_DETAILS = {
@@ -121,11 +117,7 @@ const ARCHETYPE_DETAILS = {
   }
 };
 
-const DIMENSOES = [
-  { id: 'alma', title: 'Alma', color: '#D4AF37' },
-  { id: 'acao', title: 'Ação', color: '#E06666' },
-  { id: 'social', title: 'Social', color: '#8E7CC3' }
-];
+
 
 export default function App() {
   // --- ESTADO GLOBAL ---
@@ -359,8 +351,7 @@ export default function App() {
 
         {/* Smartphone Container */}
         <div 
-          className="relative w-[340px] h-[550px] bg-[#0A0A0C] border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
-          style={{ borderColor: "#1E60FF" }}
+          className="relative w-[340px] h-[550px] bg-[#0A0A0C] border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
         >
           {/* Visor Interno */}
           <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10 text-white relative">
@@ -538,7 +529,7 @@ export default function App() {
               onClick={() => setActiveView("servicos")}
               className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
                 activeView === "servicos" 
-                  ? "bg-brand-blue/15 border border-brand-blue/30 text-white" 
+                  ? "bg-white/5 border border-white/5 text-white" 
                   : "text-white/60 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -556,7 +547,7 @@ export default function App() {
               onClick={() => setActiveView("storyboard")}
               className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
                 activeView === "storyboard" 
-                  ? "bg-brand-blue/15 border border-brand-blue/30 text-white" 
+                  ? "bg-white/5 border border-white/5 text-white" 
                   : "text-white/60 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -619,8 +610,7 @@ export default function App() {
 
               {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
               <div 
-                className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
-                style={{ borderColor: "#1E60FF" }}
+                className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
               >
                 {/* Visor Interno */}
                 {/* Visor Interno (Fundo preto removido em Tela1A e Tela1B para renderização direta no Player) */}
@@ -657,7 +647,7 @@ export default function App() {
                       {/* Botão de Avanço para a Identificação */}
                       <button 
                         onClick={() => setOnboardingStep("identificacao")}
-                        className="w-full h-11 bg-brand-blue/15 border border-brand-blue/30 hover:bg-brand-blue/25 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
+                        className="w-full h-11 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
                       >
                         AVANÇAR <ArrowRight className="w-4 h-4" />
                       </button>
@@ -688,7 +678,7 @@ export default function App() {
                       {/* Botão de Avanço para a Matriz */}
                       <button 
                         onClick={() => setOnboardingStep("matriz")}
-                        className="w-full h-11 bg-brand-blue/15 border border-brand-blue/30 hover:bg-brand-blue/25 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
+                        className="w-full h-11 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
                       >
                         DOSAR <ArrowRight className="w-4 h-4" />
                       </button>
@@ -700,7 +690,6 @@ export default function App() {
                       {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
                       <div className="mt-4 mb-3 overflow-hidden flex flex-col gap-0 h-[384px]">
                         {ARCHETYPES.map((arch) => {
-                          const dimColor = arch.dim === "Alma" ? "#D4AF37" : arch.dim === "Ação" ? "#E06666" : "#8E7CC3";
                           const isFocused = focusedArchetype?.id === arch.id;
                           return (
                             <div 
@@ -712,8 +701,8 @@ export default function App() {
                               style={{ borderColor: isFocused ? "#D5A370" : "transparent" }}
                             >
                               <div className="flex justify-between items-center text-[10px] font-bold leading-none">
-                                <span style={{ color: dimColor }} className="flex items-center gap-1.5">
-                                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dimColor }} />
+                                <span style={{ color: "#858585" }} className="flex items-center gap-1.5 transition-colors duration-200">
+                                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#858585" }} />
                                   {arch.name}
                                 </span>
                                 <span className="text-white/60 font-black">{dosagemPersona[arch.id]}%</span>
@@ -741,7 +730,7 @@ export default function App() {
                           setHasPersonaDefined(true);
                           setActiveView("storyboard");
                         }}
-                        className="w-auto mx-4 mb-3 h-11 bg-brand-blue/15 border border-brand-blue/30 hover:bg-brand-blue/25 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
+                        className="w-auto mx-4 mb-3 h-11 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
                       >
                         ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
                       </button>
@@ -765,71 +754,45 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* CONTEÚDO SCROLLABLE DO PORTAL ABAIXO */}
-                <div className="flex-1 overflow-y-auto pr-1 custom-scrollbar-visible flex flex-col gap-4">
-                  {activeArch ? (
-                    /* PORTAL DO ARQUÉTIPO ATIVO (HOVERED OU FOCUSED) */
-                    <div className="flex flex-col gap-4 flex-1">
-
-                      {/* Image Card (9:16) */}
-                      <div className="relative w-full aspect-[9/16] rounded-lg overflow-hidden border border-white/10 shadow-lg group">
-                        <img 
-                          src={ARCHETYPE_DETAILS[activeArch.id]?.imagem || activeArch.seedUrl} 
-                          className="w-full h-full object-cover group-hover:scale-105 duration-700 brightness-[0.8] contrast-[1.05]"
-                          alt={activeArch.name}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-black/20 pointer-events-none" />
-                        <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
+                {/* CONTEÚDO DO PORTAL ABAIXO (SEM SCROLL, APENAS FOTO STRETCHED) */}
+                <div className="flex-1 flex flex-col gap-4">
+                  {/* Image Card (Flex-1 para preenchimento vertical perfeito) */}
+                  <div className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg group">
+                    <img 
+                      src={
+                        activeArch 
+                          ? (ARCHETYPE_DETAILS[activeArch.id]?.imagem || activeArch.seedUrl)
+                          : "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tela1A.webp"
+                      } 
+                      className="w-full h-full object-cover group-hover:scale-105 duration-700 brightness-[0.8] contrast-[1.05]"
+                      alt={activeArch ? activeArch.name : "Portal da Persona"}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-black/20 pointer-events-none" />
+                    <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
+                      {activeArch ? (
+                        <>
                           <span 
                             className="text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/60 border"
                             style={{ color: activeArch.color, borderColor: activeArch.color }}
                           >
-                            {activeArch.dim}
+                            ARQUÉTIPO
                           </span>
                           <h3 className="text-lg font-black text-white mt-2 leading-tight drop-shadow-md">
                             {activeArch.name}
                           </h3>
-                        </div>
-                      </div>
-
-                      {/* Text Details Card */}
-                      <div className="bg-white/[0.03] border border-white/10 rounded-lg p-4 flex flex-col gap-3 text-left">
-                        <div className="flex flex-col gap-0.5">
-                          <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Desejo Central</span>
-                          <p className="text-[10.5px] font-semibold text-white/90">
-                            {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
-                          </p>
-                        </div>
-                        <div className="flex flex-col gap-0.5">
-                          <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Medo Primordial</span>
-                          <p className="text-[10.5px] font-semibold text-white/90">
-                            {ARCHETYPE_DETAILS[activeArch.id]?.medo}
-                          </p>
-                        </div>
-                        <div className="flex flex-col gap-0.5">
-                          <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Superpoder</span>
-                          <p className="text-[10.5px] font-bold text-gold-dress">
-                            {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
-                          </p>
-                        </div>
-                      </div>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/60 border border-brand-gold text-brand-gold">
+                            Guia Geral
+                          </span>
+                          <h3 className="text-lg font-black text-white mt-2 leading-tight drop-shadow-md">
+                            Portal do Arquétipo
+                          </h3>
+                        </>
+                      )}
                     </div>
-                  ) : (
-                    /* WELCOME PANEL (QUANDO NENHUM ARQUÉTIPO ESTÁ ATIVO) */
-                    <div className="flex-1 flex flex-col justify-center items-center text-center p-6 gap-4 border border-white/5 bg-white/[0.01] rounded-lg my-auto">
-                      <div className="w-12 h-12 rounded-full bg-brand-blue/10 border border-brand-blue/20 flex justify-center items-center active-pulse">
-                        <Sparkles className="w-5 h-5 text-brand-blue" />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-black uppercase tracking-wider text-white">
-                          Portal do Arquétipo
-                        </h3>
-                        <p className="text-[10px] text-white/40 mt-2 leading-relaxed">
-                          Passe o mouse ou clique em qualquer um dos 12 sliders arquetípicos para revelar a sua arte sacra digital e essência mística.
-                        </p>
-                      </div>
-                    </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* ALWAYS-VISIBLE AUDIO CONTROLS & BRAND SIGNATURE */}
@@ -872,7 +835,7 @@ export default function App() {
 
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30">
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
@@ -902,7 +865,7 @@ export default function App() {
 
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" style={{ borderColor: "#1E60FF" }}>
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30">
               
               {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
               <button 
