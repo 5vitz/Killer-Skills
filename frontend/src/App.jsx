@@ -15,105 +15,107 @@ const SEED_IMAGES = [
   { id: 3, url: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500", name: "BYD Song Plus (Estilo)" },
   { id: 4, url: "https://images.unsplash.com/photo-1621007947382-cc347941150e?w=500", name: "Toyota Hilux (Lamas)" },
   { id: 5, url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500", name: "Porsche Taycan (Estética)" }
-];const ARCHETYPES = [
-  { id: 'sabio', name: 'Sábio', desc: 'Busca o conhecimento e pratica a autorreflexão. Analisa e age com sabedoria.', color: '#D4AF37', shadow: 'Sombra: Distanciamento emocional e altivez intelectual.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp' },
-  { id: 'inocente', name: 'Inocente', desc: 'Enxerga os aspectos positivos em tudo. Espontâneo, confiante e otimista.', color: '#4D90FE', shadow: 'Sombra: Pode ser ingênuo ou negar realidades dolorosas.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp' },
-  { id: 'explorador', name: 'Explorador', desc: 'Busca liberdade para agir e descobrir o mundo. Gosta de novidades constantes.', color: '#34A853', shadow: 'Sombra: Inconstância, dispersão e medo de criar raízes.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp' },
-  { id: 'cuidador', name: 'Cuidador', desc: 'Gosta de cuidar dos outros. Prestativo e focado no bem-estar de todos.', color: '#EA4335', shadow: 'Sombra: Esgotamento emocional por negligência de si próprio.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp' },
-  { id: 'heroi', name: 'Herói', desc: 'Guerreiro e destemido. Luta para proteger os seus e não teme obstáculos.', color: '#E06666', shadow: 'Sombra: Obsessão por combate e necessidade de provar valor.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp' },
-  { id: 'mago', name: 'Mago', desc: 'Acredita que o mundo pode ser diferente. Focado na transformação e revolução.', color: '#93C47D', shadow: 'Sombra: Manipulação mental e fuga da realidade física.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp' },
-  { id: 'rebelde', name: 'Rebelde', desc: 'Pensa de maneira diferente. Foge de padrões tradicionais e regras estritas.', color: '#F6B26B', shadow: 'Sombra: Destruição sem causa e marginalização improdutiva.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp' },
-  { id: 'criador', name: 'Criador', desc: 'Dá vida à imaginação e às coisas que ainda não existem. Artista e inventor.', color: '#FFD966', shadow: 'Sombra: Perfeccionismo extremo que impede a entrega.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp' },
-  { id: 'amante', name: 'Amante', desc: 'Valoriza as conexões humanas de alta sensibilidade. Feliz ao amar e ser amado.', color: '#C27BA0', shadow: 'Sombra: Perda de identidade e anulação em favor do outro.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp' },
-  { id: 'tolo', name: 'Tolo', desc: 'Alegre, dinâmico, gosta de divertir as pessoas. Autêntico e descontraído.', color: '#8E7CC3', shadow: 'Sombra: Frivolidade e fuga de responsabilidades sérias.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp' },
-  { id: 'homem_comum', name: 'Homem Comum', desc: 'Age em conformidade com o grupo. Empático, pé no chão e excelente vizinho.', color: '#858585', shadow: 'Sombra: Perda de voz ativa em nome da conformidade social.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp' },
-  { id: 'governante', name: 'Governante', desc: 'Líder natural, assume a autoridade e sabe impor a ordem e a estabilidade.', color: '#E09E25', shadow: 'Sombra: Rigidez extrema e medo irracional do caos.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp' }
+];
+
+const ARCHETYPES = [
+  { id: 'sabio', name: 'Sábio', desc: 'O Sábio é aquela parte de você que busca silenciar o barulho do mundo para escutar a própria verdade. Ele representa a sua capacidade de refletir antes de agir, de observar além do óbvio e de valorizar o aprendizado constante. Ter esse lado ativo significa que você encontra paz na quietude, prefere conversas profundas e busca entender a lógica das coisas. Mas cuidado: o excesso de racionalidade pode afastar você das suas emoções. Use sua sabedoria para iluminar o seu caminho, mantendo sempre o coração aberto.', color: '#D4AF37', shadow: 'Sombra: Isolamento na frieza da mente e distanciamento das emoções.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp' },
+  { id: 'inocente', name: 'Inocente', desc: 'O Inocente é aquela parte de você que escolhe enxergar a beleza e a pureza nas coisas simples da vida. Ele representa o seu otimismo espontâneo, a capacidade de confiar e a busca constante pela felicidade leve e sem complicações. Ter esse lado forte significa que você mantém viva a fé no futuro e o dom de recomeçar sempre com o coração limpo. Mas atenção: a busca por um mundo perfeito pode fazer você negar realidades difíceis. Preserve sua leveza, mantendo os pés firmes no chão.', color: '#4D90FE', shadow: 'Sombra: Ingenuidade excessiva e negação de realidades dolorosas.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp' },
+  { id: 'explorador', name: 'Explorador', desc: 'O Explorador é aquela chama interna que impulsiona você a buscar liberdade e a descobrir novos caminhos na jornada da vida. Ele representa a sua coragem de romper a rotina, o desejo de autenticidade e o amor pela independência. Ter esse lado ativo significa que você se renova com o desconhecido e detesta qualquer sentimento de aprisionamento. Mas cuidado: o medo de criar raízes pode gerar uma eterna inconstância. Lembre-se de que a maior de todas as viagens acontece dentro de você.', color: '#34A853', shadow: 'Sombra: Inconstância e dispersão pelo medo de criar raízes.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp' },
+  { id: 'cuidador', name: 'Cuidador', desc: 'O Cuidador é aquela força amorosa em você que encontra propósito em apoiar, proteger e nutrir a vida ao seu redor. Ele representa a sua generosidade natural, a compaixão sincera e a capacidade de criar ambientes seguros e acolhedores. Ter esse lado ativo significa que o bem-estar do outro é sagrado para você. Mas preste atenção: doar-se sem limites pode levar ao esquecimento das suas próprias necessidades. Lembre-se de que cuidar de si mesmo é o primeiro passo para poder cuidar do mundo.', color: '#EA4335', shadow: 'Sombra: Martírio e esgotamento por negligenciar a si próprio.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp' },
+  { id: 'heroi', name: 'Herói', desc: 'O Herói é aquela força guerreira em você que se recusa a desistir diante dos obstáculos e das injustiças. Ele representa a sua determinação obstinada, a coragem de assumir batalhas difíceis e a busca constante por superação pessoal. Ter esse lado ativo significa que você se fortalece no desafio e busca proteger quem ama. Mas fique alerta: a necessidade constante de lutar pode transformá-lo em alguém rígido ou obcecado por vitórias. Aprenda que a verdadeira força também sabe quando descansar.', color: '#E06666', shadow: 'Sombra: Rigor excessivo e obsessão por estar sempre em combate.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp' },
+  { id: 'mago', name: 'Mago', desc: 'O Mago é aquela parte intuitiva de você que acredita que a realidade pode ser transformada a partir de uma visão interna profunda. Ele representa a sua capacidade de manifestar sonhos, de compreender o invisível e de catalisar mudanças profundas na vida cotidiana. Ter esse lado ativo significa que você enxerga conexões onde outros veem caos e busca criar o extraordinário. Mas atenção: o apego ao controle mental pode afastar você da simplicidade do mundo físico. Use sua magia com os pés no chão.', color: '#93C47D', shadow: 'Sombra: Manipulação da realidade e distanciamento do mundo real.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp' },
+  { id: 'rebelde', name: 'Rebelde', desc: 'O Rebelde é aquela voz autêntica em você que questiona as regras vazias e se recusa a viver sob moldes impostos pelos outros. Ele representa a sua liberdade de pensar diferente, a coragem de quebrar padrões obsoletos e o desejo de revolução pessoal. Ter esse lado ativo significa que você valoriza a sua individualidade acima de tudo e busca a mudança real. Mas cuidado: a revolta cega pode levar ao isolamento ou à destruição sem propósito. Direcione sua força para construir o novo.', color: '#F6B26B', shadow: 'Sombra: Rebeldia vazia e destruição sem causa legítima.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp' },
+  { id: 'criador', name: 'Criador', desc: 'O Criador é aquela força expressiva em você que sente a necessidade urgente de dar forma à imaginação e de trazer algo novo ao mundo. Ele representa o seu impulso artístico, a busca pela originalidade e o desejo de deixar uma marca pessoal duradoura. Ter esse lado ativo significa que você enxerga potencial criativo em cada detalhe da vida. Mas preste atenção: o perfeccionismo extremo pode paralisar as suas mãos e impedir você de entregar sua arte. Liberte suas criações com amor.', color: '#FFD966', shadow: 'Sombra: Perfeccionismo extremo que paralisa e impede a entrega.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp' },
+  { id: 'amante', name: 'Amante', desc: 'O Amante é aquela energia sensível em você que busca conexão profunda, beleza e harmonia em todas as relações humanas. Ele representa a sua capacidade de se entregar com paixão, de valorizar o afeto e de viver com intensidade sensorial e emocional. Ter esse lado ativo significa que você coloca o amor e a beleza no centro do seu caminho. Mas cuidado: o medo de ficar só ou de ser rejeitado pode fazer você anular a sua própria identidade. Lembre-se de amar a si mesmo primeiro.', color: '#C27BA0', shadow: 'Sombra: Anulação pessoal e perda de identidade para agradar.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp' },
+  { id: 'tolo', name: 'Tolo', desc: 'O Tolo é aquela parte leve e espontânea de você que escolhe viver o momento presente com alegria, humor e diversão contagiante. Ele representa a sua capacidade de rir de si mesmo, de simplificar o que parece pesado e de trazer sorrisos ao dia a dia. Ter esse lado active significa que você valoriza a leveza e sabe que a vida é um jogo belo. Mas atenção: usar o riso como escudo pode esconder sentimentos que precisam ser acolhidos com seriedade. Divirta-se sem fugir de si.', color: '#8E7CC3', shadow: 'Sombra: Frivolidade excessiva e fuga de responsabilidades sérias.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp' },
+  { id: 'homem_comum', name: 'Homem Comum', desc: 'O Homem Comum é aquela parte realista e acolhedora em você que valoriza a igualdade, a simplicidade e a conexão genuína com os outros. Ele representa o seu senso de comunidade, a empatia pé no chão e o desejo de pertencer sem precisar fingir ser quem não é. Ter esse lado ativo significa que você é confiável, valoriza a honestidade simples e respeita a todos igualmente. Mas cuidado: o medo de se destacar pode apagar o brilho da sua voz individual. Lembre-se de sua singularidade.', color: '#858585', shadow: 'Sombra: Conformismo excessivo e perda da voz própria.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp' },
+  { id: 'governante', name: 'Governante', desc: 'O Governante é aquela força de liderança em você que busca criar ordem, estabilidade e prosperidade para a sua família e comunidade. Ele representa a sua capacidade de assumir responsabilidades, de organizar o caos e de guiar com segurança e clareza. Ter esse lado ativo significa que você é o pilar que sustenta e protege os outros nos momentos difíceis. Mas fique atento: a obsessão pelo controle pode gerar rigidez e afastar as pessoas. Lidere sempre com o coração aberto.', color: '#E09E25', shadow: 'Sombra: Rigidez controladora e autoritarismo defensivo.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp' }
 ];
 
 const ARCHETYPE_DETAILS = {
   sabio: {
-    desejo: "Encontrar a verdade",
-    medo: "Ser enganado ou ignorante",
-    superpoder: "Sabedoria e análise profunda",
+    desejo: "Silenciar o barulho do mundo e encontrar a verdade interna",
+    medo: "Viver na ilusão e ser guiado pela ignorância",
+    superpoder: "Observação profunda e discernimento intuitivo",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp",
-    sombra: "Distanciamento emocional e altivez intelectual"
+    sombra: "Isolamento na frieza da mente e distanciamento das emoções"
   },
   inocente: {
-    desejo: "Experimentar o paraíso e ser feliz",
-    medo: "Fazer algo errado e ser punido",
-    superpoder: "Fé e otimismo inabaláveis",
+    desejo: "Viver com espontaneidade, leveza e otimismo pleno",
+    medo: "Ser punido ou contaminado pela maldade e dureza do mundo",
+    superpoder: "Fé inabalável e pureza no recomeçar",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp",
-    sombra: "Ingenuidade excessiva e negação da realidade"
+    sombra: "Ingenuidade excessiva e negação de realidades dolorosas"
   },
   explorador: {
-    desejo: "Viver uma vida livre e autêntica",
-    medo: "Ficar preso ou se conformar",
-    superpoder: "Autenticidade e coragem de desbravar",
+    desejo: "Viver com liberdade e descobrir sua própria verdade",
+    medo: "Ficar preso no conformismo e na rotina sufocante",
+    superpoder: "Coragem de desbravar novos caminhos",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp",
-    sombra: "Inconstância, dispersão e pânico de criar raízes"
+    sombra: "Inconstância e dispersão pelo medo de criar raízes"
   },
   cuidador: {
-    desejo: "Proteger e cuidar dos outros",
-    medo: "Egoísmo e ingratidão",
-    superpoder: "Compaixão e generosidade pura",
+    desejo: "Proteger e nutrir aqueles que ama",
+    medo: "O egoísmo e a ingratidão dos que estão ao redor",
+    superpoder: "Generosidade e acolhimento incondicional",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp",
-    sombra: "Martírio e esgotamento por negligência de si próprio"
+    sombra: "Martírio e esgotamento por negligenciar a si próprio"
   },
   heroi: {
-    desejo: "Provar seu valor através de ações difíceis",
-    medo: "Fraqueza e vulnerabilidade",
-    superpoder: "Competência, coragem e determinação",
+    desejo: "Superar desafios e proteger quem ama",
+    medo: "Fraqueza e fracasso diante dos obstáculos",
+    superpoder: "Determinação inabalável e coragem de lutar",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp",
-    sombra: "Obsessão por combate e necessidade de provar valor"
+    sombra: "Rigor excessivo e obsessão por estar sempre em combate"
   },
   mago: {
-    desejo: "Compreender as leis fundamentais do universo",
-    medo: "Consequências negativas não intencionais",
-    superpoder: "Transformação e manifestação da visão",
+    desejo: "Transformar a realidade a partir de uma visão interior",
+    medo: "Consequências desastrosas causadas pelo controle inadequado",
+    superpoder: "Intuição afiada e manifestação de sonhos",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp",
-    sombra: "Manipulação mental e distanciamento da realidade física"
+    sombra: "Manipulação da realidade e distanciamento do world real"
   },
   rebelde: {
-    desejo: "Revolucionar o que não funciona",
-    medo: "Ser comum ou impotente",
-    superpoder: "Liberdade radical e pensamento disruptivo",
+    desejo: "Questionar regras obsoletas e provocar a mudança real",
+    medo: "Ser comum e impotente diante de padrões impostos",
+    superpoder: "Pensamento disruptivo e liberdade radical",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp",
-    sombra: "Destruição sem causa legítima e rebeldia improdutiva"
+    sombra: "Rebeldia vazia e destruição sem causa legítima"
   },
   criador: {
-    desejo: "Criar algo de valor duradouro",
-    medo: "Mediocridade ou falta de visão",
-    superpoder: "Criatividade sem limites e habilidade técnica",
+    desejo: "Dar forma à imaginação e criar algo com alma",
+    medo: "Mediocridade e incapacidade de expressar sua visão",
+    superpoder: "Criatividade fluida e poder de dar vida às ideias",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp",
-    sombra: "Perfeccionismo extremo que paralisa a entrega"
+    sombra: "Perfeccionismo extremo que paralisa e impede a entrega"
   },
   amante: {
-    desejo: "Estar em conexão com quem e o que ama",
-    medo: "Ficar sozinho ou não ser desejado",
-    superpoder: "Sensualidade, empatia e compromisso profundo",
+    desejo: "Vivenciar o afeto, a sintonia e a entrega mútua",
+    medo: "A solidão profunda e a dor de não ser aceito ou desejado",
+    superpoder: "Sensibilidade, afeto e compromisso de alma",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp",
-    sombra: "Anulação pessoal para agradar ao parceiro"
+    sombra: "Anulação pessoal e perda de identidade para agradar"
   },
   tolo: {
-    desejo: "Viver no momento com alegria plena",
-    medo: "Ser chato ou passar despercebido",
-    superpoder: "Humor, leveza e inteligência espontânea",
+    desejo: "Alegria espontânea, riso leve e descontração plena",
+    medo: "A seriedade rígida e o tédio existencial",
+    superpoder: "Humor inteligente e habilidade de aliviar pesos",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp",
-    sombra: "Frivolidade e irresponsabilidade diante de crises"
+    sombra: "Frivolidade excessiva e fuga de responsabilidades sérias"
   },
   homem_comum: {
-    desejo: "Pertencer e conectar-se com os outros",
-    medo: "Ser deixado de fora ou se destacar demais",
-    superpoder: "Empatia, realismo e ausência de pretensão",
+    desejo: "Conectar-se com a simplicidade e pertencer com sinceridade",
+    medo: "Ser excluído do grupo ou rejeitado por sua simplicidade",
+    superpoder: "Empatia pé no chão e fidelidade ao cotidiano",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp",
-    sombra: "Perda da própria voz em nome do consenso do grupo"
+    sombra: "Conformismo excessivo e perda da voz própria"
   },
   governante: {
-    desejo: "Criar uma família ou comunidade próspera",
-    medo: "O caos e a perda do controle",
-    superpoder: "Liderança, responsabilidade e estabilidade",
+    desejo: "Organizar o caos, guiar e prosperar coletivamente",
+    medo: "A perda de controle, a ruína e a desordem do ambiente",
+    superpoder: "Liderança responsável e poder de prover segurança",
     imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp",
-    sombra: "Autoritarismo rígido e incapacidade de delegar"
+    sombra: "Rigidez controladora e autoritarismo defensivo"
   }
 };
 
@@ -489,6 +491,8 @@ export default function App() {
   }));
 
   const currentPersona = activePersonasList[selectedPersonaIdx] || activePersonasList[0];
+  const activeArch = hoveredArchetype || focusedArchetype;
+  const isMetamorphosed = activeView === "servicos" && !hasPersonaDefined && activeArch;
 
   return (
     <div className="relative w-screen h-screen bg-black flex overflow-hidden text-white antialiased select-none z-10">
@@ -500,96 +504,176 @@ export default function App() {
       </div>
 
       {/* 1. BARRA LATERAL METÁLICA PREMIUM */}
-      <div className="w-[260px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A]">
-        <div className="flex flex-col gap-6">
-          {/* Título do Cockpit */}
-          <div className="text-center">
-            <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
-            <div className={`text-[9px] font-bold tracking-wider uppercase ${isAdminMode ? "text-brand-gold" : "text-brand-blue"}`}>
-              {isAdminMode ? "ADMIN COCKPIT" : "KS STUDIO"}
+      <div className="w-[260px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A] relative overflow-hidden transition-all duration-500">
+        
+        {/* ESTADO A: MENU PADRÃO */}
+        <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${isMetamorphosed ? "opacity-0 scale-95 pointer-events-none absolute inset-5" : "opacity-100 scale-100"}`}>
+          <div className="flex flex-col gap-6">
+            {/* Título do Cockpit */}
+            <div className="text-center">
+              <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
+              <div className={`text-[9px] font-bold tracking-wider uppercase ${isAdminMode ? "text-brand-gold" : "text-brand-blue"}`}>
+                {isAdminMode ? "ADMIN COCKPIT" : "KS STUDIO"}
+              </div>
+            </div>
+
+            <hr className="border-white/10" />
+
+            {/* Card do Usuário */}
+            <div className="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/5">
+              <div className={`w-8 h-8 rounded-full flex justify-center items-center font-bold text-xs ${isAdminMode ? "bg-brand-gold text-black" : "bg-brand-blue text-white"}`}>
+                {userEmail.substring(0, 2).toUpperCase()}
+              </div>
+              <div className="text-xs font-medium text-white/70 overflow-hidden text-ellipsis whitespace-nowrap w-[150px]">
+                {userEmail}
+              </div>
+            </div>
+
+            {/* Menu de Áreas de Trabalho */}
+            <div className="flex flex-col gap-1.5 pt-2">
+              
+              <button 
+                onClick={() => setActiveView("servicos")}
+                className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
+                  activeView === "servicos" 
+                    ? "bg-white/5 border border-white/5 text-white" 
+                    : "text-white/60 hover:bg-white/5 hover:text-white"
+                }`}
+              >
+                <User className="w-4 h-4" /> 1 - PERSONAS
+              </button>
+
+              <button 
+                disabled
+                className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 text-white/20 border border-dashed border-white/[0.05] cursor-not-allowed select-none"
+              >
+                <Cpu className="w-4 h-4" /> 2 - EM BREVE (🔒)
+              </button>
+
+              <button 
+                onClick={() => setActiveView("storyboard")}
+                className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
+                  activeView === "storyboard" 
+                    ? "bg-white/5 border border-white/5 text-white" 
+                    : "text-white/60 hover:bg-white/5 hover:text-white"
+                }`}
+              >
+                <Sparkles className="w-4 h-4" /> 3 - KS STUDIO
+              </button>
             </div>
           </div>
 
-          <hr className="border-white/10" />
-
-          {/* Card do Usuário */}
-          <div className="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/5">
-            <div className={`w-8 h-8 rounded-full flex justify-center items-center font-bold text-xs ${isAdminMode ? "bg-brand-gold text-black" : "bg-brand-blue text-white"}`}>
-              {userEmail.substring(0, 2).toUpperCase()}
-            </div>
-            <div className="text-xs font-medium text-white/70 overflow-hidden text-ellipsis whitespace-nowrap w-[150px]">
-              {userEmail}
-            </div>
-          </div>
-
-          {/* Menu de Áreas de Trabalho */}
-          <div className="flex flex-col gap-1.5 pt-2">
-            
+          {/* Rodapé da Sidebar */}
+          <div className="flex flex-col gap-1.5 border-t border-white/10 pt-4">
+            {/* Alternador Administrativo de Cockpit */}
             <button 
-              onClick={() => setActiveView("servicos")}
+              onClick={() => {
+                if (isAdminMode) {
+                  triggerGoogleAuthSequence("scalla_records@gmail.com");
+                } else {
+                  triggerGoogleAuthSequence("artz.genera@gmail.com");
+                }
+              }}
               className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-                activeView === "servicos" 
-                  ? "bg-white/5 border border-white/5 text-white" 
+                isAdminMode 
+                  ? "bg-brand-gold/15 border border-brand-gold/30 text-brand-gold" 
                   : "text-white/60 hover:bg-white/5 hover:text-white"
               }`}
             >
-              <User className="w-4 h-4" /> 1 - PERSONAS
+              <ShieldCheck className="w-4 h-4" /> PAINEL ADM
             </button>
 
             <button 
-              disabled
-              className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 text-white/20 border border-dashed border-white/[0.05] cursor-not-allowed select-none"
+              onClick={handleLogout}
+              className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold uppercase flex items-center gap-3 duration-200 text-white/60 hover:bg-brand-pink/10 hover:text-brand-pink"
             >
-              <Cpu className="w-4 h-4" /> 2 - EM BREVE (🔒)
+              <LogOut className="w-4 h-4" /> ENCERRAR SESSÃO
             </button>
 
-            <button 
-              onClick={() => setActiveView("storyboard")}
-              className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-                activeView === "storyboard" 
-                  ? "bg-white/5 border border-white/5 text-white" 
-                  : "text-white/60 hover:bg-white/5 hover:text-white"
-              }`}
-            >
-              <Sparkles className="w-4 h-4" /> 3 - KS STUDIO
-            </button>
-          </div>
-        </div>
-
-        {/* Rodapé da Sidebar */}
-        <div className="flex flex-col gap-1.5 border-t border-white/10 pt-4">
-          {/* Alternador Administrativo de Cockpit */}
-          <button 
-            onClick={() => {
-              if (isAdminMode) {
-                triggerGoogleAuthSequence("scalla_records@gmail.com");
-              } else {
-                triggerGoogleAuthSequence("artz.genera@gmail.com");
-              }
-            }}
-            className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-              isAdminMode 
-                ? "bg-brand-gold/15 border border-brand-gold/30 text-brand-gold" 
-                : "text-white/60 hover:bg-white/5 hover:text-white"
-            }`}
-          >
-            <ShieldCheck className="w-4 h-4" /> PAINEL ADM
-          </button>
-
-          <button 
-            onClick={handleLogout}
-            className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold uppercase flex items-center gap-3 duration-200 text-white/60 hover:bg-brand-pink/10 hover:text-brand-pink"
-          >
-            <LogOut className="w-4 h-4" /> ENCERRAR SESSÃO
-          </button>
-
-          <div className="w-full h-11 px-4 flex items-center gap-3 text-white/40 select-none">
-            <div className="w-4 flex justify-center items-center">
-              <span className="w-2 h-2 bg-green-500 rounded-full active-pulse" />
+            <div className="w-full h-11 px-4 flex items-center gap-3 text-white/40 select-none">
+              <div className="w-4 flex justify-center items-center">
+                <span className="w-2 h-2 bg-green-500 rounded-full active-pulse" />
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-widest">ONLINE NA WEB</span>
             </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest">ONLINE NA WEB</span>
           </div>
         </div>
+
+        {/* ESTADO B: GUIA FINO E DETALHADO (ARQUÉTIPOS TEXTOS) */}
+        <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${isMetamorphosed ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
+          {isMetamorphosed && (
+            <>
+              {/* TOPO FIXO: Título Geral e Card Dinâmico Centrado de Arquétipo */}
+              <div className="flex flex-col gap-3 w-full shrink-0 select-none mb-4">
+                <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold text-center">
+                  Significado
+                </h2>
+                <div className="w-full h-11 bg-white/5 border border-black rounded-xl flex items-center justify-center text-center px-4">
+                  <span 
+                    className="text-xs font-poppins-light uppercase tracking-widest transition-all duration-300"
+                    style={{ 
+                      color: activeArch.color,
+                      textShadow: `0 0 10px ${activeArch.color}55`
+                    }}
+                  >
+                    {activeArch.name}
+                  </span>
+                </div>
+              </div>
+
+              {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
+              <div className="flex-1 flex flex-col gap-4 overflow-hidden">
+                <div 
+                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg bg-[#090C15]/40 p-4 flex flex-col justify-between transition-all duration-500"
+                >
+                  {/* Descrição Ontológica Poética */}
+                  <p className="font-poppins-light text-[11.5px] text-white/80 leading-relaxed text-justify overflow-y-auto max-h-[170px] pr-1 scrollbar-thin">
+                    {activeArch.desc}
+                  </p>
+
+                  {/* Fichas Técnicas Delicadas */}
+                  <div className="flex flex-col gap-2.5 pt-3 border-t border-white/5 mt-auto">
+                    <div className="flex flex-col text-left">
+                      <span className="text-[8px] tracking-wider text-brand-gold uppercase font-poppins-light">Desejo Central</span>
+                      <span className="text-[10px] text-white/95 font-poppins-light leading-tight">
+                        {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col text-left">
+                      <span className="text-[8px] tracking-wider text-brand-pink uppercase font-poppins-light">Maior Medo</span>
+                      <span className="text-[10px] text-white/95 font-poppins-light leading-tight">
+                        {ARCHETYPE_DETAILS[activeArch.id]?.medo}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col text-left">
+                      <span className="text-[8px] tracking-wider text-green-400 uppercase font-poppins-light">Superpoder</span>
+                      <span className="text-[10px] text-white/95 font-poppins-light leading-tight">
+                        {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col text-left">
+                      <span className="text-[8px] tracking-wider text-amber-500 uppercase font-poppins-light">Sombra</span>
+                      <span className="text-[10px] text-white/95 font-poppins-light leading-tight">
+                        {ARCHETYPE_DETAILS[activeArch.id]?.sombra}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ALWAYS-VISIBLE NAVIGATION INSTRUCTION */}
+              <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4 text-center shrink-0">
+                <span className="text-[8px] font-poppins-light tracking-[0.25em] text-white/30 uppercase">
+                  Mova o mouse para mudar
+                </span>
+              </div>
+            </>
+          )}
+        </div>
+
       </div>
 
       {/* 2. CONTEÚDO PRINCIPAL (COMPLETAMENTE ADAPTÁVEL) */}

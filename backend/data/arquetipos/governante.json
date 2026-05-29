@@ -1,0 +1,10 @@
+{
+  "id": "governante",
+  "name": "Governante",
+  "desc_ontologica": "O Governante é aquela força de liderança em você que busca criar ordem, estabilidade e prosperidade para a sua família e comunidade. Ele representa a sua capacidade de assumir responsabilidades, de organizar o caos e de guiar com segurança e clareza. Ter esse lado ativo significa que você é o pilar que sustenta e protege os outros nos momentos difíceis. Mas fique atento: a obsessão pelo controle pode gerar rigidez e afastar as pessoas. Lidere sempre com o coração aberto.",
+  "desejo": "Organizar o caos, guiar e prosperar coletivamente",
+  "medo": "A perda de controle, a ruína e a desordem do ambiente",
+  "superpoder": "Liderança responsável e poder de prover segurança",
+  "sombra": "Rigidez controladora e autoritarismo defensivo",
+  "color": "#E09E25"
+}

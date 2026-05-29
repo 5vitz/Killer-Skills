@@ -1,0 +1,10 @@
+{
+  "id": "heroi",
+  "name": "Herói",
+  "desc_ontologica": "O Herói é aquela força guerreira em você que se recusa a desistir diante dos obstáculos e das injustiças. Ele representa a sua determinação obstinada, a coragem de assumir batalhas difíceis e a busca constante por superação pessoal. Ter esse lado ativo significa que você se fortalece no desafio e busca proteger quem ama. Mas fique alerta: a necessidade constante de lutar pode transformá-lo em alguém rígido ou obcecado por vitórias. Aprenda que a verdadeira força também sabe quando descansar.",
+  "desejo": "Superar desafios e proteger quem ama",
+  "medo": "Fraqueza e fracasso diante dos obstáculos",
+  "superpoder": "Determinação inabalável e coragem de lutar",
+  "sombra": "Rigor excessivo e obsessão por estar sempre em combate",
+  "color": "#E06666"
+}
