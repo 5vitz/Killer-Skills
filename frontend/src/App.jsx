@@ -748,7 +748,7 @@ export default function App() {
                     Arquétipos
                   </h2>
                   <div className="w-full h-11 bg-white/5 border border-black rounded-xl flex items-center justify-center text-center px-4">
-                    <span className="text-xs font-black uppercase tracking-wider text-white">
+                    <span className="text-xs font-poppins-light uppercase tracking-widest text-white">
                       {activeArch ? activeArch.name : "POSICIONE-SE"}
                     </span>
                   </div>
