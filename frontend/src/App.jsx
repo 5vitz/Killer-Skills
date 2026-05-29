@@ -615,18 +615,14 @@ export default function App() {
                 {/* Visor Interno */}
                 {/* Visor Interno (Fundo preto removido em Tela1A e Tela1B para renderização direta no Player) */}
                 <div 
-                  className={`w-full h-full flex flex-col justify-between relative overflow-hidden z-10 select-none text-white ${
-                    (onboardingStep === "video" || onboardingStep === "identificacao") 
-                      ? "bg-transparent border-0 p-0" 
-                      : "bg-black rounded-[6px] border border-white/5 pt-1 pb-0 px-0"
-                  }`}
+                  className="w-full h-full flex flex-col justify-between relative overflow-hidden z-10 select-none text-white bg-transparent border-0 p-0"
                 >
                   {onboardingStep === "video" ? (
                     /* TELA 1A - LETREIRO 1 (OS ARQUÉTIPOS DE JUNG) */
                     <div key="screen-1a" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
                       
                       {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
-                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
+                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
                           key="img-1a"
                           src="https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tela1A.webp" 
@@ -657,7 +653,7 @@ export default function App() {
                     <div key="screen-1b" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
                       
                       {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
-                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/20 shadow-2xl bg-white/[0.02] mb-4">
+                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-white/[0.02] mb-4">
                         <img 
                           key="img-1b"
                           src="https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tela1B.webp" 
@@ -685,42 +681,45 @@ export default function App() {
                     </div>
                   ) : (
                     /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
-                    <div className="w-full h-full flex flex-col justify-between p-0 select-none relative bg-black rounded-[6px]">
+                    <div key="screen-1c" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
                       
-                      {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
-                      <div className="mt-4 mb-3 overflow-hidden flex flex-col gap-0 h-[384px]">
-                        {ARCHETYPES.map((arch) => {
-                          const isFocused = focusedArchetype?.id === arch.id;
-                          return (
-                            <div 
-                              key={arch.id} 
-                              onMouseEnter={() => setHoveredArchetype(arch)}
-                              onMouseLeave={() => setHoveredArchetype(null)}
-                              onClick={() => setFocusedArchetype(isFocused ? null : arch)}
-                              className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.04] transition-all duration-200 cursor-pointer h-[32px]"
-                              style={{ borderColor: isFocused ? "#D5A370" : "transparent" }}
-                            >
-                              <div className="flex justify-between items-center text-[10px] font-bold leading-none px-4">
-                                <span style={{ color: "#858585" }} className="flex items-center gap-1.5 transition-colors duration-200">
-                                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#858585" }} />
-                                  {arch.name}
-                                </span>
-                                <span className="text-white/60 font-black">{dosagemPersona[arch.id]}%</span>
+                      {/* Card da Matriz com Bordas Arredondadas e Fundo Preto (Flex-1 para ter a mesma exata altura do card das imagens) */}
+                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-black mb-4 flex flex-col pt-1 pb-0 px-0">
+                        {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
+                        <div className="my-auto overflow-hidden flex flex-col gap-0 h-[384px]">
+                          {ARCHETYPES.map((arch) => {
+                            const isFocused = focusedArchetype?.id === arch.id;
+                            return (
+                              <div 
+                                key={arch.id} 
+                                onMouseEnter={() => setHoveredArchetype(arch)}
+                                onMouseLeave={() => setHoveredArchetype(null)}
+                                onClick={() => setFocusedArchetype(isFocused ? null : arch)}
+                                className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.04] transition-all duration-200 cursor-pointer h-[32px]"
+                                style={{ borderColor: isFocused ? "#D5A370" : "transparent" }}
+                              >
+                                <div className="flex justify-between items-center text-[10px] font-bold leading-none px-4">
+                                  <span style={{ color: "#858585" }} className="flex items-center gap-1.5 transition-colors duration-200">
+                                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#858585" }} />
+                                    {arch.name}
+                                  </span>
+                                  <span className="text-white/60 font-black">{dosagemPersona[arch.id]}%</span>
+                                </div>
+                                <input 
+                                  type="range" 
+                                  min="0" 
+                                  max="100" 
+                                  value={dosagemPersona[arch.id]}
+                                  onChange={(e) => {
+                                    const val = parseInt(e.target.value);
+                                    setDosagemPersona(prev => ({ ...prev, [arch.id]: val }));
+                                  }}
+                                  className="w-full premium-slider"
+                                />
                               </div>
-                              <input 
-                                type="range" 
-                                min="0" 
-                                max="100" 
-                                value={dosagemPersona[arch.id]}
-                                onChange={(e) => {
-                                  const val = parseInt(e.target.value);
-                                  setDosagemPersona(prev => ({ ...prev, [arch.id]: val }));
-                                }}
-                                className="w-full premium-slider"
-                              />
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
+                        </div>
                       </div>
 
                       {/* Botão de Finalização Gerar Persona */}
@@ -747,49 +746,38 @@ export default function App() {
                   <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold text-center">
                     Portal da Persona
                   </h2>
-                  <div className="w-full h-11 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-center px-4">
-                    <span className="text-xs font-black uppercase tracking-wider text-white">
-                      {activeArch ? activeArch.name : "Arquétipo"}
-                    </span>
-                  </div>
                 </div>
 
                 {/* CONTEÚDO DO PORTAL ABAIXO (SEM SCROLL, APENAS FOTO STRETCHED) */}
                 <div className="flex-1 flex flex-col gap-4">
                   {/* Image Card (Flex-1 para preenchimento vertical perfeito) */}
-                  <div className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg group">
+                  <div 
+                    className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg group transition-colors duration-500"
+                    style={{ backgroundColor: activeArch ? "transparent" : "#090C15" }}
+                  >
                     <img 
                       src={
                         activeArch 
                           ? (ARCHETYPE_DETAILS[activeArch.id]?.imagem || activeArch.seedUrl)
-                          : "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tela1A.webp"
+                          : "/images/ImagemCapa.jpg"
                       } 
-                      className="w-full h-full object-cover group-hover:scale-105 duration-700 brightness-[0.8] contrast-[1.05]"
+                      className={`w-full h-full duration-700 ${
+                        activeArch 
+                          ? "object-cover group-hover:scale-105 brightness-[0.8] contrast-[1.05]" 
+                          : "object-contain p-4 brightness-[1.0] contrast-[1.0] scale-95"
+                      }`}
                       alt={activeArch ? activeArch.name : "Portal da Persona"}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-black/20 pointer-events-none" />
                     <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
                       {activeArch ? (
-                        <>
-                          <span 
-                            className="text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/60 border"
-                            style={{ color: activeArch.color, borderColor: activeArch.color }}
-                          >
-                            ARQUÉTIPO
-                          </span>
-                          <h3 className="text-lg font-black text-white mt-2 leading-tight drop-shadow-md">
-                            {activeArch.name}
-                          </h3>
-                        </>
+                        <h3 className="text-lg font-black text-white leading-tight drop-shadow-md">
+                          {activeArch.name}
+                        </h3>
                       ) : (
-                        <>
-                          <span className="text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/60 border border-brand-gold text-brand-gold">
-                            Guia Geral
-                          </span>
-                          <h3 className="text-lg font-black text-white mt-2 leading-tight drop-shadow-md">
-                            Portal do Arquétipo
-                          </h3>
-                        </>
+                        <h3 className="text-lg font-black text-white leading-tight drop-shadow-md">
+                          Portal do Arquétipo
+                        </h3>
                       )}
                     </div>
                   </div>
