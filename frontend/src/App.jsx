@@ -630,8 +630,8 @@ export default function App() {
                           alt="AI Guide"
                         />
                         {/* Letreiro 1 Overlay Inside Card (Top Position) */}
-                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/80 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
-                          <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
+                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/80 backdrop-blur-[2px] py-3 border-y border-white/[0.06] z-20">
+                          <div className="inline-block whitespace-nowrap animate-marquee text-[20px] font-poppins-light text-gold-dress tracking-widest uppercase">
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
@@ -661,8 +661,8 @@ export default function App() {
                           alt="Archetype Study"
                         />
                         {/* Letreiro 2 Overlay Inside Card (Top Position) */}
-                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/80 backdrop-blur-[2px] py-1 border-y border-white/[0.06] z-20">
-                          <div className="inline-block whitespace-nowrap animate-marquee text-[10px] font-poppins-light text-gold-dress tracking-widest uppercase">
+                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/80 backdrop-blur-[2px] py-3 border-y border-white/[0.06] z-20">
+                          <div className="inline-block whitespace-nowrap animate-marquee text-[20px] font-poppins-light text-gold-dress tracking-widest uppercase" style={{ animationDuration: "25s" }}>
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                             ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
@@ -685,6 +685,7 @@ export default function App() {
                       
                       {/* Card da Matriz com Bordas Arredondadas e Fundo Preto (Flex-1 para ter a mesma exata altura do card das imagens) */}
                       <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-black mb-4 flex flex-col pt-1 pb-0 px-0">
+                        
                         {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
                         <div className="my-auto overflow-hidden flex flex-col gap-0 h-[384px]">
                           {ARCHETYPES.map((arch) => {
@@ -744,8 +745,13 @@ export default function App() {
                 {/* TOPO FIXO: Título Geral e Card Dinâmico Centrado de Arquétipo */}
                 <div className="flex flex-col gap-3 w-full shrink-0 select-none mb-4">
                   <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold text-center">
-                    Portal da Persona
+                    Arquétipos
                   </h2>
+                  <div className="w-full h-11 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-center px-4">
+                    <span className="text-xs font-black uppercase tracking-wider text-white">
+                      {activeArch ? activeArch.name : "POSICIONE-SE"}
+                    </span>
+                  </div>
                 </div>
 
                 {/* CONTEÚDO DO PORTAL ABAIXO (SEM SCROLL, APENAS FOTO STRETCHED) */}
@@ -768,18 +774,7 @@ export default function App() {
                       }`}
                       alt={activeArch ? activeArch.name : "Portal da Persona"}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-black/20 pointer-events-none" />
-                    <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
-                      {activeArch ? (
-                        <h3 className="text-lg font-black text-white leading-tight drop-shadow-md">
-                          {activeArch.name}
-                        </h3>
-                      ) : (
-                        <h3 className="text-lg font-black text-white leading-tight drop-shadow-md">
-                          Portal do Arquétipo
-                        </h3>
-                      )}
-                    </div>
+
                   </div>
                 </div>
 
