@@ -643,7 +643,7 @@ export default function App() {
                       {/* Botão de Avanço para a Identificação */}
                       <button 
                         onClick={() => setOnboardingStep("identificacao")}
-                        className="w-full h-11 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
+                        className="w-full h-11 bg-white/[0.015] border border-white/10 hover:bg-white/[0.06] hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
                       >
                         AVANÇAR <ArrowRight className="w-4 h-4" />
                       </button>
@@ -674,7 +674,7 @@ export default function App() {
                       {/* Botão de Avanço para a Matriz */}
                       <button 
                         onClick={() => setOnboardingStep("matriz")}
-                        className="w-full h-11 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
+                        className="w-full h-11 bg-white/[0.015] border border-white/10 hover:bg-white/[0.06] hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
                       >
                         DOSAR <ArrowRight className="w-4 h-4" />
                       </button>
@@ -696,7 +696,7 @@ export default function App() {
                                 onMouseEnter={() => setHoveredArchetype(arch)}
                                 onMouseLeave={() => setHoveredArchetype(null)}
                                 onClick={() => setFocusedArchetype(isFocused ? null : arch)}
-                                className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.04] transition-all duration-200 cursor-pointer h-[32px]"
+                                className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.12] transition-all duration-200 cursor-pointer h-[32px]"
                                 style={{ borderColor: isFocused ? "#D5A370" : "transparent" }}
                               >
                                 <div className="flex justify-between items-center text-[10px] font-bold leading-none px-4">
@@ -730,7 +730,7 @@ export default function App() {
                           setHasPersonaDefined(true);
                           setActiveView("storyboard");
                         }}
-                        className="w-full h-11 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
+                        className="w-full h-11 bg-white/[0.015] border border-white/10 hover:bg-white/[0.06] hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
                       >
                         ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
                       </button>
@@ -747,7 +747,7 @@ export default function App() {
                   <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold text-center">
                     Arquétipos
                   </h2>
-                  <div className="w-full h-11 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-center px-4">
+                  <div className="w-full h-11 bg-white/5 border border-black rounded-xl flex items-center justify-center text-center px-4">
                     <span className="text-xs font-black uppercase tracking-wider text-white">
                       {activeArch ? activeArch.name : "POSICIONE-SE"}
                     </span>
