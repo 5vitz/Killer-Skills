@@ -618,7 +618,7 @@ export default function App() {
                   className={`w-full h-full flex flex-col justify-between relative overflow-hidden z-10 select-none text-white ${
                     (onboardingStep === "video" || onboardingStep === "identificacao") 
                       ? "bg-transparent border-0 p-0" 
-                      : "bg-black rounded-[6px] border border-white/5 pt-1 pb-3 px-0"
+                      : "bg-black rounded-[6px] border border-white/5 pt-1 pb-0 px-0"
                   }`}
                 >
                   {onboardingStep === "video" ? (
@@ -697,10 +697,10 @@ export default function App() {
                               onMouseEnter={() => setHoveredArchetype(arch)}
                               onMouseLeave={() => setHoveredArchetype(null)}
                               onClick={() => setFocusedArchetype(isFocused ? null : arch)}
-                              className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-4 hover:bg-white/[0.04] transition-all duration-200 cursor-pointer h-[32px]"
+                              className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.04] transition-all duration-200 cursor-pointer h-[32px]"
                               style={{ borderColor: isFocused ? "#D5A370" : "transparent" }}
                             >
-                              <div className="flex justify-between items-center text-[10px] font-bold leading-none">
+                              <div className="flex justify-between items-center text-[10px] font-bold leading-none px-4">
                                 <span style={{ color: "#858585" }} className="flex items-center gap-1.5 transition-colors duration-200">
                                   <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#858585" }} />
                                   {arch.name}
@@ -730,7 +730,7 @@ export default function App() {
                           setHasPersonaDefined(true);
                           setActiveView("storyboard");
                         }}
-                        className="w-auto mx-4 mb-3 h-11 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
+                        className="w-full h-11 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
                       >
                         ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
                       </button>
