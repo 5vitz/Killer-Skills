@@ -31,7 +31,22 @@ else
 fi
 
 echo "🖥️ 2. Conectando via SSH ao VPS e atualizando a web..."
-ssh root@31.220.102.2 << 'EOF'
+
+# Função de conexão inteligente que automatiza o SSH com senha se VPS_PASSWORD existir
+connect_ssh() {
+  if [ ! -z "$VPS_PASSWORD" ]; then
+      # Garante que o sshpass esteja instalado localmente
+      if ! command -v sshpass >/dev/null 2>&1; then
+          echo "🔄 Instalando sshpass localmente para automação de senha..."
+          sudo apt-get update && sudo apt-get install -y sshpass || true
+      fi
+      sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no root@31.220.102.2 "$@"
+  else
+      ssh root@31.220.102.2 "$@"
+  fi
+}
+
+connect_ssh << 'EOF'
   cd ~/Killer-Skills || { echo "❌ ERRO: Pasta ~/Killer-Skills não encontrada no VPS!"; exit 1; }
   
   # Força a atualização do repositório
