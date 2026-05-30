@@ -150,12 +150,12 @@ input[type="range"].premium-slider:hover::-webkit-slider-runnable-track {
 input[type="range"].premium-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #000000; /* Fundo preto idêntico ao visor para efeito vazado/arruela perfeito */
   border: 1px solid #ffffff; /* Anel fino branco (arruela) */
-  margin-top: -4.5px; /* Centraliza perfeitamente a bolinha de 10px na linha de 1px */
+  margin-top: -3.5px; /* Centraliza perfeitamente a bolinha de 8px na linha de 1px */
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
   transition: transform 0.1s ease, border-color 0.1s ease;
 }
@@ -175,8 +175,8 @@ input[type="range"].premium-slider::-moz-range-track {
 
 /* Firefox Thumb */
 input[type="range"].premium-slider::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #000000; /* Fundo preto */
   border: 1px solid #ffffff; /* Anel branco */
