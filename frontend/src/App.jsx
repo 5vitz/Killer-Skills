@@ -606,7 +606,10 @@ export default function App() {
             <>
               {/* TOPO FIXO: Título Geral */}
               <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
-                <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold text-center">
+                <h2 
+                  className="text-sm uppercase tracking-wider text-white text-center"
+                  style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                >
                   Significado
                 </h2>
               </div>
@@ -813,7 +816,10 @@ export default function App() {
                 
                 {/* TOPO FIXO: Título Geral */}
                 <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
-                  <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold text-center">
+                  <h2 
+                    className="text-sm uppercase tracking-wider text-white text-center"
+                    style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                  >
                     Arquétipos
                   </h2>
                 </div>
