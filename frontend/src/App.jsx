@@ -404,7 +404,6 @@ export default function App() {
 
                 {/* Entrada de Email */}
                 <div className="w-full flex flex-col gap-2 mb-6">
-                  <label className="text-[8px] font-black tracking-wider text-white/40 uppercase text-left">Digite seu E-mail</label>
                   <input 
                     type="email" 
                     value={enteredEmail}

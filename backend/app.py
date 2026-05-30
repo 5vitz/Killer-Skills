@@ -103,6 +103,7 @@ def index():
     return {"status": "online", "message": "Killer Skills API is up and running!"}
 
 @app.post("/api/login")
+@app.post("/login")
 def login(req: LoginRequest):
     email = req.email.strip().lower()
     if not email:
@@ -124,10 +125,12 @@ def login(req: LoginRequest):
     }
 
 @app.get("/api/personas")
+@app.get("/personas")
 def get_personas():
     return ALL_PERSONAS
 
 @app.post("/api/ai/caption")
+@app.post("/ai/caption")
 def get_ai_caption(req: CaptionRequest):
     if not ai:
         return {"caption": "IA Indisponível no momento. Adicione a chave no arquivo .env."}
@@ -139,6 +142,7 @@ def get_ai_caption(req: CaptionRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/ai/analysis")
+@app.post("/ai/analysis")
 def get_ai_analysis(req: AnalysisRequest):
     if not ai:
         return {"insight": "IA offline no momento. Adicione sua chave GEMINI_API_KEY no .env."}
@@ -149,6 +153,7 @@ def get_ai_analysis(req: AnalysisRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/forge")
+@app.post("/forge")
 def forge_order(req: ForgeRequest):
     os_id = f"OS-2026-KS-{req.persona_title[:4].upper()}"
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
