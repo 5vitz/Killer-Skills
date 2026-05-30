@@ -152,7 +152,8 @@ export default function App() {
 
   useEffect(() => {
     audio.muted = isMuted;
-    audio.volume = volume;
+    // Percepção auditiva humana ajustada via escala quadrática (suavidade perfeita)
+    audio.volume = Math.pow(volume, 2);
   }, [isMuted, volume, audio]);
 
   useEffect(() => {
@@ -523,12 +524,12 @@ export default function App() {
 
             <hr className="border-white/10" />
 
-            {/* Card do Usuário */}
-            <div className="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/5">
-              <div className={`w-8 h-8 rounded-full flex justify-center items-center font-bold text-xs ${isAdminMode ? "bg-brand-gold text-black" : "bg-brand-blue text-white"}`}>
+            {/* Card do Usuário (Mesma Altura e Estilo dos Itens do Menu) */}
+            <div className="w-full h-11 px-4 rounded-lg flex items-center justify-start gap-3 bg-white/5 border border-white/5 shrink-0">
+              <div className={`w-5 h-5 rounded-full flex justify-center items-center font-bold text-[9px] shrink-0 ${isAdminMode ? "bg-brand-gold text-black" : "bg-brand-blue text-white"}`}>
                 {userEmail.substring(0, 2).toUpperCase()}
               </div>
-              <div className="text-xs font-medium text-white/70 overflow-hidden text-ellipsis whitespace-nowrap w-[150px]">
+              <div className="text-xs font-semibold text-white/70 overflow-hidden text-ellipsis whitespace-nowrap">
                 {userEmail}
               </div>
             </div>
@@ -544,14 +545,18 @@ export default function App() {
                     : "text-white/60 hover:bg-white/5 hover:text-white"
                 }`}
               >
-                <User className="w-4 h-4" /> 1 - PERSONAS
+                <User className="w-4 h-4 shrink-0" /> PERSONA
               </button>
 
               <button 
-                disabled
-                className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 text-white/20 border border-dashed border-white/[0.05] cursor-not-allowed select-none"
+                onClick={() => setActiveView("servicos_escolha")}
+                className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
+                  activeView === "servicos_escolha" 
+                    ? "bg-white/5 border border-white/5 text-white" 
+                    : "text-white/60 hover:bg-white/5 hover:text-white"
+                }`}
               >
-                <Cpu className="w-4 h-4" /> 2 - EM BREVE (🔒)
+                <Cpu className="w-4 h-4 shrink-0" /> SERVIÇOS
               </button>
 
               <button 
@@ -562,7 +567,7 @@ export default function App() {
                     : "text-white/60 hover:bg-white/5 hover:text-white"
                 }`}
               >
-                <Sparkles className="w-4 h-4" /> 3 - KS STUDIO
+                <Sparkles className="w-4 h-4 shrink-0" /> KS STUDIO
               </button>
             </div>
           </div>
@@ -578,24 +583,24 @@ export default function App() {
                   triggerGoogleAuthSequence("artz.genera@gmail.com");
                 }
               }}
-              className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
+              className={`w-full h-11 px-4 rounded-lg text-left text-[10px] font-bold uppercase tracking-widest flex items-center gap-3 duration-200 ${
                 isAdminMode 
                   ? "bg-brand-gold/15 border border-brand-gold/30 text-brand-gold" 
-                  : "text-white/60 hover:bg-white/5 hover:text-white"
+                  : "text-white/40 hover:bg-white/5 hover:text-white"
               }`}
             >
-              <ShieldCheck className="w-4 h-4" /> PAINEL ADM
+              <ShieldCheck className="w-4 h-4 shrink-0 text-white/40" /> PAINEL ADM
             </button>
 
             <button 
               onClick={handleLogout}
-              className="w-full h-11 px-4 rounded-lg text-left text-xs font-semibold uppercase flex items-center gap-3 duration-200 text-white/60 hover:bg-brand-pink/10 hover:text-brand-pink"
+              className="w-full h-11 px-4 rounded-lg text-left text-[10px] font-bold uppercase tracking-widest flex items-center gap-3 duration-200 text-white/40 hover:bg-brand-pink/10 hover:text-brand-pink"
             >
-              <LogOut className="w-4 h-4" /> ENCERRAR SESSÃO
+              <LogOut className="w-4 h-4 shrink-0 text-white/40" /> ENCERRAR SESSÃO
             </button>
 
             <div className="w-full h-11 px-4 flex items-center gap-3 text-white/40 select-none">
-              <div className="w-4 flex justify-center items-center">
+              <div className="w-4 flex justify-center items-center shrink-0">
                 <span className="w-2 h-2 bg-green-500 rounded-full active-pulse" />
               </div>
               <span className="text-[10px] font-bold uppercase tracking-widest">ONLINE NA WEB</span>
@@ -719,7 +724,7 @@ export default function App() {
                       {/* Botão de Avanço para a Identificação */}
                       <button 
                         onClick={() => setOnboardingStep("identificacao")}
-                        className="w-full h-11 bg-white/[0.015] border border-white/10 hover:bg-white/[0.06] hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
+                        className="btn-login-avancar z-10 mt-auto"
                       >
                         AVANÇAR <ArrowRight className="w-4 h-4" />
                       </button>
@@ -750,7 +755,7 @@ export default function App() {
                       {/* Botão de Avanço para a Matriz */}
                       <button 
                         onClick={() => setOnboardingStep("matriz")}
-                        className="w-full h-11 bg-white/[0.015] border border-white/10 hover:bg-white/[0.06] hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-10 mt-auto"
+                        className="btn-login-avancar z-10 mt-auto"
                       >
                         DOSAR <ArrowRight className="w-4 h-4" />
                       </button>
@@ -810,8 +815,7 @@ export default function App() {
                           setHasPersonaDefined(true);
                           setActiveView("storyboard");
                         }}
-                        className="w-full h-11 bg-white/[0.015] border border-white/10 hover:bg-white/[0.06] hover:border-white/20 active:scale-95 text-white rounded-lg text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
-                        style={{ fontFamily: 'Poppins', fontWeight: 300 }}
+                        className="btn-login-avancar z-30"
                       >
                         ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
                       </button>
@@ -875,7 +879,7 @@ export default function App() {
                       type="range"
                       min="0"
                       max="1"
-                      step="0.05"
+                      step="0.01"
                       value={volume}
                       onChange={(e) => setVolume(parseFloat(e.target.value))}
                       className="w-16 h-1 accent-brand-blue bg-white/15 rounded-lg appearance-none cursor-pointer"
