@@ -764,7 +764,9 @@ export default function App() {
                                 key={arch.id} 
                                 onMouseEnter={() => setHoveredArchetype(arch)}
                                 onMouseLeave={() => setHoveredArchetype(null)}
-                                className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.12] transition-all duration-200 h-[32px]"
+                                className={`flex flex-col justify-between text-left border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.12] transition-all duration-200 h-[32px] ${
+                                  activeArch?.id === arch.id ? "bg-white/[0.08]" : "bg-white/[0.01]"
+                                }`}
                               >
                                 <div className="flex justify-between items-center text-[10px] font-bold leading-none px-4">
                                   <span style={{ color: "#858585" }} className="flex items-center gap-1.5 transition-colors duration-200">
