@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Menu, Play, BookOpen, Layers, Settings, ChevronUp, ChevronDown, ChevronLeft, ChevronRight,
   Sparkles, CheckCircle2, Circle, LogOut, ArrowRight, ShieldCheck, 
@@ -134,6 +134,7 @@ export default function App() {
   const [loginStage, setLoginStage] = useState("email"); // "email" ou "google"
   const [enteredEmail, setEnteredEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const passwordInputRef = useRef(null);
   
   // Router Guard de Roteamento Dinâmico
   const [hasPersonaDefined, setHasPersonaDefined] = useState(false);
@@ -171,6 +172,16 @@ export default function App() {
       audio.pause();
     };
   }, [audio]);
+
+  // Garantia de Auto-Foco instantâneo na transição para a tela de senha (mecanismo à prova de falhas do browser)
+  useEffect(() => {
+    if (loginStage === "google" && passwordInputRef.current) {
+      const timer = setTimeout(() => {
+        passwordInputRef.current.focus();
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [loginStage]);
 
   // Novo Onboarding de Dosagem de Personas
   const [dosagemPersona, setDosagemPersona] = useState({
@@ -227,6 +238,10 @@ export default function App() {
     setHasPersonaDefined(false);
     setOnboardingStep("video");
     setActiveView("servicos");
+
+    // Entra tocando a trilha sonora com 20% do volume como default
+    setIsMuted(false);
+    setVolume(0.20);
   };
 
   const handleLogout = () => {
@@ -236,6 +251,7 @@ export default function App() {
     setActiveView("storyboard");
     setLoginStage("email");
     setLoginPassword("");
+    setIsMuted(true); // Silencia a trilha sonora no logout
   };
 
   const runAiAnalysis = async () => {
@@ -460,6 +476,7 @@ export default function App() {
                 <div className="w-full flex flex-col gap-1.5 text-left mb-6">
                   <input 
                     type="password"
+                    ref={passwordInputRef}
                     autoFocus
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
