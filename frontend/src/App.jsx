@@ -791,7 +791,7 @@ export default function App() {
                                 />
 
                                 {/* Bloco 3 (Porcentagem): Largura fixa de 24px alinhada na direita */}
-                                <div className="w-6 shrink-0 text-right text-[10px] font-black text-white/60 leading-none">
+                                <div className="w-6 shrink-0 text-right text-[9px] font-black text-white/60 leading-none">
                                   {dosagemPersona[arch.id]}%
                                 </div>
                               </div>
