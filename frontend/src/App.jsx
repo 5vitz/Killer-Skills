@@ -140,7 +140,7 @@ export default function App() {
   const [onboardingStep, setOnboardingStep] = useState("video"); // "video" ou "matriz"
 
   // --- AUDIO & ARQUÉTIPOS DINÂMICOS ---
-  const [focusedArchetype, setFocusedArchetype] = useState(null);
+  const [focusedArchetype, setFocusedArchetype] = useState(ARCHETYPES[0]);
   const [hoveredArchetype, setHoveredArchetype] = useState(null);
   const [isMuted, setIsMuted] = useState(true);
   const [volume, setVolume] = useState(0.35);
