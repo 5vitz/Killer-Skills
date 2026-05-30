@@ -771,8 +771,8 @@ export default function App() {
                                   activeArch?.id === arch.id ? "bg-white/[0.08]" : "bg-white/[0.01]"
                                 }`}
                               >
-                                {/* Bloco 1 (Nome): Largura fixa de 105px para alinhar o início das bolinhas a partir do "Homem Comum" */}
-                                <div className="w-[105px] shrink-0 flex items-center gap-1.5 text-[10px] font-bold leading-none">
+                                {/* Bloco 1 (Nome): Largura fixa de 125px (ajustada para fonte generosa de 12px) para alinhar o início das bolinhas a partir do "Homem Comum" */}
+                                <div className="w-[125px] shrink-0 flex items-center gap-1.5 text-[12px] font-bold leading-none">
                                   <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: "#858585" }} />
                                   <span style={{ color: "#858585" }} className="truncate">{arch.name}</span>
                                 </div>
