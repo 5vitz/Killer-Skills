@@ -629,12 +629,7 @@ export default function App() {
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg bg-[#090C15]/40 p-4 flex flex-col justify-between transition-all duration-500"
                 >
                   {/* Textura de Pergaminho Místico e Suave */}
-                  <div 
-                    className="absolute inset-0 pointer-events-none opacity-[0.09] z-0"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-                    }}
-                  />
+                  <div className="mystical-parchment" />
 
                   {/* Descrição Ontológica Poética */}
                   <p className="relative z-10 font-poppins-light text-[11.5px] text-white/80 leading-relaxed text-justify overflow-y-auto max-h-[170px] pr-1 scrollbar-thin">
