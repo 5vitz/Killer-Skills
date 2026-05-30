@@ -813,16 +813,11 @@ export default function App() {
               {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Portal da Persona) */}
               <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
                 
-                {/* TOPO FIXO: Título Geral e Card Dinâmico Centrado de Arquétipo */}
-                <div className="flex flex-col gap-3 w-full shrink-0 select-none mb-4">
+                {/* TOPO FIXO: Título Geral */}
+                <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
                   <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold text-center">
                     Arquétipos
                   </h2>
-                  <div className="w-full h-11 bg-white/5 border border-black rounded-xl flex items-center justify-center text-center px-4">
-                    <span className="text-xs font-poppins-light uppercase tracking-widest text-white">
-                      {activeArch ? activeArch.name : "POSICIONE-SE"}
-                    </span>
-                  </div>
                 </div>
 
                 {/* CONTEÚDO DO PORTAL ABAIXO (SEM SCROLL, APENAS FOTO STRETCHED) */}
