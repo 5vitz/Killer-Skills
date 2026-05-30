@@ -802,7 +802,8 @@ export default function App() {
                           setHasPersonaDefined(true);
                           setActiveView("storyboard");
                         }}
-                        className="w-full h-11 bg-white/[0.015] border border-white/10 hover:bg-white/[0.06] hover:border-white/20 active:scale-95 text-white rounded-lg font-black text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
+                        className="w-full h-11 bg-white/[0.015] border border-white/10 hover:bg-white/[0.06] hover:border-white/20 active:scale-95 text-white rounded-lg text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg duration-200 cursor-pointer z-30"
+                        style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                       >
                         ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
                       </button>
