@@ -783,8 +783,8 @@ export default function App() {
                     /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
                     <div key="screen-1c" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
                       
-                      {/* Card da Matriz com Bordas Arredondadas e Fundo Preto (Flex-1 para ter a mesma exata altura do card das imagens) */}
-                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-black mb-4 flex flex-col pt-1 pb-0 px-0">
+                      {/* Card da Matriz com Bordas Arredondadas e Textura Aço Escovado Escuro Apple-Like */}
+                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl brushed-steel-dark mb-4 flex flex-col pt-1 pb-0 px-0">
                         
                         {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
                         <div className="my-auto overflow-hidden flex flex-col gap-0 h-[384px]">
