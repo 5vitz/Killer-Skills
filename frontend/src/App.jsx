@@ -400,8 +400,8 @@ export default function App() {
                 }}
                 className="w-full flex flex-col items-center justify-center animate-fade-in"
               >
-                {/* Cabeçalho da Tela 0 (Âncora de Altura Fixa para Sincronia Espacial) */}
-                <div className="h-[96px] flex flex-col items-center justify-center mb-6">
+                {/* Cabeçalho da Tela 0 (Âncora de Altura Fixa para Sincronia Espacial - Deslocado 30px para Cima) */}
+                <div className="h-[96px] flex flex-col items-center justify-center mb-[54px]">
                   {/* Logo Metálica */}
                   <div className="text-3xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-white to-brand-blue mb-1">
                     KILLER SKILLS
@@ -439,8 +439,8 @@ export default function App() {
                 }}
                 className="w-full flex flex-col items-center justify-center animate-fade-in"
               >
-                {/* Cabeçalho da Tela 0A (Symmetrical height and spacing to anchor visual permanence) */}
-                <div className="h-[96px] flex flex-col items-center justify-center mb-6">
+                {/* Cabeçalho da Tela 0A (Symmetrical height and spacing - Deslocado 30px para Cima) */}
+                <div className="h-[96px] flex flex-col items-center justify-center mb-[54px]">
                   {/* Google Logo SVG - Ampliado e Elevado */}
                   <svg className="w-12 h-12 mb-3.5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -450,7 +450,7 @@ export default function App() {
                   </svg>
 
                   <h3 className="text-[10px] font-poppins-light text-white/50 uppercase tracking-widest">
-                    Escolha sua conta Google para entrar
+                    Entre Com a Conta Desejada
                   </h3>
                 </div>
 
