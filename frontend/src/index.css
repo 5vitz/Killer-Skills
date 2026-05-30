@@ -13,6 +13,13 @@
   code, pre {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  /* Remove default browser orange outline/border highlights on click */
+  *:focus, *:active, *:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
 }
 
 .font-indian {

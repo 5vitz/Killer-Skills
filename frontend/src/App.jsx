@@ -605,34 +605,23 @@ export default function App() {
         <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${isMetamorphosed ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
           {isMetamorphosed && (
             <>
-              {/* TOPO FIXO: Título Geral e Card Dinâmico Centrado de Arquétipo */}
-              <div className="flex flex-col gap-3 w-full shrink-0 select-none mb-4">
+              {/* TOPO FIXO: Título Geral */}
+              <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
                 <h2 className="text-sm font-black uppercase tracking-wider text-brand-gold text-center">
                   Significado
                 </h2>
-                <div className="w-full h-11 bg-white/5 border border-black rounded-xl flex items-center justify-center text-center px-4">
-                  <span 
-                    className="text-xs font-poppins-light uppercase tracking-widest transition-all duration-300"
-                    style={{ 
-                      color: activeArch.color,
-                      textShadow: `0 0 10px ${activeArch.color}55`
-                    }}
-                  >
-                    {activeArch.name}
-                  </span>
-                </div>
               </div>
 
               {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
-                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg bg-[#090C15]/40 p-4 flex flex-col justify-between transition-all duration-500"
+                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg bg-[#090C15]/40 p-5 flex flex-col justify-between transition-all duration-500"
                 >
                   {/* Textura de Pergaminho Místico e Suave */}
                   <div className="mystical-parchment" />
 
-                  {/* Descrição Ontológica Poética */}
-                  <p className="relative z-10 font-poppins-light text-[11.5px] text-white/80 leading-relaxed text-justify overflow-y-auto max-h-[170px] pr-1 scrollbar-thin">
+                  {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
+                  <p className="relative z-10 font-poppins-light text-[12px] text-white/80 leading-relaxed text-justify mb-4">
                     {activeArch.desc}
                   </p>
 
@@ -667,13 +656,6 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* ALWAYS-VISIBLE NAVIGATION INSTRUCTION */}
-              <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4 text-center shrink-0">
-                <span className="text-[8px] font-poppins-light tracking-[0.25em] text-white/30 uppercase">
-                  Mova o mouse para mudar
-                </span>
               </div>
             </>
           )}
@@ -844,7 +826,7 @@ export default function App() {
                 </div>
 
                 {/* CONTEÚDO DO PORTAL ABAIXO (SEM SCROLL, APENAS FOTO STRETCHED) */}
-                <div className="flex-1 flex flex-col gap-4">
+                <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                   {/* Image Card (Flex-1 para preenchimento vertical perfeito) */}
                   <div 
                     className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg group transition-colors duration-500"
@@ -868,7 +850,7 @@ export default function App() {
                 </div>
 
                 {/* ALWAYS-VISIBLE AUDIO CONTROLS & BRAND SIGNATURE */}
-                <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4">
+                <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4 shrink-0">
                   <div className="flex items-center justify-between text-white/40">
                     <div className="flex items-center gap-1.5">
                       <button 
