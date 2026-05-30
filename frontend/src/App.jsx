@@ -901,7 +901,7 @@ export default function App() {
                       step="0.01"
                       value={volume}
                       onChange={(e) => setVolume(parseFloat(e.target.value))}
-                      className="w-16 h-1 accent-brand-blue bg-white/15 rounded-lg appearance-none cursor-pointer"
+                      className="w-16 premium-slider"
                     />
                   </div>
                   <div className="text-[8px] font-black tracking-widest text-center text-white/15 uppercase mt-1">
