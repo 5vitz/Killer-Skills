@@ -416,6 +416,7 @@ export default function App() {
                 <div className="w-full flex flex-col gap-1.5 text-left mb-6">
                   <input 
                     type="email" 
+                    autoFocus
                     value={enteredEmail}
                     onChange={(e) => setEnteredEmail(e.target.value)}
                     placeholder="nome@exemplo.com"
@@ -459,6 +460,7 @@ export default function App() {
                 <div className="w-full flex flex-col gap-1.5 text-left mb-6">
                   <input 
                     type="password"
+                    autoFocus
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="Digite sua Senha"
