@@ -644,11 +644,8 @@ export default function App() {
               {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
-                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg bg-[#090C15]/40 p-5 flex flex-col justify-between transition-all duration-500"
+                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg bg-[#050505] p-5 flex flex-col justify-between transition-all duration-500"
                 >
-                  {/* Textura de Pergaminho Místico e Suave */}
-                  <div className="mystical-parchment" />
-
                   {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
                   <p className="relative z-10 font-poppins-light text-[12px] text-white/80 leading-relaxed text-justify mb-4">
                     {activeArch.desc}
