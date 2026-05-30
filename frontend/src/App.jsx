@@ -673,7 +673,7 @@ export default function App() {
           const archTop2 = ARCHETYPES.find(a => a.id === sortedDosagens[1][0]) || ARCHETYPES[1];
           const combinedTitle = `${archTop1.name} ${archTop2.name}`;
 
-          const activeArch = hoveredArchetype || focusedArchetype;
+          const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || ARCHETYPES[0]) : null;
 
           return (
             <div className="relative w-full h-full flex justify-center items-center">
