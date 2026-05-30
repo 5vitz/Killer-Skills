@@ -513,29 +513,33 @@ export default function App() {
         
         {/* ESTADO A: MENU PADRÃO */}
         <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${isMetamorphosed ? "opacity-0 scale-95 pointer-events-none absolute inset-5" : "opacity-100 scale-100"}`}>
-          <div className="flex flex-col gap-6">
-            {/* Título do Cockpit */}
-            <div className="text-center">
-              <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
-              <div className={`text-[9px] font-bold tracking-wider uppercase ${isAdminMode ? "text-brand-gold" : "text-brand-blue"}`}>
-                {isAdminMode ? "ADMIN COCKPIT" : "KS STUDIO"}
+          <div className="flex flex-col gap-5">
+            {/* Bloco de Identidade: Marca + Conta do Usuário */}
+            <div className="flex flex-col gap-4">
+              {/* Título do Cockpit */}
+              <div className="text-center">
+                <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
+                <div className={`text-[9px] font-bold tracking-wider uppercase ${isAdminMode ? "text-brand-gold" : "text-brand-blue"}`}>
+                  {isAdminMode ? "ADMIN COCKPIT" : "KS STUDIO"}
+                </div>
+              </div>
+
+              {/* Card do Usuário (Mesma Altura e Estilo dos Itens do Menu) */}
+              <div className="w-full h-11 px-4 rounded-lg flex items-center justify-start gap-3 bg-white/5 border border-white/5 shrink-0">
+                <div className={`w-5 h-5 rounded-full flex justify-center items-center font-bold text-[9px] shrink-0 ${isAdminMode ? "bg-brand-gold text-black" : "bg-brand-blue text-white"}`}>
+                  {userEmail.substring(0, 2).toUpperCase()}
+                </div>
+                <div className="text-xs font-semibold text-white/70 overflow-hidden text-ellipsis whitespace-nowrap">
+                  {userEmail}
+                </div>
               </div>
             </div>
 
+            {/* Divisor de Seção (Marca o início dos Controles/Menu) */}
             <hr className="border-white/10" />
 
-            {/* Card do Usuário (Mesma Altura e Estilo dos Itens do Menu) */}
-            <div className="w-full h-11 px-4 rounded-lg flex items-center justify-start gap-3 bg-white/5 border border-white/5 shrink-0">
-              <div className={`w-5 h-5 rounded-full flex justify-center items-center font-bold text-[9px] shrink-0 ${isAdminMode ? "bg-brand-gold text-black" : "bg-brand-blue text-white"}`}>
-                {userEmail.substring(0, 2).toUpperCase()}
-              </div>
-              <div className="text-xs font-semibold text-white/70 overflow-hidden text-ellipsis whitespace-nowrap">
-                {userEmail}
-              </div>
-            </div>
-
             {/* Menu de Áreas de Trabalho */}
-            <div className="flex flex-col gap-1.5 pt-2">
+            <div className="flex flex-col gap-1.5 pt-1">
               
               <button 
                 onClick={() => setActiveView("servicos")}
