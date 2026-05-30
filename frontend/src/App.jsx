@@ -493,7 +493,7 @@ export default function App() {
   }));
 
   const currentPersona = activePersonasList[selectedPersonaIdx] || activePersonasList[0];
-  const activeArch = hoveredArchetype || focusedArchetype;
+  const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || focusedArchetype) : null;
   const isMetamorphosed = activeView === "servicos" && !hasPersonaDefined && activeArch;
 
   return (
