@@ -606,11 +606,7 @@ export default function App() {
                   triggerGoogleAuthSequence("artz.genera@gmail.com");
                 }
               }}
-              className={`w-full h-11 px-4 rounded-lg text-left text-[10px] font-bold uppercase tracking-widest flex items-center gap-3 duration-200 ${
-                isAdminMode 
-                  ? "bg-brand-gold/15 border border-brand-gold/30 text-brand-gold" 
-                  : "text-white/40 hover:bg-white/5 hover:text-white"
-              }`}
+              className="w-full h-11 px-4 rounded-lg text-left text-[10px] font-bold uppercase tracking-widest flex items-center gap-3 duration-200 text-white/40 hover:bg-white/5 hover:text-white"
             >
               <ShieldCheck className="w-4 h-4 shrink-0 text-white/40" /> PAINEL ADM
             </button>
@@ -747,7 +743,7 @@ export default function App() {
                       {/* Botão de Avanço para a Identificação */}
                       <button 
                         onClick={() => setOnboardingStep("identificacao")}
-                        className="btn-login-avancar z-10 mt-auto"
+                        className="btn-dashboard-avancar z-10 mt-auto"
                       >
                         AVANÇAR <ArrowRight className="w-4 h-4" />
                       </button>
@@ -778,7 +774,7 @@ export default function App() {
                       {/* Botão de Avanço para a Matriz */}
                       <button 
                         onClick={() => setOnboardingStep("matriz")}
-                        className="btn-login-avancar z-10 mt-auto"
+                        className="btn-dashboard-avancar z-10 mt-auto"
                       >
                         DOSAR <ArrowRight className="w-4 h-4" />
                       </button>
@@ -838,7 +834,7 @@ export default function App() {
                           setHasPersonaDefined(true);
                           setActiveView("storyboard");
                         }}
-                        className="btn-login-avancar z-30"
+                        className="btn-dashboard-avancar z-30"
                       >
                         ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
                       </button>
