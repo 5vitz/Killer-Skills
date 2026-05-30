@@ -538,8 +538,8 @@ export default function App() {
               {/* Título do Cockpit */}
               <div className="text-center">
                 <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
-                <div className={`text-[9px] font-bold tracking-wider uppercase ${isAdminMode ? "text-brand-gold" : "text-brand-blue"}`}>
-                  {isAdminMode ? "ADMIN COCKPIT" : "KS STUDIO"}
+                <div className="text-[9px] font-bold tracking-wider uppercase text-brand-blue">
+                  KS STUDIO
                 </div>
               </div>
 
