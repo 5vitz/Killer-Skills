@@ -444,20 +444,12 @@ export default function App() {
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
                 </svg>
 
-                <h3 className="text-sm font-bold text-white mb-6">Escolha sua conta para entrar</h3>
-
-                {/* Card de Leitura Única do Email */}
-                <div className="w-full flex flex-col gap-1.5 text-left mb-4">
-                  <span className="text-[8px] font-black text-white/30 uppercase tracking-widest">Conta Selecionada</span>
-                  <div className="w-full p-3 bg-white/[0.02] border border-white/10 rounded-lg text-xs font-semibold text-white/70 flex items-center justify-between">
-                    <span className="overflow-hidden text-ellipsis whitespace-nowrap w-[160px]">{enteredEmail}</span>
-                    <span className="text-[7px] bg-white/10 px-1.5 py-0.5 rounded text-white/40 uppercase font-black">Somente Leitura</span>
-                  </div>
-                </div>
+                <h3 className="text-[10px] font-poppins-light text-white/50 uppercase tracking-widest mb-8">
+                  Escolha sua conta Google para entrar
+                </h3>
 
                 {/* Entrada de Senha */}
                 <div className="w-full flex flex-col gap-1.5 text-left mb-6">
-                  <span className="text-[8px] font-black text-white/30 uppercase tracking-widest">Senha do Google</span>
                   <input 
                     type="password"
                     value={loginPassword}
@@ -467,25 +459,13 @@ export default function App() {
                   />
                 </div>
 
-                {/* Botões de Ação */}
-                <div className="w-full flex gap-2 mb-6">
-                  <button 
-                    type="button"
-                    onClick={() => {
-                      setLoginStage("email");
-                      setLoginPassword("");
-                    }}
-                    className="flex-1 h-11 bg-white/5 hover:bg-white/10 text-white rounded-lg font-bold text-xs tracking-wider flex justify-center items-center gap-1 cursor-pointer duration-150"
-                  >
-                    VOLTAR
-                  </button>
-                  <button 
-                    type="submit"
-                    className="flex-[2] btn-login-avancar"
-                  >
-                    ENTRAR
-                  </button>
-                </div>
+                {/* Botão de Entrada */}
+                <button 
+                  type="submit"
+                  className="w-full btn-login-avancar mb-6"
+                >
+                  ENTRAR
+                </button>
               </form>
             )}
 
