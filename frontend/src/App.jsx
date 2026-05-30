@@ -140,7 +140,6 @@ export default function App() {
   const [onboardingStep, setOnboardingStep] = useState("video"); // "video" ou "matriz"
 
   // --- AUDIO & ARQUÉTIPOS DINÂMICOS ---
-  const [focusedArchetype, setFocusedArchetype] = useState(ARCHETYPES[0]);
   const [hoveredArchetype, setHoveredArchetype] = useState(null);
   const [isMuted, setIsMuted] = useState(true);
   const [volume, setVolume] = useState(0.35);
@@ -493,7 +492,7 @@ export default function App() {
   }));
 
   const currentPersona = activePersonasList[selectedPersonaIdx] || activePersonasList[0];
-  const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || focusedArchetype) : null;
+  const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || ARCHETYPES[0]) : null;
   const isMetamorphosed = activeView === "servicos" && !hasPersonaDefined && activeArch;
 
   return (
@@ -760,15 +759,12 @@ export default function App() {
                         {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
                         <div className="my-auto overflow-hidden flex flex-col gap-0 h-[384px]">
                           {ARCHETYPES.map((arch) => {
-                            const isFocused = focusedArchetype?.id === arch.id;
                             return (
                               <div 
                                 key={arch.id} 
                                 onMouseEnter={() => setHoveredArchetype(arch)}
                                 onMouseLeave={() => setHoveredArchetype(null)}
-                                onClick={() => setFocusedArchetype(isFocused ? null : arch)}
-                                className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.12] transition-all duration-200 cursor-pointer h-[32px]"
-                                style={{ borderColor: isFocused ? "#D5A370" : "transparent" }}
+                                className="flex flex-col justify-between text-left bg-white/[0.01] border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.12] transition-all duration-200 h-[32px]"
                               >
                                 <div className="flex justify-between items-center text-[10px] font-bold leading-none px-4">
                                   <span style={{ color: "#858585" }} className="flex items-center gap-1.5 transition-colors duration-200">
