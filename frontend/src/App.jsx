@@ -767,17 +767,17 @@ export default function App() {
                                 key={arch.id} 
                                 onMouseEnter={() => setHoveredArchetype(arch)}
                                 onMouseLeave={() => setHoveredArchetype(null)}
-                                className={`flex flex-col justify-between text-left border-b border-white/[0.05] pt-[3px] pb-[3px] px-0 hover:bg-white/[0.12] transition-all duration-200 h-[32px] ${
+                                className={`flex items-center justify-between text-left border-b border-white/[0.05] px-4 hover:bg-white/[0.12] transition-all duration-200 h-[32px] ${
                                   activeArch?.id === arch.id ? "bg-white/[0.08]" : "bg-white/[0.01]"
                                 }`}
                               >
-                                <div className="flex justify-between items-center text-[10px] font-bold leading-none px-4">
-                                  <span style={{ color: "#858585" }} className="flex items-center gap-1.5 transition-colors duration-200">
-                                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#858585" }} />
-                                    {arch.name}
-                                  </span>
-                                  <span className="text-white/60 font-black">{dosagemPersona[arch.id]}%</span>
+                                {/* Bloco 1 (Nome): Largura fixa de 105px para alinhar o início das bolinhas a partir do "Homem Comum" */}
+                                <div className="w-[105px] shrink-0 flex items-center gap-1.5 text-[10px] font-bold leading-none">
+                                  <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: "#858585" }} />
+                                  <span style={{ color: "#858585" }} className="truncate">{arch.name}</span>
                                 </div>
+
+                                {/* Bloco 2 (Slider): Se estica para preencher todo o meio do card */}
                                 <input 
                                   type="range" 
                                   min="0" 
@@ -787,8 +787,13 @@ export default function App() {
                                     const val = parseInt(e.target.value);
                                     setDosagemPersona(prev => ({ ...prev, [arch.id]: val }));
                                   }}
-                                  className="w-full premium-slider"
+                                  className="flex-1 premium-slider mx-2"
                                 />
+
+                                {/* Bloco 3 (Porcentagem): Largura fixa de 24px alinhada na direita */}
+                                <div className="w-6 shrink-0 text-right text-[10px] font-black text-white/60 leading-none">
+                                  {dosagemPersona[arch.id]}%
+                                </div>
                               </div>
                             );
                           })}
