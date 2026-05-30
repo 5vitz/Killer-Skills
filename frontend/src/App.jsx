@@ -341,6 +341,39 @@ export default function App() {
 
   // --- RENDERS DE TELA ---
 
+  const handleEmailSubmit = async () => {
+    if (enteredEmail.trim() === "" || !enteredEmail.includes("@")) {
+      alert("Por favor, insira um e-mail válido!");
+      return;
+    }
+    
+    try {
+      const res = await fetch(`${API_BASE}/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: enteredEmail.trim() })
+      });
+      
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setLoginStage("google");
+      } else {
+        alert(data.detail || "E-mail não cadastrado em nosso sistema!");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao conectar ao servidor de autenticação. Verifique se o backend está rodando!");
+    }
+  };
+
+  const handlePasswordSubmit = () => {
+    if (loginPassword.trim() === "") {
+      alert("Por favor, digite sua senha para entrar!");
+      return;
+    }
+    triggerGoogleAuthSequence(enteredEmail);
+  };
+
   // 1. TELA DE LOGIN (SMARTPHONE DE GLOWS AZUL/DOURADO)
   if (!isLoggedIn) {
     return (
@@ -366,47 +399,30 @@ export default function App() {
                   KILLER SKILLS
                 </div>
                 <div className="text-[9px] font-bold tracking-widest text-[#1E60FF] uppercase mb-10">
-                  Direção de Arte AI
-                </div>
-
-                <div className="text-[11px] text-white/30 font-bold uppercase tracking-wider mb-6">
-                  CONECTAR COM KS STUDIO
+                  KS Studio
                 </div>
 
                 {/* Entrada de Email */}
                 <div className="w-full flex flex-col gap-2 mb-6">
-                  <label className="text-[8px] font-black tracking-wider text-white/40 uppercase text-left">Escolha ou Digite seu E-mail</label>
+                  <label className="text-[8px] font-black tracking-wider text-white/40 uppercase text-left">Digite seu E-mail</label>
                   <input 
                     type="email" 
                     value={enteredEmail}
                     onChange={(e) => setEnteredEmail(e.target.value)}
+                    onKeyDown={async (e) => {
+                      if (e.key === "Enter") {
+                        await handleEmailSubmit();
+                      }
+                    }}
                     placeholder="nome@exemplo.com"
                     className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-lg px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
                   />
-                  {/* Atalhos rápidos para facilitar o teste no browser */}
-                  <div className="flex flex-wrap gap-1.5 mt-2 justify-center">
-                    {['sinkando@gmail.com', 'artz.genera@gmail.com', 'scalla_records@gmail.com'].map(email => (
-                      <button 
-                        key={email}
-                        onClick={() => setEnteredEmail(email)}
-                        className="text-[8.5px] px-2.5 py-1 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full text-white/60 hover:text-white transition-all duration-150 cursor-pointer"
-                      >
-                        {email.split('@')[0]}
-                      </button>
-                    ))}
-                  </div>
                 </div>
 
                 {/* Botão de Avanço */}
                 <button 
-                  onClick={() => {
-                    if (enteredEmail.trim() === "" || !enteredEmail.includes("@")) {
-                      alert("Por favor, insira ou selecione um e-mail válido!");
-                      return;
-                    }
-                    setLoginStage("google");
-                  }}
-                  className="w-full h-12 bg-brand-blue hover:bg-brand-blue/90 hover:scale-105 active:scale-95 duration-200 text-white rounded-lg font-bold text-xs tracking-wider flex justify-center items-center gap-2 mb-6 shadow-lg cursor-pointer"
+                  onClick={handleEmailSubmit}
+                  className="btn-login-avancar mb-6"
                 >
                   AVANÇAR <ArrowRight className="w-4 h-4" />
                 </button>
@@ -440,6 +456,11 @@ export default function App() {
                     type="password"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handlePasswordSubmit();
+                      }
+                    }}
                     placeholder="Digite sua Senha"
                     className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-lg px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
                   />
@@ -457,14 +478,8 @@ export default function App() {
                     VOLTAR
                   </button>
                   <button 
-                    onClick={() => {
-                      if (loginPassword.trim() === "") {
-                        alert("Por favor, digite sua senha para entrar!");
-                        return;
-                      }
-                      triggerGoogleAuthSequence(enteredEmail);
-                    }}
-                    className="flex-[2] h-11 bg-brand-blue hover:bg-brand-blue/90 active:scale-95 text-white rounded-lg font-bold text-xs tracking-wider flex justify-center items-center gap-2 shadow-lg cursor-pointer duration-150"
+                    onClick={handlePasswordSubmit}
+                    className="flex-[2] btn-login-avancar"
                   >
                     ENTRAR
                   </button>

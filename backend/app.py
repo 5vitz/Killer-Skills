@@ -108,7 +108,15 @@ def login(req: LoginRequest):
     if not email:
         raise HTTPException(status_code=400, detail="E-mail inválido")
     
-    # Mock de autenticação SaaS simples
+    ALLOWED_EMAILS = [
+        "artz.genera@gmail.com",
+        "sinkando@gmail.com",
+        "scalla_records@gmail.com"
+    ]
+    
+    if email not in ALLOWED_EMAILS:
+        raise HTTPException(status_code=400, detail="E-mail não cadastrado")
+    
     return {
         "success": True,
         "email": email,
