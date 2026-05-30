@@ -767,7 +767,7 @@ export default function App() {
                                 key={arch.id} 
                                 onMouseEnter={() => setHoveredArchetype(arch)}
                                 onMouseLeave={() => setHoveredArchetype(null)}
-                                className={`flex items-center justify-between text-left px-4 hover:bg-white/[0.12] transition-all duration-200 h-[32px] ${
+                                className={`flex items-center justify-between text-left border-b border-white/[0.03] px-4 hover:bg-white/[0.12] transition-all duration-200 h-[32px] ${
                                   activeArch?.id === arch.id ? "bg-white/[0.08]" : "bg-white/[0.01]"
                                 }`}
                               >
