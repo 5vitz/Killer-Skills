@@ -359,14 +359,14 @@ input[type="range"].premium-slider::-moz-range-thumb:hover {
 }
 
 .brushed-steel-dark {
-  /* Premium warm book-paper / palha vertical satin gradient */
-  background: linear-gradient(to bottom, #FAF5EA 0%, #E6DEC9 100%);
+  /* Elegant deep solid dark card background matching dashboard panels */
+  background: #0A0A0C;
   position: relative;
   overflow: hidden;
 }
 
-/* Premium Range Input Custom Sliders (Black version for inverted Dosador) */
-input[type="range"].premium-slider-black {
+/* Premium Range Input Custom Sliders (Warm Book-Paper / Palha version) */
+input[type="range"].premium-slider-palha {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -378,54 +378,54 @@ input[type="range"].premium-slider-black {
 }
 
 /* Webkit Track */
-input[type="range"].premium-slider-black::-webkit-slider-runnable-track {
+input[type="range"].premium-slider-palha::-webkit-slider-runnable-track {
   width: 100%;
   height: 1px;
-  background: rgba(0, 0, 0, 0.22); /* Elegant fine black track line */
+  background: rgba(239, 229, 211, 0.15); /* Elegant warm palha track line */
   border-radius: 9999px;
   transition: background 0.15s ease;
 }
 
-input[type="range"].premium-slider-black:hover::-webkit-slider-runnable-track {
-  background: rgba(0, 0, 0, 0.45);
+input[type="range"].premium-slider-palha:hover::-webkit-slider-runnable-track {
+  background: rgba(239, 229, 211, 0.30);
 }
 
 /* Webkit Thumb */
-input[type="range"].premium-slider-black::-webkit-slider-thumb {
+input[type="range"].premium-slider-palha::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #000000; /* Solid black dial handle */
-  border: 1px solid #000000;
+  background: #EFE5D3; /* Solid warm palha/cream dial handle */
+  border: 1px solid #EFE5D3;
   margin-top: -2.5px;
   transition: transform 0.1s ease;
 }
 
-input[type="range"].premium-slider-black::-webkit-slider-thumb:hover {
+input[type="range"].premium-slider-palha::-webkit-slider-thumb:hover {
   transform: scale(1.3);
 }
 
 /* Firefox Track */
-input[type="range"].premium-slider-black::-moz-range-track {
+input[type="range"].premium-slider-palha::-moz-range-track {
   width: 100%;
   height: 1px;
-  background: rgba(0, 0, 0, 0.22);
+  background: rgba(239, 229, 211, 0.15);
   border-radius: 9999px;
 }
 
 /* Firefox Thumb */
-input[type="range"].premium-slider-black::-moz-range-thumb {
+input[type="range"].premium-slider-palha::-moz-range-thumb {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #000000;
-  border: 1px solid #000000;
+  background: #EFE5D3;
+  border: 1px solid #EFE5D3;
   transition: transform 0.1s ease;
 }
 
-input[type="range"].premium-slider-black::-moz-range-thumb:hover {
+input[type="range"].premium-slider-palha::-moz-range-thumb:hover {
   transform: scale(1.3);
 }
 

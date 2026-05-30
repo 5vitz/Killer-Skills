@@ -780,7 +780,7 @@ export default function App() {
                     /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
                     <div key="screen-1c" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
                       
-                      {/* Card da Matriz com Bordas Arredondadas e Textura Aço Escovado Escuro Apple-Like */}
+                      {/* Card da Matriz com Bordas Arredondadas e Fundo Grafite Sólido Luxuoso */}
                       <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl brushed-steel-dark mb-4 flex flex-col pt-1 pb-0 px-0">
                         
                         {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
@@ -791,14 +791,14 @@ export default function App() {
                                 key={arch.id} 
                                 onMouseEnter={() => setHoveredArchetype(arch)}
                                 onMouseLeave={() => setHoveredArchetype(null)}
-                                className={`flex items-center justify-between text-left border-b border-black/[0.08] px-4 hover:bg-black/[0.08] transition-all duration-200 h-[32px] ${
-                                  activeArch?.id === arch.id ? "bg-black/[0.05]" : "bg-black/[0.01]"
+                                className={`flex items-center justify-between text-left border-b border-white/[0.05] px-4 hover:bg-white/[0.08] transition-all duration-200 h-[32px] ${
+                                  activeArch?.id === arch.id ? "bg-white/[0.05]" : "bg-white/[0.01]"
                                 }`}
                               >
                                 {/* Bloco 1 (Nome): Largura fixa de 100px para que as barras comecem coladas ao "Homem Comum" (fonte 12px) mantendo alinhamento vertical */}
                                 <div className="w-[100px] shrink-0 flex items-center gap-1.5 text-[12px] font-bold leading-none">
-                                  <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: "#000000" }} />
-                                  <span style={{ color: "#000000" }} className="truncate">{arch.name}</span>
+                                  <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: "#EFE5D3" }} />
+                                  <span style={{ color: "#EFE5D3" }} className="truncate">{arch.name}</span>
                                 </div>
 
                                 {/* Bloco 2 (Slider): Se estica para preencher todo o meio do card */}
@@ -811,11 +811,11 @@ export default function App() {
                                     const val = parseInt(e.target.value);
                                     setDosagemPersona(prev => ({ ...prev, [arch.id]: val }));
                                   }}
-                                  className="flex-1 premium-slider-black mx-2"
+                                  className="flex-1 premium-slider-palha mx-2"
                                 />
 
                                 {/* Bloco 3 (Porcentagem): Largura fixa de 24px alinhada na direita */}
-                                <div className="w-6 shrink-0 text-right text-[9px] font-black text-black/70 leading-none">
+                                <div className="w-6 shrink-0 text-right text-[9px] font-black text-[#EFE5D3]/70 leading-none">
                                   {dosagemPersona[arch.id]}%
                                 </div>
                               </div>
