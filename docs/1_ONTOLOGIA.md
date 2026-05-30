@@ -17,6 +17,7 @@ O **Killer Skills** atua como uma engine inteligente de coprodução criativa (C
 *   **A Estética da Subtração (O Senso Mínimo):** Inspirada na máxima atribuída a Antoine de Saint-Exupéry:
     > *"A obra de arte está pronta, quando não se pode retirar mais nada dela!"*
     O ecossistema Killer Skills adota rigorosamente a filosofia *clean* e minimalista. Poucos elementos, sofisticação silenciosa, ausência de ruído e foco na mensagem essencial. Esse senso estético deve prevalecer em todas as interfaces, layouts e pautas geradas.
+*   **Doutrina da Permanência Visual (O Princípio da Âncora):** A permanência do Player e de seus controles interativos centrais é a nossa maior âncora visual. Em transições de etapas (como de Tela 0 para Tela 0A), os elementos de entrada (inputs) e botões de comando (actions) **devem manter exatamente as mesmas coordenadas físicas e alturas**. Apenas o contexto de informação interna (como logos, letreiros e descrições) pode sofrer transformações (crossfade, morph ou escala), enquanto o chassi operacional permanece perfeitamente imóvel e contínuo, preservando a ilusão de estabilidade física do dispositivo virtual.
 
 ---
 
