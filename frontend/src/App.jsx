@@ -827,9 +827,9 @@ export default function App() {
                       {/* Botão de Finalização Gerar Persona */}
                       <button 
                         onClick={() => {
-                          // Conclui Onboarding e envia diretamente ao KS Studio (Tela 3)
+                          // Conclui Onboarding e envia diretamente para Tela 2A (Serviços)
                           setHasPersonaDefined(true);
-                          setActiveView("storyboard");
+                          setActiveView("servicos_escolha");
                         }}
                         className="btn-dashboard-avancar z-30"
                       >
@@ -915,29 +915,73 @@ export default function App() {
         {activeView === "servicos_escolha" && (
           <div className="relative w-full h-full flex justify-center items-center">
 
-
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30">
-              
-              {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
-              <button 
-                onClick={() => scrollPersona("up")}
-                className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
-              >
-                <ChevronUp className="w-4.5 h-4.5 text-white/60" />
-              </button>
-              <button 
-                onClick={() => scrollPersona("down")}
-                className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
-              >
-                <ChevronDown className="w-4.5 h-4.5 text-white/60" />
-              </button>
-
-              {/* Visor Interno de Reels */}
-              <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10">
-                {/* Esvaziado para reestruturação de layout */}
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30">
+              {/* Visor Interno de Reels Vazio */}
+              <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 relative overflow-hidden z-10 select-none text-center">
+                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center mb-4">
+                  <Cpu className="w-5 h-5 text-brand-blue" />
+                </div>
+                <h3 className="text-xs font-black uppercase tracking-widest text-white mb-2">PORTAL DE SERVIÇOS AI</h3>
+                <p className="text-[9px] text-white/40 leading-relaxed uppercase tracking-wider max-w-[200px]">
+                  Selecione os micro-serviços no painel à direita para iniciar a forja inteligente.
+                </p>
               </div>
             </div>
+
+            {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Área com o Card Vazio) */}
+            <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
+              {/* TOPO FIXO: Título Geral */}
+              <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
+                <h2 
+                  className="text-sm uppercase tracking-wider text-white text-center font-extralight"
+                  style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                >
+                  Configuração
+                </h2>
+              </div>
+
+              {/* CONTEÚDO DO PORTAL ABAIXO (CARD VAZIO) */}
+              <div className="flex-1 flex flex-col gap-4 overflow-hidden">
+                <div className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 bg-[#050505] flex flex-col justify-center items-center p-5 text-center shadow-lg">
+                  <Sliders className="w-8 h-8 text-white/15 mb-3" />
+                  <span className="text-[9px] font-black tracking-widest uppercase text-white/30 mb-1">Painel Vazio</span>
+                  <span className="text-[9px] font-semibold text-white/20 uppercase tracking-wider leading-relaxed max-w-[150px]">
+                    Card reservado para calibração de serviços
+                  </span>
+                </div>
+              </div>
+
+              {/* ALWAYS-VISIBLE AUDIO CONTROLS & BRAND SIGNATURE */}
+              <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4 shrink-0">
+                <div className="flex items-center gap-3 text-white/40">
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button 
+                      onClick={() => setIsMuted(!isMuted)} 
+                      className="p-1 rounded-lg hover:bg-white/5 hover:text-white transition duration-200 shrink-0"
+                    >
+                      {isMuted ? <VolumeX className="w-3.5 h-3.5 text-brand-pink" /> : <Volume2 className="w-3.5 h-3.5 text-brand-blue" />}
+                    </button>
+                    <span className="text-[9px] font-black uppercase tracking-wider whitespace-nowrap">
+                      {isMuted ? "Áudio Mutado" : "Trilha Sonora"}
+                    </span>
+                  </div>
+                  <input 
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={volume}
+                    onChange={(e) => setVolume(parseFloat(e.target.value))}
+                    className="flex-1 premium-slider min-w-[60px]"
+                  />
+                </div>
+                <div className="text-[8px] font-black tracking-widest text-center text-white/15 uppercase mt-1">
+                  Killer Skills v4.0 • Direção de Arte AI
+                </div>
+              </div>
+            </div>
+
           </div>
         )}
 
@@ -945,256 +989,73 @@ export default function App() {
         {activeView === "storyboard" && (
           <div className="relative w-full h-full flex justify-center items-center">
 
-
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-brand-card border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30">
-              
-              {/* Botoes Flutuantes de Navegacao (Estilo Site da Ingrid - Top/Bottom Centralizados e Aproximados) */}
-              <button 
-                onClick={() => scrollPersona("up")}
-                className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
-              >
-                <ChevronUp className="w-4.5 h-4.5 text-white/60" />
-              </button>
-              <button 
-                onClick={() => scrollPersona("down")}
-                className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex justify-center items-center hover:bg-black/80 hover:border-white/40 active:scale-95 transition-all duration-200 shadow-xl cursor-pointer z-40"
-              >
-                <ChevronDown className="w-4.5 h-4.5 text-white/60" />
-              </button>
-
-              {/* Visor Interno de Reels - Simulador de Feed Realista */}
-              <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-between p-0 relative overflow-hidden z-10 select-none text-white">
-                {/* Active Frame Image Preview */}
-                <div className="absolute inset-0 w-full h-full bg-neutral-900 flex justify-center items-center">
-                  {storyboardData[activeSlot !== null ? activeSlot : 0] ? (
-                    <img 
-                      src={storyboardData[activeSlot !== null ? activeSlot : 0]} 
-                      className="w-full h-full object-cover animate-fade-in"
-                      alt="Reels Frame"
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center gap-3 text-center p-6">
-                      <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex justify-center items-center backdrop-blur-md">
-                        <ImageIcon className="w-4.5 h-4.5 text-white/30" />
-                      </div>
-                      <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest leading-normal">
-                        Slot {(activeSlot !== null ? activeSlot : 0) + 1} Vazio
-                      </span>
-                      <button 
-                        onClick={() => {
-                          if (activeSlot === null) setActiveSlot(0);
-                          setActiveView("almoxarifado");
-                        }}
-                        className="px-3 py-1.5 bg-white/10 hover:bg-white/20 active:scale-95 border border-white/10 rounded-lg text-[9px] font-black uppercase tracking-wider transition duration-150 text-white"
-                      >
-                        + Mídia
-                      </button>
-                    </div>
-                  )}
-                  {/* Subtle dark gradient overlay at the bottom for readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30">
+              {/* Visor Interno de Reels Vazio */}
+              <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 relative overflow-hidden z-10 select-none text-center">
+                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center mb-4">
+                  <Sparkles className="w-5 h-5 text-brand-blue" />
                 </div>
+                <h3 className="text-xs font-black uppercase tracking-widest text-white mb-2">KS STUDIO</h3>
+                <p className="text-[9px] text-white/40 leading-relaxed uppercase tracking-wider max-w-[200px]">
+                  Direção estética e simulação de reels. Acesse os painéis laterais para calibração.
+                </p>
+              </div>
+            </div>
 
-                {/* Top Header Overlay */}
-                <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-20 pointer-events-none">
-                  <span className="text-[9px] font-black tracking-widest text-white/40 uppercase">
-                    Reels Simulator
+            {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Área com o Card Vazio) */}
+            <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
+              {/* TOPO FIXO: Título Geral */}
+              <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
+                <h2 
+                  className="text-sm uppercase tracking-wider text-white text-center font-extralight"
+                  style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                >
+                  KS Studio
+                </h2>
+              </div>
+
+              {/* CONTEÚDO DO PORTAL ABAIXO (CARD VAZIO) */}
+              <div className="flex-1 flex flex-col gap-4 overflow-hidden">
+                <div className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 bg-[#050505] flex flex-col justify-center items-center p-5 text-center shadow-lg">
+                  <Sparkles className="w-8 h-8 text-white/15 mb-3" />
+                  <span className="text-[9px] font-black tracking-widest uppercase text-white/30 mb-1">Cockpit Vazio</span>
+                  <span className="text-[9px] font-semibold text-white/20 uppercase tracking-wider leading-relaxed max-w-[150px]">
+                    Card reservado para forja estética AI
                   </span>
-                  <div className="px-2 py-0.5 rounded-full bg-black/60 border border-white/10 text-[8px] font-black text-brand-gold uppercase tracking-wider">
-                    FRAME {(activeSlot !== null ? activeSlot : 0) + 1} / 4
-                  </div>
                 </div>
+              </div>
 
-                {/* Right Side Social Overlay Buttons */}
-                <div className="absolute right-3 bottom-16 flex flex-col items-center gap-4 z-20">
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-sm">❤️</span>
-                    <span className="text-[8px] font-black text-white/60">1.2k</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-sm">💬</span>
-                    <span className="text-[8px] font-black text-white/60">84</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-sm">✈️</span>
-                  </div>
-                  {/* Vinyl rotating disk */}
-                  <div className="w-7 h-7 rounded-full bg-black border border-white/30 flex justify-center items-center animate-spin [animation-duration:4s]">
-                    <div className="w-2.5 h-2.5 bg-brand-gold rounded-full" />
-                  </div>
-                </div>
-
-                {/* Bottom Profile and Caption Overlays */}
-                <div className="absolute left-4 right-14 bottom-14 z-20 flex flex-col gap-1.5 text-left pointer-events-none">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-brand-gold flex justify-center items-center font-bold text-[9px] text-black border border-white/20">
-                      SR
-                    </div>
-                    <span className="text-[10px] font-bold text-white tracking-wide">
-                      @scalla.records
+              {/* ALWAYS-VISIBLE AUDIO CONTROLS & BRAND SIGNATURE */}
+              <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4 shrink-0">
+                <div className="flex items-center gap-3 text-white/40">
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button 
+                      onClick={() => setIsMuted(!isMuted)} 
+                      className="p-1 rounded-lg hover:bg-white/5 hover:text-white transition duration-200 shrink-0"
+                    >
+                      {isMuted ? <VolumeX className="w-3.5 h-3.5 text-brand-pink" /> : <Volume2 className="w-3.5 h-3.5 text-brand-blue" />}
+                    </button>
+                    <span className="text-[9px] font-black uppercase tracking-wider whitespace-nowrap">
+                      {isMuted ? "Áudio Mutado" : "Trilha Sonora"}
                     </span>
                   </div>
-                  <p className="text-[9.5px] text-white/80 font-medium leading-relaxed truncate-2-lines max-h-8 overflow-hidden overflow-ellipsis">
-                    {txtLegenda || "Nenhuma legenda forjada..."}
-                  </p>
-                </div>
-
-                {/* Overlay Navigation Tabs at the Very Bottom (Frame slots 1-4 selection) */}
-                <div className="absolute bottom-0 inset-x-0 h-11 bg-black/90 border-t border-white/5 px-2 flex justify-between items-center z-30">
-                  {Array.from({ length: 4 }).map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setActiveSlot(idx)}
-                      className={`flex-1 py-1 rounded-lg text-[8px] font-black uppercase tracking-wider mx-0.5 border transition duration-150 ${
-                        ((activeSlot === idx) || (activeSlot === null && idx === 0))
-                          ? "bg-brand-blue/20 border-brand-blue/50 text-white"
-                          : "bg-white/5 border-white/5 text-white/40 hover:bg-white/10 hover:text-white"
-                      }`}
-                    >
-                      Slot {idx + 1}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* PAINEL DE CONTROLE ESQUERDO: CO-DIRETOR AI (Flutuante Estilo Cockpit) */}
-            <div className="absolute left-6 top-6 bottom-6 w-[320px] bg-[#0A0A0C]/90 backdrop-blur-md border border-white/10 rounded-lg p-6 z-20 flex flex-col justify-between shadow-2xl animate-fade-in text-white text-left">
-              <div className="flex flex-col gap-5 flex-1">
-                {/* Header do Painel */}
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Cpu className="w-5 h-5 text-brand-gold" />
-                    <span className="text-xs font-black uppercase tracking-widest text-brand-gold">Co-Diretor AI</span>
-                  </div>
-                  <div className="text-[10px] font-bold text-white/40 uppercase mt-0.5">Inteligência Estética & Análise</div>
-                </div>
-
-                <hr className="border-white/10" />
-
-                {/* Status do Storyboard */}
-                <div className="flex flex-col gap-2">
-                  <div className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Storyboard Atual</div>
-                  <div className="grid grid-cols-4 gap-2">
-                    {storyboardData.map((slot, idx) => (
-                      <div 
-                        key={idx} 
-                        onClick={() => {
-                          setActiveSlot(idx);
-                          setActiveView("almoxarifado");
-                        }}
-                        className={`aspect-square rounded-lg overflow-hidden border cursor-pointer relative group ${
-                          (activeSlot === idx || (activeSlot === null && idx === 0))
-                            ? "border-brand-blue" 
-                            : "border-white/10 hover:border-white/30"
-                        }`}
-                      >
-                        {slot ? (
-                          <img src={slot} className="w-full h-full object-cover group-hover:scale-110 duration-200" alt="Frame" />
-                        ) : (
-                          <div className="w-full h-full bg-white/5 flex justify-center items-center text-[10px] text-white/20 font-black">
-                            +
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Box de Resposta do Co-Diretor */}
-                <div className="flex-1 flex flex-col gap-2 mt-2">
-                  <div className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Opinião do Co-Diretor</div>
-                  <div className="flex-1 bg-[#050507] border border-white/10 rounded-lg p-4 text-[11px] font-medium text-white/70 overflow-y-auto leading-relaxed italic text-left">
-                    {aiInsightText}
-                  </div>
-                </div>
-              </div>
-
-              {/* Botão de Análise */}
-              <button 
-                onClick={runAiAnalysis}
-                disabled={isAiLoading}
-                className="w-full h-11 bg-white/5 hover:bg-white/10 active:scale-95 border border-white/10 rounded-lg text-xs font-bold tracking-wider uppercase transition duration-150 mt-4 flex justify-center items-center gap-2 text-white cursor-pointer"
-              >
-                {isAiLoading ? (
-                  <RefreshCw className="w-4 h-4 animate-spin text-brand-gold" />
-                ) : (
-                  <>🧠 ANALISAR ESTÉTICA COM IA</>
-                )}
-              </button>
-            </div>
-
-            {/* PAINEL DE CONTROLE DIREITO: LEGENDA & FORJA (Flutuante Estilo Cockpit) */}
-            <div className="absolute right-6 top-6 bottom-6 w-[350px] bg-[#0A0A0C]/90 backdrop-blur-md border border-white/10 rounded-lg p-6 z-20 flex flex-col justify-between shadow-2xl animate-fade-in text-white text-left">
-              <div className="flex flex-col gap-5 flex-1">
-                {/* Header do Painel */}
-                <div className="flex justify-between items-start">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <Sliders className="w-5 h-5 text-brand-blue" />
-                      <span className="text-xs font-black uppercase tracking-widest text-brand-blue">Estúdio de Criação</span>
-                    </div>
-                    <div className="text-[10px] font-bold text-white/40 uppercase mt-0.5">Editor de Legenda e Micro-Serviços</div>
-                  </div>
-                </div>
-
-                <hr className="border-white/10" />
-
-                {/* Textarea Legenda */}
-                <div className="flex flex-col gap-2 flex-1">
-                  <div className="flex justify-between items-center">
-                    <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Legenda Lapidada</span>
-                    <button 
-                      onClick={runAiCaption}
-                      disabled={isLegendaLoading}
-                      className="text-[9px] font-black text-brand-gold hover:text-brand-gold/80 flex items-center gap-1 uppercase transition duration-150 disabled:opacity-50 cursor-pointer"
-                    >
-                      {isLegendaLoading ? <RefreshCw className="w-2.5 h-2.5 animate-spin" /> : "✍️ Regenerar com IA"}
-                    </button>
-                  </div>
-                  <textarea 
-                    value={txtLegenda}
-                    onChange={(e) => setTxtLegenda(e.target.value)}
-                    className="w-full flex-1 bg-[#050507] border border-white/10 rounded-lg p-4 text-[11px] font-semibold text-white/80 focus:border-brand-blue outline-none resize-none leading-relaxed text-left"
+                  <input 
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={volume}
+                    onChange={(e) => setVolume(parseFloat(e.target.value))}
+                    className="flex-1 premium-slider min-w-[60px]"
                   />
                 </div>
-
-                {/* Lista de Micro-Serviços */}
-                <div className="flex flex-col gap-3">
-                  <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Micro-Serviços Ativos</span>
-                  <div className="flex flex-col gap-2">
-                    {[
-                      { key: "legendas", label: "Legendas Didáticas" },
-                      { key: "roteiro", label: "Roteiro de Carrossel" },
-                      { key: "webp", label: "Compressor WebP Automático" },
-                      { key: "video", label: "Vídeo Generativo AI" }
-                    ].map((ms) => (
-                      <div 
-                        key={ms.key}
-                        onClick={() => toggleMs(ms.key)}
-                        className="flex justify-between items-center bg-white/5 border border-white/5 hover:border-white/10 rounded-lg px-4 py-2.5 cursor-pointer duration-150 group"
-                      >
-                        <span className="text-xs font-semibold text-white/70 group-hover:text-white transition duration-150">{ms.label}</span>
-                        {microServicesState[ms.key] ? (
-                          <CheckCircle2 className="w-4 h-4 text-brand-blue" />
-                        ) : (
-                          <div className="w-4 h-4 rounded-full border border-white/20" />
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                <div className="text-[8px] font-black tracking-widest text-center text-white/15 uppercase mt-1">
+                  Killer Skills v4.0 • Direção de Arte AI
                 </div>
               </div>
-
-              {/* Botão de Forja Principal */}
-              <button 
-                onClick={triggerForge}
-                className="w-full h-12 bg-brand-gold text-black font-black text-xs tracking-widest uppercase rounded-lg hover:scale-[1.02] active:scale-95 duration-150 mt-5 shadow-lg shadow-brand-gold/15 flex justify-center items-center gap-2 cursor-pointer"
-              >
-                ✨ EMITIR ORDEM DE SERVIÇO
-              </button>
             </div>
+
           </div>
         )}
 
