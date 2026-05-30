@@ -516,7 +516,7 @@ export default function App() {
 
   const currentPersona = activePersonasList[selectedPersonaIdx] || activePersonasList[0];
   const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || ARCHETYPES[0]) : null;
-  const isMetamorphosed = activeView === "servicos" && !hasPersonaDefined && activeArch;
+  const isMetamorphosed = activeView === "servicos" && onboardingStep === "matriz" && activeArch;
 
   return (
     <div className="relative w-screen h-screen bg-black flex overflow-hidden text-white antialiased select-none z-10">
