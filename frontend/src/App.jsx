@@ -393,7 +393,13 @@ export default function App() {
           <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10 text-white relative">
             {loginStage === "email" ? (
               /* ETAPA 1: DIGITAR E-MAIL DE ACESSO */
-              <div className="w-full flex flex-col items-center justify-center animate-fade-in">
+              <form 
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  await handleEmailSubmit();
+                }}
+                className="w-full flex flex-col items-center justify-center animate-fade-in"
+              >
                 {/* Logo Metálica */}
                 <div className="text-3xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-white to-brand-blue mb-2">
                   KILLER SKILLS
@@ -408,11 +414,6 @@ export default function App() {
                     type="email" 
                     value={enteredEmail}
                     onChange={(e) => setEnteredEmail(e.target.value)}
-                    onKeyDown={async (e) => {
-                      if (e.key === "Enter") {
-                        await handleEmailSubmit();
-                      }
-                    }}
                     placeholder="nome@exemplo.com"
                     className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-lg px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
                   />
@@ -420,15 +421,21 @@ export default function App() {
 
                 {/* Botão de Avanço */}
                 <button 
-                  onClick={handleEmailSubmit}
+                  type="submit"
                   className="btn-login-avancar mb-6"
                 >
                   AVANÇAR <ArrowRight className="w-4 h-4" />
                 </button>
-              </div>
+              </form>
             ) : (
               /* ETAPA 2: GOOGLE SIGN-IN MORPH */
-              <div className="w-full flex flex-col items-center justify-center animate-fade-in">
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handlePasswordSubmit();
+                }}
+                className="w-full flex flex-col items-center justify-center animate-fade-in"
+              >
                 {/* Google Logo SVG */}
                 <svg className="w-8 h-8 mb-3" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -455,11 +462,6 @@ export default function App() {
                     type="password"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handlePasswordSubmit();
-                      }
-                    }}
                     placeholder="Digite sua Senha"
                     className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-lg px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
                   />
@@ -468,6 +470,7 @@ export default function App() {
                 {/* Botões de Ação */}
                 <div className="w-full flex gap-2 mb-6">
                   <button 
+                    type="button"
                     onClick={() => {
                       setLoginStage("email");
                       setLoginPassword("");
@@ -477,13 +480,13 @@ export default function App() {
                     VOLTAR
                   </button>
                   <button 
-                    onClick={handlePasswordSubmit}
+                    type="submit"
                     className="flex-[2] btn-login-avancar"
                   >
                     ENTRAR
                   </button>
                 </div>
-              </div>
+              </form>
             )}
 
             <div className="text-[9px] font-bold text-white/10 tracking-widest uppercase">
