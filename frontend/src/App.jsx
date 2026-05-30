@@ -515,9 +515,9 @@ export default function App() {
         
         {/* ESTADO A: MENU PADRÃO */}
         <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${isMetamorphosed ? "opacity-0 scale-95 pointer-events-none absolute inset-5" : "opacity-100 scale-100"}`}>
-          <div className="flex flex-col gap-5">
-            {/* Bloco de Identidade: Marca + Conta do Usuário */}
-            <div className="flex flex-col gap-4">
+          <div className="flex flex-col">
+            {/* Bloco de Identidade: Marca + Conta do Usuário (Espaçamento Luxuoso) */}
+            <div className="flex flex-col gap-8">
               {/* Título do Cockpit */}
               <div className="text-center">
                 <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
@@ -537,11 +537,11 @@ export default function App() {
               </div>
             </div>
 
-            {/* Divisor de Seção (Marca o início dos Controles/Menu) */}
-            <hr className="border-white/10" />
+            {/* Divisor de Seção (Posicionado Mais Abaixo para Dar uma Respirada) */}
+            <hr className="border-white/10 mt-10 mb-8" />
 
-            {/* Menu de Áreas de Trabalho */}
-            <div className="flex flex-col gap-1.5 pt-1">
+            {/* Menu de Áreas de Trabalho (Deslocado mais para baixo com espaçamento amplo) */}
+            <div className="flex flex-col gap-2 pt-2">
               
               <button 
                 onClick={() => setActiveView("servicos")}
