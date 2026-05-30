@@ -76,10 +76,22 @@ connect_ssh << 'EOF'
   [ -s "$HOME/.bashrc" ] && \. "$HOME/.bashrc"
   
   echo "🔄 Reiniciando serviço PM2..."
-  pm2 restart killer-skills || /usr/local/bin/pm2 restart killer-skills || /usr/bin/pm2 restart killer-skills || {
-      echo "⚠️ AVISO: Não foi possível reiniciar via PM2 automaticamente. Tentando matar processo Python antigo..."
-      pkill -f "main.py" || true
+  pm2 restart all || pm2 restart killer-skills || /usr/bin/pm2 restart all || {
+      echo "⚠️ AVISO: Não foi possível reiniciar via PM2 automaticamente. Liberando portas e reiniciando processos em background..."
+      pkill -f "APP/main.py" || true
+      pkill -f "backend/app.py" || true
+      
+      # Força liberação de portas caso estejam presas
+      if command -v fuser >/dev/null 2>&1; then
+          fuser -k 8081/tcp || true
+          fuser -k 8000/tcp || true
+      fi
+      
+      # Reinicia o servidor estático (Frontend na porta 8081)
       nohup python3 APP/main.py > /dev/null 2>&1 &
+      
+      # Reinicia o backend real FastAPI (Porta 8000)
+      nohup python3 backend/app.py > backend/backend.log 2>&1 &
   }
   
   echo "✅ DEPLOY CONCLUÍDO COM SUCESSO NO VPS!"
