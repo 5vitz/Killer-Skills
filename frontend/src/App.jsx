@@ -124,6 +124,12 @@ const ARCHETYPE_DETAILS = {
 
 
 export default function App() {
+  // --- CONFIGURAÇÃO EXPERIMENTAL DO DEGRADÊ DO COCKPIT ---
+  // Para reverter para a versão anterior (2 tons), basta mudar ACTIVE_COCKPIT_GRADIENT para GRADIENT_2_TONES
+  const GRADIENT_2_TONES = "linear-gradient(to bottom, #383838 0%, #0D0D0D 25%)";
+  const GRADIENT_3_TONES = "linear-gradient(to bottom, #383838 0%, #222222 50%, #000000 100%)";
+  const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES; // Mude para GRADIENT_2_TONES para reverter!
+
   // --- ESTADO GLOBAL ---
   const [activeView, setActiveView] = useState("servicos"); // storyboard, servicos, almoxarifado, admin_console
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -645,7 +651,7 @@ export default function App() {
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col justify-between transition-all duration-500"
-                  style={{ background: 'linear-gradient(to bottom, #383838 0%, #0D0D0D 25%)' }}
+                  style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
                   {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
                   <p className="relative z-10 font-poppins-light text-[12px] leading-relaxed text-justify mb-4" style={{ color: '#FFFFFF' }}>
@@ -784,7 +790,7 @@ export default function App() {
                       {/* Card da Matriz com Bordas Arredondadas e Fundo Grafite Sólido Luxuoso */}
                       <div 
                         className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl mb-4 flex flex-col pt-1 pb-0 px-0"
-                        style={{ background: 'linear-gradient(to bottom, #383838 0%, #0D0D0D 25%)' }}
+                        style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                       >
                         
                         {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
