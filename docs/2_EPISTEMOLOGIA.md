@@ -1,7 +1,6 @@
-# 📐 VIÉS EPISTEMOLÓGICO: O SABER (ESTRUTURA & ENGENHARIA)
-## Projeto Killer Skills — Versão Unificada 2.0 (Maio de 2026)## 🏛️ CLASSE E: TOPOLOGIA OPERACIONAL (SIMETRIA EM 3 COLUNAS & DUALIDADE DE DISPOSITIVO)
+## 🏛️ CLASSE E: TOPOLOGIA OPERACIONAL (SIMETRIA EM 3 COLUNAS & DUALIDADE DE DISPOSITIVO)
 
-Toda a interação em Desktop é estruturada sob a **Simetria Estática de Três Colunas**, mantendo o smartphone virtual perfeitamente centralizado fisicamente no centro da tela (`fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`). As transições de tela ocorrem por crossfade exclusivo dentro do visor do celular virtual, enquanto os metadados, instruções de onboarding, relatórios de persona e botões de avanço são delegados à barra lateral direita.
+Toda a interação em Desktop é estruturada sob a **Simetria Estática de Três Colunas**, mantendo o smartphone virtual perfeitamente centralizado fisicamente no centro da tela (`fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`). As transições de tela ocorrem por crossfade exclusivo dentro do visor do celular virtual, enquanto os metadados, instruções de onboarding, relatórios de persona e botões de avanço são distribuídos ergonomicamente entre a barra lateral esquerda (Coluna 1) e a barra lateral direita (Coluna 3).
 
 ### E.0. Lógica de Dispositivo Dual (isMobile Viewport)
 *   **Desktop (`isMobile === false`):** Exibe a simetria de 3 colunas com o smartphone virtual centralizado de luxo.
@@ -22,29 +21,28 @@ O redirecionamento pós-login é governado de forma estrita pelo tipo de conta (
    * **Restrição de IA:** O usuário Free não tem acesso a "Elaborar Persona". O menu lateral "1 - PERSONAS" fica trancado/desativado no cockpit.
    * **Foco no Manual:** Cria manualmente o flow de storyboard, realiza upload e utiliza o **Simulador de Feed do Instagram** (visualização 1:1) para postar ou agendar postagens manuais.
 
-### E.2. Módulo Tela 1 (Onboarding Simétrico & Diagnóstico Híbrido MEVA)
-*   **Finalidade:** Determinação da dosagem arquetípica e elaboração da Persona Híbrida.
-*   **Componentes do Desktop:**
-    *   *Sidebar Esquerda:* Menu de navegação e status online (já existente).
-    *   *Smartphone Central (O Player):*
-        *   No passo `video`: Contém **apenas** o player de vídeo cenográfico com controles de som.
-        *   No passo `matriz`: Contém **unicamente** os 12 sliders dosadores (ocupando toda a área útil do visor para máximo conforto tátil).
-    *   *Sidebar Direita (O Relatório):*
-        *   No passo `video`: Exibe textos instrucionais e o botão **`IR PARA A MATRIZ ➔`**.
-        *   No passo `matriz`: Exibe a **Persona Resultante** (ex: `SÁBIO / CRIADOR`), o **Relatório Detalhado** (Doutrina de Voz, Luz/Sombra e Nuances de Subtom de menores dosagens) e o botão dourado **`ELABORAR PERSONA ✨`**.
+### E.2. Módulo Tela 1C (Onboarding & Calibração dos Sliders MEVA)
+*   **Finalidade:** Determinação da dosagem arquetípica fina do usuário.
+*   **Distribuição das Colunas (Desktop):**
+    *   **Coluna 1 (Sidebar Esquerda):** Exibe a **Descrição / Significado Fixo** do arquétipo que estiver sob o mouse/foco (hover/focus). O conceito do arquétipo é estático e imutável (ex: o Sábio é sempre o Sábio, independentemente da dosagem).
+    *   **Coluna 2 (Smartphone Central):** Exibe os **12 sliders dosadores** da Matriz MEVA compactados (com altura fixa simétrica de 32px e com 50% de dosagem inicial padrão).
+    *   **Coluna 3 (Sidebar Direita):** Exibe o **Controle de Áudio** (Trilha Sonora, volume, mute/unmute) e as **Imagens dos Arquétipos** correspondentes ao foco (geradas por inteligência artificial).
 
-### E.3. Módulo Tela 2 (Serviços & Construtor de Prompt)
-*   **Finalidade:** Escolha da modalidade e emissão da Ordem de Serviço (OS) com feedback interativo dos agentes baseada na Persona gerada.
-*   **Componentes:**
-    *   *O Construtor de Prompt:* Toggles táteis de micro-serviços (Redator, Roteirista, Compressor, Vídeo AI).
-    *   *Feedback dos Agentes (Live Work):* Console técnico mostrando os Agentes trabalhando em tempo real no visor central do smartphone.
-    *   *OK de Envio:* Botão dourado **`EMITIR ORDEM DE SERVIÇO`** na barra direita.
+### E.3. Módulo Tela 2 (Serviços & Diagnóstico da Persona Híbrida)
+*   **Finalidade:** Escolha de micro-serviços baseados no diagnóstico psicológico da Persona compilada.
+*   **A Regra do Prompt:** **Todo o direcionamento de criação de mídias (imagens, vídeos, textos e títulos) deriva diretamente do Prompt Conceitual da Persona**, gerado a partir dos pesos e calibração dos arquétipos na matriz MEVA. Este prompt é o pré-requisito genético de toda a engine de geração.
+*   **Distribuição das Colunas (Desktop):**
+    *   **Coluna 1 (Sidebar Esquerda):** Exibe o **Título Duplo Híbrido** (associado aos dois maiores percentuais selecionados, ex: `SÁBIO / EXPLORADOR`) e a **Persona Resultante** (o encadeamento e síntese narrativa dos textos da gradação decimal correspondente de cada um dos 12 arquétipos).
+    *   **Coluna 2 (Smartphone Central):** Exibe o visor com o portal estético reativo da Persona ou console de "live work" dos agentes virtuais trabalhando em tempo real.
+    *   **Coluna 3 (Sidebar Direita):** Exibe os toggles táteis de **Micro-serviços** (Redator, Roteirista, Compressor WebP, Vídeo AI) e o botão dourado de confirmação **`EMITIR ORDEM DE SERVIÇO`**.
 
-### E.4. Módulo Tela 3 (O KS Studio)
-*   **Finalidade:** Sandbox interativa de visualização 1:1, simulação de feed e controle de publicação.
-*   **Componentes do Visor:**
-    *   *Simulador de Feed:* O próprio visor do celular exibe a miniatura real e interativa (Reels ou Carrossel) que o usuário pode rodar e ler.
-    *   *Controles Finais:* Botões rápidos de `Publicar Agora` ou `Agendar Post` no painel lateral.
+### E.4. Módulo Tela 3 (O KS Studio & Simulador de Feed)
+*   **Finalidade:** Sandbox interativa de visualização 1:1, simulação de feed e controle de publicação final.
+*   **Geração Estética:** Os agentes virtuais no KS Studio consomem o Prompt Conceitual da Persona (especificado na Tela 2) para **gerar do absoluto zero as mídias (imagens, vídeos, textos e títulos)** para a conta Premium. A Categoria Pessoal está plenamente definida, e a **Categoria Profissional iniciará o desenvolvimento em sequência**.
+*   **Distribuição das Colunas (Desktop):**
+    *   **Coluna 1 (Sidebar Esquerda):** Exibe o Construtor de Prompt final e o console técnico de status de geração.
+    *   **Coluna 2 (Smartphone Central):** Exibe o **Simulador de Feed do Instagram (1:1)**, onde o smartphone simula a miniatura interativa do post (Reels, Carrossel) que o usuário pode navegar.
+    *   **Coluna 3 (Sidebar Direita):** Exibe os controles operacionais finais (botões rápidos de `Publicar Agora` ou `Agendar Post`).
 
 ---
 

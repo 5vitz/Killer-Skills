@@ -52,9 +52,31 @@ Abaixo segue a identidade conceitual e filosófica de cada um dos 12 arquétipos
 *   **🗣️ O Tolo:** Alegre, dinâmico, gosta de divertir as pessoas. Autêntico e descontraído. *(Sombra: Frivolidade e mascarar dores com humor constante)*. Metáfora: Padrões dinâmicos de luzes coloridas dançando sobre paredes de pedra escura texturizada.
 *   **👤 O Homem Comum:** Age em conformidade com o grupo. Empático, prático e excelente vizinho. *(Sombra: Perda de individualidade para pertencer à massa)*. Metáfora: Placas geométricas de ardósia escura, linhas e formas de concreto rústico cinza-argila.
 *   **🏆 O Governante:** Líder natural. Assume autoridade para gerar estabilidade e ordem. *(Sombra: Rigidez extrema e autoritarismo)*. Metáfora: Trono de basalto negro minimalista, metais polidos e reflexos dourados secos.
+---
 
----A Metáfora do Portal:** Padrões dinâmicos de luzes coloridas dançando sobre paredes de pedra escura texturizada.
-*   **Luz & Sombra:** Revela alegria e engajamento reativo; protege o cansaço da exigência constante por novidades.
+### B.4. A Matriz MEVA 12x10 (Os 120 Textos de Gradação Decimais)
+Cada um dos 12 arquétipos possui **10 textos autorais e fixos**, mapeando faixas decimais de intensidade de dosagem. O sistema lê o valor do slider (0% a 100%) e o converte em um bracket correspondente:
+* **Fórmula de Bracket:** $\text{Bracket} = \min\left(10, \left\lfloor \frac{\text{Percentual}}{10} \right\rfloor + 1\right)$
+  * **Brackets de Gradação:**
+    * `0% - 10%`: **Texto 01** (Sombra/Carência Crítica: "A ausência deste arquétipo em você pode estar te levando a caminhos perigosos...")
+    * `11% - 20%`: **Texto 02**
+    * `21% - 30%`: **Texto 03**
+    * `31% - 40%`: **Texto 04**
+    * `41% - 50%`: **Texto 05**
+    * `51% - 60%`: **Texto 06**
+    * `61% - 70%`: **Texto 07**
+    * `71% - 80%`: **Texto 08**
+    * `81% - 90%`: **Texto 09**
+    * `91% - 100%`: **Texto 10** (Integração Total/Potência Máxima: "A maestria plena deste arquétipo transborda em...")
+
+### B.5. O Motor de Compilação Narrativa da Persona Híbrida
+* **Geração de Diagnóstico:** Quando o usuário clica em `ANALISAR RESULTADO`, o ecossistema executa a compilação do relatório final de Persona.
+* **Ordenação de Relevância:** Os arquétipos são ordenados de forma decrescente de acordo com o seu percentual (dosagem). O encadeamento do texto final começa pelas **Forças Dominantes (Top 1 e Top 2)**, passando pelos **Co-Pilotos de Expressão (Valores Intermediários)** e concluindo com o mapeamento das **Ausências e Sombras (Valores de Baixa Dosagem)**.
+*   **Assinatura de Título Duplo Híbrido:** O título oficial da Persona será a combinação em caixa alta dos dois maiores percentuais (ex: `SÁBIO / EXPLORADOR`), proporcionando uma flexibilidade narrativa premium e adaptabilidade no tom (o "jogo de cintura" interpretativo).
+
+### B.6. O Direcionamento Genético de Mídia & Próxima Fase
+* **O DNA da Criação:** Fica estabelecido como lei arquitetural que **todo o direcionamento de criação de mídias (imagens, vídeos, textos e títulos) deriva diretamente do Prompt Conceitual da Persona**, que é o resultado direto da calibração fina e dos pesos dos arquétipos na matriz MEVA. O Prompt é o pré-requisito genético de toda a engine.
+* **Ordem de Desenvolvimento:** A Categoria Pessoal está plenamente consolidada e homologada em seu pipeline estético e funcional. A **Categoria Profissional começará a ser desenvolvida na sequência imediata**, utilizando esta mesma infraestrutura e pipeline genético de coprodutores AI.
 
 ---
 

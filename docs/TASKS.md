@@ -110,6 +110,26 @@ gantt
     *   Implementação de *Drawer / Bottom Sheet* tátil e ergonômico para a modulação de subtons e doutrina arquetípica na lateral direita.
 *   [ ] **Aperfeiçoamento do Construtor de Prompts (Tela 2):** Revisão das chamadas de API e conexões com o backend FastAPI.
 *   [ ] **Otimizações do Módulo Reels (Tela 3):** Validação dos storyboards gerados e comportamento reativo da grid.
+*   [ ] **Experiência Sensorial Dinâmica dos Sliders (Módulo Onboarding / Matriz):**
+    *   Todos os sliders começam em 50% por padrão.
+    *   A imagem correspondente ao arquétipo no portal lateral direito começa em preto e branco (`grayscale(100%)`).
+    *   **Dosagem abaixo de 50%:** A imagem vai descolando/desfocando progressivamente (aplicando `blur(...)` dinâmico via CSS até um máximo de `8px` ou `12px` em 0%).
+    *   **Retorno a 50%:** A imagem volta a ficar nítida, mantendo-se em preto e branco (`blur(0px)`, `grayscale(100%)`).
+    *   **Dosagem acima de 50%:** A saturação e a cor original da imagem aumentam gradativamente (o grayscale vai de `100%` a `0%` ao alcançar 100% de intensidade do slider).
+    *   **Lógica Técnica:** Vincular os valores do slider ativamente aos filtros de estilo do React: `filter: grayscale(G%) blur(Bpx)`.
+*   [ ] **Redação e Produção dos 120+ Textos da Matriz MEVA (Módulo Onboarding / Matriz):**
+    *   **Estrutura 12x10 (120 Textos):** Desenvolver 10 textos de gradação decimais para cada um dos 12 arquétipos (Bracket 1 de 0-10% a Bracket 10 de 91-100%).
+    *   **Faixa Decimal de Ausência (Texto 01):** Garantir que o bracket de 0% a 10% comente de forma ativa a carência ou sombra psicológica daquele arquétipo ("A ausência de...").
+    *   **Motor de Compilação Narrativa:** Implementar a lógica no app que lê os 12 valores, resolve os brackets, ordena de forma decrescente (Dominância -> Co-Pilotos -> Sombra/Subtoms) e concatena os textos para formar o relatório final de Persona.
+    *   **Assinatura de Título Duplo Híbrido:** Exibir no topo do diagnóstico o título oficial com o par ordenado em caixa alta dos dois maiores percentuais (ex: `SÁBIO / EXPLORADOR`), conferindo flexibilidade na voz e na interpretação do app.
+    *   **Layout Físico em 3 Colunas na Tela 1C (Sliders):**
+        *   *Coluna 1 (Esquerda):* Descrição conceitual estática do arquétipo hovered/focused.
+        *   *Coluna 2 (Centro):* 12 sliders arquetípicos na simetria do smartphone.
+        *   *Coluna 3 (Direita):* Controles de áudio (volume e mute) + Exibição das imagens conceituais dos arquétipos geradas por IA.
+    *   **Layout Físico em 3 Colunas na Tela 2 (Serviços / Diagnóstico):**
+        *   *Coluna 1 (Esquerda):* Título Duplo Híbrido + O relatório de Persona compilado final.
+        *   *Coluna 2 (Centro):* Visor do smartphone com portal estético reativo da Persona ou live work preview.
+        *   *Coluna 3 (Direita):* Painel de seleção de Micro-serviços + Botão dourado de EMITIR ORDEM DE SERVIÇO.
 
 ---
 *Lincoln (Orquestrador Geral) & Armando — Maio de 2026.*

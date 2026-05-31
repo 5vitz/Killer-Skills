@@ -644,39 +644,40 @@ export default function App() {
               {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
-                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg bg-[#050505] p-5 flex flex-col justify-between transition-all duration-500"
+                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-black/10 shadow-lg p-5 flex flex-col justify-between transition-all duration-500"
+                  style={{ backgroundColor: '#FFFFA2' }}
                 >
                   {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
-                  <p className="relative z-10 font-poppins-light text-[12px] text-white/80 leading-relaxed text-justify mb-4">
+                  <p className="relative z-10 font-poppins-light text-[12px] text-black/80 leading-relaxed text-justify mb-4">
                     {activeArch.desc}
                   </p>
 
                   {/* Fichas Técnicas Delicadas */}
-                  <div className="relative z-10 flex flex-col gap-2.5 pt-3 border-t border-white/5 mt-auto">
+                  <div className="relative z-10 flex flex-col gap-2.5 pt-3 border-t border-black/10 mt-auto">
                     <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider text-brand-gold uppercase font-poppins-light">Desejo Central</span>
-                      <span className="text-[10px] text-white/95 font-poppins-light leading-tight">
+                      <span className="text-[8px] tracking-wider text-black/50 uppercase font-poppins-light">Desejo Central</span>
+                      <span className="text-[10px] text-black font-poppins-light leading-tight">
                         {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
                       </span>
                     </div>
 
                     <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider text-brand-pink uppercase font-poppins-light">Maior Medo</span>
-                      <span className="text-[10px] text-white/95 font-poppins-light leading-tight">
+                      <span className="text-[8px] tracking-wider text-black/50 uppercase font-poppins-light">Maior Medo</span>
+                      <span className="text-[10px] text-black font-poppins-light leading-tight">
                         {ARCHETYPE_DETAILS[activeArch.id]?.medo}
                       </span>
                     </div>
 
                     <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider text-green-400 uppercase font-poppins-light">Superpoder</span>
-                      <span className="text-[10px] text-white/95 font-poppins-light leading-tight">
+                      <span className="text-[8px] tracking-wider text-black/50 uppercase font-poppins-light">Superpoder</span>
+                      <span className="text-[10px] text-black font-poppins-light leading-tight">
                         {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
                       </span>
                     </div>
 
                     <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider text-amber-500 uppercase font-poppins-light">Sombra</span>
-                      <span className="text-[10px] text-white/95 font-poppins-light leading-tight">
+                      <span className="text-[8px] tracking-wider text-black/50 uppercase font-poppins-light">Sombra</span>
+                      <span className="text-[10px] text-black font-poppins-light leading-tight">
                         {ARCHETYPE_DETAILS[activeArch.id]?.sombra}
                       </span>
                     </div>
