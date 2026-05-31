@@ -128,7 +128,7 @@ export default function App() {
   // Para alternar ou reverter, basta trocar as variáveis abaixo:
   const GRADIENT_2_TONES = "linear-gradient(to bottom, #383838 0%, #0D0D0D 25%)";
   const GRADIENT_3_TONES = "linear-gradient(to bottom, #383838 0%, #222222 50%, #000000 100%)";
-  const GRADIENT_3_TONES_INVERTED = "linear-gradient(to bottom, #000000 0%, #222222 50%, #383838 100%)";
+  const GRADIENT_3_TONES_INVERTED = "linear-gradient(to bottom, #000000 0%, #000000 60%, #222222 80%, #383838 100%)";
   
   const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES; // Coluna 1 Card (Prata em cima, Preto embaixo)
   const ACTIVE_PLAYER_GRADIENT = GRADIENT_3_TONES_INVERTED; // Player Central (Preto em cima, Prata embaixo)
