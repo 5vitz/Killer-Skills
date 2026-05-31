@@ -397,8 +397,8 @@ input[type="range"].premium-slider-palha::-webkit-slider-thumb {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #EFE5D3; /* Solid warm palha/cream dial handle */
-  border: 1px solid #EFE5D3;
+  background: #0D0D0D; /* Deep dark handle */
+  border: 1px solid #0D0D0D;
   margin-top: -2.5px;
   transition: transform 0.1s ease;
 }
@@ -420,8 +420,8 @@ input[type="range"].premium-slider-palha::-moz-range-thumb {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #EFE5D3;
-  border: 1px solid #EFE5D3;
+  background: #0D0D0D; /* Deep dark handle */
+  border: 1px solid #0D0D0D;
   transition: transform 0.1s ease;
 }
 
