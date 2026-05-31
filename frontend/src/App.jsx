@@ -782,7 +782,10 @@ export default function App() {
                     <div key="screen-1c" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
                       
                       {/* Card da Matriz com Bordas Arredondadas e Fundo Grafite Sólido Luxuoso */}
-                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl brushed-steel-dark mb-4 flex flex-col pt-1 pb-0 px-0">
+                      <div 
+                        className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl mb-4 flex flex-col pt-1 pb-0 px-0"
+                        style={{ background: 'linear-gradient(to bottom, #383838 0%, #0D0D0D 25%)' }}
+                      >
                         
                         {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
                         <div className="my-auto overflow-hidden flex flex-col gap-0 h-[384px]">
