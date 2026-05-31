@@ -797,7 +797,7 @@ export default function App() {
                                 }`}
                               >
                                 {/* Bloco 1 (Nome): Largura fixa de 72px sem o ponto a esquerda e sem negrito para aproximar a barra e centralizar os sliders */}
-                                <div className="w-[72px] shrink-0 flex items-center text-[12px] font-poppins-light leading-none">
+                                <div className="w-[72px] shrink-0 flex items-center text-[11px] font-poppins-light leading-tight">
                                   <span style={{ color: "#EFE5D3" }} className="truncate">{arch.name}</span>
                                 </div>
 
