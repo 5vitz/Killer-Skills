@@ -125,10 +125,13 @@ const ARCHETYPE_DETAILS = {
 
 export default function App() {
   // --- CONFIGURAÇÃO EXPERIMENTAL DO DEGRADÊ DO COCKPIT ---
-  // Para reverter para a versão anterior (2 tons), basta mudar ACTIVE_COCKPIT_GRADIENT para GRADIENT_2_TONES
+  // Para alternar ou reverter, basta trocar as variáveis abaixo:
   const GRADIENT_2_TONES = "linear-gradient(to bottom, #383838 0%, #0D0D0D 25%)";
   const GRADIENT_3_TONES = "linear-gradient(to bottom, #383838 0%, #222222 50%, #000000 100%)";
-  const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES; // Mude para GRADIENT_2_TONES para reverter!
+  const GRADIENT_3_TONES_INVERTED = "linear-gradient(to bottom, #000000 0%, #222222 50%, #383838 100%)";
+  
+  const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES; // Coluna 1 Card (Prata em cima, Preto embaixo)
+  const ACTIVE_PLAYER_GRADIENT = GRADIENT_3_TONES_INVERTED; // Player Central (Preto em cima, Prata embaixo)
 
   // --- ESTADO GLOBAL ---
   const [activeView, setActiveView] = useState("servicos"); // storyboard, servicos, almoxarifado, admin_console
@@ -790,7 +793,7 @@ export default function App() {
                       {/* Card da Matriz com Bordas Arredondadas e Fundo Grafite Sólido Luxuoso */}
                       <div 
                         className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl mb-4 flex flex-col pt-1 pb-0 px-0"
-                        style={{ background: ACTIVE_COCKPIT_GRADIENT }}
+                        style={{ background: ACTIVE_PLAYER_GRADIENT }}
                       >
                         
                         {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
