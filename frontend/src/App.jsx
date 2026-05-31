@@ -120,18 +120,18 @@ const ARCHETYPE_DETAILS = {
     sombra: "Rigidez controladora e autoritarismo defensivo"
   }
 };
-const TEXTO_PADRAO = `Eu tenho o dom de ver além do óbvio. Meu olhar traz discernimento, verdade e clareza para a vida.
-Minha essência irradia otimismo e pureza, renovando as esperanças e a leveza de recomeçar sempre.
-Minha jornada busca desbravar novos caminhos e caminha rumo à minha própria liberdade interior.
-Eu tenho o dom de acolher com generosidade genuína, sendo um porto seguro e de amparo constante.
-Eu ajo com coragem inabalável diante de qualquer obstáculo, determinado a vencer com honra.
-Eu tenho a força sutil de catalisar grandes transformações, convertendo meus sonhos em realidade.
-Eu penso fora dos padrões com independência e ousadia, abrindo caminhos para o novo surgir.
-Minha força criativa dá forma e alma à imaginação, superando toda barreira para criar o novo.
-Meu valor reside nas conexões de alta sensibilidade e no afeto profundo que dedico às relações.
-Eu trago a sabedoria do riso e do humor inteligente, aliviando os pesos da rotina com leveza.
-Minha virtude é a empatia pé no chão, unindo pessoas com simplicidade e companheirismo real.
-Eu sei ordenar o caos e trazer estabilidade com liderança, gerando segurança ao meu redor.`;
+const TEXTO_PADRAO = `Eu tenho o dom de ver além do óbvio, trazendo clareza para a vida.
+Minha essência irradia otimismo puro, renovando a leveza de recomeçar.
+Minha jornada busca novos caminhos rumo à minha liberdade interior.
+Eu sei acolher com generosidade, sendo porto seguro para as pessoas.
+Eu ajo com coragem inabalável, determinado a vencer com honra.
+Eu tenho a força sutil de transformar meus sonhos em realidade.
+Eu penso fora dos padrões com ousadia, abrindo caminhos para o novo.
+Minha força criativa dá forma à imaginação, superando barreiras.
+Meu valor reside no afeto profundo que dedico a todas as relações.
+Eu trago a sabedoria do riso leve, aliviando os pesos do cotidiano.
+Minha virtude é a empatia simples, unindo as pessoas com sinceridade.
+Eu sei ordenar o caos com liderança firme, trazendo estabilidade.`;
 
 
 
@@ -674,7 +674,7 @@ export default function App() {
                     <>
                       {/* Texto-Padrão da Persona em 50% com scrollbar customizada e visível */}
                       <div className="relative z-10 flex-1 overflow-y-auto custom-scrollbar-visible pr-1 select-text">
-                        <div className="font-poppins-light text-[11px] leading-relaxed text-justify text-white/95 whitespace-pre-line">
+                        <div className="font-poppins-light text-[12px] leading-relaxed text-justify whitespace-pre-line" style={{ color: '#FFFFFF' }}>
                           {TEXTO_PADRAO}
                         </div>
                       </div>
