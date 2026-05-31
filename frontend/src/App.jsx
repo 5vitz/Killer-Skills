@@ -855,13 +855,15 @@ export default function App() {
               {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Portal da Persona) */}
               <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
                 
-                {/* TOPO FIXO: Título Geral */}
+                {/* TOPO FIXO: Título Geral (Dinâmico na Tela 1C ao passar o mouse sobre o Player) */}
                 <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
                   <h2 
                     className="text-sm uppercase tracking-wider text-white text-center"
                     style={{ fontFamily: 'Poppins', fontWeight: 200 }}
                   >
-                    Arquétipos
+                    {onboardingStep === "matriz" && hoveredArchetype 
+                      ? hoveredArchetype.name 
+                      : "Arquétipos"}
                   </h2>
                 </div>
 
