@@ -645,39 +645,39 @@ export default function App() {
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col justify-between transition-all duration-500"
-                  style={{ backgroundColor: '#737373' }}
+                  style={{ backgroundColor: '#666666' }}
                 >
                   {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
-                  <p className="relative z-10 font-poppins-light text-[12px] leading-relaxed text-justify mb-4" style={{ color: '#000000' }}>
+                  <p className="relative z-10 font-poppins-light text-[12px] leading-relaxed text-justify mb-4" style={{ color: '#FFFFFF' }}>
                     {activeArch.desc}
                   </p>
 
                   {/* Fichas Técnicas Delicadas */}
                   <div className="relative z-10 flex flex-col gap-2.5 pt-3 border-t border-white/5 mt-auto">
                     <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#000000' }}>Desejo Central</span>
-                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#000000' }}>
+                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Desejo Central</span>
+                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
                         {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
                       </span>
                     </div>
 
                     <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#000000' }}>Maior Medo</span>
-                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#000000' }}>
+                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Maior Medo</span>
+                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
                         {ARCHETYPE_DETAILS[activeArch.id]?.medo}
                       </span>
                     </div>
 
                     <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#000000' }}>Superpoder</span>
-                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#000000' }}>
+                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Superpoder</span>
+                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
                         {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
                       </span>
                     </div>
 
                     <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#000000' }}>Sombra</span>
-                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#000000' }}>
+                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Sombra</span>
+                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
                         {ARCHETYPE_DETAILS[activeArch.id]?.sombra}
                       </span>
                     </div>
