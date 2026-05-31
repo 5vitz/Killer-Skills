@@ -120,6 +120,18 @@ const ARCHETYPE_DETAILS = {
     sombra: "Rigidez controladora e autoritarismo defensivo"
   }
 };
+const TEXTO_PADRAO = `Você tem o dom de ver além do óbvio. Seu olhar traz discernimento, verdade e clareza para a vida.
+Sua essência irradia otimismo e pureza, renovando as esperanças e a leveza de recomeçar sempre.
+Sua jornada é guiada pelo desejo de desbravar horizontes novos e descobrir sua própria liberdade.
+Você tem o dom de acolher com generosidade genuína, sendo um porto seguro e de amparo constante.
+Você age com coragem inabalável diante de qualquer obstáculo, determinado a vencer com honra.
+Você tem a força sutil de catalisar grandes transformações, convertendo sonhos em realidades.
+Você pensa fora dos padrões com independência e ousadia, abrindo caminhos para o novo surgir.
+Sua força criativa dá forma e alma à imaginação, superando qualquer barreira para dar à luz.
+Seu valor reside nas conexões de alta sensibilidade e no afeto profundo que dedica às relações.
+Você traz a sabedoria do riso e do humor inteligente, aliviando os pesos da rotina com leveza.
+Sua virtude é a empatia pé no chão, unindo pessoas com simplicidade, sinceridade e companheirismo.
+Você sabe ordenar o caos e trazer estabilidade com liderança, gerando segurança ao seu redor.`;
 
 
 
@@ -526,6 +538,8 @@ export default function App() {
   const currentPersona = activePersonasList[selectedPersonaIdx] || activePersonasList[0];
   const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || ARCHETYPES[0]) : null;
   const isMetamorphosed = activeView === "servicos" && onboardingStep === "matriz" && activeArch;
+  const showPersonaCard = isMetamorphosed || (activeView === "servicos_escolha");
+
 
   return (
     <div className="relative w-screen h-screen bg-black flex overflow-hidden text-white antialiased select-none z-10">
@@ -540,7 +554,7 @@ export default function App() {
       <div className="w-[320px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A] relative overflow-hidden transition-all duration-500">
         
         {/* ESTADO A: MENU PADRÃO */}
-        <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${isMetamorphosed ? "opacity-0 scale-95 pointer-events-none absolute inset-5" : "opacity-100 scale-100"}`}>
+        <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showPersonaCard ? "opacity-0 scale-95 pointer-events-none absolute inset-5" : "opacity-100 scale-100"}`}>
           <div className="flex flex-col">
             {/* Bloco de Identidade: Marca + Conta do Usuário (Espaçamento Luxuoso) */}
             <div className="flex flex-col gap-8">
@@ -637,8 +651,8 @@ export default function App() {
         </div>
 
         {/* ESTADO B: GUIA FINO E DETALHADO (ARQUÉTIPOS TEXTOS) */}
-        <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${isMetamorphosed ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
-          {isMetamorphosed && (
+        <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showPersonaCard ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
+          {showPersonaCard && (
             <>
               {/* TOPO FIXO: Título Geral */}
               <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
@@ -646,51 +660,79 @@ export default function App() {
                   className="text-sm uppercase tracking-wider text-white text-center"
                   style={{ fontFamily: 'Poppins', fontWeight: 200 }}
                 >
-                  Significado
+                  {activeView === "servicos_escolha" ? "Doutrina Híbrida" : "Significado"}
                 </h2>
               </div>
 
               {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
-                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col justify-between transition-all duration-500"
+                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col transition-all duration-500"
                   style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
-                  {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
-                  <p className="relative z-10 font-poppins-light text-[12px] leading-relaxed text-justify mb-4" style={{ color: '#FFFFFF' }}>
-                    {activeArch.desc}
-                  </p>
+                  {activeView === "servicos_escolha" ? (
+                    <>
+                      {/* Título Híbrido no Topo do Card */}
+                      <div className="relative z-10 text-center mb-4 pb-3 border-b border-white/10 select-none">
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Persona Unificada</div>
+                        <div className="text-sm font-poppins-light uppercase tracking-wider text-white mt-1">
+                          {(() => {
+                            const sorted = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
+                            const arch1Name = ARCHETYPES.find(a => a.id === sorted[0][0])?.name || "SÁBIO";
+                            const arch2Name = ARCHETYPES.find(a => a.id === sorted[1][0])?.name || "EXPLORADOR";
+                            return `${arch1Name} / ${arch2Name}`;
+                          })()}
+                        </div>
+                      </div>
 
-                  {/* Fichas Técnicas Delicadas */}
-                  <div className="relative z-10 flex flex-col gap-2.5 pt-3 border-t border-white/5 mt-auto">
-                    <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Desejo Central</span>
-                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
-                        {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
-                      </span>
-                    </div>
+                      {/* Texto-Padrão da Persona em 50% com scrollbar customizada e visível */}
+                      <div className="relative z-10 flex-1 overflow-y-auto custom-scrollbar-visible pr-1 select-text">
+                        <div className="font-poppins-light text-[11px] leading-relaxed text-justify text-white/90 flex flex-col gap-3">
+                          {TEXTO_PADRAO.split('\n').map((paragraph, idx) => (
+                            <p key={idx}>{paragraph}</p>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
+                      <p className="relative z-10 font-poppins-light text-[12px] leading-relaxed text-justify mb-4" style={{ color: '#FFFFFF' }}>
+                        {activeArch.desc}
+                      </p>
 
-                    <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Maior Medo</span>
-                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
-                        {ARCHETYPE_DETAILS[activeArch.id]?.medo}
-                      </span>
-                    </div>
+                      {/* Fichas Técnicas Delicadas */}
+                      <div className="relative z-10 flex flex-col gap-2.5 pt-3 border-t border-white/5 mt-auto">
+                        <div className="flex flex-col text-left">
+                          <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Desejo Central</span>
+                          <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
+                            {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
+                          </span>
+                        </div>
 
-                    <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Superpoder</span>
-                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
-                        {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
-                      </span>
-                    </div>
+                        <div className="flex flex-col text-left">
+                          <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Maior Medo</span>
+                          <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
+                            {ARCHETYPE_DETAILS[activeArch.id]?.medo}
+                          </span>
+                        </div>
 
-                    <div className="flex flex-col text-left">
-                      <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Sombra</span>
-                      <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
-                        {ARCHETYPE_DETAILS[activeArch.id]?.sombra}
-                      </span>
-                    </div>
-                  </div>
+                        <div className="flex flex-col text-left">
+                          <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Superpoder</span>
+                          <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
+                            {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
+                          </span>
+                        </div>
+
+                        <div className="flex flex-col text-left">
+                          <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Sombra</span>
+                          <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
+                            {ARCHETYPE_DETAILS[activeArch.id]?.sombra}
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </>
