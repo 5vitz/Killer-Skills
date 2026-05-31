@@ -645,7 +645,7 @@ export default function App() {
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col justify-between transition-all duration-500"
-                  style={{ backgroundColor: '#666666' }}
+                  style={{ backgroundColor: '#383838' }}
                 >
                   {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
                   <p className="relative z-10 font-poppins-light text-[12px] leading-relaxed text-justify mb-4" style={{ color: '#FFFFFF' }}>
