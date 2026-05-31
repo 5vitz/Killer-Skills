@@ -120,18 +120,18 @@ const ARCHETYPE_DETAILS = {
     sombra: "Rigidez controladora e autoritarismo defensivo"
   }
 };
-const TEXTO_PADRAO = `Você tem o dom de ver além do óbvio. Seu olhar traz discernimento, verdade e clareza para a vida.
-Sua essência irradia otimismo e pureza, renovando as esperanças e a leveza de recomeçar sempre.
-Sua jornada é guiada pelo desejo de desbravar horizontes novos e descobrir sua própria liberdade.
-Você tem o dom de acolher com generosidade genuína, sendo um porto seguro e de amparo constante.
-Você age com coragem inabalável diante de qualquer obstáculo, determinado a vencer com honra.
-Você tem a força sutil de catalisar grandes transformações, convertendo sonhos em realidades.
-Você pensa fora dos padrões com independência e ousadia, abrindo caminhos para o novo surgir.
-Sua força criativa dá forma e alma à imaginação, superando qualquer barreira para dar à luz.
-Seu valor reside nas conexões de alta sensibilidade e no afeto profundo que dedica às relações.
-Você traz a sabedoria do riso e do humor inteligente, aliviando os pesos da rotina com leveza.
-Sua virtude é a empatia pé no chão, unindo pessoas com simplicidade, sinceridade e companheirismo.
-Você sabe ordenar o caos e trazer estabilidade com liderança, gerando segurança ao seu redor.`;
+const TEXTO_PADRAO = `Eu tenho o dom de ver além do óbvio. Meu olhar traz discernimento, verdade e clareza para a vida.
+Minha essência irradia otimismo e pureza, renovando as esperanças e a leveza de recomeçar sempre.
+Minha jornada busca desbravar novos caminhos e caminha rumo à minha própria liberdade interior.
+Eu tenho o dom de acolher com generosidade genuína, sendo um porto seguro e de amparo constante.
+Eu ajo com coragem inabalável diante de qualquer obstáculo, determinado a vencer com honra.
+Eu tenho a força sutil de catalisar grandes transformações, convertendo meus sonhos em realidade.
+Eu penso fora dos padrões com independência e ousadia, abrindo caminhos para o novo surgir.
+Minha força criativa dá forma e alma à imaginação, superando toda barreira para criar o novo.
+Meu valor reside nas conexões de alta sensibilidade e no afeto profundo que dedico às relações.
+Eu trago a sabedoria do riso e do humor inteligente, aliviando os pesos da rotina com leveza.
+Minha virtude é a empatia pé no chão, unindo pessoas com simplicidade e companheirismo real.
+Eu sei ordenar o caos e trazer estabilidade com liderança, gerando segurança ao meu redor.`;
 
 
 
@@ -660,7 +660,7 @@ export default function App() {
                   className="text-sm uppercase tracking-wider text-white text-center"
                   style={{ fontFamily: 'Poppins', fontWeight: 200 }}
                 >
-                  {activeView === "servicos_escolha" ? "Doutrina Híbrida" : "Significado"}
+                  {activeView === "servicos_escolha" ? "MYSELF" : "Significado"}
                 </h2>
               </div>
 
@@ -672,25 +672,10 @@ export default function App() {
                 >
                   {activeView === "servicos_escolha" ? (
                     <>
-                      {/* Título Híbrido no Topo do Card */}
-                      <div className="relative z-10 text-center mb-4 pb-3 border-b border-white/10 select-none">
-                        <div className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Persona Unificada</div>
-                        <div className="text-sm font-poppins-light uppercase tracking-wider text-white mt-1">
-                          {(() => {
-                            const sorted = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
-                            const arch1Name = ARCHETYPES.find(a => a.id === sorted[0][0])?.name || "SÁBIO";
-                            const arch2Name = ARCHETYPES.find(a => a.id === sorted[1][0])?.name || "EXPLORADOR";
-                            return `${arch1Name} / ${arch2Name}`;
-                          })()}
-                        </div>
-                      </div>
-
                       {/* Texto-Padrão da Persona em 50% com scrollbar customizada e visível */}
                       <div className="relative z-10 flex-1 overflow-y-auto custom-scrollbar-visible pr-1 select-text">
-                        <div className="font-poppins-light text-[11px] leading-relaxed text-justify text-white/90 flex flex-col gap-3">
-                          {TEXTO_PADRAO.split('\n').map((paragraph, idx) => (
-                            <p key={idx}>{paragraph}</p>
-                          ))}
+                        <div className="font-poppins-light text-[11px] leading-relaxed text-justify text-white/95 whitespace-pre-line">
+                          {TEXTO_PADRAO}
                         </div>
                       </div>
                     </>
