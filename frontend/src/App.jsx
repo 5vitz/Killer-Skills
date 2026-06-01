@@ -806,7 +806,7 @@ export default function App() {
                         onClick={() => setOnboardingStep("matriz")}
                         className="btn-dashboard-avancar z-10 mt-auto"
                       >
-                        INTEGRAR <ArrowRight className="w-4 h-4" />
+                        AVANÇAR <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   ) : (
@@ -877,7 +877,7 @@ export default function App() {
                         }}
                         className="btn-dashboard-avancar z-30"
                       >
-                        ANALISAR RESULTADO <ArrowRight className="w-4 h-4" />
+                        INTEGRAR <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   )}
