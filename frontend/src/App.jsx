@@ -126,7 +126,7 @@ Eu sei acolher com generosidade, sendo porto seguro para as pessoas. Eu ajo com 
 
 Eu penso fora dos padrões com ousadia, abrindo caminhos para o novo. Minha força criativa dá forma à imaginação, superando barreiras. Meu valor reside no afeto profundo que dedico a todas as relações.
 
-Eu trago a sabedoria do riso leve, aliviando os pesos do cotidiano. Minha virtude é a empatia simples, unindo as pessoas com sinceridade. Eu sei ordenar o caos com liderança firme, trazendo estabilidade.`;
+Eu trago a sabedoria do riso leve, aliviando os pesos do cotidiano.`;
 
 
 
@@ -668,8 +668,8 @@ export default function App() {
                 >
                   {activeView === "servicos_escolha" ? (
                     <>
-                      {/* Texto-Padrão da Persona em 50% com scrollbar customizada e visível */}
-                      <div className="relative z-10 flex-1 overflow-y-auto custom-scrollbar-visible pr-1 select-text">
+                      {/* Texto-Padrão da Persona em 50% sem scroll, colado na base do card */}
+                      <div className="relative z-10 flex-1 flex flex-col justify-end pr-1 select-text">
                         <div className="font-poppins-light text-[12px] leading-relaxed text-justify whitespace-pre-line" style={{ color: '#FFFFFF' }}>
                           {TEXTO_PADRAO}
                         </div>
