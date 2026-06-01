@@ -824,7 +824,7 @@ export default function App() {
                             className="text-sm uppercase tracking-wider text-white text-center"
                             style={{ fontFamily: 'Poppins', fontWeight: 200 }}
                           >
-                            ESPELHO
+                            ESPELHO DA ALMA
                           </h2>
                         </div>
                         
