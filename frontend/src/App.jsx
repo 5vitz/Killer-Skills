@@ -806,7 +806,7 @@ export default function App() {
                         onClick={() => setOnboardingStep("matriz")}
                         className="btn-dashboard-avancar z-10 mt-auto"
                       >
-                        DOSAR <ArrowRight className="w-4 h-4" />
+                        INTEGRAR <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
                   ) : (
@@ -815,12 +815,21 @@ export default function App() {
                       
                       {/* Card da Matriz com Bordas Arredondadas e Fundo Grafite Sólido Luxuoso */}
                       <div 
-                        className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl mb-4 flex flex-col pt-1 pb-0 px-0"
+                        className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl mb-4 flex flex-col pt-1 pb-0 px-0 justify-between"
                         style={{ background: ACTIVE_PLAYER_GRADIENT }}
                       >
+                        {/* Header do Player Central */}
+                        <div className="w-full shrink-0 select-none mt-4 mb-2">
+                          <h2 
+                            className="text-sm uppercase tracking-wider text-white text-center"
+                            style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                          >
+                            ESPELHO
+                          </h2>
+                        </div>
                         
                         {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
-                        <div className="my-auto overflow-hidden flex flex-col gap-0 h-[384px]">
+                        <div className="mb-4 mt-auto overflow-hidden flex flex-col gap-0 h-[384px]">
                           {ARCHETYPES.map((arch) => {
                             return (
                               <div 
