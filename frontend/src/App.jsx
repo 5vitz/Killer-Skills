@@ -793,10 +793,10 @@ export default function App() {
                         {/* Letreiro 2 Overlay Inside Card (Top Position) */}
                         <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/80 backdrop-blur-[2px] py-3 border-y border-white/[0.06] z-20">
                           <div className="inline-block whitespace-nowrap animate-marquee text-[20px] font-poppins-light text-gold-dress tracking-widest uppercase" style={{ animationDuration: "25s" }}>
-                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ Com quais Arquétipos você se identifica? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ O quanto você se identifica com cada Arquétipo? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ O quanto você se identifica com cada Arquétipo? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ O quanto você se identifica com cada Arquétipo? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+                            ♥ O quanto você se identifica com cada Arquétipo? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
                           </div>
                         </div>
                       </div>
