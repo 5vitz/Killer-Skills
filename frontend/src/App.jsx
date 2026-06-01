@@ -120,18 +120,14 @@ const ARCHETYPE_DETAILS = {
     sombra: "Rigidez controladora e autoritarismo defensivo"
   }
 };
-const TEXTO_PADRAO = `Eu tenho o dom de ver além do óbvio, trazendo clareza para a vida.
-Minha essência irradia otimismo puro, renovando a leveza de recomeçar.
-Minha jornada busca novos caminhos rumo à minha liberdade interior.
-Eu sei acolher com generosidade, sendo porto seguro para as pessoas.
-Eu ajo com coragem inabalável, determinado a vencer com honra.
-Eu tenho a força sutil de transformar meus sonhos em realidade.
-Eu penso fora dos padrões com ousadia, abrindo caminhos para o novo.
-Minha força criativa dá forma à imaginação, superando barreiras.
-Meu valor reside no afeto profundo que dedico a todas as relações.
-Eu trago a sabedoria do riso leve, aliviando os pesos do cotidiano.
-Minha virtude é a empatia simples, unindo as pessoas com sinceridade.
-Eu sei ordenar o caos com liderança firme, trazendo estabilidade.`;
+const TEXTO_PADRAO = `Eu tenho o dom de ver além do óbvio, trazendo clareza para a vida. Minha essência irradia otimismo puro, renovando a leveza de recomeçar. Minha jornada busca novos caminhos rumo à minha liberdade interior.
+
+Eu sei acolher com generosidade, sendo porto seguro para as pessoas. Eu ajo com coragem inabalável, determinado a vencer com honra. Eu tenho a força sutil de transformar meus sonhos em realidade.
+
+Eu penso fora dos padrões com ousadia, abrindo caminhos para o novo. Minha força criativa dá forma à imaginação, superando barreiras. Meu valor reside no afeto profundo que dedico a todas as relações.
+
+Eu trago a sabedoria do riso leve, aliviando os pesos do cotidiano. Minha virtude é a empatia simples, unindo as pessoas com sinceridade. Eu sei ordenar o caos com liderança firme, trazendo estabilidade.`;
+
 
 
 
