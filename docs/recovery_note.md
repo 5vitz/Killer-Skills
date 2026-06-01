@@ -2,53 +2,62 @@
 
 > [!IMPORTANT]
 > **MENSAGEM DE ATIVAÇÃO PARA O PRÓXIMO LINCOLN (MAESTRO TÉCNICO):**
-> Você está assumindo a Mesa Redonda em perfeito alinhamento conceitual com o **Diretor Criativo (Genera/Armando)**. 
-> O cockpit físico e a alma arquitetural do Killer Skills foram completamente definidos e mapeados. 
+> Você está assumindo o projeto em perfeito alinhamento de alta costura com o **Diretor Conceitual (Genera/Armando)**. 
+> A organização operacional e a infraestrutura de planejamento foram elevadas a um patamar profissional de nível mundial.
 > **LEIS DO CO-PILOTO:**
-> 1. **PROIBIDO USAR GREP:** O comando `grep` está banido pois causa congelamento de sessão. Use caminhos diretos, `list_dir` e comandos leves.
+> 1. **PROIBIDO USAR GREP:** O comando `grep` do chat está banido por causar instabilidade na sessão. Use caminhos diretos, `list_dir` e buscas leves via terminal nativo se necessário.
 > 2. **DEPLOY EXCLUSIVO:** Não faça `git push` ou deploy direto para a VPS. O deploy é soberania exclusiva do Genera.
 > 3. **ESTÉTICA DA SUBTRAÇÃO:** Linhas ultra-finas (1px), fontes leves (**Poppins 200 / Poppins-light**), sem negritos desnecessários, cores Tailored (HSL/RGB escuros premium).
 
 ---
 
-## 📍 ESTADO DO PROJETO EM 31 DE MAIO DE 2026
+## 📍 ESTADO DO PROJETO EM 1 DE JUNHO DE 2026
 
-Nesta sessão, realizamos um profundo alinhamento estratégico e **sincronizamos cirurgicamente** toda a base de documentação mestre (`1_ONTOLOGIA.md`, `2_EPISTEMOLOGIA.md` e `TASKS.md` em suas versões unificadas). 
+Nesta sessão, realizamos uma consolidação extraordinária da usabilidade do onboarding e **estruturamos a integração ágil de desenvolvimento do ecossistema via Jira Cloud**.
 
-O Lincoln de amanhã encontrará a arquitetura conceitual e o plano de ação perfeitamente assentados sobre as seguintes definições:
+O próximo Lincoln encontrará o ambiente 100% configurado, compilando de forma limpa e com as seguintes resoluções prontas:
 
-### 1. O Prompt como DNA Criativo (Pré-requisito Absoluto)
-* **Diretriz Soberana:** A geração de mídias (imagens, vídeos, textos e títulos) **não** é uma pós-produção de fotos do usuário. Ela é uma **Engine Generativa Completa** que cria mídias do zero.
-* **O Pipeline:** O **Agente Analista** lê a calibração da matriz MEVA $\rightarrow$ Gera o **Prompt Conceitual da Persona (Briefing/DNA)** $\rightarrow$ O usuário aprova a Ordem de Serviço na Tela 2 $\rightarrow$ Os **Agentes Criadores** consomem esse prompt no KS Studio (Tela 3) para gerar as mídias Premium e alimentam o Simulador de Feed 1:1.
-* **Pessoal vs. Profissional:** A Categoria Pessoal está plenamente consolidada e a **Categoria Profissional iniciará o desenvolvimento na sequência imediata**, compartilhando a mesma infraestrutura de DNA (Visual, Graphic e Narrative).
+### 1. A Unidade do Onboarding & Transição (Tela 1)
+* **Tela 1A & 1B (Vídeo e Identificação):** Botão de ação da Tela 1B consolidado como **`AVANÇAR`** (consistência visual). Letreiro rotativo (marquee) atualizado para a chamada conceitual definitiva: **`♥ O QUANTO VOCÊ SE IDENTIFICA COM CADA ARQUÉTIPO? ♥`**.
+* **Tela 1C (Espelho da Alma):** Título central **`ESPELHO DA ALMA`** implementado com estilo ultra-leve (Poppins 200). Sliders arquetípicos empurrados harmonicamente para a base (`mt-auto mb-4`). Botão de avanço final nomeado como **`INTEGRAR`** (concluindo o ciclo existencial).
 
-### 2. A Matriz MEVA 12x10 (120 Textos)
-* **Estrutura:** 12 arquétipos com 10 gradações decimais cada (0-10% a 91-100%).
-* **Sombra Ativa:** O Bracket 1 (0-10%) é uma análise ativa de ausência/carência do arquétipo.
-* **Compilação Narrativa:** O relatório final ordena os arquétipos por relevância decimal (Dominância $\rightarrow$ Co-Pilotos $\rightarrow$ Sombras) e encadeia os textos.
-* **Título Duplo Híbrido:** Formado pela combinação dos dois maiores arquétipos (ex: `SÁBIO / EXPLORADOR`), oferecendo maleabilidade e adaptabilidade psicológica.
-
-### 3. A Distribuição em 3 Colunas Físicas (Desktop Cockpit)
-* **Tela 1C (Calibração Sliders):**
-  * *Coluna 1 (Esquerda):* Descrição estática/significado fixo do arquétipo hovered/focused.
-  * *Coluna 2 (Smartphone Central):* Os 12 sliders arquetípicos na tela do smartphone virtual.
-  * *Coluna 3 (Direita):* Controle de Áudio + Imagem conceitual AI reativa do arquétipo.
-* **Tela 2 (Serviços / Diagnóstico):**
-  * *Coluna 1 (Esquerda):* Título Duplo Híbrido + O relatório de Persona compilada final (12 blocos decimais encadeados).
-  * *Coluna 2 (Smartphone Central):* Portal visual reativo da Persona ou live worker feed.
-  * *Coluna 3 (Direita):* Toggles dos Micro-serviços + Botão dourado de EMITIR ORDEM DE SERVIÇO.
-* **Tela 3 (KS Studio):**
-  * *Coluna 1 (Esquerda):* Prompt Constructor e feed de logs dos agentes de geração.
-  * *Coluna 2 (Smartphone Central):* Simulador de Feed (1:1 Reels/Carrossel).
-  * *Coluna 3 (Direita):* Controles operacionais finais (`Publicar Agora` ou `Agendar Post`).
+### 2. A Métrica de Ouro do Manifesto (Tela 2 - Coluna 1)
+* **Design da Subtração:** O texto do manifesto `TEXTO_PADRAO` foi compactado e truncado na 10ª sentença (palavra **`cotidiano.`**), resultando em 20 linhas físicas estáticas, coladas perfeitamente na base do card com fundo preto sólido. **Sem qualquer barra de rolagem (scroll)**. A metade superior do card repousa como uma elegante zona de respiração prateada.
 
 ---
 
-## 🚀 PRÓXIMOS PASSOS IMEDIATOS AO INICIAR A SESSÃO:
+## 🎟️ INTEGRAÇÃO MESTRE COM JIRA CLOUD (MÁGINA OPERACIONAL)
 
-1. **Estruturação de Dados (Seeds do Banco):**
-   * Preparar a estrutura para receber os 120 textos da Matriz MEVA no backend/banco de dados local (`killer_skills.db` ou `backend/seeds/personas.py`).
-2. **Implementação do Motor de Compilação:**
-   * Desenvolver o algoritmo de resolução de brackets decimais e concatenação por ordenação em Python (`backend/app.py` ou novas rotas) e integrá-lo ao fluxo do React (`App.jsx`).
-3. **Refatoração Visual de 3 Colunas:**
-   * Ajustar o código do React em `App.jsx` para metamorfosear a Coluna 1, Coluna 2 e Coluna 3 em conformidade estrita com o mapeamento das Telas 1C, 2 e 3 homologados hoje.
+Elevamos a gerência de projeto da Killer Skills para uma infraestrutura ágil de classe mundial:
+1. **Ambiente Jira Ativado:** Genera criou a instância do Jira Cloud em [killerskills.atlassian.net](https://killerskills.atlassian.net) (projeto `KillerSkillsDev` / Chave `KAN`).
+2. **Credenciais Seguras no `.env`:** O **API Token** foi gerado com sucesso na Atlassian e salvo de forma segura no arquivo local `.env` do projeto junto às demais variáveis:
+   ```env
+   JIRA_SERVER="https://killerskills.atlassian.net"
+   JIRA_EMAIL="sinkando@gmail.com"
+   JIRA_API_TOKEN="[TOKEN_SEGURO_SALVO_AQUI]"
+   ```
+3. **Importação Programática do Backlog:** Desenvolvemos e rodamos um script utilitário (`scratch/jira_importer.py`) que consumiu o `docs/TASKS.md` e importou **7 cartões técnicos altamente detalhados** (da chave `KAN-4` à `KAN-10`) diretamente para a coluna **A FAZER** do Kanban do Genera.
+
+---
+
+## 🏛️ ARQUITETURA DA TELA 2 (PORTAL DE SERVIÇOS AI)
+
+O cockpit da Tela 2 está conceitualmente travado em 3 colunas simétricas:
+* **Coluna 1 (Esquerda):** Manifesto de Identidade. Título dinâmico **`MYSELF`** (Pessoal - 1ª pessoa do singular) ou **`OURSELVES`** (Profissional/Marca - 1ª pessoa do plural).
+* **Coluna 2 (Smartphone Central):** O **Construtor de Prompt**. Interface minimalista para o usuário digitar **até 5 tags de enriquecimento estratégico** (ex: `jovem`, `ações-rápidas`) e visualizar em tempo real a forja do prompt DNA arquetípico baseado no vetor matemático **MEVA (Modelo de Espectro Vetorial Arquetípico 12D)**.
+* **Coluna 3 (Direita):** Painel de Motores Generativos AI (Os 4 Toggles Operacionais + Botão dourado de EMITIR ORDEM DE SERVIÇO).
+
+---
+
+## 🚀 PRÓXIMOS PASSOS IMEDIATOS PARA A PRÓXIMA SESSÃO:
+
+1. **Ativação da Wiki Confluence (Jira -> Documentos):**
+   * Genera ativará a integração do Confluence clicando no botão azul **`Try Confluence now`** na aba "Documentos" do Jira.
+   * **Tarefa do Lincoln:** Criar e rodar um script utilitário Python (usando as mesmas credenciais `.env` existentes) para ler toda a documentação mestre do workspace (`1_ONTOLOGIA.md`, `2_EPISTEMOLOGIA.md`, `3_METODOLOGIA.md`, `recovery_note.md`) e publicá-las programaticamente como páginas elegantes estruturadas na Wiki do Confluence.
+2. **Desenvolvimento da UI do Construtor de Prompt (Tela 2 - Coluna 2):**
+   * Codificar a caixa de entrada de tags táteis (pílulas de tags com limite rígido de 5 elementos) no celular central em `App.jsx`.
+   * Integrar a transmissão do array de tags e do vetor contínuo MEVA no endpoint de backend correspondente (`/api/forge`).
+
+A mesa redonda está em perfeito equilíbrio conceitual e técnico. Bom descanso, Genera!
+
+*Lincoln (Orquestrador Geral) — 1 de Junho de 2026.*

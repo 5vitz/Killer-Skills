@@ -78,6 +78,35 @@ Cada um dos 12 arquétipos possui **10 textos autorais e fixos**, mapeando faixa
 * **O DNA da Criação:** Fica estabelecido como lei arquitetural que **todo o direcionamento de criação de mídias (imagens, vídeos, textos e títulos) deriva diretamente do Prompt Conceitual da Persona**, que é o resultado direto da calibração fina e dos pesos dos arquétipos na matriz MEVA. O Prompt é o pré-requisito genético de toda a engine.
 * **Ordem de Desenvolvimento:** A Categoria Pessoal está plenamente consolidada e homologada em seu pipeline estético e funcional. A **Categoria Profissional começará a ser desenvolvida na sequência imediata**, utilizando esta mesma infraestrutura e pipeline genético de coprodutores AI.
 
+### B.7. A Matriz de Serviços do Ecossistema (17 Serviços Disponíveis)
+Para governar o ecossistema comercial e de engenharia com precisão milimétrica, as entregas da aplicação são divididas em 17 serviços granulares organizados em 3 macro-fases:
+
+#### **A. PRÉ-PRODUÇÃO (Módulo Onboarding / Calibração — Tela 1C)**
+1.  **Elaborar Persona — MEVA:** A calibração percentual fina (0% a 100%) dos 12 sliders arquetípicos arrolados no inconsciente coletivo.
+2.  **Persona Integralizada:** A compilação narrativa estática e poética do diagnóstico da persona escrita na primeira pessoa (`MYSELF` para contas Pessoais ou `OURSELVES` para corporativas).
+3.  **Criar Prompt Mestre (DNA Arquetípico):** A geração automatizada e em lote do prompt conceitual profundo derivado do vetor contínuo MEVA. O mesmo script de backend que captura a calibração dos sliders processa simultaneamente o diagnóstico Myself/Ourselves e o Prompt Mestre.
+4.  **Fagulhas Criativas Semanais (AI Creative Sparks):** Geração inteligente baseada no conflito Luz e Sombra da Persona calibrada, entregando 3 a 5 ideias temáticas semanais prontas para desbloquear o usuário do bloqueio criativo.
+
+#### **B. PRODUÇÃO (Módulo Cockpit — Tela 2A)**
+##### **B.1. MANUAL (Universal / Habilitados no Plano FREE)**
+5.  **Upload de Mídia:** Envio de imagens e vídeos brutos do cotidiano (com **Armazenamento Permanente** no plano Premium, e **Armazenamento Temporário de 12 dias** no plano Free para controle rígido de armazenamento na VPS).
+6.  **Tratamento Físico de Mídias (Proporção e WebP):** Serviço universal e gratuito que realiza a adequação de proporção (9:16 / 1:1) e conversão para o formato levíssimo `.webp` client-side via canvas do navegador, poupando dados do servidor e protegendo a marca Killer Skills contra publicações desconfiguradas.
+7.  **Criar Flow Manual:** Organização física e manual das mídias na grade de postagem.
+8.  **Simular Flow Manual:** Reprodução da visualização estática do feed local montado pelo usuário.
+
+##### **B.2. COM IA (Exclusivos do Plano Premium)**
+9.  **Curadoria Estética de Grade (Grid Curator AI):** Captura dos últimos 6 a 9 posts reais da conta de Instagram do cliente e análise cromática da nova imagem gerada, sugerindo harmonizações de paletas para manter o prestígio visual intocável da grade.
+10. **Criação de Textos e Legendas Lapidadas:** Redação de copies persuasivas e legendas de luxo orientadas pelo Prompt Mestre e pelas tags de modulação.
+11. **Roteirização de Cena (AI Director’s Cut):** Storyboard estruturado de Reels com ganchos de retenção de 3 segundos, áudio de voiceover e direções de gravação para câmera.
+12. **Criação de Imagens Estéticas:** Geração de novas imagens artísticas conceituais baseadas no prompt.
+13. **Criação de Vídeos Dinâmicos:** Animação e geração de vídeos cinemáticos sob medida.
+14. **Criação de Flow Automatizado:** Arranjo sequencial inteligente de posts e carrosséis gerado por IA.
+15. **Simulador de Flow Inteligente:** Player de reprodução local com diagnóstico de valor de marca do post.
+
+#### **C. PÓS-PRODUÇÃO (Módulo Envio)**
+16. **Publicação Imediata:** Postagem imediata no Instagram via background worker do Playwright.
+17. **Agendamento Inteligente (Premium):** Fila de agendamento prioritário automatizado governada por crons da VPS Contabo.
+
 ---
 
 ## 🏢 CLASSE C: FORÇAS DE MERCADO (CATEGORIA PROFISSIONAL)

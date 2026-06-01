@@ -218,6 +218,28 @@ export default function App() {
     webp: true,
     video: false
   });
+  const [tags, setTags] = useState(["luxo", "alta-costura"]);
+  const [tagInput, setTagInput] = useState("");
+  const isPremium = isLoggedIn && userEmail !== "free@killerskills.com.br";
+
+  const getPromptMestre = () => {
+    const sorted = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
+    const top1 = ARCHETYPES.find(a => a.id === sorted[0][0]) || ARCHETYPES[0];
+    const top2 = ARCHETYPES.find(a => a.id === sorted[1][0]) || ARCHETYPES[1];
+    
+    return `PROMPT DNA ARQUETÍPICO:
+[VETOR MEVA ATIVO]
+${sorted.map(([k, v]) => `  - ${k.toUpperCase()}: ${v}%`).join('\\n')}
+
+[ESSÊNCIA DOMINANTE]
+Primeiro Arquétipo: ${top1.name} (${sorted[0][1]}%)
+Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
+
+[DIRETRIZES DE VOZ]
+- Tom de marca guiado pelo arquétipo ${top1.name} (Top 1) e temperado pela expressão do ${top2.name} (Top 2).
+- Estética minimalista high-end, linguagem elegante, inteligente e direcionada ao mercado premium.
+- Evitar jargões industriais, clichês de marketing e tom barulhento.`;
+  };
   const [storyboardData, setStoryboardData] = useState([
     "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500", // Jeep
     "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=500", // Hyundai
@@ -313,8 +335,10 @@ export default function App() {
   };
 
   const triggerForge = async () => {
-    const currentPersona = personas[selectedPersonaIdx];
-    if (!currentPersona) return;
+    const sortedDosagens = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
+    const archTop1 = ARCHETYPES.find(a => a.id === sortedDosagens[0][0]) || ARCHETYPES[0];
+    const archTop2 = ARCHETYPES.find(a => a.id === sortedDosagens[1][0]) || ARCHETYPES[1];
+    const combinedTitle = `${archTop1.name.toUpperCase()} / ${archTop2.name.toUpperCase()}`;
 
     setShowForgeModal(true);
     setForgeProgress(20);
@@ -324,9 +348,13 @@ export default function App() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          persona_title: currentPersona.title,
-          persona_tag: currentPersona.tag,
-          micro_services: microServicesState
+          persona_title: combinedTitle,
+          persona_tag: isPremium ? "Premium" : "Free",
+          micro_services: {
+            ...microServicesState,
+            tags: tags.join(", ")
+          },
+          dosagem: dosagemPersona
         })
       });
       setForgeProgress(60);
@@ -957,134 +985,214 @@ export default function App() {
 
         {/* TELA 2: SERVIÇOS & CONSTRUTOR DE PROMPT */}
         {activeView === "servicos_escolha" && (
-          <div className="relative w-full h-full flex justify-center items-center">
+          <div className="relative w-full h-full flex justify-center items-center animate-fade-in">
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
             <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30">
-              {/* Visor Interno de Reels Vazio */}
-              <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 relative overflow-hidden z-10 select-none text-center">
-                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center mb-4">
-                  <Cpu className="w-5 h-5 text-brand-blue" />
+              {/* Visor Interno */}
+              <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-between p-4 relative overflow-hidden z-10 select-none">
+                
+                {/* Cabeçalho do Construtor */}
+                <div className="w-full shrink-0 select-none mt-2 mb-3">
+                  <h2 
+                    className="text-[11px] uppercase tracking-widest text-white/50 text-center"
+                    style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                  >
+                    CONSTRUTOR DE PROMPT
+                  </h2>
                 </div>
-                <h3 className="text-xs font-black uppercase tracking-widest text-white mb-2">PORTAL DE SERVIÇOS AI</h3>
-                <p className="text-[9px] text-white/40 leading-relaxed uppercase tracking-wider max-w-[200px]">
-                  Selecione os micro-serviços no painel à direita para iniciar a forja inteligente.
-                </p>
+
+                {/* Bloco Superior: Prompt Mestre Herdado */}
+                <div className="w-full flex-1 flex flex-col gap-1 overflow-hidden mb-3">
+                  <span className="text-[7.5px] font-bold tracking-widest uppercase text-white/30 text-left pl-1">
+                    Prompt Mestre Herdado
+                  </span>
+                  <div 
+                    className="w-full flex-1 bg-black/60 border border-white/5 rounded-lg p-2.5 overflow-y-auto custom-scrollbar-visible text-left text-[8.5px] font-mono text-white/60 leading-relaxed whitespace-pre-wrap select-text selection:bg-brand-blue/30"
+                  >
+                    {getPromptMestre()}
+                  </div>
+                </div>
+
+                {/* Bloco Inferior: Console de Modulação por Tags */}
+                <div className="w-full shrink-0 flex flex-col gap-1.5 mb-4 text-left">
+                  <div className="flex justify-between items-center px-1">
+                    <span className="text-[7.5px] font-bold tracking-widest uppercase text-white/30">
+                      Modulação por Tags ({tags.length}/5)
+                    </span>
+                    <span className="text-[7px] font-bold text-white/15 uppercase">Limite Máximo</span>
+                  </div>
+
+                  {/* Lista de Badges de Tags */}
+                  <div className="flex flex-wrap gap-1.5 p-2 bg-white/[0.01] border border-white/5 rounded-lg min-h-[42px] max-h-[76px] overflow-y-auto scrollbar-none">
+                    {tags.map((tag, idx) => (
+                      <span 
+                        key={idx}
+                        className="bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-[8.5px] font-semibold flex items-center gap-1.5 text-white/70 animate-fade-in"
+                      >
+                        {tag}
+                        <button 
+                          onClick={() => setTags(prev => prev.filter((_, i) => i !== idx))}
+                          className="hover:text-brand-pink duration-150 font-bold text-[9px] focus:outline-none shrink-0"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    ))}
+                    {tags.length === 0 && (
+                      <span className="text-[8px] font-poppins-light text-white/20 italic self-center pl-1">
+                        Nenhuma tag ativa...
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Input de Tags */}
+                  <div className="relative">
+                    <input 
+                      type="text"
+                      disabled={tags.length >= 5}
+                      value={tagInput}
+                      onChange={(e) => setTagInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === ",") {
+                          e.preventDefault();
+                          const val = tagInput.trim().toLowerCase().replace(/[^a-z0-9-]/g, "");
+                          if (val && !tags.includes(val) && tags.length < 5) {
+                            setTags(prev => [...prev, val]);
+                          }
+                          setTagInput("");
+                        }
+                      }}
+                      placeholder={tags.length >= 5 ? "Limite atingido (5 tags)" : "Digitar tag (pressione Enter)"}
+                      className="w-full h-8 bg-white/[0.02] border border-white/10 rounded-lg px-3 text-[9px] text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
+                    />
+                  </div>
+                </div>
+
+                {/* Botão de Emissão de OS na base */}
+                <button 
+                  onClick={triggerForge}
+                  className="w-full h-10 bg-[#EFE5D3] hover:bg-[#F7EFE2] active:scale-95 duration-200 rounded-lg text-black text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 shrink-0 shadow-lg"
+                >
+                  Emitir Ordem de Serviço <ArrowRight className="w-3.5 h-3.5" />
+                </button>
               </div>
             </div>
 
-            {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Área com o Card Vazio) */}
+            {/* COLUNA LATERAL DIREITA: Painel de Serviços Contratados */}
             <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
+              
               {/* TOPO FIXO: Título Geral */}
               <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
                 <h2 
                   className="text-sm uppercase tracking-wider text-white text-center font-extralight"
                   style={{ fontFamily: 'Poppins', fontWeight: 200 }}
                 >
-                  Configuração
+                  SERVIÇOS CONTRATADOS
                 </h2>
               </div>
 
-              {/* CONTEÚDO DO PORTAL (PAINEL DE MICRO-SERVIÇOS) */}
+              {/* CONTEÚDO DO PORTAL: Matriz de Serviços Premium / Free */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-4 flex flex-col justify-between transition-all duration-500"
                   style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
-                  {/* Lista de Toggles com micro-interações */}
-                  <div className="flex flex-col gap-3 relative z-10">
-                    <div className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3] border-b border-white/10 pb-2 mb-1 text-center">
-                      Motores Generativos AI
+                  <div className="flex flex-col gap-3 relative z-10 flex-1 overflow-hidden">
+                    {/* Header de Assinatura */}
+                    <div className="text-[10px] font-bold uppercase tracking-widest border-b border-white/10 pb-2 mb-2 text-center flex flex-col gap-1">
+                      <span style={{ color: isPremium ? '#D4AF37' : '#858585' }}>
+                        {isPremium ? "★ CONTA PREMIUM ATIVADA ★" : "CONTA GRATUITA (FREE)"}
+                      </span>
                     </div>
 
-                    {/* Toggle Legendas */}
-                    <div 
-                      onClick={() => setMicroServicesState(prev => ({ ...prev, legendas: !prev.legendas }))}
-                      className={`group w-full p-2.5 rounded-lg border cursor-pointer duration-200 flex items-center justify-between transition-all ${
-                        microServicesState.legendas 
-                          ? "bg-white/[0.03] border-white/20 text-white" 
-                          : "bg-transparent border-white/5 text-white/40 hover:border-white/10"
-                      }`}
-                    >
-                      <div className="flex flex-col gap-0.5 text-left">
-                        <span className="text-[9px] font-bold uppercase tracking-wider">Legendas Estratégicas</span>
-                        <span className="text-[7.5px] font-poppins-light leading-normal max-w-[200px]">
-                          Transpõe a sua essência em textos de alto impacto.
-                        </span>
-                      </div>
-                      <div className={`w-2 h-2 rounded-full duration-300 shrink-0 ${
-                        microServicesState.legendas ? "bg-[#EFE5D3] shadow-[0_0_8px_#EFE5D3]" : "bg-white/10"
-                      }`} />
-                    </div>
-
-                    {/* Toggle Roteiro */}
-                    <div 
-                      onClick={() => setMicroServicesState(prev => ({ ...prev, roteiro: !prev.roteiro }))}
-                      className={`group w-full p-2.5 rounded-lg border cursor-pointer duration-200 flex items-center justify-between transition-all ${
-                        microServicesState.roteiro 
-                          ? "bg-white/[0.03] border-white/20 text-white" 
-                          : "bg-transparent border-white/5 text-white/40 hover:border-white/10"
-                      }`}
-                    >
-                      <div className="flex flex-col gap-0.5 text-left">
-                        <span className="text-[9px] font-bold uppercase tracking-wider">Roteirizador de Reels</span>
-                        <span className="text-[7.5px] font-poppins-light leading-normal max-w-[200px]">
-                          Cria roteiros cinematográficos otimizados para viralização.
-                        </span>
-                      </div>
-                      <div className={`w-2 h-2 rounded-full duration-300 shrink-0 ${
-                        microServicesState.roteiro ? "bg-[#EFE5D3] shadow-[0_0_8px_#EFE5D3]" : "bg-white/10"
-                      }`} />
-                    </div>
-
-                    {/* Toggle WebP */}
-                    <div 
-                      onClick={() => setMicroServicesState(prev => ({ ...prev, webp: !prev.webp }))}
-                      className={`group w-full p-2.5 rounded-lg border cursor-pointer duration-200 flex items-center justify-between transition-all ${
-                        microServicesState.webp 
-                          ? "bg-white/[0.03] border-white/20 text-white" 
-                          : "bg-transparent border-white/5 text-white/40 hover:border-white/10"
-                      }`}
-                    >
-                      <div className="flex flex-col gap-0.5 text-left">
-                        <span className="text-[9px] font-bold uppercase tracking-wider">Compressor WebP 9:16</span>
-                        <span className="text-[7.5px] font-poppins-light leading-normal max-w-[200px]">
-                          Formata imagens em alta fidelidade e compressão leve.
-                        </span>
-                      </div>
-                      <div className={`w-2 h-2 rounded-full duration-300 shrink-0 ${
-                        microServicesState.webp ? "bg-[#EFE5D3] shadow-[0_0_8px_#EFE5D3]" : "bg-white/10"
-                      }`} />
-                    </div>
-
-                    {/* Toggle Video */}
-                    <div 
-                      onClick={() => setMicroServicesState(prev => ({ ...prev, video: !prev.video }))}
-                      className={`group w-full p-2.5 rounded-lg border cursor-pointer duration-200 flex items-center justify-between transition-all ${
-                        microServicesState.video 
-                          ? "bg-white/[0.03] border-white/20 text-white" 
-                          : "bg-transparent border-white/5 text-white/40 hover:border-white/10"
-                      }`}
-                    >
-                      <div className="flex flex-col gap-0.5 text-left">
-                        <span className="text-[9px] font-bold uppercase tracking-wider">Sintetizador de Vídeo</span>
-                        <span className="text-[7.5px] font-poppins-light leading-normal max-w-[200px]">
-                          Engine AI de motion para postagens animadas 9:16.
-                        </span>
-                      </div>
-                      <div className={`w-2 h-2 rounded-full duration-300 shrink-0 ${
-                        microServicesState.video ? "bg-[#EFE5D3] shadow-[0_0_8px_#EFE5D3]" : "bg-white/10"
-                      }`} />
+                    {/* Lista dos 17 Serviços com status de ativação */}
+                    <div className="flex-1 overflow-y-auto custom-scrollbar-visible pr-1.5 flex flex-col gap-2.5 h-[230px]">
+                      {[
+                        { id: 1, name: "01. Elaborar Persona MEVA", premium: true },
+                        { id: 2, name: "02. Persona Integralizada", premium: true },
+                        { id: 3, name: "03. Criar Prompt Mestre", premium: true },
+                        { id: 4, name: "04. Fagulhas Criativas", premium: true },
+                        { id: 5, name: "05. Upload de Mídia", premium: false },
+                        { id: 6, name: "06. Tratamento de Proporção / WebP", premium: false },
+                        { id: 7, name: "07. Criar Flow Manual", premium: false },
+                        { id: 8, name: "08. Simular Flow Manual", premium: false },
+                        { id: 9, name: "09. Curadoria de Grade (Grid AI)", premium: true },
+                        { id: 10, name: "10. Criação de Legendas (IA)", premium: true },
+                        { id: 11, name: "11. Roteiros Reels (Director's)", premium: true },
+                        { id: 12, name: "12. Geração de Imagens (IA)", premium: true },
+                        { id: 13, name: "13. Geração de Vídeos (IA)", premium: true },
+                        { id: 14, name: "14. Flow Automatizado (IA)", premium: true },
+                        { id: 15, name: "15. Simulador Inteligente Flow", premium: true },
+                        { id: 16, name: "16. Publicação Imediata", premium: false },
+                        { id: 17, name: "17. Agendamento Inteligente", premium: true }
+                      ].map((svc) => {
+                        const isActive = isPremium || !svc.premium;
+                        return (
+                          <div 
+                            key={svc.id}
+                            className={`flex items-center justify-between text-left duration-200 transition-all ${
+                              isActive ? "opacity-90" : "opacity-30"
+                            }`}
+                          >
+                            <span className="text-[9px] font-poppins-light truncate max-w-[200px]">
+                              {svc.name}
+                            </span>
+                            <div className="flex items-center gap-1 shrink-0 select-none">
+                              {isActive ? (
+                                <>
+                                  <span className="text-[8px] font-bold text-brand-blue uppercase">ATIVO</span>
+                                  <span className="text-[10px] text-brand-blue font-bold">✓</span>
+                                </>
+                              ) : (
+                                <>
+                                  <span className="text-[8px] font-bold text-white/30 uppercase">TRANCADO</span>
+                                  <span className="text-[8.5px]">🔒</span>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
 
-                  {/* Botão de Emissão de Ordem de Serviço */}
-                  <button 
-                    onClick={triggerForge}
-                    className="w-full h-11 bg-[#EFE5D3] hover:bg-[#F7EFE2] active:scale-95 duration-200 rounded-lg text-black text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 mt-4 shrink-0 shadow-lg"
-                  >
-                    Emitir Ordem de Serviço <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                  {/* Card do Almoxarifado & Contingência */}
+                  <div className="flex flex-col gap-2 pt-3 border-t border-white/10 mt-3 relative z-10 shrink-0 select-none">
+                    {/* Status do Almoxarifado */}
+                    <div className="bg-white/[0.02] border border-white/5 rounded-lg p-2 flex items-center justify-between">
+                      <div className="flex flex-col text-left">
+                        <span className="text-[7.5px] font-bold text-white/30 uppercase tracking-wider">Mídia Almoxarifado</span>
+                        <span className="text-[9px] font-bold text-white/70 uppercase">
+                          {isPremium ? "✓ ARMAZENAMENTO PERMANENTE" : "EXPIRAÇÃO EM 12 DIAS"}
+                        </span>
+                      </div>
+                      <span className="text-xs">{isPremium ? "📦" : "⏳"}</span>
+                    </div>
+
+                    {/* Contingência de Download */}
+                    <div className="flex justify-between items-center px-1 py-0.5 text-[8.5px] text-white/40 hover:text-white transition duration-200 cursor-pointer">
+                      <span className="font-poppins-light leading-none">Download Manual de Contingência</span>
+                      <span className="font-bold text-[9px]">↓</span>
+                    </div>
+                  </div>
+
+                  {/* Botão de Upgrade para Free ou rodapé premium */}
+                  {!isPremium ? (
+                    <button 
+                      onClick={() => {
+                        setActiveView("servicos");
+                        setOnboardingStep("video");
+                      }}
+                      className="w-full h-11 bg-brand-gold hover:bg-[#F0C547] active:scale-95 duration-200 rounded-lg text-black text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 mt-3 shrink-0 shadow-lg shadow-brand-gold/15"
+                    >
+                      Fazer Upgrade para Premium <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  ) : (
+                    <div className="text-[7.5px] text-center text-white/20 uppercase tracking-widest mt-3 shrink-0 select-none">
+                      Segurança de Faturamento Ativa
+                    </div>
+                  )}
                 </div>
               </div>
 

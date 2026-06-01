@@ -28,13 +28,20 @@ O redirecionamento pós-login é governado de forma estrita pelo tipo de conta (
     *   **Coluna 2 (Smartphone Central):** Exibe os **12 sliders dosadores** da Matriz MEVA compactados (com altura fixa simétrica de 32px e com 50% de dosagem inicial padrão).
     *   **Coluna 3 (Sidebar Direita):** Exibe o **Controle de Áudio** (Trilha Sonora, volume, mute/unmute) e as **Imagens dos Arquétipos** correspondentes ao foco (geradas por inteligência artificial).
 
-### E.3. Módulo Tela 2 (Serviços & Diagnóstico da Persona Híbrida)
-*   **Finalidade:** Escolha de micro-serviços baseados no diagnóstico psicológico da Persona compilada.
-*   **A Regra do Prompt:** **Todo o direcionamento de criação de mídias (imagens, vídeos, textos e títulos) deriva diretamente do Prompt Conceitual da Persona**, gerado a partir dos pesos e calibração dos arquétipos na matriz MEVA. Este prompt é o pré-requisito genético de toda a engine de geração.
+### E.3. Módulo Tela 2A (Cockpit de Produção & Construtor de Prompt)
+*   **Finalidade:** Enriquecimento do prompt mestre herdado da persona e consolidação dos serviços contratados (Ordem de Serviço).
+*   **A Regra do Prompt:** **Todo o direcionamento de criação de mídias (imagens, vídeos, textos e títulos) deriva diretamente do Prompt Mestre da Persona**, gerado a partir dos pesos e calibração dos arquétipos na matriz MEVA, fundido com até 5 tags de modulação rápida.
 *   **Distribuição das Colunas (Desktop):**
-    *   **Coluna 1 (Sidebar Esquerda):** Exibe o **Título Duplo Híbrido** (associado aos dois maiores percentuais selecionados, ex: `SÁBIO / EXPLORADOR`) e a **Persona Resultante** (o encadeamento e síntese narrativa dos textos da gradação decimal correspondente de cada um dos 12 arquétipos).
-    *   **Coluna 2 (Smartphone Central):** Exibe o visor com o portal estético reativo da Persona ou console de "live work" dos agentes virtuais trabalhando em tempo real.
-    *   **Coluna 3 (Sidebar Direita):** Exibe os toggles táteis de **Micro-serviços** (Redator, Roteirista, Compressor WebP, Vídeo AI) e o botão dourado de confirmação **`EMITIR ORDEM DE SERVIÇO`**.
+    *   **Coluna 1 (Sidebar Esquerda):** Exibe o **Título Duplo Híbrido** (associado aos dois maiores percentuais selecionados, ex: `SÁBIO / EXPLORADOR`) e a **Persona Resultante** (o diagnóstico místico `Myself` ou `Ourselves` em 20 linhas físicas estáticas sem barra de rolagem, perfeitamente colada na base do card com fundo preto sólido, mantendo a metade superior como zona de respiração visual prateada).
+    *   **Coluna 2 (Smartphone Central):** Mockup do celular virtual com borda de 1px e cor `#1E60FF`. O visor interno exibe o **Construtor de Prompt**:
+        1.  *Metade Superior:* Exibição do **Prompt Mestre Herdado** do onboarding, em fonte prateada fosca sobre fundo preto sólido. Possui scroll interno suave para permitir a visualização de todo o texto sem quebrar o chassi geométrico do telefone.
+        2.  *Metade Inferior:* O **Console de Modulação por Tags**. Um campo de entrada minimalista permite digitar e adicionar até **5 tags de direcionamento rápido** (representadas por badges/pílulas estéticas com botão de exclusão). Ao atingir o limite estrito de 5 tags, a interface bloqueia novas entradas.
+        3.  *Base do Visor:* O botão dourado principal **`EMITIR ORDEM DE SERVIÇO`** perfeitamente centralizado e estático, garantindo a Doutrina de Permanência Visual.
+    *   **Coluna 3 (Sidebar Direita):** Exibe o **Console de Autenticação dos 17 Serviços Disponíveis**:
+        1.  *Selo do Plano:* Exibição em caixa alta do status da conta (`CONTA PREMIUM ATIVADA` em dourado metalizado ou `CONTA GRATUITA (FREE)` em cinza fosco).
+        2.  *Lista de Autenticação:* Exibe de forma compacta a lista de serviços que estão ativos na conta (`✓` dourado para Premium ativo, `🔒` fosco para recursos IA bloqueados no Free).
+        3.  *Status do Almoxarifado:* Exibe o card de expiração de mídias (`Armazenamento Permanente` para Premium ou `Armazenamento Temporário (Expira em 12 dias)` para Free).
+        4.  *Painel de Contingência:* Link estético para Download Manual rápido de criativos e legendas caso o Playwright sofra bloqueios no Instagram.
 
 ### E.4. Módulo Tela 3 (O KS Studio & Simulador de Feed)
 *   **Finalidade:** Sandbox interativa de visualização 1:1, simulação de feed e controle de publicação final.

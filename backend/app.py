@@ -112,7 +112,8 @@ def login(req: LoginRequest):
     ALLOWED_EMAILS = [
         "artz.genera@gmail.com",
         "sinkando@gmail.com",
-        "scalla_records@gmail.com"
+        "scalla_records@gmail.com",
+        "free@killerskills.com.br"
     ]
     
     if email not in ALLOWED_EMAILS:

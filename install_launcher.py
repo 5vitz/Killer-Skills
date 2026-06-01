@@ -11,7 +11,7 @@ def install():
     
     root_dir = "/home/artz/Documentos/Antigravity/Killer-Skills"
     run_sh = os.path.join(root_dir, "run.sh")
-    logo_png = os.path.join(root_dir, "Imagens", "Logo_Final.png")
+    logo_png = os.path.join(root_dir, "Imagens", "LOGO", "Logo_Final.png")
     
     # 1. Tornar o run.sh executável
     if os.path.exists(run_sh):
