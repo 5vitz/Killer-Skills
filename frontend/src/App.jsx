@@ -976,14 +976,106 @@ export default function App() {
                 </h2>
               </div>
 
-              {/* CONTEÚDO DO PORTAL ABAIXO (CARD VAZIO) */}
+              {/* CONTEÚDO DO PORTAL (PAINEL DE MICRO-SERVIÇOS) */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
-                <div className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 bg-[#050505] flex flex-col justify-center items-center p-5 text-center shadow-lg">
-                  <Sliders className="w-8 h-8 text-white/15 mb-3" />
-                  <span className="text-[9px] font-black tracking-widest uppercase text-white/30 mb-1">Painel Vazio</span>
-                  <span className="text-[9px] font-semibold text-white/20 uppercase tracking-wider leading-relaxed max-w-[150px]">
-                    Card reservado para calibração de serviços
-                  </span>
+                <div 
+                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-4 flex flex-col justify-between transition-all duration-500"
+                  style={{ background: ACTIVE_COCKPIT_GRADIENT }}
+                >
+                  {/* Lista de Toggles com micro-interações */}
+                  <div className="flex flex-col gap-3 relative z-10">
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3] border-b border-white/10 pb-2 mb-1 text-center">
+                      Motores Generativos AI
+                    </div>
+
+                    {/* Toggle Legendas */}
+                    <div 
+                      onClick={() => setMicroServicesState(prev => ({ ...prev, legendas: !prev.legendas }))}
+                      className={`group w-full p-2.5 rounded-lg border cursor-pointer duration-200 flex items-center justify-between transition-all ${
+                        microServicesState.legendas 
+                          ? "bg-white/[0.03] border-white/20 text-white" 
+                          : "bg-transparent border-white/5 text-white/40 hover:border-white/10"
+                      }`}
+                    >
+                      <div className="flex flex-col gap-0.5 text-left">
+                        <span className="text-[9px] font-bold uppercase tracking-wider">Legendas Estratégicas</span>
+                        <span className="text-[7.5px] font-poppins-light leading-normal max-w-[200px]">
+                          Transpõe a sua essência em textos de alto impacto.
+                        </span>
+                      </div>
+                      <div className={`w-2 h-2 rounded-full duration-300 shrink-0 ${
+                        microServicesState.legendas ? "bg-[#EFE5D3] shadow-[0_0_8px_#EFE5D3]" : "bg-white/10"
+                      }`} />
+                    </div>
+
+                    {/* Toggle Roteiro */}
+                    <div 
+                      onClick={() => setMicroServicesState(prev => ({ ...prev, roteiro: !prev.roteiro }))}
+                      className={`group w-full p-2.5 rounded-lg border cursor-pointer duration-200 flex items-center justify-between transition-all ${
+                        microServicesState.roteiro 
+                          ? "bg-white/[0.03] border-white/20 text-white" 
+                          : "bg-transparent border-white/5 text-white/40 hover:border-white/10"
+                      }`}
+                    >
+                      <div className="flex flex-col gap-0.5 text-left">
+                        <span className="text-[9px] font-bold uppercase tracking-wider">Roteirizador de Reels</span>
+                        <span className="text-[7.5px] font-poppins-light leading-normal max-w-[200px]">
+                          Cria roteiros cinematográficos otimizados para viralização.
+                        </span>
+                      </div>
+                      <div className={`w-2 h-2 rounded-full duration-300 shrink-0 ${
+                        microServicesState.roteiro ? "bg-[#EFE5D3] shadow-[0_0_8px_#EFE5D3]" : "bg-white/10"
+                      }`} />
+                    </div>
+
+                    {/* Toggle WebP */}
+                    <div 
+                      onClick={() => setMicroServicesState(prev => ({ ...prev, webp: !prev.webp }))}
+                      className={`group w-full p-2.5 rounded-lg border cursor-pointer duration-200 flex items-center justify-between transition-all ${
+                        microServicesState.webp 
+                          ? "bg-white/[0.03] border-white/20 text-white" 
+                          : "bg-transparent border-white/5 text-white/40 hover:border-white/10"
+                      }`}
+                    >
+                      <div className="flex flex-col gap-0.5 text-left">
+                        <span className="text-[9px] font-bold uppercase tracking-wider">Compressor WebP 9:16</span>
+                        <span className="text-[7.5px] font-poppins-light leading-normal max-w-[200px]">
+                          Formata imagens em alta fidelidade e compressão leve.
+                        </span>
+                      </div>
+                      <div className={`w-2 h-2 rounded-full duration-300 shrink-0 ${
+                        microServicesState.webp ? "bg-[#EFE5D3] shadow-[0_0_8px_#EFE5D3]" : "bg-white/10"
+                      }`} />
+                    </div>
+
+                    {/* Toggle Video */}
+                    <div 
+                      onClick={() => setMicroServicesState(prev => ({ ...prev, video: !prev.video }))}
+                      className={`group w-full p-2.5 rounded-lg border cursor-pointer duration-200 flex items-center justify-between transition-all ${
+                        microServicesState.video 
+                          ? "bg-white/[0.03] border-white/20 text-white" 
+                          : "bg-transparent border-white/5 text-white/40 hover:border-white/10"
+                      }`}
+                    >
+                      <div className="flex flex-col gap-0.5 text-left">
+                        <span className="text-[9px] font-bold uppercase tracking-wider">Sintetizador de Vídeo</span>
+                        <span className="text-[7.5px] font-poppins-light leading-normal max-w-[200px]">
+                          Engine AI de motion para postagens animadas 9:16.
+                        </span>
+                      </div>
+                      <div className={`w-2 h-2 rounded-full duration-300 shrink-0 ${
+                        microServicesState.video ? "bg-[#EFE5D3] shadow-[0_0_8px_#EFE5D3]" : "bg-white/10"
+                      }`} />
+                    </div>
+                  </div>
+
+                  {/* Botão de Emissão de Ordem de Serviço */}
+                  <button 
+                    onClick={triggerForge}
+                    className="w-full h-11 bg-[#EFE5D3] hover:bg-[#F7EFE2] active:scale-95 duration-200 rounded-lg text-black text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 mt-4 shrink-0 shadow-lg"
+                  >
+                    Emitir Ordem de Serviço <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
 
