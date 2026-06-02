@@ -222,7 +222,7 @@ export default function App() {
   const [tagInput, setTagInput] = useState("");
   const [expandedSection, setExpandedSection] = useState("pre"); // "pre", "pro", "pos"
   const [postType, setPostType] = useState("reels"); // "reels", "carrossel", "imagem_unica"
-  const [postQty, setPostQty] = useState(1);
+  const [postQty, setPostQty] = useState(0);
   const [personaConfirmed, setPersonaConfirmed] = useState(false);
   const [agendamentoData, setAgendamentoData] = useState("");
   const [agendamentoHora, setAgendamentoHora] = useState("");
@@ -1009,24 +1009,57 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                     className="text-[11px] uppercase tracking-widest text-white/50 text-center"
                     style={{ fontFamily: 'Poppins', fontWeight: 200 }}
                   >
-                    CONSTRUTOR DE PROMPT
+                    SERVIÇOS ATIVADOS
                   </h2>
                 </div>
 
-                {/* Bloco Superior: Prompt Mestre Herdado */}
+                {/* Bloco Superior: Listagem de Serviços Ativados do Plano */}
                 <div className="w-full flex-1 flex flex-col gap-1 overflow-hidden mb-3">
                   <span className="text-[7.5px] font-bold tracking-widest uppercase text-white/30 text-left pl-1">
-                    Prompt Mestre Herdado
+                    Esteira de Produção
                   </span>
                   <div 
-                    className="w-full flex-1 bg-black/60 border border-white/5 rounded-lg p-2.5 overflow-y-auto custom-scrollbar-visible text-left text-[8.5px] font-mono text-white/60 leading-relaxed whitespace-pre-wrap select-text selection:bg-brand-blue/30"
+                    className="w-full flex-1 bg-black/60 border border-white/5 rounded-lg p-2 overflow-y-auto custom-scrollbar-visible pr-1 flex flex-col gap-1.5"
                   >
-                    {getPromptMestre()}
+                    {[
+                      { id: 1, name: "01. Elaborar Persona - MEVA", premium: false },
+                      { id: 2, name: "02. Persona Integralizada (Myself)", premium: false },
+                      { id: 3, name: "03. Criar Prompt Ontológico - IA", premium: true },
+                      { id: 4, name: "04. Fagulhas Criativas Semanais", premium: true },
+                      { id: 5, name: "05. Upload de Mídia (Permanente)", premium: true },
+                      { id: 6, name: "06. Compressor WebP Nativo", premium: false },
+                      { id: 7, name: "07. Adequação de Proporções", premium: false },
+                      { id: 8, name: "08. Criar Flow Manual", premium: false },
+                      { id: 9, name: "09. Simular Flow Manual", premium: false },
+                      { id: 10, name: "10. Curadoria Estética Grade (Grid IA)", premium: true },
+                      { id: 11, name: "11. Criação de Legendas - IA", premium: true },
+                      { id: 12, name: "12. Roteirização Reels (Director's)", premium: true },
+                      { id: 13, name: "13. Geração de Imagens - IA", premium: true },
+                      { id: 14, name: "14. Geração de Vídeos - IA", premium: true },
+                      { id: 15, name: "15. Flow Automatizado - IA", premium: true },
+                      { id: 16, name: "16. Postar VPS Automatizado", premium: true },
+                      { id: 17, name: "17. Agendar Post Automatizado", premium: true }
+                    ].map((svc) => {
+                      const isActive = isPremium || !svc.premium;
+                      return (
+                        <div 
+                          key={svc.id} 
+                          className={`flex items-center justify-between text-[8.5px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
+                            isActive ? "text-white/80" : "text-white/20"
+                          }`}
+                        >
+                          <span className="truncate max-w-[195px] font-poppins-light">{svc.name}</span>
+                          <span className={isActive ? "text-brand-gold font-bold" : "text-white/20"}>
+                            {isActive ? "✓" : "🔒"}
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
                 {/* Bloco Inferior: Console de Modulação por Tags */}
-                <div className="w-full shrink-0 flex flex-col gap-1.5 mb-4 text-left">
+                <div className="w-full shrink-0 flex flex-col gap-1.5 mb-3 text-left">
                   <div className="flex justify-between items-center px-1">
                     <span className="text-[7.5px] font-bold tracking-widest uppercase text-white/30">
                       Modulação por Tags ({tags.length}/5)
@@ -1080,10 +1113,26 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                   </div>
                 </div>
 
+                {/* Bloco de Custo Estimado Reativo em Destaque Dourado Metalizado */}
+                <div className="w-full shrink-0 bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent border border-brand-gold/30 rounded-lg p-2 flex items-center justify-between text-left select-none mb-3">
+                  <div className="flex flex-col">
+                    <span className="text-[7px] font-bold text-brand-gold/80 uppercase tracking-wider">Custo da Ordem de Serviço</span>
+                    <span className="text-[9.5px] font-black text-brand-gold uppercase tracking-wide">
+                      Créditos Consumidos: {postQty === 0 ? 0 : (postType === "reels" ? postQty * 35 : (postType === "carrossel" ? postQty * 25 : postQty * 15))} cr
+                    </span>
+                  </div>
+                  <span className="text-sm select-none">💰</span>
+                </div>
+
                 {/* Botão de Emissão de OS na base */}
                 <button 
                   onClick={triggerForge}
-                  className="w-full h-10 bg-[#EFE5D3] hover:bg-[#F7EFE2] active:scale-95 duration-200 rounded-lg text-black text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 shrink-0 shadow-lg"
+                  disabled={postQty === 0}
+                  className={`w-full h-10 rounded-lg text-black text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 shrink-0 shadow-lg duration-200 ${
+                    postQty === 0 
+                      ? "bg-white/5 border border-white/10 text-white/20 cursor-not-allowed active:scale-100" 
+                      : "bg-[#EFE5D3] hover:bg-[#F7EFE2] active:scale-95 cursor-pointer"
+                  }`}
                 >
                   Emitir Ordem de Serviço <ArrowRight className="w-3.5 h-3.5" />
                 </button>
@@ -1190,7 +1239,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                         </div>
 
                         <div className={`transition-all duration-300 overflow-hidden ${
-                          expandedSection === "pro" ? "max-h-[380px] p-3 border-t border-white/5" : "max-h-0"
+                          expandedSection === "pro" ? "max-h-[180px] p-3 border-t border-white/5" : "max-h-0"
                         }`}>
                           <div className="flex flex-col gap-3">
                             {/* Formato de Post */}
@@ -1203,9 +1252,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                                 onChange={(e) => {
                                   const t = e.target.value;
                                   setPostType(t);
-                                  // Ajustar a quantidade padrão conforme o tipo
-                                  if (t === "carrossel") setPostQty(5);
-                                  else setPostQty(1);
+                                  setPostQty(0); // Reinicia a quantidade para 0 sempre que o tipo muda, conforme especificação
                                 }}
                                 className="w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white uppercase tracking-wider focus:outline-none focus:border-brand-blue/30 duration-200"
                               >
@@ -1226,8 +1273,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                               <div className="flex items-center gap-1">
                                 <button 
                                   onClick={() => {
-                                    const min = postType === "carrossel" ? 2 : 1;
-                                    if (postQty > min) setPostQty(prev => prev - 1);
+                                    if (postQty > 0) setPostQty(prev => prev - 1);
                                   }}
                                   className="w-8 h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold font-mono duration-150 active:scale-90"
                                 >
@@ -1235,7 +1281,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                                 </button>
                                 
                                 <div className="flex-1 h-8 bg-black/60 border border-white/5 rounded-lg flex items-center justify-center text-[10px] font-bold font-mono">
-                                  {postQty} {postType === "carrossel" ? "Slides" : (postQty === 1 ? "Post" : "Posts")}
+                                  {postQty} {postType === "carrossel" ? (postQty === 1 ? "Slide" : "Slides") : (postQty === 1 ? "Post" : "Posts")}
                                 </div>
                                 
                                 <button 
@@ -1246,49 +1292,6 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                                 >
                                   +
                                 </button>
-                              </div>
-                            </div>
-
-                            {/* Estimador de Créditos */}
-                            <div className="bg-black/60 border border-white/5 rounded-lg p-2 flex items-center justify-between text-left select-none">
-                              <div className="flex flex-col">
-                                <span className="text-[7.5px] font-bold text-white/30 uppercase tracking-wider">Custo de Ordem de Serviço</span>
-                                <span className="text-[9px] font-bold text-brand-gold uppercase">
-                                  {/* Reels: 35cr, Carrossel: 25cr, Post Único: 15cr */}
-                                  Custo Estimado: {postType === "reels" ? postQty * 35 : (postType === "carrossel" ? postQty * 25 : postQty * 15)} créditos
-                                </span>
-                              </div>
-                              <span className="text-xs">💰</span>
-                            </div>
-
-                            {/* Detalhes Técnicos dos Serviços do Plano */}
-                            <div className="flex flex-col gap-1.5 pt-2 border-t border-white/5 mt-1 select-none">
-                              <span className="text-[7.5px] font-bold uppercase tracking-wider text-white/30 pl-1 text-left">
-                                Serviços Ativados
-                              </span>
-                              
-                              <div className="max-h-[100px] overflow-y-auto custom-scrollbar-visible pr-1 flex flex-col gap-1.5">
-                                {[
-                                  { id: 1, name: "05. Upload de Mídia (Permanente)", premium: true },
-                                  { id: 2, name: "06. Adequação de Proporção", premium: false },
-                                  { id: 3, name: "07. Criar Flow Manual", premium: false },
-                                  { id: 4, name: "08. Simular Flow Manual", premium: false },
-                                  { id: 5, name: "09. Curadoria de Grade (Grid AI)", premium: true },
-                                  { id: 6, name: "10. Criação de Legendas (IA)", premium: true },
-                                  { id: 7, name: "11. Roteiros Reels (Director's)", premium: true },
-                                  { id: 8, name: "12. Geração de Imagens (IA)", premium: true },
-                                  { id: 9, name: "13. Geração de Vídeos (IA)", premium: true },
-                                  { id: 10, name: "14. Flow Automatizado (IA)", premium: true },
-                                  { id: 11, name: "15. Simulador Inteligente Flow", premium: true }
-                                ].map((svc) => {
-                                  const isActive = isPremium || !svc.premium;
-                                  return (
-                                    <div key={svc.id} className={`flex items-center justify-between text-[8px] transition-all ${isActive ? "opacity-80" : "opacity-20"}`}>
-                                      <span className="truncate max-w-[170px]">{svc.name}</span>
-                                      <span>{isActive ? "✓" : "🔒"}</span>
-                                    </div>
-                                  );
-                                })}
                               </div>
                             </div>
                           </div>

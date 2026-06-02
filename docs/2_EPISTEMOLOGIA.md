@@ -28,32 +28,27 @@ O redirecionamento pós-login é governado de forma estrita pelo tipo de conta (
     *   **Coluna 2 (Smartphone Central):** Exibe os **12 sliders dosadores** da Matriz MEVA compactados (com altura fixa simétrica de 32px e com 50% de dosagem inicial padrão).
     *   **Coluna 3 (Sidebar Direita):** Exibe o **Controle de Áudio** (Trilha Sonora, volume, mute/unmute) e as **Imagens dos Arquétipos** correspondentes ao foco (geradas por inteligência artificial).
 
-### E.3. Módulo Tela 2A (Cockpit de Produção & Construtor de Prompt)
-*   **Finalidade:** Enriquecimento do prompt mestre herdado da persona e consolidação dos serviços contratados (Ordem de Serviço).
-*   **A Regra do Prompt:** **Todo o direcionamento de criação de mídias (imagens, vídeos, textos e títulos) deriva diretamente do Prompt Mestre da Persona**, gerado a partir dos pesos e calibração dos arquétipos na matriz MEVA, fundido com até 5 tags de modulação rápida.
+### E.3. Módulo Tela 2A (Cockpit de Produção & Serviços Ativados)
+*   **Finalidade:** Enriquecimento do escopo físico das mídias, modulação por tags táteis e visualização altamente legível dos serviços contratados (Ordem de Serviço).
+*   **A Regra da Produção:** A ativação dos serviços não depende do escopo do post, mas sim do nível de conta (Premium vs Free). O prompt mestre herdado fica implícito e invisível, enquanto o visor central do smartphone torna-se o cockpit de comandos do usuário.
 *   **Distribuição das Colunas (Desktop):**
     *   **Coluna 1 (Sidebar Esquerda):** Exibe o **Título Duplo Híbrido** (associado aos dois maiores percentuais selecionados, ex: `SÁBIO / EXPLORADOR`) e a **Persona Resultante** (o diagnóstico místico `Myself` ou `Ourselves` em 20 linhas físicas estáticas sem barra de rolagem, perfeitamente colada na base do card com fundo preto sólido, mantendo a metade superior como zona de respiração visual prateada).
-    *   **Coluna 2 (Smartphone Central):** Mockup do celular virtual com borda de 1px e cor `#1E60FF`. O visor interno exibe o **Construtor de Prompt**:
-        1.  *Metade Superior:* Exibição do **Prompt Mestre Herdado** do onboarding, em fonte prateada fosca sobre fundo preto sólido. Possui scroll interno suave para permitir a visualização de todo o texto sem quebrar o chassi geométrico do telefone.
-        2.  *Metade Inferior:* O **Console de Modulação por Tags**. Um campo de entrada minimalista permite digitar e adicionar até **5 tags de direcionamento rápido** (representadas por badges/pílulas estéticas com botão de exclusão). Ao atingir o limite estrito de 5 tags, a interface bloqueia novas entradas.
-        3.  *Base do Visor:* O botão dourado principal **`EMITIR ORDEM DE SERVIÇO`** perfeitamente centralizado e estático, garantindo a Doutrina de Permanência Visual.
-    *   **Coluna 3 (Sidebar Direita):** Exibe a área de **`DEFINIÇÕES DO POST`** estruturada em um **Console de Acordeões Tripartites Interativos** (linhas de 1px, expansão mútua onde apenas um fica ativo por vez para preservar a Estética da Subtração):
+    *   **Coluna 2 (Smartphone Central):** Mockup do celular virtual com borda de 1px e cor `#1E60FF`. O visor interno exibe o console de **SERVIÇOS ATIVADOS**:
+        1.  *Metade Superior:* A listagem altamente visível e legível dos **17 Serviços Disponíveis** da conta ativa. Exibe o marcador dourado de `✓ ATIVO` para serviços habilitados (Premium) ou cadeado fosco `🔒 TRANCADO` (Free), com excelente legibilidade e sem scrolls ocultos.
+        2.  *Metade Inferior (Definições Físicas):*
+            *   **Formato do Post:** Seletor minimalista para escolher entre `Reels (Vídeo)`, `Carrossel (Imagens)` ou `Imagem Única (Post Único)`.
+            *   **Quantidade Dinâmica:** Contador numérico de 1 a 10 (`-` / `+`) adequado ao formato selecionado.
+            *   **Modulação por Tags:** Campo de entrada minimalista para adicionar até **5 tags de direcionamento rápido** (pílulas/badges táteis de exclusão).
+            *   **Custo Estimado (Super-Evidenciado):** Um card de destaque dourado metalizado na base do painel do smartphone (`Custo Estimado: XXX créditos`) altamente visível para evidenciar o consumo da OS.
+        3.  *Base do Visor:* O botão dourado principal **`EMITIR ORDEM DE SERVIÇO`** perfeitamente estático e centralizado na base física do visor.
+    *   **Coluna 3 (Sidebar Direita):** Exibe a área de **`Definições do Post`** de forma extremamente desafogada, limpa e sem nested scrolls, usando 2 cards expansíveis (acordeões) de 1px:
         1.  *Selo do Plano:* Cabeçalho elegante em caixa alta mostrando o status (`CONTA PREMIUM ATIVADA` em dourado metalizado ou `CONTA GRATUITA (FREE)` em cinza fosco).
-        2.  *CARD 1 — PRÉ-PRODUÇÃO (O DNA Institucional):* Focado na validação ontológica da persona mística.
-            *   *Ação 1:* `✓ CONFIRMAR PERSONA` (valida e sela a Persona Híbrida construída no onboarding para a geração atual).
-            *   *Ação 2:* `✎ EDITAR PERSONA` (redireciona o usuário para reajustar os 12 sliders arquetípicos na Tela 1C).
-        3.  *CARD 2 — PRODUÇÃO (Métricas e Escopo Quantitativo):* Focado em definir *o que* a IA e a VPS vão gerar.
-            *   *Seletor de Tipo:* Dropdown/pílulas para escolher entre `Reels (Vídeo)`, `Carrossel (Imagens)` ou `Imagem Única (Post Único)`.
-            *   *Seletor de Quantidade:* Seletor numérico tátil (limite de 1 a 10) ajustado dinamicamente:
-                *   *Se Reels:* define o número de vídeos a serem gerados.
-                *   *Se Carrossel:* define a quantidade de slides de imagens deslizantes (2 a 10 slides).
-                *   *Se Imagem Única:* define o número de posts de imagem individual.
-            *   *Estimador Dinâmico de Créditos:* Cálculo financeiro em tempo real exibido na base do card (ex: Reels consome 35 créditos/unidade; Carrossel 25 créditos/unidade; Imagem Única 15 créditos/unidade), multiplicando o custo unitário pela quantidade escolhida.
-            *   *Lista de Serviços Habilitados:* Exibição em cascata compacta dos 17 serviços autenticados (`✓ ATIVO` para Premium, `🔒 TRANCADO` para IA no Free).
-        4.  *CARD 3 — PÓS-PRODUÇÃO (A Fila de Envio):* Configura a logística de publicação.
-            *   *Ação 1:* `✓ PUBLICAR IMEDIATO` (envia as mídias aprovadas direto ao background worker).
-            *   *Ação 2:* `⏰ AGENDAR PUBLICAÇÃO` (abre seletores minimalistas de calendário e hora para enfileiramento cron).
-        5.  *Almoxarifado & Contingência:* Card de expiração de mídias (`Armazenamento Permanente` Premium vs `Expiração em 12 Dias` Free) e link de download manual contingencial para salvaguarda de postagens.
+        2.  *CARD 1 — PRÉ-PRODUÇÃO (O DNA Institucional):* Focado na validação ontológica.
+            *   *Ação 1:* `✓ CONFIRMAR PERSONA` (valida e sela a Persona Híbrida do onboarding).
+            *   *Ação 2:* `✎ EDITAR PERSONA` (redireciona aos sliders da Tela 1C).
+        3.  *CARD 3 — PÓS-PRODUÇÃO (A Fila de Envio):* Configura a logística de agendamento de data e hora.
+        4.  *Almoxarifado & Contingência:* Card de expiração de mídias (`Armazenamento Permanente` Premium vs `Expiração em 12 Dias` Free) e link de download manual contingencial para salvaguarda de postagens.
+        5.  *Upgrade CTA:* Botão dourado `FAZER UPGRADE PARA PREMIUM ➔` exibido na base da Coluna 3 se o usuário for Free.
 
 ### E.4. Módulo Tela 3 (O KS Studio & Simulador de Feed)
 *   **Finalidade:** Sandbox interativa de visualização 1:1, simulação de feed e controle de publicação final.
