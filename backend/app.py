@@ -67,6 +67,7 @@ class ForgeRequest(BaseModel):
     agendamento_data: Optional[str] = None
     agendamento_hora: Optional[str] = None
     persona_confirmada: Optional[bool] = None
+    lote: Optional[List[Dict[str, Any]]] = None
 
 # --- PERSONAS DATA SEED ---
 PESSOAL_DATA = [
@@ -170,11 +171,47 @@ def forge_order(req: ForgeRequest):
         sorted_meva = sorted(req.dosagem.items(), key=lambda x: x[1], reverse=True)
         meva_signature_yaml = "\n" + "\n".join([f"      {k.upper()}: {v}%" for k, v in sorted_meva])
 
-    # Calcula custo estimado com base no tipo
-    qty = req.post_qty if req.post_qty is not None else 1
-    t_type = req.post_type or "reels"
-    unit_cost = 35 if t_type == "reels" else (25 if t_type == "carrossel" else 15)
-    total_cost = qty * unit_cost
+    # Lógica de processamento de Lote vs Post Único Legado
+    lote_items_yaml = ""
+    total_cost = 0
+    
+    if req.lote and len(req.lote) > 0:
+        # Modo Lote Acumulado
+        lote_items_yaml = f"\n  ESTEIRA_DE_PRODUCAO_LOTE ({len(req.lote)} itens):"
+        for i, item in enumerate(req.lote, 1):
+            t_type = item.get("tipo", "reels").upper()
+            qty = item.get("quantidade", 1)
+            tags_list = ", ".join(item.get("tags", [])) if item.get("tags") else "N/A"
+            agendamento = item.get("agendamento", {})
+            a_data = agendamento.get("data")
+            a_hora = agendamento.get("hora")
+            logistica = f"{a_data} às {a_hora}" if a_data else "IMEDIATO (Publicação VPS Contabo)"
+            custo_item = item.get("custo", 0)
+            total_cost += custo_item
+            
+            lote_items_yaml += f"""
+    - ITEM {i}:
+        FORMATO_FISICO: "{t_type}"
+        QUANTIDADE_SOLICITADA: {qty}
+        TAGS_TATEIS: "{tags_list}"
+        LOGISTICA_ENTREGA: "{logistica}"
+        CUSTO: "{custo_item} créditos\""""
+    else:
+        # Fallback Modo Legado (Post Único)
+        qty = req.post_qty if req.post_qty is not None else 1
+        t_type = req.post_type or "reels"
+        unit_cost = 35 if t_type == "reels" else (25 if t_type == "carrossel" else 15)
+        total_cost = qty * unit_cost
+        tags_list = req.micro_services.get("tags", "N/A")
+        logistica = f"{req.agendamento_data} às {req.agendamento_hora}" if req.agendamento_data else "IMEDIATO (Publicação VPS Contabo)"
+        
+        lote_items_yaml = f"""
+  DEFINICOES_DO_POST:
+    FORMATO_FISICO: "{t_type.upper()}"
+    QUANTIDADE_SOLICITADA: {qty}
+    CUSTO_ESTIMADO: "{total_cost} créditos"
+    LOGISTICA_ENTREGA: "{logistica}"
+    TAGS_TATEIS_DIRECIONAMENTO: "{tags_list}\""""
 
     manifest_yaml = f"""---
 ORDEM_DE_SERVICO:
@@ -187,18 +224,13 @@ ORDEM_DE_SERVICO:
     STATUS: "CONVOCADO"
     
   ASSINATURA_ARQUETIPICA_MEVA: {meva_signature_yaml}
+  {lote_items_yaml}
   
-  DEFINICOES_DO_POST:
-    FORMATO_FISICO: "{t_type.upper()}"
-    QUANTIDADE_SOLICITADA: {qty}
-    CUSTO_ESTIMADO: "{total_cost} créditos"
-    PERSONA_CONFIRMADA: {"SIM (Selo Ontológico Ativo) ✓" if req.persona_confirmada else "NÃO (Sombra Ativa) 🔴"}
-    LOGISTICA_ENTREGA: "{f'{req.agendamento_data} às {req.agendamento_hora}' if req.agendamento_data else 'IMEDIATO (Publicação VPS Contabo)'}"
-    TAGS_TATEIS_DIRECIONAMENTO: "{req.micro_services.get('tags', 'N/A')}"
+  CUSTO_TOTAL_CONSOLIDADO: "{total_cost} créditos"
+  PERSONA_CONFIRMADA: {"SIM (Selo Ontológico Ativo) ✓" if req.persona_confirmada else "NÃO (Sombra Ativa) 🔴"}
 
   MICRO_SERVICOS_AUTENTICADOS:
     - Postagem Automática: {"ATIVO 🟢" if req.persona_confirmada else "PENDENTE 🟡"}
-    - Agendamento de Post: {"ATIVO 🟢" if req.agendamento_data else "INATIVO 🔴"}
     - Curadoria de Grade (Grid AI): ATIVO 🟢 (Plano Premium)
     - Roteirização Reels (Director's Cut): ATIVO 🟢 (Plano Premium)
     - Criação de Legendas: ATIVO 🟢 (Plano Premium)
@@ -213,14 +245,26 @@ ORDEM_DE_SERVICO:
     # Se a conexão com o banco de dados Firebase/Firestore estiver ativa, salvamos o agendamento
     if db:
         try:
-            # Recupera as mídias ativas e legenda de exemplo
-            db.agendar_post(
-                data_hora=timestamp,
-                arquivos="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500",
-                legenda=f"OS Forjada para a persona {req.persona_title}! Assinatura arquetípica unificada ativa."
-            )
+            if req.lote and len(req.lote) > 0:
+                for item in req.lote:
+                    agendamento = item.get("agendamento", {})
+                    a_data = agendamento.get("data")
+                    a_hora = agendamento.get("hora")
+                    item_time = f"{a_data} {a_hora}" if a_data else timestamp
+                    
+                    db.agendar_post(
+                        data_hora=item_time,
+                        arquivos="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500",
+                        legenda=f"Lote OS: {item.get('quantidade')}x {item.get('tipo').upper()} para a persona {req.persona_title}!"
+                    )
+            else:
+                db.agendar_post(
+                    data_hora=timestamp,
+                    arquivos="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500",
+                    legenda=f"OS Forjada para a persona {req.persona_title}! Assinatura arquetípica unificada ativa."
+                )
         except Exception as e:
-            print(f"⚠️ Erro ao salvar agendamento no Firestore: {e}")
+            print(f"⚠️ Erro ao salvar agendamentos no Firestore: {e}")
 
     return {
         "success": True,
