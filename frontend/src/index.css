@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Yatra+One&family=Kurale&family=Poppins:wght@100;200;300;400&family=Outfit:wght@300;400;600;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yatra+One&family=Kurale&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Outfit:wght@300;400;600;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #000000;
   }
   
@@ -34,7 +34,7 @@
 
 .font-poppins-light {
   font-family: 'Poppins', sans-serif;
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: 0.08em;
 }
 

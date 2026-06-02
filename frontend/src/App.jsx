@@ -693,7 +693,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
               <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
                 <h2 
                   className="text-sm uppercase tracking-wider text-white text-center"
-                  style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                  style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                 >
                   {activeView === "servicos_escolha" ? "MYSELF" : "Significado"}
                 </h2>
@@ -861,7 +861,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                         <div className="w-full shrink-0 select-none mt-4 mb-2">
                           <h2 
                             className="text-sm uppercase tracking-wider text-white text-center"
-                            style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                            style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                           >
                             ESPELHO DA ALMA
                           </h2>
@@ -930,7 +930,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                 <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
                   <h2 
                     className="text-sm uppercase tracking-wider text-white text-center"
-                    style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                    style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                   >
                     {activeArch ? activeArch.name : "Arquétipos"}
                   </h2>
@@ -1007,17 +1007,14 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                 <div className="w-full shrink-0 select-none mt-2 mb-3">
                   <h2 
                     className="text-[11px] uppercase tracking-widest text-white/50 text-center"
-                    style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                    style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                   >
-                    SERVIÇOS ATIVADOS
+                    ESTEIRA DE PRODUÇÃO
                   </h2>
                 </div>
 
                 {/* Bloco Superior: Listagem de Serviços Ativados do Plano */}
                 <div className="w-full flex-1 flex flex-col gap-1 overflow-hidden mb-3">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-white/30 text-left pl-1">
-                    Esteira de Produção
-                  </span>
                   <div 
                     className="w-full flex-1 bg-black/60 border border-white/5 rounded-lg p-2 overflow-y-auto custom-scrollbar-visible pr-1 flex flex-col gap-1.5"
                   >
@@ -1091,7 +1088,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
               <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
                 <h2 
                   className="text-sm uppercase tracking-wider text-white text-center font-extralight"
-                  style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                  style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                 >
                   Definições do Post
                 </h2>
@@ -1104,13 +1101,6 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                   style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
                   <div className="flex flex-col gap-2.5 relative z-10 flex-1 overflow-hidden">
-                    {/* Header de Assinatura */}
-                    <div className="text-[10px] font-bold uppercase tracking-widest border-b border-white/10 pb-2 mb-2 text-center flex flex-col gap-1 select-none shrink-0">
-                      <span style={{ color: isPremium ? '#D4AF37' : '#858585' }}>
-                        {isPremium ? "★ CONTA PREMIUM ATIVADA ★" : "CONTA GRATUITA (FREE)"}
-                      </span>
-                    </div>
-
                     {/* Acordeão Container */}
                     <div className="flex-1 flex flex-col gap-2 overflow-y-auto pr-1 custom-scrollbar-visible">
                       
@@ -1453,7 +1443,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
               <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
                 <h2 
                   className="text-sm uppercase tracking-wider text-white text-center font-extralight"
-                  style={{ fontFamily: 'Poppins', fontWeight: 200 }}
+                  style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                 >
                   KS Studio
                 </h2>
