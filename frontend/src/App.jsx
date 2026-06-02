@@ -1015,7 +1015,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
 
                 {/* Bloco Superior: Listagem de Serviços Ativados do Plano */}
                 <div className="w-full flex-1 flex flex-col gap-1 overflow-hidden mb-3">
-                  <span className="text-[7.5px] font-bold tracking-widest uppercase text-white/30 text-left pl-1">
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-white/30 text-left pl-1">
                     Esteira de Produção
                   </span>
                   <div 
@@ -1044,72 +1044,17 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                       return (
                         <div 
                           key={svc.id} 
-                          className={`flex items-center justify-between text-[8.5px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
+                          className={`flex items-center justify-between text-[11px] transition-all px-2 py-1.5 border-b border-white/[0.02] last:border-b-0 ${
                             isActive ? "text-white/80" : "text-white/20"
                           }`}
                         >
-                          <span className="truncate max-w-[195px] font-poppins-light">{svc.name}</span>
+                          <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
                           <span className={isActive ? "text-brand-gold font-bold" : "text-white/20"}>
                             {isActive ? "✓" : "🔒"}
                           </span>
                         </div>
                       );
                     })}
-                  </div>
-                </div>
-
-                {/* Bloco Inferior: Console de Modulação por Tags */}
-                <div className="w-full shrink-0 flex flex-col gap-1.5 mb-3 text-left">
-                  <div className="flex justify-between items-center px-1">
-                    <span className="text-[7.5px] font-bold tracking-widest uppercase text-white/30">
-                      Modulação por Tags ({tags.length}/5)
-                    </span>
-                    <span className="text-[7px] font-bold text-white/15 uppercase">Limite Máximo</span>
-                  </div>
-
-                  {/* Lista de Badges de Tags */}
-                  <div className="flex flex-wrap gap-1.5 p-2 bg-white/[0.01] border border-white/5 rounded-lg min-h-[42px] max-h-[76px] overflow-y-auto scrollbar-none">
-                    {tags.map((tag, idx) => (
-                      <span 
-                        key={idx}
-                        className="bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-[8.5px] font-semibold flex items-center gap-1.5 text-white/70 animate-fade-in"
-                      >
-                        {tag}
-                        <button 
-                          onClick={() => setTags(prev => prev.filter((_, i) => i !== idx))}
-                          className="hover:text-brand-pink duration-150 font-bold text-[9px] focus:outline-none shrink-0"
-                        >
-                          ×
-                        </button>
-                      </span>
-                    ))}
-                    {tags.length === 0 && (
-                      <span className="text-[8px] font-poppins-light text-white/20 italic self-center pl-1">
-                        Nenhuma tag ativa...
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Input de Tags */}
-                  <div className="relative">
-                    <input 
-                      type="text"
-                      disabled={tags.length >= 5}
-                      value={tagInput}
-                      onChange={(e) => setTagInput(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === ",") {
-                          e.preventDefault();
-                          const val = tagInput.trim().toLowerCase().replace(/[^a-z0-9-]/g, "");
-                          if (val && !tags.includes(val) && tags.length < 5) {
-                            setTags(prev => [...prev, val]);
-                          }
-                          setTagInput("");
-                        }
-                      }}
-                      placeholder={tags.length >= 5 ? "Limite atingido (5 tags)" : "Digitar tag (pressione Enter)"}
-                      className="w-full h-8 bg-white/[0.02] border border-white/10 rounded-lg px-3 text-[9px] text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
-                    />
                   </div>
                 </div>
 
@@ -1239,7 +1184,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                         </div>
 
                         <div className={`transition-all duration-300 overflow-hidden ${
-                          expandedSection === "pro" ? "max-h-[180px] p-3 border-t border-white/5" : "max-h-0"
+                          expandedSection === "pro" ? "max-h-[350px] p-3 border-t border-white/5" : "max-h-0"
                         }`}>
                           <div className="flex flex-col gap-3">
                             {/* Formato de Post */}
@@ -1292,6 +1237,61 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                                 >
                                   +
                                 </button>
+                              </div>
+                            </div>
+
+                            {/* Modulação por Tags (Coluna 3) */}
+                            <div className="flex flex-col gap-1.5 text-left border-t border-white/5 pt-3 mt-1">
+                              <div className="flex justify-between items-center px-1">
+                                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                                  Modulação por Tags ({tags.length}/5)
+                                </span>
+                                <span className="text-[8px] uppercase tracking-wider text-white/15">Limite</span>
+                              </div>
+
+                              {/* Lista de Badges de Tags */}
+                              <div className="flex flex-wrap gap-1.5 p-2 bg-white/[0.01] border border-white/5 rounded-lg min-h-[42px] max-h-[76px] overflow-y-auto scrollbar-none">
+                                {tags.map((tag, idx) => (
+                                  <span 
+                                    key={idx}
+                                    className="bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-[8.5px] font-semibold flex items-center gap-1.5 text-white/70 animate-fade-in"
+                                  >
+                                    {tag}
+                                    <button 
+                                      onClick={() => setTags(prev => prev.filter((_, i) => i !== idx))}
+                                      className="hover:text-brand-pink duration-150 font-bold text-[9px] focus:outline-none shrink-0"
+                                    >
+                                      ×
+                                    </button>
+                                  </span>
+                                ))}
+                                {tags.length === 0 && (
+                                  <span className="text-[8px] font-poppins-light text-white/20 italic self-center pl-1">
+                                    Nenhuma tag ativa...
+                                  </span>
+                                )}
+                              </div>
+
+                              {/* Input de Tags */}
+                              <div className="relative">
+                                <input 
+                                  type="text"
+                                  disabled={tags.length >= 5}
+                                  value={tagInput}
+                                  onChange={(e) => setTagInput(e.target.value)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === ",") {
+                                      e.preventDefault();
+                                      const val = tagInput.trim().toLowerCase().replace(/[^a-z0-9-]/g, "");
+                                      if (val && !tags.includes(val) && tags.length < 5) {
+                                        setTags(prev => [...prev, val]);
+                                      }
+                                      setTagInput("");
+                                    }
+                                  }}
+                                  placeholder={tags.length >= 5 ? "Limite atingido (5 tags)" : "Digitar tag (pressione Enter)"}
+                                  className="w-full h-8 bg-white/[0.02] border border-white/10 rounded-lg px-3 text-[9px] text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
+                                />
                               </div>
                             </div>
                           </div>
