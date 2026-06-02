@@ -1102,7 +1102,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                 >
                   <div className="flex flex-col gap-2.5 relative z-10 flex-1 overflow-hidden">
                     {/* Acordeão Container */}
-                    <div className="flex-1 flex flex-col gap-2 overflow-y-auto pr-1 custom-scrollbar-visible">
+                    <div className="flex-1 flex flex-col gap-4 pt-8 overflow-y-auto pr-1 custom-scrollbar-visible">
                       
                       {/* CARD 1: PRÉ-PRODUÇÃO (DNA Institucional) */}
                       <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
