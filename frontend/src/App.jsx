@@ -1347,28 +1347,8 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                     </div>
                   </div>
 
-                  {/* Card do Almoxarifado & Contingência */}
-                  <div className="flex flex-col gap-2 pt-3 border-t border-white/10 mt-3 relative z-10 shrink-0 select-none">
-                    {/* Status do Almoxarifado */}
-                    <div className="bg-white/[0.02] border border-white/5 rounded-lg p-2 flex items-center justify-between">
-                      <div className="flex flex-col text-left">
-                        <span className="text-[7.5px] font-bold text-white/30 uppercase tracking-wider">Mídia Almoxarifado</span>
-                        <span className="text-[9px] font-bold text-white/70 uppercase">
-                          {isPremium ? "✓ ARMAZENAMENTO PERMANENTE" : "EXPIRAÇÃO EM 12 DIAS"}
-                        </span>
-                      </div>
-                      <span className="text-xs">{isPremium ? "📦" : "⏳"}</span>
-                    </div>
-
-                    {/* Contingência de Download */}
-                    <div className="flex justify-between items-center px-1 py-0.5 text-[8.5px] text-white/40 hover:text-white transition duration-200 cursor-pointer">
-                      <span className="font-poppins-light leading-none">Download Manual de Contingência</span>
-                      <span className="font-bold text-[9px]">↓</span>
-                    </div>
-                  </div>
-
-                  {/* Botão de Upgrade para Free ou rodapé premium */}
-                  {!isPremium ? (
+                  {/* Botão de Upgrade para Free */}
+                  {!isPremium && (
                     <button 
                       onClick={() => {
                         setActiveView("servicos");
@@ -1378,10 +1358,6 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                     >
                       Fazer Upgrade para Premium <ArrowRight className="w-3.5 h-3.5" />
                     </button>
-                  ) : (
-                    <div className="text-[7.5px] text-center text-white/20 uppercase tracking-widest mt-3 shrink-0 select-none">
-                      Segurança de Faturamento Ativa
-                    </div>
                   )}
                 </div>
               </div>
