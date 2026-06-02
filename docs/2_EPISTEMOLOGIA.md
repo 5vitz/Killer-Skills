@@ -37,11 +37,23 @@ O redirecionamento pós-login é governado de forma estrita pelo tipo de conta (
         1.  *Metade Superior:* Exibição do **Prompt Mestre Herdado** do onboarding, em fonte prateada fosca sobre fundo preto sólido. Possui scroll interno suave para permitir a visualização de todo o texto sem quebrar o chassi geométrico do telefone.
         2.  *Metade Inferior:* O **Console de Modulação por Tags**. Um campo de entrada minimalista permite digitar e adicionar até **5 tags de direcionamento rápido** (representadas por badges/pílulas estéticas com botão de exclusão). Ao atingir o limite estrito de 5 tags, a interface bloqueia novas entradas.
         3.  *Base do Visor:* O botão dourado principal **`EMITIR ORDEM DE SERVIÇO`** perfeitamente centralizado e estático, garantindo a Doutrina de Permanência Visual.
-    *   **Coluna 3 (Sidebar Direita):** Exibe o **Console de Autenticação dos 17 Serviços Disponíveis**:
-        1.  *Selo do Plano:* Exibição em caixa alta do status da conta (`CONTA PREMIUM ATIVADA` em dourado metalizado ou `CONTA GRATUITA (FREE)` em cinza fosco).
-        2.  *Lista de Autenticação:* Exibe de forma compacta a lista de serviços que estão ativos na conta (`✓` dourado para Premium ativo, `🔒` fosco para recursos IA bloqueados no Free).
-        3.  *Status do Almoxarifado:* Exibe o card de expiração de mídias (`Armazenamento Permanente` para Premium ou `Armazenamento Temporário (Expira em 12 dias)` para Free).
-        4.  *Painel de Contingência:* Link estético para Download Manual rápido de criativos e legendas caso o Playwright sofra bloqueios no Instagram.
+    *   **Coluna 3 (Sidebar Direita):** Exibe a área de **`DEFINIÇÕES DO POST`** estruturada em um **Console de Acordeões Tripartites Interativos** (linhas de 1px, expansão mútua onde apenas um fica ativo por vez para preservar a Estética da Subtração):
+        1.  *Selo do Plano:* Cabeçalho elegante em caixa alta mostrando o status (`CONTA PREMIUM ATIVADA` em dourado metalizado ou `CONTA GRATUITA (FREE)` em cinza fosco).
+        2.  *CARD 1 — PRÉ-PRODUÇÃO (O DNA Institucional):* Focado na validação ontológica da persona mística.
+            *   *Ação 1:* `✓ CONFIRMAR PERSONA` (valida e sela a Persona Híbrida construída no onboarding para a geração atual).
+            *   *Ação 2:* `✎ EDITAR PERSONA` (redireciona o usuário para reajustar os 12 sliders arquetípicos na Tela 1C).
+        3.  *CARD 2 — PRODUÇÃO (Métricas e Escopo Quantitativo):* Focado em definir *o que* a IA e a VPS vão gerar.
+            *   *Seletor de Tipo:* Dropdown/pílulas para escolher entre `Reels (Vídeo)`, `Carrossel (Imagens)` ou `Imagem Única (Post Único)`.
+            *   *Seletor de Quantidade:* Seletor numérico tátil (limite de 1 a 10) ajustado dinamicamente:
+                *   *Se Reels:* define o número de vídeos a serem gerados.
+                *   *Se Carrossel:* define a quantidade de slides de imagens deslizantes (2 a 10 slides).
+                *   *Se Imagem Única:* define o número de posts de imagem individual.
+            *   *Estimador Dinâmico de Créditos:* Cálculo financeiro em tempo real exibido na base do card (ex: Reels consome 35 créditos/unidade; Carrossel 25 créditos/unidade; Imagem Única 15 créditos/unidade), multiplicando o custo unitário pela quantidade escolhida.
+            *   *Lista de Serviços Habilitados:* Exibição em cascata compacta dos 17 serviços autenticados (`✓ ATIVO` para Premium, `🔒 TRANCADO` para IA no Free).
+        4.  *CARD 3 — PÓS-PRODUÇÃO (A Fila de Envio):* Configura a logística de publicação.
+            *   *Ação 1:* `✓ PUBLICAR IMEDIATO` (envia as mídias aprovadas direto ao background worker).
+            *   *Ação 2:* `⏰ AGENDAR PUBLICAÇÃO` (abre seletores minimalistas de calendário e hora para enfileiramento cron).
+        5.  *Almoxarifado & Contingência:* Card de expiração de mídias (`Armazenamento Permanente` Premium vs `Expiração em 12 Dias` Free) e link de download manual contingencial para salvaguarda de postagens.
 
 ### E.4. Módulo Tela 3 (O KS Studio & Simulador de Feed)
 *   **Finalidade:** Sandbox interativa de visualização 1:1, simulação de feed e controle de publicação final.

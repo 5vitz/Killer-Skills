@@ -220,6 +220,12 @@ export default function App() {
   });
   const [tags, setTags] = useState(["luxo", "alta-costura"]);
   const [tagInput, setTagInput] = useState("");
+  const [expandedSection, setExpandedSection] = useState("pre"); // "pre", "pro", "pos"
+  const [postType, setPostType] = useState("reels"); // "reels", "carrossel", "imagem_unica"
+  const [postQty, setPostQty] = useState(1);
+  const [personaConfirmed, setPersonaConfirmed] = useState(false);
+  const [agendamentoData, setAgendamentoData] = useState("");
+  const [agendamentoHora, setAgendamentoHora] = useState("");
   const isPremium = isLoggedIn && userEmail !== "free@killerskills.com.br";
 
   const getPromptMestre = () => {
@@ -354,7 +360,12 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
             ...microServicesState,
             tags: tags.join(", ")
           },
-          dosagem: dosagemPersona
+          dosagem: dosagemPersona,
+          post_type: postType,
+          post_qty: postQty,
+          agendamento_data: agendamentoData,
+          agendamento_hora: agendamentoHora,
+          persona_confirmada: personaConfirmed
         })
       });
       setForgeProgress(60);
@@ -1079,7 +1090,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
               </div>
             </div>
 
-            {/* COLUNA LATERAL DIREITA: Painel de Serviços Contratados */}
+            {/* COLUNA LATERAL DIREITA: Definições do Post (Acordeões) */}
             <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
               
               {/* TOPO FIXO: Título Geral */}
@@ -1088,72 +1099,258 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                   className="text-sm uppercase tracking-wider text-white text-center font-extralight"
                   style={{ fontFamily: 'Poppins', fontWeight: 200 }}
                 >
-                  SERVIÇOS CONTRATADOS
+                  Definições do Post
                 </h2>
               </div>
 
-              {/* CONTEÚDO DO PORTAL: Matriz de Serviços Premium / Free */}
+              {/* CONTEÚDO DO PORTAL: 3 Cards Expansíveis (Acordeões) */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-4 flex flex-col justify-between transition-all duration-500"
                   style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
-                  <div className="flex flex-col gap-3 relative z-10 flex-1 overflow-hidden">
+                  <div className="flex flex-col gap-2.5 relative z-10 flex-1 overflow-hidden">
                     {/* Header de Assinatura */}
-                    <div className="text-[10px] font-bold uppercase tracking-widest border-b border-white/10 pb-2 mb-2 text-center flex flex-col gap-1">
+                    <div className="text-[10px] font-bold uppercase tracking-widest border-b border-white/10 pb-2 mb-2 text-center flex flex-col gap-1 select-none shrink-0">
                       <span style={{ color: isPremium ? '#D4AF37' : '#858585' }}>
                         {isPremium ? "★ CONTA PREMIUM ATIVADA ★" : "CONTA GRATUITA (FREE)"}
                       </span>
                     </div>
 
-                    {/* Lista dos 17 Serviços com status de ativação */}
-                    <div className="flex-1 overflow-y-auto custom-scrollbar-visible pr-1.5 flex flex-col gap-2.5 h-[230px]">
-                      {[
-                        { id: 1, name: "01. Elaborar Persona MEVA", premium: true },
-                        { id: 2, name: "02. Persona Integralizada", premium: true },
-                        { id: 3, name: "03. Criar Prompt Mestre", premium: true },
-                        { id: 4, name: "04. Fagulhas Criativas", premium: true },
-                        { id: 5, name: "05. Upload de Mídia", premium: false },
-                        { id: 6, name: "06. Tratamento de Proporção / WebP", premium: false },
-                        { id: 7, name: "07. Criar Flow Manual", premium: false },
-                        { id: 8, name: "08. Simular Flow Manual", premium: false },
-                        { id: 9, name: "09. Curadoria de Grade (Grid AI)", premium: true },
-                        { id: 10, name: "10. Criação de Legendas (IA)", premium: true },
-                        { id: 11, name: "11. Roteiros Reels (Director's)", premium: true },
-                        { id: 12, name: "12. Geração de Imagens (IA)", premium: true },
-                        { id: 13, name: "13. Geração de Vídeos (IA)", premium: true },
-                        { id: 14, name: "14. Flow Automatizado (IA)", premium: true },
-                        { id: 15, name: "15. Simulador Inteligente Flow", premium: true },
-                        { id: 16, name: "16. Publicação Imediata", premium: false },
-                        { id: 17, name: "17. Agendamento Inteligente", premium: true }
-                      ].map((svc) => {
-                        const isActive = isPremium || !svc.premium;
-                        return (
-                          <div 
-                            key={svc.id}
-                            className={`flex items-center justify-between text-left duration-200 transition-all ${
-                              isActive ? "opacity-90" : "opacity-30"
-                            }`}
-                          >
-                            <span className="text-[9px] font-poppins-light truncate max-w-[200px]">
-                              {svc.name}
+                    {/* Acordeão Container */}
+                    <div className="flex-1 flex flex-col gap-2 overflow-y-auto pr-1 custom-scrollbar-visible">
+                      
+                      {/* CARD 1: PRÉ-PRODUÇÃO (DNA Institucional) */}
+                      <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+                        <div 
+                          onClick={() => setExpandedSection(expandedSection === "pre" ? null : "pre")}
+                          className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+                        >
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
+                            A - Pré-Produção
+                          </span>
+                          <span className="text-[8px] text-white/30">
+                            {expandedSection === "pre" ? "▼" : "▶"}
+                          </span>
+                        </div>
+                        
+                        <div className={`transition-all duration-300 overflow-hidden ${
+                          expandedSection === "pre" ? "max-h-[160px] p-3 border-t border-white/5" : "max-h-0"
+                        }`}>
+                          <div className="flex flex-col gap-2">
+                            <span className="text-[8px] uppercase tracking-wider text-white/30">
+                              Validação da Persona (MEVA)
                             </span>
-                            <div className="flex items-center gap-1 shrink-0 select-none">
-                              {isActive ? (
-                                <>
-                                  <span className="text-[8px] font-bold text-brand-blue uppercase">ATIVO</span>
-                                  <span className="text-[10px] text-brand-blue font-bold">✓</span>
-                                </>
+                            
+                            {/* Botão Confirmar Persona */}
+                            <button 
+                              onClick={() => setPersonaConfirmed(!personaConfirmed)}
+                              className={`w-full h-8 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 ${
+                                personaConfirmed 
+                                  ? "bg-brand-blue/10 border border-brand-blue/30 text-brand-blue" 
+                                  : "bg-white/5 border border-white/10 text-white/70 hover:bg-white/10"
+                              }`}
+                            >
+                              {personaConfirmed ? (
+                                <>✓ PERSONA CONFIRMADA</>
                               ) : (
-                                <>
-                                  <span className="text-[8px] font-bold text-white/30 uppercase">TRANCADO</span>
-                                  <span className="text-[8.5px]">🔒</span>
-                                </>
+                                <>✓ CONFIRMAR PERSONA</>
                               )}
+                            </button>
+
+                            {/* Botão Editar Sliders */}
+                            <button 
+                              disabled={!isPremium}
+                              onClick={() => {
+                                setActiveView("servicos");
+                                setOnboardingStep("matriz");
+                              }}
+                              className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
+                                !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
+                              }`}
+                            >
+                              ✎ EDITAR PERSONA {!isPremium && "🔒"}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* CARD 2: PRODUÇÃO (Tipos e Quantidades) */}
+                      <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+                        <div 
+                          onClick={() => setExpandedSection(expandedSection === "pro" ? null : "pro")}
+                          className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+                        >
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
+                            B - Produção
+                          </span>
+                          <span className="text-[8px] text-white/30">
+                            {expandedSection === "pro" ? "▼" : "▶"}
+                          </span>
+                        </div>
+
+                        <div className={`transition-all duration-300 overflow-hidden ${
+                          expandedSection === "pro" ? "max-h-[380px] p-3 border-t border-white/5" : "max-h-0"
+                        }`}>
+                          <div className="flex flex-col gap-3">
+                            {/* Formato de Post */}
+                            <div className="flex flex-col gap-1 text-left">
+                              <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                                Formato de Post
+                              </span>
+                              <select 
+                                value={postType}
+                                onChange={(e) => {
+                                  const t = e.target.value;
+                                  setPostType(t);
+                                  // Ajustar a quantidade padrão conforme o tipo
+                                  if (t === "carrossel") setPostQty(5);
+                                  else setPostQty(1);
+                                }}
+                                className="w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white uppercase tracking-wider focus:outline-none focus:border-brand-blue/30 duration-200"
+                              >
+                                <option value="reels">Reels (Vídeo)</option>
+                                <option value="carrossel">Carrossel (Imagens)</option>
+                                <option value="imagem_unica">Post Único (Imagem)</option>
+                              </select>
+                            </div>
+
+                            {/* Quantidade Dinâmica */}
+                            <div className="flex flex-col gap-1 text-left">
+                              <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                                {postType === "reels" && "Quantidade de Vídeos"}
+                                {postType === "carrossel" && "Quantidade de Slides (Imagens)"}
+                                {postType === "imagem_unica" && "Quantidade de Posts (Imagens)"}
+                              </span>
+                              
+                              <div className="flex items-center gap-1">
+                                <button 
+                                  onClick={() => {
+                                    const min = postType === "carrossel" ? 2 : 1;
+                                    if (postQty > min) setPostQty(prev => prev - 1);
+                                  }}
+                                  className="w-8 h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold font-mono duration-150 active:scale-90"
+                                >
+                                  -
+                                </button>
+                                
+                                <div className="flex-1 h-8 bg-black/60 border border-white/5 rounded-lg flex items-center justify-center text-[10px] font-bold font-mono">
+                                  {postQty} {postType === "carrossel" ? "Slides" : (postQty === 1 ? "Post" : "Posts")}
+                                </div>
+                                
+                                <button 
+                                  onClick={() => {
+                                    if (postQty < 10) setPostQty(prev => prev + 1);
+                                  }}
+                                  className="w-8 h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold font-mono duration-150 active:scale-90"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Estimador de Créditos */}
+                            <div className="bg-black/60 border border-white/5 rounded-lg p-2 flex items-center justify-between text-left select-none">
+                              <div className="flex flex-col">
+                                <span className="text-[7.5px] font-bold text-white/30 uppercase tracking-wider">Custo de Ordem de Serviço</span>
+                                <span className="text-[9px] font-bold text-brand-gold uppercase">
+                                  {/* Reels: 35cr, Carrossel: 25cr, Post Único: 15cr */}
+                                  Custo Estimado: {postType === "reels" ? postQty * 35 : (postType === "carrossel" ? postQty * 25 : postQty * 15)} créditos
+                                </span>
+                              </div>
+                              <span className="text-xs">💰</span>
+                            </div>
+
+                            {/* Detalhes Técnicos dos Serviços do Plano */}
+                            <div className="flex flex-col gap-1.5 pt-2 border-t border-white/5 mt-1 select-none">
+                              <span className="text-[7.5px] font-bold uppercase tracking-wider text-white/30 pl-1 text-left">
+                                Serviços Ativados
+                              </span>
+                              
+                              <div className="max-h-[100px] overflow-y-auto custom-scrollbar-visible pr-1 flex flex-col gap-1.5">
+                                {[
+                                  { id: 1, name: "05. Upload de Mídia (Permanente)", premium: true },
+                                  { id: 2, name: "06. Adequação de Proporção", premium: false },
+                                  { id: 3, name: "07. Criar Flow Manual", premium: false },
+                                  { id: 4, name: "08. Simular Flow Manual", premium: false },
+                                  { id: 5, name: "09. Curadoria de Grade (Grid AI)", premium: true },
+                                  { id: 6, name: "10. Criação de Legendas (IA)", premium: true },
+                                  { id: 7, name: "11. Roteiros Reels (Director's)", premium: true },
+                                  { id: 8, name: "12. Geração de Imagens (IA)", premium: true },
+                                  { id: 9, name: "13. Geração de Vídeos (IA)", premium: true },
+                                  { id: 10, name: "14. Flow Automatizado (IA)", premium: true },
+                                  { id: 11, name: "15. Simulador Inteligente Flow", premium: true }
+                                ].map((svc) => {
+                                  const isActive = isPremium || !svc.premium;
+                                  return (
+                                    <div key={svc.id} className={`flex items-center justify-between text-[8px] transition-all ${isActive ? "opacity-80" : "opacity-20"}`}>
+                                      <span className="truncate max-w-[170px]">{svc.name}</span>
+                                      <span>{isActive ? "✓" : "🔒"}</span>
+                                    </div>
+                                  );
+                                })}
+                              </div>
                             </div>
                           </div>
-                        );
-                      })}
+                        </div>
+                      </div>
+
+                      {/* CARD 3: PÓS-PRODUÇÃO (Fila de Envio) */}
+                      <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+                        <div 
+                          onClick={() => setExpandedSection(expandedSection === "pos" ? null : "pos")}
+                          className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+                        >
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
+                            C - Pós-Produção
+                          </span>
+                          <span className="text-[8px] text-white/30">
+                            {expandedSection === "pos" ? "▼" : "▶"}
+                          </span>
+                        </div>
+
+                        <div className={`transition-all duration-300 overflow-hidden ${
+                          expandedSection === "pos" ? "max-h-[220px] p-3 border-t border-white/5" : "max-h-0"
+                        }`}>
+                          <div className="flex flex-col gap-2.5">
+                            {/* Agendador Toggle */}
+                            <div className="flex flex-col gap-1 text-left">
+                              <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                                Data da Publicação
+                              </span>
+                              <input 
+                                type="date"
+                                disabled={!isPremium}
+                                value={agendamentoData}
+                                onChange={(e) => setExpandedSection("pos") || setAgendamentoData(e.target.value)}
+                                className={`w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white uppercase focus:outline-none focus:border-brand-blue/30 duration-200 ${
+                                  !isPremium ? "opacity-30 cursor-not-allowed" : ""
+                                }`}
+                              />
+                            </div>
+
+                            <div className="flex flex-col gap-1 text-left">
+                              <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                                Hora da Publicação
+                              </span>
+                              <input 
+                                type="time"
+                                disabled={!isPremium}
+                                value={agendamentoHora}
+                                onChange={(e) => setExpandedSection("pos") || setAgendamentoHora(e.target.value)}
+                                className={`w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white focus:outline-none focus:border-brand-blue/30 duration-200 ${
+                                  !isPremium ? "opacity-30 cursor-not-allowed" : ""
+                                }`}
+                              />
+                            </div>
+                            
+                            <div className="text-[7.5px] text-white/20 uppercase tracking-widest pl-1 text-left">
+                              {isPremium ? "✓ Conexão estável com VPS PM2" : "🔒 Agendamento restrito ao Premium"}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
 

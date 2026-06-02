@@ -3,7 +3,7 @@ import sys
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Any, Union
 from datetime import datetime
 
 # Ajustando o caminho do Python para carregar o módulo killer_skills com suporte a caminhos novos e legados
@@ -60,8 +60,13 @@ class AnalysisRequest(BaseModel):
 class ForgeRequest(BaseModel):
     persona_title: str
     persona_tag: str
-    micro_services: Dict[str, bool]
+    micro_services: Dict[str, Any]
     dosagem: Optional[Dict[str, float]] = None
+    post_type: Optional[str] = None
+    post_qty: Optional[int] = None
+    agendamento_data: Optional[str] = None
+    agendamento_hora: Optional[str] = None
+    persona_confirmada: Optional[bool] = None
 
 # --- PERSONAS DATA SEED ---
 PESSOAL_DATA = [
@@ -165,6 +170,12 @@ def forge_order(req: ForgeRequest):
         sorted_meva = sorted(req.dosagem.items(), key=lambda x: x[1], reverse=True)
         meva_signature_yaml = "\n" + "\n".join([f"      {k.upper()}: {v}%" for k, v in sorted_meva])
 
+    # Calcula custo estimado com base no tipo
+    qty = req.post_qty if req.post_qty is not None else 1
+    t_type = req.post_type or "reels"
+    unit_cost = 35 if t_type == "reels" else (25 if t_type == "carrossel" else 15)
+    total_cost = qty * unit_cost
+
     manifest_yaml = f"""---
 ORDEM_DE_SERVICO:
   ID: "{os_id}"
@@ -177,15 +188,23 @@ ORDEM_DE_SERVICO:
     
   ASSINATURA_ARQUETIPICA_MEVA: {meva_signature_yaml}
   
-  MICRO_SERVICOS_SOLICITADOS:
-    - Postagem Automática: {"ATIVO 🟢" if req.micro_services.get("post_automatica") else "INATIVO 🔴"}
-    - Agendamento de Post: {"ATIVO 🟢" if req.micro_services.get("agendamento") else "INATIVO 🔴"}
-    - Tratamento de Imagens: {"ATIVO 🟢" if req.micro_services.get("tratamento") else "INATIVO 🔴"}
-    - Criação de Flow: {"ATIVO 🟢" if req.micro_services.get("criacao_flow") else "INATIVO 🔴"}
-    - Criação de Textos: {"ATIVO 🟢" if req.micro_services.get("criacao_textos") else "INATIVO 🔴"}
-    - Criação de Imagem: {"ATIVO 🟢" if req.micro_services.get("criacao_imagem") else "INATIVO 🔴"}
-    - Criação de Vídeo: {"ATIVO 🟢" if req.micro_services.get("criacao_video") else "INATIVO 🔴"}
-    - Compressor WebP (Sistema): ATIVO 🟢 (Padrão de Infraestrutura)
+  DEFINICOES_DO_POST:
+    FORMATO_FISICO: "{t_type.upper()}"
+    QUANTIDADE_SOLICITADA: {qty}
+    CUSTO_ESTIMADO: "{total_cost} créditos"
+    PERSONA_CONFIRMADA: {"SIM (Selo Ontológico Ativo) ✓" if req.persona_confirmada else "NÃO (Sombra Ativa) 🔴"}
+    LOGISTICA_ENTREGA: "{f'{req.agendamento_data} às {req.agendamento_hora}' if req.agendamento_data else 'IMEDIATO (Publicação VPS Contabo)'}"
+    TAGS_TATEIS_DIRECIONAMENTO: "{req.micro_services.get('tags', 'N/A')}"
+
+  MICRO_SERVICOS_AUTENTICADOS:
+    - Postagem Automática: {"ATIVO 🟢" if req.persona_confirmada else "PENDENTE 🟡"}
+    - Agendamento de Post: {"ATIVO 🟢" if req.agendamento_data else "INATIVO 🔴"}
+    - Curadoria de Grade (Grid AI): ATIVO 🟢 (Plano Premium)
+    - Roteirização Reels (Director's Cut): ATIVO 🟢 (Plano Premium)
+    - Criação de Legendas: ATIVO 🟢 (Plano Premium)
+    - Geração de Imagem: ATIVO 🟢 (Plano Premium)
+    - Geração de Vídeo: ATIVO 🟢 (Plano Premium)
+    - Compressor WebP Local: ATIVO 🟢 (Padrão de Infraestrutura)
   
   ORQUESTRADOR: "Central-AI-v4"
   STATUS_ORDEM: "PRONTO_PARA_FORJA"
