@@ -262,7 +262,6 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
   
   // Lista de 24 Personas
   const [personas, setPersonas] = useState([]);
-  const [showForgeModal, setShowForgeModal] = useState(false);
   const [forgeProgress, setForgeProgress] = useState(0);
   const [forgeData, setForgeData] = useState(null);
 
@@ -402,7 +401,8 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
     const archTop2 = ARCHETYPES.find(a => a.id === sortedDosagens[1][0]) || ARCHETYPES[1];
     const combinedTitle = `${archTop1.name.toUpperCase()} / ${archTop2.name.toUpperCase()}`;
 
-    setShowForgeModal(true);
+    // Transiciona imediatamente para a Tela 3 (KS Studio) e ativa o progresso reativo da OS
+    setActiveView("storyboard");
     setForgeProgress(20);
 
     try {
@@ -433,11 +433,9 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
     }
   };
 
-  const handleForgeClose = () => {
-    setShowForgeModal(false);
+  const handleSimularEsteira = () => {
     setForgeProgress(0);
     setForgeData(null);
-    setActiveView("storyboard");
   };
 
   const scrollPersona = (direction) => {
@@ -1511,16 +1509,63 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
 
             {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
             <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30">
-              {/* Visor Interno de Reels Vazio */}
-              <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 relative overflow-hidden z-10 select-none text-center">
-                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center mb-4">
-                  <Sparkles className="w-5 h-5 text-brand-blue" />
+              {/* Visor Interno: Modo Forja/Manifesto ou Modo Padrão */}
+              {forgeProgress > 0 ? (
+                <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-between items-center p-5 relative overflow-hidden z-10 text-center">
+                  <div className="flex flex-col items-center gap-3 mt-4 w-full shrink-0">
+                    <Cpu className="w-9 h-9 text-brand-gold animate-pulse shrink-0" />
+                    <div>
+                      <h2 
+                        className="text-sm uppercase tracking-wider text-white text-center"
+                        style={{ fontFamily: 'Poppins', fontWeight: 300 }}
+                      >
+                        A Criação está ativada...
+                      </h2>
+                      <p className="text-[7px] font-bold text-brand-blue uppercase tracking-widest mt-1">Orquestrador Central assimilando agentes</p>
+                    </div>
+
+                    {/* Barra de Progresso */}
+                    <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden border border-white/5 mt-1 shrink-0">
+                      <div 
+                        className="bg-brand-gold h-full duration-500 transition-all" 
+                        style={{ width: `${forgeProgress}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Console de Saída YAML do Manifest */}
+                  {forgeData ? (
+                    <div className="w-full flex-1 bg-[#050507] border border-white/10 rounded-lg p-3 text-[8px] font-mono text-[#8A95A5] overflow-y-auto text-left whitespace-pre-wrap leading-normal mt-3 mb-3 select-text scrollbar-thin">
+                      {forgeData.manifest}
+                    </div>
+                  ) : (
+                    <div className="flex-1 flex items-center justify-center text-white/30 text-[8px] uppercase tracking-widest select-none">
+                      Compilando ordem de serviço...
+                    </div>
+                  )}
+
+                  {/* Botão de Conclusão e Simulação */}
+                  {forgeProgress === 100 && (
+                    <button 
+                      onClick={handleSimularEsteira}
+                      className="w-full h-10 bg-brand-gold text-black font-extrabold text-[9px] tracking-widest rounded-lg hover:scale-[1.02] active:scale-95 duration-200 shadow-lg shadow-brand-gold/15 shrink-0 uppercase"
+                    >
+                      Simular Esteira em Prod ➔
+                    </button>
+                  )}
                 </div>
-                <h3 className="text-xs font-black uppercase tracking-widest text-white mb-2">KS STUDIO</h3>
-                <p className="text-[9px] text-white/40 leading-relaxed uppercase tracking-wider max-w-[200px]">
-                  Direção estética e simulação de reels. Acesse os painéis laterais para calibração.
-                </p>
-              </div>
+              ) : (
+                /* Visor Interno de Reels Vazio (Padrão) */
+                <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 relative overflow-hidden z-10 select-none text-center">
+                  <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center mb-4">
+                    <Sparkles className="w-5 h-5 text-brand-blue" />
+                  </div>
+                  <h3 className="text-xs font-black uppercase tracking-widest text-white mb-2">KS STUDIO</h3>
+                  <p className="text-[9px] text-white/40 leading-relaxed uppercase tracking-wider max-w-[200px]">
+                    Direção estética e simulação de reels. Acesse os painéis laterais para calibração.
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Área com o Card Vazio) */}
@@ -1620,43 +1665,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
         )}
       </div>
 
-      {/* 3. MODAL DE PROGRESSO DA FORJA DE PROMPTS */}
-      {showForgeModal && (
-        <div className="fixed inset-0 bg-black/90 flex justify-center items-center z-50 animate-fade-in p-6">
-          <div className="bg-[#0A0A0C] border border-white/15 rounded-lg p-8 max-w-lg w-full flex flex-col items-center gap-6 shadow-2xl">
-            <Cpu className="w-14 h-14 text-brand-gold active-pulse" />
-            <div className="text-center">
-              <h2 className="text-2xl font-bold">A Criação está ativada...</h2>
-              <p className="text-[10px] font-bold text-brand-blue uppercase tracking-widest mt-1">Orquestrador Central assimilando agentes</p>
-            </div>
 
-            {/* Barra de Progresso */}
-            <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden border border-white/5">
-              <div 
-                className="bg-brand-gold h-full duration-500 transition-all" 
-                style={{ width: `${forgeProgress}%` }}
-              />
-            </div>
-
-            {/* Console de Saída YAML do Manifest */}
-            {forgeData && (
-              <div className="w-full bg-[#050507] border border-white/10 rounded-lg p-5 text-[10px] font-mono text-[#8A95A5] max-h-60 overflow-y-auto whitespace-pre-wrap leading-relaxed">
-                {forgeData.manifest}
-              </div>
-            )}
-
-            {/* Ações Finais */}
-            {forgeProgress === 100 && (
-              <button 
-                onClick={handleForgeClose}
-                className="w-full h-12 bg-brand-gold text-black font-extrabold text-xs tracking-wider rounded-lg hover:scale-105 active:scale-95 duration-200 shadow-lg shadow-brand-gold/15"
-              >
-                CONVOCAR AGENTE E CONCLUIR
-              </button>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
