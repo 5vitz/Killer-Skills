@@ -226,6 +226,7 @@ export default function App() {
   const [personaConfirmed, setPersonaConfirmed] = useState(false);
   const [agendamentoData, setAgendamentoData] = useState("");
   const [agendamentoHora, setAgendamentoHora] = useState("");
+  const [loteProducao, setLoteProducao] = useState([]);
   const isPremium = isLoggedIn && userEmail !== "free@killerskills.com.br";
 
   const getPromptMestre = () => {
@@ -272,6 +273,38 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
       .then(data => setPersonas(data))
       .catch(err => console.error("Erro ao carregar personas do backend:", err));
   }, []);
+
+  // --- LÓGICA DE LOTES ACUMULADOS ---
+  const handleAdicionarAoLote = () => {
+    if (postQty === 0) {
+      alert("Por favor, selecione uma quantidade maior que 0 antes de adicionar à esteira!");
+      return;
+    }
+
+    const novoItem = {
+      id: Date.now(),
+      tipo: postType,
+      quantidade: postQty,
+      tags: [...tags],
+      agendamento: {
+        data: agendamentoData,
+        hora: agendamentoHora
+      },
+      custo: postType === "reels" ? postQty * 35 : (postType === "carrossel" ? postQty * 25 : postQty * 15)
+    };
+
+    setLoteProducao(prev => [...prev, novoItem]);
+
+    // Limpa campos locais de insumo para permitir a próxima inserção
+    setPostQty(0);
+    setTags([]);
+    setAgendamentoData("");
+    setAgendamentoHora("");
+  };
+
+  const handleRemoverDoLote = (id) => {
+    setLoteProducao(prev => prev.filter(item => item.id !== id));
+  };
 
   // --- LÓGICA DE AÇÕES ---
   const triggerGoogleAuthSequence = (email = "artz.genera@gmail.com") => {
@@ -341,6 +374,29 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
   };
 
   const triggerForge = async () => {
+    let loteEnvio = [...loteProducao];
+    
+    // Salvaguarda: se houver configuração ativa na tela que não foi adicionada, inclui no lote final
+    if (postQty > 0) {
+      const itemPendente = {
+        id: Date.now(),
+        tipo: postType,
+        quantidade: postQty,
+        tags: [...tags],
+        agendamento: {
+          data: agendamentoData,
+          hora: agendamentoHora
+        },
+        custo: postType === "reels" ? postQty * 35 : (postType === "carrossel" ? postQty * 25 : postQty * 15)
+      };
+      loteEnvio.push(itemPendente);
+    }
+
+    if (loteEnvio.length === 0) {
+      alert("Sua esteira de produção está vazia! Configure um post e clique em Adicionar à Esteira primeiro.");
+      return;
+    }
+
     const sortedDosagens = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
     const archTop1 = ARCHETYPES.find(a => a.id === sortedDosagens[0][0]) || ARCHETYPES[0];
     const archTop2 = ARCHETYPES.find(a => a.id === sortedDosagens[1][0]) || ARCHETYPES[1];
@@ -357,14 +413,10 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
           persona_title: combinedTitle,
           persona_tag: isPremium ? "Premium" : "Free",
           micro_services: {
-            ...microServicesState,
-            tags: tags.join(", ")
+            ...microServicesState
           },
           dosagem: dosagemPersona,
-          post_type: postType,
-          post_qty: postQty,
-          agendamento_data: agendamentoData,
-          agendamento_hora: agendamentoHora,
+          lote: loteEnvio, // Envia o lote completo de posts estruturados!
           persona_confirmada: personaConfirmed
         })
       });
@@ -372,6 +424,9 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
       const data = await res.json();
       setForgeProgress(100);
       setForgeData(data);
+      
+      // Limpa o lote local após emissão bem-sucedida
+      setLoteProducao([]);
     } catch (e) {
       console.error(e);
       setForgeProgress(100);
@@ -1060,7 +1115,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                   <div className="flex flex-col">
                     <span className="text-[7px] font-bold text-brand-gold/80 uppercase tracking-wider">Custo da Ordem de Serviço</span>
                     <span className="text-[9.5px] font-black text-brand-gold uppercase tracking-wide">
-                      Créditos Consumidos: {postQty === 0 ? 0 : (postType === "reels" ? postQty * 35 : (postType === "carrossel" ? postQty * 25 : postQty * 15))} cr
+                      Créditos Consumidos: {loteProducao.reduce((sum, item) => sum + item.custo, 0) + (postQty === 0 ? 0 : (postType === "reels" ? postQty * 35 : (postType === "carrossel" ? postQty * 25 : postQty * 15)))} cr
                     </span>
                   </div>
                   <span className="text-sm select-none">💰</span>
@@ -1069,9 +1124,9 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                 {/* Botão de Emissão de OS na base */}
                 <button 
                   onClick={triggerForge}
-                  disabled={postQty === 0}
+                  disabled={loteProducao.length === 0 && postQty === 0}
                   className={`w-full h-10 rounded-lg text-black text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 shrink-0 shadow-lg duration-200 ${
-                    postQty === 0 
+                    loteProducao.length === 0 && postQty === 0 
                       ? "bg-white/5 border border-white/10 text-white/20 cursor-not-allowed active:scale-100" 
                       : "bg-[#EFE5D3] hover:bg-[#F7EFE2] active:scale-95 cursor-pointer"
                   }`}
@@ -1174,7 +1229,7 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                         </div>
 
                         <div className={`transition-all duration-300 overflow-hidden ${
-                          expandedSection === "pro" ? "max-h-[350px] p-3 border-t border-white/5" : "max-h-0"
+                          expandedSection === "pro" ? "max-h-[480px] p-3 border-t border-white/5" : "max-h-0"
                         }`}>
                           <div className="flex flex-col gap-3">
                             {/* Formato de Post */}
@@ -1284,6 +1339,61 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                                 />
                               </div>
                             </div>
+
+                            {/* Botão de Adicionar à Esteira */}
+                            <button 
+                              onClick={handleAdicionarAoLote}
+                              disabled={postQty === 0}
+                              className={`w-full h-9 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 mt-3 select-none ${
+                                postQty === 0 
+                                  ? "bg-white/5 border border-white/10 text-white/20 cursor-not-allowed" 
+                                  : "bg-white/10 border border-white/20 hover:bg-white/15 text-white cursor-pointer active:scale-95"
+                              }`}
+                            >
+                              Adicionar à Esteira ➔
+                            </button>
+
+                            {/* Fila do Lote Acumulado */}
+                            {loteProducao.length > 0 && (
+                              <div className="flex flex-col gap-2 border-t border-white/5 pt-3 mt-3">
+                                <div className="flex justify-between items-center px-1">
+                                  <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                                    Lote Acumulado na Esteira ({loteProducao.length})
+                                  </span>
+                                  <span className="text-[8px] uppercase tracking-wider text-white/15">Fila</span>
+                                </div>
+                                <div className="flex flex-col gap-1.5 max-h-[140px] overflow-y-auto custom-scrollbar-visible pr-1">
+                                  {loteProducao.map((item) => (
+                                    <div 
+                                      key={item.id} 
+                                      className="bg-white/5 border border-white/10 rounded-lg p-2 flex justify-between items-center text-[9px] text-white/80 animate-fade-in"
+                                    >
+                                      <div className="flex flex-col gap-0.5 text-left truncate">
+                                        <span className="font-bold text-[#EFE5D3] uppercase tracking-wider">
+                                          {item.quantidade}x {item.tipo === "reels" ? "Reels" : (item.tipo === "carrossel" ? "Carrossel" : "Post Único")}
+                                        </span>
+                                        {item.tags.length > 0 && (
+                                          <span className="text-[7.5px] text-white/30 truncate">
+                                            Tags: {item.tags.join(", ")}
+                                          </span>
+                                        )}
+                                        {(item.agendamento.data || item.agendamento.hora) && (
+                                          <span className="text-[7.5px] text-brand-gold/70 font-semibold uppercase tracking-wider">
+                                            📅 {item.agendamento.data || "Sem data"} • ⏰ {item.agendamento.hora || "Sem hora"}
+                                          </span>
+                                        )}
+                                      </div>
+                                      <button 
+                                        onClick={() => handleRemoverDoLote(item.id)}
+                                        className="p-1 hover:text-brand-pink duration-150 font-bold text-xs shrink-0 select-none"
+                                      >
+                                        ✕
+                                      </button>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
