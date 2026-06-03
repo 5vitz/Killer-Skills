@@ -54,50 +54,52 @@ Abaixo segue a identidade conceitual e filosófica de cada um dos 12 arquétipos
 *   **🏆 O Governante:** Líder natural. Assume autoridade para gerar estabilidade e ordem. *(Sombra: Rigidez extrema e autoritarismo)*. Metáfora: Trono de basalto negro minimalista, metais polidos e reflexos dourados secos.
 ---
 
-### B.4. A Matriz MEVA 12x10 (Os 120 Textos de Gradação Decimais)
-Cada um dos 12 arquétipos possui **10 textos autorais e fixos**, mapeando faixas decimais de intensidade de dosagem. O sistema lê o valor do slider (0% a 100%) e o converte em um bracket correspondente:
-* **Fórmula de Bracket:** $\text{Bracket} = \min\left(10, \left\lfloor \frac{\text{Percentual}}{10} \right\rfloor + 1\right)$
-  * **Brackets de Gradação:**
-    * `0% - 10%`: **Texto 01** (Sombra/Carência Crítica: "A ausência deste arquétipo em você pode estar te levando a caminhos perigosos...")
-    * `11% - 20%`: **Texto 02**
-    * `21% - 30%`: **Texto 03**
-    * `31% - 40%`: **Texto 04**
-    * `41% - 50%`: **Texto 05**
-    * `51% - 60%`: **Texto 06**
-    * `61% - 70%`: **Texto 07**
-    * `71% - 80%`: **Texto 08**
-    * `81% - 90%`: **Texto 09**
-    * `91% - 100%`: **Texto 10** (Integração Total/Potência Máxima: "A maestria plena deste arquétipo transborda em...")
+### B.4. A Tríade Harmônica MEVA (Série Harmônica de Identidade)
+A Persona resultante da dosagem MEVA é estruturada a partir da analogia da **Série Harmônica Musical**, onde os 3 primeiros harmônicos (Tônica, Terça e Quinta) definem a essência de todo o campo harmônico e a melodia da marca digital:
+*   **1. O Arquétipo Principal (Tônica - 1º Lugar):** Responsável pelo **TEXTO / Significado** (O que é dito, a copy principal, a mensagem de posicionamento e o tom essencial de voz da Persona).
+*   **2. O Arquétipo Secundário (Terça - 2º Lugar):** Responsável pelo **CONTEXTO / Cenário** (Onde acontece, a ambientação da mídia, a atmosfera física e o estilo estético de enquadramento).
+*   **3. O Arquétipo Terciário (Quinta - 3º Lugar):** Responsável pelos **ELEMENTOS / Objetos de cena** (Quais adereços, detalhes visuais ou mecânicas físicas interativas aparecem no storyboard).
 
-### B.5. O Motor de Compilação Narrativa da Persona Híbrida
-* **Geração de Diagnóstico:** Quando o usuário clica em `ANALISAR RESULTADO`, o ecossistema executa a compilação do relatório final de Persona.
-* **Ordenação de Relevância:** Os arquétipos são ordenados de forma decrescente de acordo com o seu percentual (dosagem). O encadeamento do texto final começa pelas **Forças Dominantes (Top 1 e Top 2)**, passando pelos **Co-Pilotos de Expressão (Valores Intermediários)** e concluindo com o mapeamento das **Ausências e Sombras (Valores de Baixa Dosagem)**.
-*   **Assinatura de Título Duplo Híbrido:** O título oficial da Persona será a combinação em caixa alta dos dois maiores percentuais (ex: `SÁBIO / EXPLORADOR`), proporcionando uma flexibilidade narrativa premium e adaptabilidade no tom (o "jogo de cintura" interpretativo).
+#### As Tags de Identidade de Uma Palavra:
+Para governar os inputs rápidos da IA de forma determinística, cada arquétipo é resumido em uma única tag de propriedade essencial:
+1.  **Herói** = Superação
+2.  **Sábio** = Verdade
+3.  **Mago** = Transformação
+4.  **Criador** = Originalidade
+5.  **Explorador** = Liberdade
+6.  **Rebelde** = Ruptura
+7.  **Cuidador** = Acolhimento
+8.  **Amante** = Conexão
+9.  **Governante** = Autoridade
+10. **Homem Comum** = Realismo
+11. **Inocente** = Simplicidade
+12. **Tolo** = Leveza
 
-### B.6. O Direcionamento Genético de Mídia & Próxima Fase
-* **O DNA da Criação:** Fica estabelecido como lei arquitetural que **todo o direcionamento de criação de mídias (imagens, vídeos, textos e títulos) deriva diretamente do Prompt Conceitual da Persona**, que é o resultado direto da calibração fina e dos pesos dos arquétipos na matriz MEVA. O Prompt é o pré-requisito genético de toda a engine.
-* **Ordem de Desenvolvimento:** A Categoria Pessoal está plenamente consolidada e homologada em seu pipeline estético e funcional. A **Categoria Profissional começará a ser desenvolvida na sequência imediata**, utilizando esta mesma infraestrutura e pipeline genético de coprodutores AI.
+### B.5. Regras Lógicas de Desempate, Corte (< 50%) e Colorido
+Para evitar ruídos conceituais ("estética da subtração"), o ecossistema de geração de prompts adota as seguintes regras de negócio estáveis:
+*   **A Regra de Desprezo (< 50%):** Apenas arquétipos calibrados a pelo menos 50% de intensidade podem atuar como moduladores estruturais da Persona.
+    *   Se a Terça (Contexto) estiver abaixo de 50%, o cenário será neutro e sem ruídos conceituais.
+    *   Se a Quinta (Elementos) estiver abaixo de 50%, o storyboard não terá adereços simbólicos desse arquétipo, mantendo a cena minimalista.
+*   **Regra de Desempate no Topo (Tônica / Terça):** Caso haja empate no 1º e 2º lugares, a engine atribui um como Texto e outro como Contexto baseada na ordenação natural determinística de código (índice no array de arquétipos).
+*   **Regra de Desempate no Meio (Terça / Quinta):** Caso o empate seja entre o 2º e 3º lugares, a engine atribui um como Contexto e o outro como Elementos.
+*   **Regra de Desempate na Base (Quinta):** Se houver empate no 3º lugar (ex: Mago 50% e Criador 50%), o prompt de Elementos do storyboard será enriquecido com a **união dos elementos de cena de ambos os arquétipos**.
+*   **A Matização do Colorido (Subtoms):** Todos os arquétipos classificados abaixo da 3ª posição, ou desprezados por estarem abaixo do limite de 50%, serão passados para a IA como instruções secundárias de nuances ("colorido sutil de voz e atitude"), sem interferir na física principal da cena.
 
-### B.7. A Matriz de Serviços do Ecossistema (17 Serviços Disponíveis)
+### B.6. O Novo Diagnóstico "Myself" / "Ourselves" Dinâmico
+O relatório de Persona (Myself para contas Pessoais, Ourselves para marcas Profissionais) abandona o texto estático e passa a ser gerado de forma **100% dinâmica** com base na Tríade Harmônica ativada do usuário. Ele é compactado no tamanho exato de um parágrafo curto de 4 a 6 linhas físicas, posicionado de forma estática e sem scroll na Coluna 1 da interface do cockpit.
+
+### B.7. O Direcionamento Genético de Mídia & Próxima Fase
+*   **O DNA da Criação:** Todo o direcionamento de mídias do cockpit (fotos, vídeos, legendas, roteiros) deriva diretamente da combinação sintática da Tríade Harmônica (Tônica - Texto, Terça - Contexto, Quinta - Elementos).
+*   **Ordem de Desenvolvimento:** A Categoria Pessoal está plenamente consolidada e homologada. A Categoria Profissional segue este mesmo pipeline genético harmônico.
+
+### B.8. A Matriz de Serviços do Ecossistema (17 Serviços Disponíveis)
 Para governar o ecossistema comercial e de engenharia com precisão milimétrica, as entregas da aplicação são divididas em 17 serviços granulares organizados em 3 macro-fases:
 
 #### **A. PRÉ-PRODUÇÃO (Módulo Onboarding / Calibração — Tela 1C)**
 1.  **Elaborar Persona — MEVA:** A calibração percentual fina (0% a 100%) dos 12 sliders arquetípicos arrolados no inconsciente coletivo.
-2.  **Persona Integralizada:** A compilação narrativa estática e poética do diagnóstico da persona escrita na primeira pessoa (`MYSELF` para contas Pessoais ou `OURSELVES` para corporativas).
-3.  **Criar Prompt Mestre (DNA Arquetípico):** A geração automatizada e em lote do prompt conceitual profundo derivado do vetor contínuo MEVA. O mesmo script de backend que captura a calibração dos sliders processa simultaneamente o diagnóstico Myself/Ourselves e o Prompt Mestre.
-4.  **Fagulhas Criativas Semanais (AI Creative Sparks):** Geração inteligente baseada no conflito Luz e Sombra da Persona calibrada, entregando 3 a 5 ideias temáticas semanais prontas para desbloquear o usuário do bloqueio criativo.
-
-#### **B. PRODUÇÃO (Módulo Cockpit — Tela 2A)**
-##### **B.1. MANUAL (Universal / Habilitados no Plano FREE)**
-5.  **Upload de Mídia:** Envio de imagens e vídeos brutos do cotidiano (com **Armazenamento Permanente** no plano Premium, e **Armazenamento Temporário de 12 dias** no plano Free para controle rígido de armazenamento na VPS).
-6.  **Tratamento Físico de Mídias (Proporção e WebP):** Serviço universal e gratuito que realiza a adequação de proporção (9:16 / 1:1) e conversão para o formato levíssimo `.webp` client-side via canvas do navegador, poupando dados do servidor e protegendo a marca Killer Skills contra publicações desconfiguradas.
-7.  **Criar Flow Manual:** Organização física e manual das mídias na grade de postagem.
-8.  **Simular Flow Manual:** Reprodução da visualização estática do feed local montado pelo usuário.
-
-##### **B.2. COM IA (Exclusivos do Plano Premium)**
-9.  **Curadoria Estética de Grade (Grid Curator AI):** Captura dos últimos 6 a 9 posts reais da conta de Instagram do cliente e análise cromática da nova imagem gerada, sugerindo harmonizações de paletas para manter o prestígio visual intocável da grade.
-10. **Criação de Textos e Legendas Lapidadas:** Redação de copies persuasivas e legendas de luxo orientadas pelo Prompt Mestre e pelas tags de modulação.
-11. **Roteirização de Cena (AI Director’s Cut):** Storyboard estruturado de Reels com ganchos de retenção de 3 segundos, áudio de voiceover e direções de gravação para câmera.
+2.  **Persona Integralizada:** A compilação narrativa dinâmica e poética do diagnóstico da persona escrita na primeira pessoa (`MYSELF` para contas Pessoais ou `OURSELVES` para corporativas).
+3.  **Criar Prompt Mestre (DNA Arquetípico):** A geração automatizada e em lote do prompt conceitual profundo derivado da Tríade Harmônica MEVA.
+4.  **Fagulhas Criativas Semanais (AI Creative Sparks):** Geração inteligente baseada na Tríade calibrada, entregando 3 a 5 ideias temáticas semanais prontas para desbloquear o usuário do bloqueio criativo.
 12. **Criação de Imagens Estéticas:** Geração de novas imagens artísticas conceituais baseadas no prompt.
 13. **Criação de Vídeos Dinâmicos:** Animação e geração de vídeos cinemáticos sob medida.
 14. **Criação de Flow Automatizado:** Arranjo sequencial inteligente de posts e carrosséis gerado por IA.

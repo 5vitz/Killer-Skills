@@ -20,18 +20,18 @@ const SEED_IMAGES = [
 ];
 
 const ARCHETYPES = [
-  { id: 'sabio', name: 'Sábio', desc: 'O Sábio é aquela parte de você que busca silenciar o barulho do mundo para escutar a própria verdade. Ele representa a sua capacidade de refletir antes de agir, de observar além do óbvio e de valorizar o aprendizado constante. Ter esse lado ativo significa que você encontra paz na quietude, prefere conversas profundas e busca entender a lógica das coisas. Mas cuidado: o excesso de racionalidade pode afastar você das suas emoções. Use sua sabedoria para iluminar o seu caminho, mantendo sempre o coração aberto.', color: '#D4AF37', shadow: 'Sombra: Isolamento na frieza da mente e distanciamento das emoções.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp' },
-  { id: 'inocente', name: 'Inocente', desc: 'O Inocente é aquela parte de você que escolhe enxergar a beleza e a pureza nas coisas simples da vida. Ele representa o seu otimismo espontâneo, a capacidade de confiar e a busca constante pela felicidade leve e sem complicações. Ter esse lado forte significa que você mantém viva a fé no futuro e o dom de recomeçar sempre com o coração limpo. Mas atenção: a busca por um mundo perfeito pode fazer você negar realidades difíceis. Preserve sua leveza, mantendo os pés firmes no chão.', color: '#4D90FE', shadow: 'Sombra: Ingenuidade excessiva e negação de realidades dolorosas.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp' },
-  { id: 'explorador', name: 'Explorador', desc: 'O Explorador é aquela chama interna que impulsiona você a buscar liberdade e a descobrir novos caminhos na jornada da vida. Ele representa a sua coragem de romper a rotina, o desejo de autenticidade e o amor pela independência. Ter esse lado ativo significa que você se renova com o desconhecido e detesta qualquer sentimento de aprisionamento. Mas cuidado: o medo de criar raízes pode gerar uma eterna inconstância. Lembre-se de que a maior de todas as viagens acontece dentro de você.', color: '#34A853', shadow: 'Sombra: Inconstância e dispersão pelo medo de criar raízes.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp' },
-  { id: 'cuidador', name: 'Cuidador', desc: 'O Cuidador é aquela força amorosa em você que encontra propósito em apoiar, proteger e nutrir a vida ao seu redor. Ele representa a sua generosidade natural, a compaixão sincera e a capacidade de criar ambientes seguros e acolhedores. Ter esse lado ativo significa que o bem-estar do outro é sagrado para você. Mas preste atenção: doar-se sem limites pode levar ao esquecimento das suas próprias necessidades. Lembre-se de que cuidar de si mesmo é o primeiro passo para poder cuidar do mundo.', color: '#EA4335', shadow: 'Sombra: Martírio e esgotamento por negligenciar a si próprio.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp' },
-  { id: 'heroi', name: 'Herói', desc: 'O Herói é aquela força guerreira em você que se recusa a desistir diante dos obstáculos e das injustiças. Ele representa a sua determinação obstinada, a coragem de assumir batalhas difíceis e a busca constante por superação pessoal. Ter esse lado ativo significa que você se fortalece no desafio e busca proteger quem ama. Mas fique alerta: a necessidade constante de lutar pode transformá-lo em alguém rígido ou obcecado por vitórias. Aprenda que a verdadeira força também sabe quando descansar.', color: '#E06666', shadow: 'Sombra: Rigor excessivo e obsessão por estar sempre em combate.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp' },
-  { id: 'mago', name: 'Mago', desc: 'O Mago é aquela parte intuitiva de você que acredita que a realidade pode ser transformada a partir de uma visão interna profunda. Ele representa a sua capacidade de manifestar sonhos, de compreender o invisível e de catalisar mudanças profundas na vida cotidiana. Ter esse lado ativo significa que você enxerga conexões onde outros veem caos e busca criar o extraordinário. Mas atenção: o apego ao controle mental pode afastar você da simplicidade do mundo físico. Use sua magia com os pés no chão.', color: '#93C47D', shadow: 'Sombra: Manipulação da realidade e distanciamento do mundo real.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp' },
-  { id: 'rebelde', name: 'Rebelde', desc: 'O Rebelde é aquela voz autêntica em você que questiona as regras vazias e se recusa a viver sob moldes impostos pelos outros. Ele representa a sua liberdade de pensar diferente, a coragem de quebrar padrões obsoletos e o desejo de revolução pessoal. Ter esse lado ativo significa que você valoriza a sua individualidade acima de tudo e busca a mudança real. Mas cuidado: a revolta cega pode levar ao isolamento ou à destruição sem propósito. Direcione sua força para construir o novo.', color: '#F6B26B', shadow: 'Sombra: Rebeldia vazia e destruição sem causa legítima.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp' },
-  { id: 'criador', name: 'Criador', desc: 'O Criador é aquela força expressiva em você que sente a necessidade urgente de dar forma à imaginação e de trazer algo novo ao mundo. Ele representa o seu impulso artístico, a busca pela originalidade e o desejo de deixar uma marca pessoal duradoura. Ter esse lado ativo significa que você enxerga potencial criativo em cada detalhe da vida. Mas preste atenção: o perfeccionismo extremo pode paralisar as suas mãos e impedir você de entregar sua arte. Liberte suas criações com amor.', color: '#FFD966', shadow: 'Sombra: Perfeccionismo extremo que paralisa e impede a entrega.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp' },
-  { id: 'amante', name: 'Amante', desc: 'O Amante é aquela energia sensível em você que busca conexão profunda, beleza e harmonia em todas as relações humanas. Ele representa a sua capacidade de se entregar com paixão, de valorizar o afeto e de viver com intensidade sensorial e emocional. Ter esse lado ativo significa que você coloca o amor e a beleza no centro do seu caminho. Mas cuidado: o medo de ficar só ou de ser rejeitado pode fazer você anular a sua própria identidade. Lembre-se de amar a si mesmo primeiro.', color: '#C27BA0', shadow: 'Sombra: Anulação pessoal e perda de identidade para agradar.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp' },
-  { id: 'tolo', name: 'Tolo', desc: 'O Tolo é aquela parte leve e espontânea de você que escolhe viver o momento presente com alegria, humor e diversão contagiante. Ele representa a sua capacidade de rir de si mesmo, de simplificar o que parece pesado e de trazer sorrisos ao dia a dia. Ter esse lado active significa que você valoriza a leveza e sabe que a vida é um jogo belo. Mas atenção: usar o riso como escudo pode esconder sentimentos que precisam ser acolhidos com seriedade. Divirta-se sem fugir de si.', color: '#8E7CC3', shadow: 'Sombra: Frivolidade excessiva e fuga de responsabilidades sérias.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp' },
-  { id: 'homem_comum', name: 'Homem Comum', desc: 'O Homem Comum é aquela parte realista e acolhedora em você que valoriza a igualdade, a simplicidade e a conexão genuína com os outros. Ele representa o seu senso de comunidade, a empatia pé no chão e o desejo de pertencer sem precisar fingir ser quem não é. Ter esse lado ativo significa que você é confiável, valoriza a honestidade simples e respeita a todos igualmente. Mas cuidado: o medo de se destacar pode apagar o brilho da sua voz individual. Lembre-se de sua singularidade.', color: '#858585', shadow: 'Sombra: Conformismo excessivo e perda da voz própria.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp' },
-  { id: 'governante', name: 'Governante', desc: 'O Governante é aquela força de liderança em você que busca criar ordem, estabilidade e prosperidade para a sua família e comunidade. Ele representa a sua capacidade de assumir responsabilidades, de organizar o caos e de guiar com segurança e clareza. Ter esse lado ativo significa que você é o pilar que sustenta e protege os outros nos momentos difíceis. Mas fique atento: a obsessão pelo controle pode gerar rigidez e afastar as pessoas. Lidere sempre com o coração aberto.', color: '#E09E25', shadow: 'Sombra: Rigidez controladora e autoritarismo defensivo.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp' }
+  { id: 'sabio', name: 'Sábio', tag: 'Verdade', desc: 'O Sábio é aquela parte de você que busca silenciar o barulho do mundo para escutar a própria verdade. Ele representa a sua capacidade de refletir antes de agir, de observar além do óbvio e de valorizar o aprendizado constante. Ter esse lado ativo significa que você encontra paz na quietude, prefere conversas profundas e busca entender a lógica das coisas. Mas cuidado: o excesso de racionalidade pode afastar você das suas emoções. Use sua sabedoria para iluminar o seu caminho, mantendo sempre o coração aberto.', color: '#D4AF37', shadow: 'Sombra: Isolamento na frieza da mente e distanciamento das emoções.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp' },
+  { id: 'inocente', name: 'Inocente', tag: 'Simplicidade', desc: 'O Inocente é aquela parte de você que escolhe enxergar a beleza e a pureza nas coisas simples da vida. Ele representa o seu otimismo espontâneo, a capacidade de confiar e a busca constante pela felicidade leve e sem complicações. Ter esse lado forte significa que você mantém viva a fé no futuro e o dom de recomeçar sempre com o coração limpo. Mas atenção: a busca por um mundo perfeito pode fazer você negar realidades difíceis. Preserve sua leveza, mantendo os pés firmes no chão.', color: '#4D90FE', shadow: 'Sombra: Ingenuidade excessiva e negação de realidades dolorosas.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp' },
+  { id: 'explorador', name: 'Explorador', tag: 'Liberdade', desc: 'O Explorador é aquela chama interna que impulsiona você a buscar liberdade e a descobrir novos caminhos na jornada da vida. Ele representa a sua coragem de romper a rotina, o desejo de autenticidade e o amor pela independência. Ter esse lado ativo significa que você se renova com o desconhecido e detesta qualquer sentimento de aprisionamento. Mas cuidado: o medo de criar raízes pode gerar uma eterna inconstância. Lembre-se de que a maior de todas as viagens acontece dentro de você.', color: '#34A853', shadow: 'Sombra: Inconstância e dispersão pelo medo de criar raízes.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp' },
+  { id: 'cuidador', name: 'Cuidador', tag: 'Acolhimento', desc: 'O Cuidador é aquela força amorosa em você que encontra propósito em apoiar, proteger e nutrir a vida ao seu redor. Ele representa a sua generosidade natural, a compaixão sincera e a capacidade de criar ambientes seguros e acolhedores. Ter esse lado ativo significa que o bem-estar do outro é sagrado para você. Mas preste atenção: doar-se sem limites pode levar ao esquecimento das suas próprias necessidades. Lembre-se de que cuidar de si mesmo é o primeiro passo para poder cuidar do mundo.', color: '#EA4335', shadow: 'Sombra: Martírio e esgotamento por negligenciar a si próprio.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp' },
+  { id: 'heroi', name: 'Herói', tag: 'Superação', desc: 'O Herói é aquela força guerreira em você que se recusa a desistir diante dos obstáculos e das injustices. Ele representa a sua determinação obstinada, a coragem de assumir batalhas difíceis e a busca constante por superação pessoal. Ter esse lado ativo significa que você se fortalece no desafio e busca proteger quem ama. Mas fique alerta: a necessidade constante de lutar pode transformá-lo em alguém rígido ou obcecado por vitórias. Aprenda que a verdadeira força também sabe quando descansar.', color: '#E06666', shadow: 'Sombra: Rigor excessivo e obsessão por estar sempre em combate.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp' },
+  { id: 'mago', name: 'Mago', tag: 'Transformação', desc: 'O Mago é aquela parte intuitiva de você que acredita que a reality pode ser transformada a partir de uma visão interna profunda. Ele representa a sua capacidade de manifestar sonhos, de compreender o invisível e de catalisar mudanças profundas na vida cotidiana. Ter esse lado ativo significa que você enxerga conexões onde outros veem caos e busca criar o extraordinário. Mas atenção: o apego ao controle mental pode afastar você da simplicidade do mundo físico. Use sua magia com os pés no chão.', color: '#93C47D', shadow: 'Sombra: Manipulação da realidade e distanciamento do mundo real.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp' },
+  { id: 'rebelde', name: 'Rebelde', tag: 'Ruptura', desc: 'O Rebelde é aquela voz autêntica em você que questiona as regras vazias e se recusa a viver sob moldes impostos pelos outros. Ele representa a sua liberdade de pensar diferente, a coragem de quebrar padrões obsoletos e o desejo de revolução pessoal. Ter esse lado ativo significa que você valoriza a sua individualidade acima de tudo e busca a mudança real. Mas cuidado: a revolta cega pode levar ao isolamento ou à destruição sem propósito. Direcione sua força para construir o novo.', color: '#F6B26B', shadow: 'Sombra: Rebeldia vazia e destruição sem causa legítima.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp' },
+  { id: 'criador', name: 'Criador', tag: 'Originalidade', desc: 'O Criador é aquela força expressiva em você que sente a necessidade urgente de dar forma à imaginação e de trazer algo novo ao mundo. Ele representa o seu impulso artístico, a busca pela originalidade e o desejo de deixar uma marca pessoal duradoura. Ter esse lado ativo significa que você enxerga potencial criativo em cada detalhe da vida. Mas preste atenção: o perfeccionismo extremo pode paralisar as suas mãos e impedir você de entregar sua arte. Liberte suas criações com amor.', color: '#FFD966', shadow: 'Sombra: Perfeccionismo extremo que paralisa e impede a entrega.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp' },
+  { id: 'amante', name: 'Amante', tag: 'Conexão', desc: 'O Amante é aquela energia sensível em você que busca conexão profunda, beleza e harmonia em todas as relações humanas. Ele representa a sua capacidade de se entregar com paixão, de valorizar o afeto e de viver com intensidade sensorial e emocional. Ter esse lado ativo significa que você coloca o amor e a beleza no centro do seu caminho. Mas cuidado: o medo de ficar só ou de ser rejeitado pode fazer você anular a sua própria identidade. Lembre-se de amar a si mesmo primeiro.', color: '#C27BA0', shadow: 'Sombra: Anulação pessoal e perda de identidade para agradar.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp' },
+  { id: 'tolo', name: 'Tolo', tag: 'Leveza', desc: 'O Tolo é aquela parte leve e espontânea de você que escolhe viver o momento presente com alegria, humor e diversão contagiante. Ele representa a sua capacidade de rir de si mesmo, de simplificar o que parece pesado e de trazer sorrisos ao dia a dia. Ter esse lado active significa que você valoriza a leveza e sabe que a vida é um jogo belo. Mas atenção: usar o riso como escudo pode esconder sentimentos que precisam ser acolhidos com seriedade. Divirta-se sem fugir de si.', color: '#8E7CC3', shadow: 'Sombra: Frivolidade excessiva e fuga de responsabilidades sérias.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp' },
+  { id: 'homem_comum', name: 'Homem Comum', tag: 'Realismo', desc: 'O Homem Comum é aquela parte realista e acolhedora em você que valoriza a igualdade, a simplicidade e a conexão genuína com os outros. Ele representa o seu senso de comunidade, a empatia pé no chão e o desejo de pertencer sem precisar fingir ser quem não é. Ter esse lado ativo significa que você é confiável, valoriza a honestidade simples e respeita a todos igualmente. Mas cuidado: o medo de se destacar pode apagar o brilho da sua voz individual. Lembre-se de sua singularidade.', color: '#858585', shadow: 'Sombra: Conformismo excessivo e perda da voz própria.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp' },
+  { id: 'governante', name: 'Governante', tag: 'Autoridade', desc: 'O Governante é aquela força de liderança em você que busca criar ordem, estabilidade e prosperidade para a sua família e comunidade. Ele representa a sua capacidade de assumir responsabilidades, de organizar o caos e de guiar com segurança e clareza. Ter esse lado ativo significa que você é o pilar que sustenta e protege os outros nos momentos difíceis. Mas fique atento: a obsessão pelo controle pode gerar rigidez e afastar as pessoas. Lidere sempre com o coração aberto.', color: '#E09E25', shadow: 'Sombra: Rigidez controladora e autoritarismo defensivo.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp' }
 ];
 
 const ARCHETYPE_DETAILS = {
@@ -229,23 +229,100 @@ export default function App() {
   const [loteProducao, setLoteProducao] = useState([]);
   const isPremium = isLoggedIn && userEmail !== "free@killerskills.com.br";
 
-  const getPromptMestre = () => {
+  const getTriadeHarmonica = () => {
     const sorted = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
-    const top1 = ARCHETYPES.find(a => a.id === sorted[0][0]) || ARCHETYPES[0];
-    const top2 = ARCHETYPES.find(a => a.id === sorted[1][0]) || ARCHETYPES[1];
     
-    return `PROMPT DNA ARQUETÍPICO:
-[VETOR MEVA ATIVO]
-${sorted.map(([k, v]) => `  - ${k.toUpperCase()}: ${v}%`).join('\\n')}
+    const t1Id = sorted[0][0];
+    const t1Val = sorted[0][1];
+    const top1 = ARCHETYPES.find(a => a.id === t1Id) || ARCHETYPES[0];
+    
+    // Terça (2º lugar): Só ativa se >= 50%
+    const t2Id = sorted[1] ? sorted[1][0] : null;
+    const t2Val = sorted[1] ? sorted[1][1] : 0;
+    const top2 = t2Val >= 50 ? (ARCHETYPES.find(a => a.id === t2Id) || null) : null;
+    
+    // Quinta (3º lugar): Só ativa se >= 50%. E resolvemos empates na 3ª posição.
+    const t3Val = sorted[2] ? sorted[2][1] : 0;
+    const quintas = [];
+    if (t3Val >= 50) {
+      for (let i = 2; i < sorted.length; i++) {
+        if (sorted[i][1] === t3Val) {
+          const arch = ARCHETYPES.find(a => a.id === sorted[i][0]);
+          if (arch) quintas.push(arch);
+        } else {
+          break;
+        }
+      }
+    }
 
-[ESSÊNCIA DOMINANTE]
-Primeiro Arquétipo: ${top1.name} (${sorted[0][1]}%)
-Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
+    // Subtoms: tudo o que sobrou (com valor > 0)
+    // Excluímos a tônica, a terça (se ativa) e as quintas (se ativas)
+    const quintasIds = quintas.map(q => q.id);
+    const subtoms = sorted.filter(([k, v]) => {
+      if (k === t1Id) return false;
+      if (top2 && k === top2.id) return false;
+      if (quintasIds.includes(k)) return false;
+      return v > 0;
+    }).map(([k, v]) => ARCHETYPES.find(a => a.id === k)).filter(Boolean);
 
-[DIRETRIZES DE VOZ]
-- Tom de marca guiado pelo arquétipo ${top1.name} (Top 1) e temperado pela expressão do ${top2.name} (Top 2).
-- Estética minimalista high-end, linguagem elegante, inteligente e direcionada ao mercado premium.
-- Evitar jargões industriais, clichês de marketing e tom barulhento.`;
+    return { top1, t1Val, top2, t2Val, quintas, t3Val, subtoms };
+  };
+
+  const compilarDiagnosticoMeva = () => {
+    const { top1, top2, quintas, subtoms } = getTriadeHarmonica();
+    
+    const tonicaText = `Sua identidade expressa a mensagem de ${top1.tag} (${top1.name}).`;
+    const tercaText = top2 
+      ? ` Suas produções se localizam no contexto de ${top2.tag} (${top2.name}),`
+      : "";
+    
+    let quintaText = "";
+    if (quintas.length > 0) {
+      const qText = quintas.map(q => `${q.tag} (${q.name})`).join(" e ");
+      quintaText = `${top2 ? " materializadas" : " Materializadas"} através de elementos de ${qText}.`;
+    } else {
+      quintaText = `${top2 ? " com" : " Com"} uma estética minimalista, limpa e focada.`;
+    }
+    
+    const subList = subtoms.slice(0, 2).map(s => s.name);
+    const coloridoText = subList.length > 0
+      ? ` Nuances de ${subList.join(" e ")} dão o colorido sutil às suas atitudes.`
+      : "";
+      
+    return `${tonicaText}${tercaText}${quintaText}${coloridoText}`;
+  };
+
+  const getPromptMestre = () => {
+    const { top1, t1Val, top2, t2Val, quintas, t3Val, subtoms } = getTriadeHarmonica();
+    
+    const tonicaSection = `- MENSAGEM / SIGNIFICADO (Tônica): ${top1.name} (Tag: ${top1.tag}, Dosagem: ${t1Val}%)`;
+    const tercaSection = top2 
+      ? `- CENÁRIO / CONTEXTO (Terça): ${top2.name} (Tag: ${top2.tag}, Dosagem: ${t2Val}%)`
+      : "- CENÁRIO / CONTEXTO (Terça): NEUTRO (Abaixo do limite de 50%)";
+      
+    let quintaSection = "";
+    if (quintas.length > 0) {
+      quintaSection = `- OBJETOS / ELEMENTOS (Quinta): ${quintas.map(q => `${q.name} (Tag: ${q.tag})`).join(" + ")} (Dosagem: ${t3Val}%)`;
+    } else {
+      quintaSection = "- OBJETOS / ELEMENTOS (Quinta): NEUTRO (Abaixo do limite de 50%)";
+    }
+
+    const subtomsSection = subtoms.length > 0
+      ? `- COLORIDO / SUBTOMS: Pinceladas sutis de ${subtoms.map(s => s.name).slice(0, 3).join(", ")}`
+      : "";
+
+    return `PROMPT DNA ARQUETÍPICO (TRÍADE HARMÔNICA MEVA):
+[DIRETRIZES DE ARQUITETURA VISUAL E VOZ]
+${tonicaSection}
+${tercaSection}
+${quintaSection}
+${subtomsSection}
+
+[REGRAS DE PRODUÇÃO]
+- O tom falado e copy da legenda derivam da Tônica (${top1.name} - ${top1.tag}).
+- A atmosfera visual e o cenário do Reels/Carrossel derivam da Terça (${top2 ? `${top2.name} - ${top2.tag}` : "Neutro"}).
+- Os adereços e detalhes visuais da cena derivam da Quinta (${quintas.length > 0 ? quintas.map(q => q.name).join(" + ") : "Neutro"}).
+- A coloração geral e sutileza de tom incorporam o colorido dos Subtoms.`;
   };
   const [storyboardData, setStoryboardData] = useState([
     "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500", // Jeep
@@ -396,10 +473,10 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
       return;
     }
 
-    const sortedDosagens = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
-    const archTop1 = ARCHETYPES.find(a => a.id === sortedDosagens[0][0]) || ARCHETYPES[0];
-    const archTop2 = ARCHETYPES.find(a => a.id === sortedDosagens[1][0]) || ARCHETYPES[1];
-    const combinedTitle = `${archTop1.name.toUpperCase()} / ${archTop2.name.toUpperCase()}`;
+    const { top1, top2 } = getTriadeHarmonica();
+    const combinedTitle = top2 
+      ? `${top1.name.toUpperCase()} / ${top2.name.toUpperCase()}`
+      : top1.name.toUpperCase();
 
     // Transiciona imediatamente para a Tela 3 (KS Studio) e ativa o progresso reativo da OS
     setActiveView("storyboard");
@@ -758,16 +835,47 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col transition-all duration-500"
                   style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
-                  {activeView === "servicos_escolha" ? (
-                    <>
-                      {/* Texto-Padrão da Persona em 50% sem scroll, colado na base do card */}
-                      <div className="relative z-10 flex-1 flex flex-col justify-end pr-1 select-text">
-                        <div className="font-poppins-light text-[12px] leading-relaxed text-justify whitespace-pre-line" style={{ color: '#FFFFFF' }}>
-                          {TEXTO_PADRAO}
+                  {activeView === "servicos_escolha" ? (() => {
+                    const { top1, top2, quintas, subtoms } = getTriadeHarmonica();
+                    return (
+                      <>
+                        {/* Sumário Visual da Tríade Harmônica (Respiração Visual na metade superior) */}
+                        <div className="relative z-10 flex flex-col gap-2.5 mb-auto select-none pt-2">
+                          <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Mensagem (Texto)</span>
+                            <span className="text-[10px] font-poppins-light tracking-wide text-brand-gold uppercase">{top1.tag}</span>
+                          </div>
+                          <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Cenário (Contexto)</span>
+                            <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase">
+                              {top2 ? top2.tag : "Neutro"}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Objetos (Elementos)</span>
+                            <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase text-right truncate max-w-[140px]">
+                              {quintas.length > 0 ? quintas.map(q => q.tag).join(" + ") : "Neutro"}
+                            </span>
+                          </div>
+                          {subtoms.length > 0 && (
+                            <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                              <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Colorido (Subtoms)</span>
+                              <span className="text-[9px] font-poppins-light tracking-wide text-white/40 uppercase truncate max-w-[140px]">
+                                {subtoms.slice(0, 2).map(s => s.name).join(", ")}
+                              </span>
+                            </div>
+                          )}
                         </div>
-                      </div>
-                    </>
-                  ) : (
+
+                        {/* Diagnóstico Dinâmico de Persona compilado na base do card */}
+                        <div className="relative z-10 flex flex-col justify-end pr-1 mt-4 select-text">
+                          <div className="font-poppins-light text-[12px] leading-relaxed text-justify whitespace-pre-line" style={{ color: '#FFFFFF' }}>
+                            {compilarDiagnosticoMeva()}
+                          </div>
+                        </div>
+                      </>
+                    );
+                  })() : (
                     <>
                       {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
                       <p className="relative z-10 font-poppins-light text-[12px] leading-relaxed text-justify mb-4" style={{ color: '#FFFFFF' }}>
@@ -820,10 +928,10 @@ Segundo Arquétipo: ${top2.name} (${sorted[1][1]}%)
         {/* TELA 1: SERVIÇOS AI (SMARTPHONE DE PLAYBACK - RITUAL GERAR PERSONA) */}
         {activeView === "servicos" && (() => {
           // Lógica do Título de Persona Combinado para a Matriz de Síntese
-          const sortedDosagens = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
-          const archTop1 = ARCHETYPES.find(a => a.id === sortedDosagens[0][0]) || ARCHETYPES[0];
-          const archTop2 = ARCHETYPES.find(a => a.id === sortedDosagens[1][0]) || ARCHETYPES[1];
-          const combinedTitle = `${archTop1.name} ${archTop2.name}`;
+          const { top1, top2 } = getTriadeHarmonica();
+          const combinedTitle = top2 
+            ? `${top1.name} ${top2.name}`
+            : top1.name;
 
           const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || ARCHETYPES[0]) : null;
 

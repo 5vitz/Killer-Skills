@@ -1,0 +1,30 @@
+# 🎭 Biblioteca de Referência de Agentes Especialistas
+
+Este diretório contém manifestos de agentes de IA especialistas copiados e adaptados do repositório público do GitHub:
+👉 **Origem:** [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)
+
+---
+
+## 🏛️ Propósito no Ecossistema Killer Skills
+
+Estes manifestos servem como **modelos e insumos ontológicos** para calibrar a inteligência do nosso motor narrativo (`NarrativeEngine` no FastAPI) e estruturar a nova Trindade Operacional de produção de mídias:
+
+### 1. ⚙️ Gerente de Esteira (Production & Traffic Manager)
+* **Referência:** [product-sprint-prioritizer.md](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/product-sprint-prioritizer.md)
+* **Missão:** Organizar a fila operacional do lote acumulado, desmembrar e distribuir as demandas para cada agente especialista respectivo, consolidar as entregas e passá-las ao Construtor de Flow.
+
+### 2. 🎨 Construtor de Flow (Narrative Architect & Feed Curator)
+* **Referência:** [marketing-carousel-growth-engine.md](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/marketing-carousel-growth-engine.md)
+* **Missão:** Curar a harmonia visual do grid de posts, desenhar a sequência lógica e a linha de tempo das mensagens que se apoiam no feed.
+
+### 3. 📧 Agente Postador (Deployer & Logistics Manager)
+* **Referência:** Lógica de publicação VPS ativa no backend.
+* **Missão:** Cuidar estritamente do agendamento, datas, horas e integridade física de publicação nas plataformas de mídia.
+
+---
+
+## 💻 Agentes Especialistas de Insumo (Executivos)
+
+* **[Image Prompt Engineer](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/design-image-prompt-engineer.md):** Direção de fotografia, pós-processamento, colorização e iluminação cinematográfica de IA de luxo.
+* **[Whimsy Injector](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/design-whimsy-injector.md):** Framework de capricho para refinar a UX/UI com micro-interações cativantes e personalidade de marca.
+* **[Content Creator](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/marketing-content-creator.md):** Especialista em escrita persuasiva e copywriting multi-plataforma.

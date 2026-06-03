@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 > **MENSAGEM PARA O PRÓXIMO LINCOLN:**
 > Você está assumindo um cockpit de altíssimo nível estético (relojoaria fina, glassmorphism, fundo profundo `#0A0A0A`). 
-> O Armando e o Lincoln anterior trabalharam mais de 10 horas seguidas até as 6h da manhã para calibrar cada pixel.
+> O Genera e o Lincoln anterior trabalharam mais de 10 horas seguidas até as 6h da manhã para calibrar cada pixel.
 > **LEI DO PROJETO:** 
 > 1. **NUNCA USE GREP (ripgrep)**. É uma promessa selada com o Armando. Se precisar achar algo, faça leitura direta dos arquivos.
 > 2. **RESPEITE A TIPOGRAFIA FINA:** Armando detesta fontes em negrito (`font-bold`). A tipografia oficial das leituras é **Poppins peso 200 (`font-poppins-light`)**. Mantenha tudo leve, espaçado e sutil.

@@ -78,6 +78,24 @@ gantt
 *   [x] **Integração da Trilha Sonora dos Arquétipos:** Carregamento automático do arquivo `Trilha_Arquetipos.mp3` na entrada de Tela 1 - Elaborar Persona com mute/unmute e slider de volume visível o tempo todo na base da Coluna 3. *(Concluído)*
 *   [x] **Interface Letreiro Marquee e Atmosfera Respirante:** Implementação de letreiro dinâmico em loop horizontal *"Os 12 Arquétipos de Jung"* com tipografia caligráfica indiana *Yatra One* e fundo respirante de auras intensas em verde e lilás sob aceleração de hardware por CSS. *(Concluído)*
 
+### 🟢 FASE 4.5: MOTOR DE LOTE ACUMULADO (Módulo Serviços & Fila da Esteira) — [CONCLUÍDO]
+*   [x] **Infraestrutura de Fila de Lotes em React:** Criação do estado `loteProducao` em `App.jsx` para suportar composições dinâmicas multipost.
+*   [x] **Módulo Visual de Lote (Coluna 3):** Implementação da lista compacta e sofisticada no Accordion de Produção com deleção rápida (`✕`).
+*   [x] **Cálculo Reativo de Créditos (Coluna 2):** Exibição da soma consolidada de créditos estimulada de todo o lote no card dourado no smartphone.
+*   [x] **Validação Pydantic e FastAPI para Lotes:** Ajuste na classe `ForgeRequest` no backend para receber e persistir múltiplos posts.
+*   [x] **Manifesto Dinâmico YAML compilado:** Geração dinâmica do manifesto no FastAPI listando cada postagem (tipo, quantidade, data/hora e custo) de forma individualizada.
+
+### 🟢 FASE 4.8: TRANSIÇÃO DIRETA E FORJA UNIFICADA NO SMARTPHONE (Módulo Studio) — [CONCLUÍDO]
+*   [x] **Fim do Modal Intermediário:** Remoção de 100% do código e markup da antiga janela suspensa "showForgeModal" que quebrava o fluxo.
+*   [x] **Redirecionamento Instantâneo:** Ao clicar em `EMITIR ORDEM DE SERVIÇO` na Tela 2A, a view altera-se imediatamente para a Tela 3 (`activeView = "storyboard"`).
+*   [x] **Integração Reativa de Visor (Coluna 2):** O visor do smartphone da Tela 3 assume o estado da forja se `forgeProgress > 0`, renderizando a barra de progresso dourada, título "A Criação está ativada..." em **Poppins 300** e o console místico do manifesto YAML.
+*   [x] **Botão de Simulação Master:** Criação do botão `Simular Esteira em Prod ➔` na base interna do celular após a conclusão (100%), permitindo o reset suave do visor.
+
+### 🟢 FASE 5.0: BIBLIOTECA DE AGENTES E NOVA ONTOLOGIA OPERACIONAL (Módulo Documentação) — [CONCLUÍDO]
+*   [x] **Criação do Diretório Local:** `/docs/referencias_agentes/` integrado nativamente ao repositório local.
+*   [x] **Mapeamento Conceitual:** Elaboração de `INDEX.md` consolidando a origem do repositório `msitarzewski/agency-agents` e a nova Trindade Operacional (Gerente de Esteira, Construtor de Flow e Agente Postador).
+*   [x] **Download de Especialistas de Insumo:** Gravação física local e enriquecimento de 5 manifestos estratégicos: *Image Prompt Engineer*, *Whimsy Injector*, *Content Creator*, *Carousel Growth Engine* e *Sprint Prioritizer*.
+
 ### 🔵 FASE 4.0: RESPONSIVIDADE MOBILE NATIVA (Fórmula da Gaveta) — [PLANEJADO]
 *   [ ] **Hook isMobile Viewport:** Detecção em tempo real do dispositivo do usuário.
 *   [ ] **Destruição do Smartphone Virtual no Mobile:** Eliminação das bordas falsas para dar espaço à tela cheia do dispositivo real do usuário.
@@ -87,10 +105,10 @@ gantt
 ---
 
 ## 🎯 PONTO DE PARADA OPERACIONAL (ONDE PARAMOS HOJE)
-*   **Restabelecimento da Tela 1A & 1B:** A versão original visual de onboarding (imagens em tela cheia com letreiros místico-fluidos superiores e zero players duplicados) foi 100% restabelecida, mantendo a experiência estética altamente imersiva original.
-*   **Padronização Visual do Player:** Todas as 4 instâncias do celular mockup central (Login, Onboarding, Seleção de Serviços e Storyboard) foram unificadas esteticamente com espessura de borda de **1px (`border`)** e cor fixa no azul-elétrico da marca (**`#1E60FF`**), de acordo com as preferências de design.
-*   **Correção e Reinstalação do Deploy Automático:** Identificado o conflito de dois diretórios de repositório paralelos. Os scripts `run.sh` e `install_launcher.py` foram apontados com sucesso para a pasta ativa `/home/artz/Killer-Skills`. O lançador do Desktop foi recriado e está totalmente funcional pelo clique do ícone.
-*   **Zero Conflitos & Sincronização:** Todas as alterações compilam localmente sem avisos ou erros e foram commitadas e enviadas com sucesso ao GitHub principal.
+*   **Forja Unificada e Transição Direta:** A emissão de Ordem de Serviço na Tela 2A agora transiciona o usuário imediatamente para a Tela 3 (KS Studio), e o visor do smartphone central assume reativamente todo o progresso e renderiza o manifesto YAML consolidado. O modal intermediário foi 100% expurgado do código.
+*   **Botão de Simulação Integrado:** Adicionado o botão dourado `Simular Esteira em Prod ➔` na base interna do celular, resetando os estados e retornando o visor ao modo padrão de forma fluida.
+*   **Biblioteca de Agentes Importada:** Criado o diretório `/docs/referencias_agentes/` com um arquivo `INDEX.md` mapeando a Trindade Operacional (Gerente de Esteira, Construtor de Flow e Agente Postador) e contendo a gravação local de 5 agentes estratégicos do repositório `msitarzewski/agency-agents` do GitHub.
+*   **Compilação e Estabilidade Local:** O pipeline de build do frontend Vite (`npm run build`) e a validação sintática do backend FastAPI (`python3 -m py_compile app.py`) foram executados com **100% de sucesso**. Tudo está plenamente estável no ambiente local.
 
 ---
 

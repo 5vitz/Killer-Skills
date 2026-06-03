@@ -165,11 +165,66 @@ def forge_order(req: ForgeRequest):
     os_id = f"OS-2026-KS-{req.persona_title[:4].upper()}"
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    # Se houver dosagem MEVA, compila em string YAML
+    # Se houver dosagem MEVA, compila em string YAML com a lógica da Tríade Harmônica
     meva_signature_yaml = "N/A"
     if req.dosagem:
+        ARCHETYPE_TAGS = {
+            'heroi': 'Superação', 'sabio': 'Verdade', 'mago': 'Transformação',
+            'criador': 'Originalidade', 'explorador': 'Liberdade', 'rebelde': 'Ruptura',
+            'cuidador': 'Acolhimento', 'amante': 'Conexão', 'governante': 'Autoridade',
+            'homem_comum': 'Realismo', 'inocente': 'Simplicidade', 'tolo': 'Leveza'
+        }
+        ARCHETYPE_NAMES = {
+            'heroi': 'Herói', 'sabio': 'Sábio', 'mago': 'Mago',
+            'criador': 'Criador', 'explorador': 'Explorador', 'rebelde': 'Rebelde',
+            'cuidador': 'Cuidador', 'amante': 'Amante', 'governante': 'Governante',
+            'homem_comum': 'Homem Comum', 'inocente': 'Inocente', 'tolo': 'Tolo'
+        }
+        
         sorted_meva = sorted(req.dosagem.items(), key=lambda x: x[1], reverse=True)
-        meva_signature_yaml = "\n" + "\n".join([f"      {k.upper()}: {v}%" for k, v in sorted_meva])
+        t1_id, t1_val = sorted_meva[0]
+        t1_tag = ARCHETYPE_TAGS.get(t1_id, t1_id.capitalize())
+        t1_name = ARCHETYPE_NAMES.get(t1_id, t1_id.capitalize())
+        
+        t2_id, t2_val = sorted_meva[1] if len(sorted_meva) > 1 else (None, 0)
+        top2_str = "NEUTRO (Abaixo de 50%)"
+        if t2_val >= 50:
+            t2_tag = ARCHETYPE_TAGS.get(t2_id, t2_id.capitalize())
+            t2_name = ARCHETYPE_NAMES.get(t2_id, t2_id.capitalize())
+            top2_str = f"{t2_name.upper()} ({t2_tag} - {t2_val}%)"
+            
+        t3_val = sorted_meva[2][1] if len(sorted_meva) > 2 else 0
+        quintas = []
+        quintas_ids = []
+        if t3_val >= 50:
+            for i in range(2, len(sorted_meva)):
+                if sorted_meva[i][1] == t3_val:
+                    q_id = sorted_meva[i][0]
+                    q_tag = ARCHETYPE_TAGS.get(q_id, q_id.capitalize())
+                    q_name = ARCHETYPE_NAMES.get(q_id, q_id.capitalize())
+                    quintas.append(f"{q_name.upper()} ({q_tag})")
+                    quintas_ids.append(q_id)
+                else:
+                    break
+                    
+        top3_str = " + ".join(quintas) + f" ({t3_val}%)" if quintas else "NEUTRO (Abaixo de 50%)"
+        
+        # Subtoms
+        subtoms = []
+        for k, v in sorted_meva:
+            if k == t1_id:
+                continue
+            if t2_val >= 50 and k == t2_id:
+                continue
+            if k in quintas_ids:
+                continue
+            if v > 0:
+                q_name = ARCHETYPE_NAMES.get(k, k.capitalize())
+                subtoms.append(f"{q_name} ({v}%)")
+        
+        subtoms_str = ", ".join(subtoms[:3]) if subtoms else "N/A"
+        
+        meva_signature_yaml = f"""\n      MENSAGEM_TEXTO_TONICA: "{t1_name.upper()} ({t1_tag} - {t1_val}%)"\n      CENARIO_CONTEXTO_TERCA: "{top2_str}"\n      ELEMENTOS_CENA_QUINTA: "{top3_str}"\n      COLORIDO_SUBTOMS: "{subtoms_str}\""""
 
     # Lógica de processamento de Lote vs Post Único Legado
     lote_items_yaml = ""
