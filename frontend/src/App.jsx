@@ -236,15 +236,15 @@ export default function App() {
     const t1Val = sorted[0][1];
     const top1 = ARCHETYPES.find(a => a.id === t1Id) || ARCHETYPES[0];
     
-    // Terça (2º lugar): Só ativa se >= 50%
+    // Terça (2º lugar): Só ativa se > 50%
     const t2Id = sorted[1] ? sorted[1][0] : null;
     const t2Val = sorted[1] ? sorted[1][1] : 0;
-    const top2 = t2Val >= 50 ? (ARCHETYPES.find(a => a.id === t2Id) || null) : null;
+    const top2 = t2Val > 50 ? (ARCHETYPES.find(a => a.id === t2Id) || null) : null;
     
-    // Quinta (3º lugar): Só ativa se >= 50%. E resolvemos empates na 3ª posição.
+    // Quinta (3º lugar): Só ativa se > 50%. E resolvemos empates na 3ª posição.
     const t3Val = sorted[2] ? sorted[2][1] : 0;
     const quintas = [];
-    if (t3Val >= 50) {
+    if (t3Val > 50) {
       for (let i = 2; i < sorted.length; i++) {
         if (sorted[i][1] === t3Val) {
           const arch = ARCHETYPES.find(a => a.id === sorted[i][0]);
@@ -255,14 +255,14 @@ export default function App() {
       }
     }
 
-    // Subtoms: tudo o que sobrou (com valor > 0)
+    // Subtoms: tudo o que sobrou (com valor estritamente acima do neutro de 50%)
     // Excluímos a tônica, a terça (se ativa) e as quintas (se ativas)
     const quintasIds = quintas.map(q => q.id);
     const subtoms = sorted.filter(([k, v]) => {
       if (k === t1Id) return false;
       if (top2 && k === top2.id) return false;
       if (quintasIds.includes(k)) return false;
-      return v > 0;
+      return v > 50;
     }).map(([k, v]) => ARCHETYPES.find(a => a.id === k)).filter(Boolean);
 
     return { top1, t1Val, top2, t2Val, quintas, t3Val, subtoms };

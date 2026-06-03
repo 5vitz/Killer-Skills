@@ -187,8 +187,8 @@ def forge_order(req: ForgeRequest):
         t1_name = ARCHETYPE_NAMES.get(t1_id, t1_id.capitalize())
         
         t2_id, t2_val = sorted_meva[1] if len(sorted_meva) > 1 else (None, 0)
-        top2_str = "NEUTRO (Abaixo de 50%)"
-        if t2_val >= 50:
+        top2_str = "NEUTRO (Valor de 50% ou menos)"
+        if t2_val > 50:
             t2_tag = ARCHETYPE_TAGS.get(t2_id, t2_id.capitalize())
             t2_name = ARCHETYPE_NAMES.get(t2_id, t2_id.capitalize())
             top2_str = f"{t2_name.upper()} ({t2_tag} - {t2_val}%)"
@@ -196,7 +196,7 @@ def forge_order(req: ForgeRequest):
         t3_val = sorted_meva[2][1] if len(sorted_meva) > 2 else 0
         quintas = []
         quintas_ids = []
-        if t3_val >= 50:
+        if t3_val > 50:
             for i in range(2, len(sorted_meva)):
                 if sorted_meva[i][1] == t3_val:
                     q_id = sorted_meva[i][0]
@@ -207,18 +207,18 @@ def forge_order(req: ForgeRequest):
                 else:
                     break
                     
-        top3_str = " + ".join(quintas) + f" ({t3_val}%)" if quintas else "NEUTRO (Abaixo de 50%)"
+        top3_str = " + ".join(quintas) + f" ({t3_val}%)" if quintas else "NEUTRO (Valor de 50% ou menos)"
         
-        # Subtoms
+        # Subtoms (Exclui tudo menor ou igual a 50%)
         subtoms = []
         for k, v in sorted_meva:
             if k == t1_id:
                 continue
-            if t2_val >= 50 and k == t2_id:
+            if t2_val > 50 and k == t2_id:
                 continue
             if k in quintas_ids:
                 continue
-            if v > 0:
+            if v > 50:
                 q_name = ARCHETYPE_NAMES.get(k, k.capitalize())
                 subtoms.append(f"{q_name} ({v}%)")
         

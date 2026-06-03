@@ -77,13 +77,13 @@ Para governar os inputs rápidos da IA de forma determinística, cada arquétipo
 
 ### B.5. Regras Lógicas de Desempate, Corte (< 50%) e Colorido
 Para evitar ruídos conceituais ("estética da subtração"), o ecossistema de geração de prompts adota as seguintes regras de negócio estáveis:
-*   **A Regra de Desprezo (< 50%):** Apenas arquétipos calibrados a pelo menos 50% de intensidade podem atuar como moduladores estruturais da Persona.
-    *   Se a Terça (Contexto) estiver abaixo de 50%, o cenário será neutro e sem ruídos conceituais.
-    *   Se a Quinta (Elementos) estiver abaixo de 50%, o storyboard não terá adereços simbólicos desse arquétipo, mantendo a cena minimalista.
+*   **A Regra de Desprezo (<= 50%):** Apenas arquétipos calibrados a valores estritamente maiores que 50% de intensidade podem atuar como moduladores estruturais secundários/terciários da Persona (excluindo os 50% neutros padrão de quando o slider não é tocado).
+    *   Se a Terça (Contexto) estiver em 50% ou menos, o cenário será neutro e sem ruídos conceituais.
+    *   Se a Quinta (Elementos) estiver em 50% ou menos, o storyboard não terá adereços simbólicos desse arquétipo, mantendo a cena minimalista.
 *   **Regra de Desempate no Topo (Tônica / Terça):** Caso haja empate no 1º e 2º lugares, a engine atribui um como Texto e outro como Contexto baseada na ordenação natural determinística de código (índice no array de arquétipos).
 *   **Regra de Desempate no Meio (Terça / Quinta):** Caso o empate seja entre o 2º e 3º lugares, a engine atribui um como Contexto e o outro como Elementos.
-*   **Regra de Desempate na Base (Quinta):** Se houver empate no 3º lugar (ex: Mago 50% e Criador 50%), o prompt de Elementos do storyboard será enriquecido com a **união dos elementos de cena de ambos os arquétipos**.
-*   **A Matização do Colorido (Subtoms):** Todos os arquétipos classificados abaixo da 3ª posição, ou desprezados por estarem abaixo do limite de 50%, serão passados para a IA como instruções secundárias de nuances ("colorido sutil de voz e atitude"), sem interferir na física principal da cena.
+*   **Regra de Desempate na Base (Quinta):** Se houver empate no 3º lugar (ex: Mago 60% e Criador 60%), o prompt de Elementos do storyboard será enriquecido com a **união dos elementos de cena de ambos os arquétipos**.
+*   **A Matização do Colorido (Subtoms):** Todos os arquétipos classificados abaixo da 3ª posição, ou desprezados por estarem no limite de 50% ou menos, serão passados para a IA como instruções secundárias de nuances ("colorido sutil de voz e atitude"), sem interferir na física principal da cena.
 
 ### B.6. O Novo Diagnóstico "Myself" / "Ourselves" Dinâmico
 O relatório de Persona (Myself para contas Pessoais, Ourselves para marcas Profissionais) abandona o texto estático e passa a ser gerado de forma **100% dinâmica** com base na Tríade Harmônica ativada do usuário. Ele é compactado no tamanho exato de um parágrafo curto de 4 a 6 linhas físicas, posicionado de forma estática e sem scroll na Coluna 1 da interface do cockpit.
