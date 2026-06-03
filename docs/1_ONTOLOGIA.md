@@ -17,7 +17,7 @@ O **Killer Skills** atua como uma engine inteligente de coprodução criativa (C
 *   **A Estética da Subtração (O Senso Mínimo):** Inspirada na máxima atribuída a Antoine de Saint-Exupéry:
     > *"A obra de arte está pronta, quando não se pode retirar mais nada dela!"*
     O ecossistema Killer Skills adota rigorosamente a filosofia *clean* e minimalista. Poucos elementos, sofisticação silenciosa, ausência de ruído e foco na mensagem essencial. Esse senso estético deve prevalecer em todas as interfaces, layouts e pautas geradas.
-*   **Doutrina da Permanência Visual (O Princípio da Âncora):** A permanência do Player e de seus controles interativos centrais é a nossa maior âncora visual. Em transições de etapas (como de Tela 0 para Tela 0A), os elementos de entrada (inputs) e botões de comando (actions) **devem manter exatamente as mesmas coordenadas físicas e alturas**. Apenas o contexto de informação interna (como logos, letreiros e descrições) pode sofrer transformações (crossfade, morph ou escala), enquanto o chassi operacional permanece perfeitamente imóvel e contínuo, preservando a ilusão de estabilidade física do dispositivo virtual.
+*   **Doutrina da Permanência Visual (O Princípio da Âncora):** A permanência do Player e de seus controles interativos centrais é a nossa maior âncora visual. Em transições de etapas (como de Tela 0 para Tela 0A), os elements de entrada (inputs) e botões de comando (actions) **devem manter exatamente as mesmas coordenadas físicas e alturas**. Apenas o contexto de informação interna (como logos, letreiros e descrições) pode sofrer transformações (crossfade, morph ou escala), enquanto o chassi operacional permanece perfeitamente imóvel e contínuo, preservando a ilusão de estabilidade física do dispositivo virtual.
 
 ---
 
@@ -52,13 +52,15 @@ Abaixo segue a identidade conceitual e filosófica de cada um dos 12 arquétipos
 *   **🗣️ O Tolo:** Alegre, dinâmico, gosta de divertir as pessoas. Autêntico e descontraído. *(Sombra: Frivolidade e mascarar dores com humor constante)*. Metáfora: Padrões dinâmicos de luzes coloridas dançando sobre paredes de pedra escura texturizada.
 *   **👤 O Homem Comum:** Age em conformidade com o grupo. Empático, prático e excelente vizinho. *(Sombra: Perda de individualidade para pertencer à massa)*. Metáfora: Placas geométricas de ardósia escura, linhas e formas de concreto rústico cinza-argila.
 *   **🏆 O Governante:** Líder natural. Assume autoridade para gerar estabilidade e ordem. *(Sombra: Rigidez extrema e autoritarismo)*. Metáfora: Trono de basalto negro minimalista, metais polidos e reflexos dourados secos.
+
 ---
 
-### B.4. A Tríade Harmônica MEVA (Série Harmônica de Identidade)
-A Persona resultante da dosagem MEVA é estruturada a partir da analogia da **Série Harmônica Musical**, onde os 3 primeiros harmônicos (Tônica, Terça e Quinta) definem a essência de todo o campo harmônico e a melodia da marca digital:
-*   **1. O Arquétipo Principal (Tônica - 1º Lugar):** Responsável pelo **TEXTO / Significado** (O que é dito, a copy principal, a mensagem de posicionamento e o tom essencial de voz da Persona).
-*   **2. O Arquétipo Secundário (Terça - 2º Lugar):** Responsável pelo **CONTEXTO / Cenário** (Onde acontece, a ambientação da mídia, a atmosfera física e o estilo estético de enquadramento).
-*   **3. O Arquétipo Terciário (Quinta - 3º Lugar):** Responsável pelos **ELEMENTOS / Objetos de cena** (Quais adereços, detalhes visuais ou mecânicas físicas interativas aparecem no storyboard).
+### B.4. O Tetracorde MEVA (Série Harmônica de Identidade Unificada)
+A Persona resultante da dosagem MEVA é estruturada a partir da analogia da **Série Harmônica Musical**, expandida para um **Tetracorde** (Tônica, Terça, Quinta e Sétima) para definir a essência e a coloração visual da marca digital:
+*   **1. O Arquétipo Principal (Tônica - 1º Lugar):** Responsável pelo **TEXTO / Significado** e pela **Persona/Sujeito (Macro/Micro)** (Quem é, sua idade, vestimenta, expressão e ação).
+*   **2. O Arquétipo Secundário (Terça - 2º Lugar):** Responsável pelo **CENÁRIO / Contexto** (Onde acontece, a localização física, materiais, superfícies e planos de profundidade).
+*   **3. O Arquétipo Terciário (Quinta - 3º Lugar):** Responsável pelos **ELEMENTOS / Objetos de cena** (Quais adereços de primeiro plano, fauna/flora de apoio e sua interação).
+*   **4. O Arquétipo Quaternário (Sétima - 4º Lugar):** Responsável pelo **ESTILO / Direção de Fotografia** (Enquadramento de câmera, tipo de lente/foco, iluminação, paleta de cores e verniz estético final).
 
 #### As Tags de Identidade de Uma Palavra:
 Para governar os inputs rápidos da IA de forma determinística, cada arquétipo é resumido em uma única tag de propriedade essencial:
@@ -75,15 +77,16 @@ Para governar os inputs rápidos da IA de forma determinística, cada arquétipo
 11. **Inocente** = Simplicidade
 12. **Tolo** = Leveza
 
-### B.5. Regras Lógicas de Desempate, Corte (< 50%) e Colorido
+### B.5. Regras Lógicas de Desempate, Corte (< 50%) e Colorido (Modelo Tetracorde)
 Para evitar ruídos conceituais ("estética da subtração"), o ecossistema de geração de prompts adota as seguintes regras de negócio estáveis:
-*   **A Regra de Desprezo (<= 50%):** Apenas arquétipos calibrados a valores estritamente maiores que 50% de intensidade podem atuar como moduladores estruturais secundários/terciários da Persona (excluindo os 50% neutros padrão de quando o slider não é tocado).
-    *   Se a Terça (Contexto) estiver em 50% ou menos, o cenário será neutro e sem ruídos conceituais.
+*   **A Regra de Desprezo (<= 50%):** Apenas arquétipos calibrados a valores estritamente maiores que 50% de intensidade podem atuar como moduladores estruturais da Persona (excluindo os 50% neutros padrão de quando o slider não é tocado).
+    *   Se a Terça (Cenário) estiver em 50% ou menos, o cenário será neutro e sem ruídos conceituais.
     *   Se a Quinta (Elementos) estiver em 50% ou menos, o storyboard não terá adereços simbólicos desse arquétipo, mantendo a cena minimalista.
-*   **Regra de Desempate no Topo (Tônica / Terça):** Caso haja empate no 1º e 2º lugares, a engine atribui um como Texto e outro como Contexto baseada na ordenação natural determinística de código (índice no array de arquétipos).
-*   **Regra de Desempate no Meio (Terça / Quinta):** Caso o empate seja entre o 2º e 3º lugares, a engine atribui um como Contexto e o outro como Elementos.
-*   **Regra de Desempate na Base (Quinta):** Se houver empate no 3º lugar (ex: Mago 60% e Criador 60%), o prompt de Elementos do storyboard será enriquecido com a **união dos elementos de cena de ambos os arquétipos**.
-*   **A Matização do Colorido (Subtoms):** Todos os arquétipos classificados abaixo da 3ª posição, ou desprezados por estarem no limite de 50% ou menos, serão passados para a IA como instruções secundárias de nuances ("colorido sutil de voz e atitude"), sem interferir na física principal da cena.
+    *   Se a Sétima (Estilo) estiver em 50% ou menos, o estilo visual será o padrão neutro de luxo do Killer Skills, sem as nuances específicas do arquétipo.
+*   **Regra de Desempate no Topo (Tônica / Terça):** Caso haja empate no 1º e 2º lugares, a engine atribui um como Tônica e outro como Terça baseada na ordenação natural determinística de código (índice no array de arquétipos).
+*   **Regra de Desempate no Meio (Terça / Quinta):** Caso o empate seja entre o 2º e 3º lugares, a engine atribui um como Terça e o outro como Quinta.
+*   **Regra de Desempate na Base (Quinta / Sétima):** Caso o empate seja entre o 3º e 4º lugares, o de menor índice no array assume a Quinta e o outro assume a Sétima.
+*   **A Matização do Colorido (Subtoms & Descarte):** O 5º arquétipo ordenado e os subsequentes, assim como qualquer arquétipo abaixo de 50% de intensidade, são inteiramente desconsiderados da modelagem física e estética da imagem (não interferindo na cena). Os subtoms ativos (>15% e <=50%) são passados para a IA apenas como nuances refinadas de tom de texto na copy. A fusão estética de estilos na Sétima é proibida para preservar o minimalismo.
 
 ### B.6. O Novo Diagnóstico "Myself" / "Ourselves" Dinâmico
 O relatório de Persona (Myself para contas Pessoais, Ourselves para marcas Profissionais) abandona o texto estático e passa a ser gerado de forma **100% dinâmica** com base na Tríade Harmônica ativada do usuário. Ele é compactado no tamanho exato de um parágrafo curto de 4 a 6 linhas físicas, posicionado de forma estática e sem scroll na Coluna 1 da interface do cockpit.
@@ -174,13 +177,13 @@ As 12 personas da **Categoria Profissional** focam em conversão de leads, autor
 ### D.2. Viabilidade Operacional e Margem Financeira
 *   **Custo operacional no Killer Skills:** `72 posts * 35 créditos = 2.520 créditos / mês` (equivalente a R$ 25,20 na tabela de créditos do app).
 *   **Margem de Lucro da Operação:** **99.79%** de margem líquida de produção.
-*   **Alavancagem de Tempo:** O esforço operacional cai de **54 horas** para apenas **3,5 horas mensais** de revisão no visor central, elevando o valor da hora de Ingrid para **R$ 3.421,37**.
+*   **Alavancagem de Tempo:** O effort operacional cai de **54 horas** para apenas **3,5 horas mensais** de revisão no visor central, elevando o valor da hora de Ingrid para **R$ 3.421,37**.
 
 ---
 
 ## 📱 CLASSE E: NOMENCLATURA DO PLAYER COCKPIT (TELAS & FLUXOS)
 
-Para alinhar com precisão cirúrgica a comunicação criativa e técnica dentro da Mesa Redonda, fica estabelecida a nomenclatura oficial das telas que compõem o simulador de smartphone (Player) do Killer Skills:
+Para alrinhar com precisão cirúrgica a comunicação criativa e técnica dentro da Mesa Redonda, fica estabelecida a nomenclatura oficial das telas que compõem o simulador de smartphone (Player) do Killer Skills:
 
 ### E.1. A Jornada de Acesso (Login)
 *   **🔒 Tela 0:** Login Inicial — Etapa do E-mail (smartphone com glows neon azul/dourado e botão ENTRAR).

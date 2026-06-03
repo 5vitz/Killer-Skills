@@ -6,5 +6,117 @@
   "medo": "A perda de controle, a ruína e a desordem do ambiente",
   "superpoder": "Liderança responsável e poder de prover segurança",
   "sombra": "Rigidez controladora e autoritarismo defensivo",
-  "color": "#E09E25"
+  "color": "#E09E25",
+  "tetracorde_variabilidade": {
+    "tonica_persona": {
+      "idade": [
+        "um líder de 40 anos com postura executiva e elegante",
+        "uma estrategista de 48 anos de presença executiva impecável",
+        "um governante de 55 anos de fisionomia imponente e segura",
+        "um mentor de 65 anos com expressão de autoridade natural e serena"
+      ],
+      "aparencia": [
+        "com cabelo perfeitamente alinhado, feições firmes e olhar de comando",
+        "com feições nobres, olhar estratégico e expressão de controle absoluto",
+        "com cabelos grisalhos curtos e maxilar definido que transmite firmeza",
+        "com olhar sóbrio, feições calmas e postura de quem governa com sabedoria"
+      ],
+      "vestimenta": [
+        "um terno de alta costura sob medida em cinza-chumbo com lapelas perfeitamente passadas",
+        "um casaco estruturado de lã preta com linhas retas e botões ocultos",
+        "um blazer de abotoamento duplo em azul-marinho escuro e corte clássico",
+        "um vestido estruturado minimalista em tom preto fosco com detalhes geométricos"
+      ],
+      "postura": [
+        "sentado com imponência natural em uma cadeira de design estruturado",
+        "em pé no centro do ambiente, com uma das mãos no bolso do paletó",
+        "com os braços apoiados com segurança sobre uma mesa de reunião",
+        "em postura ereta de comando, com os ombros alinhados"
+      ],
+      "expressao": [
+        "de seriedade calma e certeza absoluta",
+        "com um olhar focado de quem decide os rumos estratégicos",
+        "de autocontrole inabalável e autoridade silenciosa",
+        "com um semblante sóbrio que inspira respeito e liderança"
+      ],
+      "acao": [
+        "assinando um documento de alta relevância com uma caneta de ouro",
+        "ajustando os botões de punho com gestos calmos e precisos",
+        "analisando um painel de dados com olhar compenetrado",
+        "em repouso confiante, observando as diretrizes"
+      ]
+    },
+    "terca_cenario": {
+      "tipo": [
+        "interno",
+        "interno",
+        "interno",
+        "interno"
+      ],
+      "localizacao": [
+        "dentro de uma sala de conselho executivo de alto padrão",
+        "em um hall monumental de arquitetura contemporânea sóbria",
+        "dentro de um escritório de presidência minimalista com vista panorâmica",
+        "no topo de uma escadaria monumental de pedra escura"
+      ],
+      "textura_superficies": [
+        "paredes de basalto negro polido e superfícies de mármore imperial",
+        "painéis de madeira nobre escura contrastados com detalhes em bronze dourado",
+        "superfícies de concreto arquitetônico liso e vidro temperado ultra-limpo",
+        "placas de granito escuro escovado com linhas retas e acabamento fosco"
+      ],
+      "profundidade": [
+        "uma enorme parede envidraçada revelando a linha do horizonte de uma metrópole ao anoitecer",
+        "uma galeria de colunas de pedra alinhadas que criam uma perspectiva geométrica perfeita",
+        "painéis artísticos geométricos de metal dourado escovado em segundo plano",
+        "a penumbra elegante de uma antessala executiva de luxo silencioso"
+      ]
+    },
+    "quinta_elementos": {
+      "objeto_principal": [
+        "uma cadeira estilo trono de basalto negro minimalista com linhas geométricas retas",
+        "uma mesa maciça de mármore imperial com bordas bisotadas",
+        "um selo de autenticidade em metal dourado sobre um documento",
+        "um relógio cronógrafo clássico de ouro escovado no pulso"
+      ],
+      "objeto_secundario": [
+        "uma caneta-tinteiro de luxo de resina preta e detalhes dourados",
+        "uma pasta de couro nobre estruturada sobre a mesa",
+        "um jogo de pesos de mesa geométricos em metal polido",
+        "uma ampulheta de design moderno com areia preta"
+      ],
+      "fauna_flora": [
+        "um bonsai de pinheiro japonês perfeitamente esculpido em vaso cerâmico escuro",
+        "uma única orquídea branca minimalista em um vaso cilíndrico de metal polido",
+        "uma árvore de folhas largas (Ficus Lyrata) em um vaso de basalto",
+        "ramos secos de trigo dourado dispostos simetricamente em um jarro preto"
+      ]
+    },
+    "setima_estilo": {
+      "enquadramento": [
+        "Plano médio perfeitamente centralizado com linhas de simetria impecáveis",
+        "Plano americano de ângulo ligeiramente baixo para denotar autoridade",
+        "Retrato corporativo cinematográfico de alto padrão em profundidade de campo",
+        "Composição clássica com enquadramento de regra dos terços perfeitamente equilibrado"
+      ],
+      "luz": [
+        "iluminação de alto brilho focada e precisa, criando reflexos dourados secos nas superfícies",
+        "luz lateral suave de fim de tarde que acentua as silhuetas e o corte da alfaiataria",
+        "iluminação executiva difusa e uniforme com realce de brilho nos metais",
+        "luz de contra-luz dramática realçando a silhueta contra a janela panorâmica da cidade"
+      ],
+      "cores": [
+        "tons de preto imperial, cinza-chumbo e reflexos dourados secos",
+        "tons de azul-marinho profundo, bronze polido e branco puro de camisa social",
+        "tons de carvão, basalto negro e realces em ouro escovado",
+        "tons de chocolate escuro, creme e detalhes metálicos finos"
+      ],
+      "estilo_visual": [
+        "estética de luxo corporativo silencioso, nitidez absoluta em toda a imagem",
+        "fotografia editorial premium de alta costura, paleta sóbria e refinada",
+        "estética executiva cinematográfica de alta definição com linhas geométricas puras",
+        "composição simétrica neo-clássica de extrema imponência e elegância minimalista"
+      ]
+    }
+  }
 }

@@ -6,5 +6,112 @@
   "medo": "Viver na ilusão e ser guiado pela ignorância",
   "superpoder": "Observação profunda e discernimento intuitivo",
   "sombra": "Isolamento na frieza da mente e distanciamento das emoções",
-  "color": "#D4AF37"
+  "color": "#D4AF37",
+  "tetracorde_variabilidade": {
+    "tonica_persona": {
+      "idade": [
+        "um sábio de 50 anos com expressão reflexiva",
+        "um sênior experiente de 65 anos",
+        "um ancião venerável de 75 anos",
+        "um mestre sábio de 80 anos"
+      ],
+      "aparencia": [
+        "com olhar analítico e cabelo levemente grisalho nas têmporas",
+        "com traços faciais marcados pela sabedoria e barba curta aparada",
+        "com olhos profundos que transmitem calma e serenidade",
+        "com olhar perspicaz e feições estóicas"
+      ],
+      "vestimenta": [
+        "um manto de linho cru minimalista de corte reto",
+        "um terno sob medida impecável em tons terrosos escuros",
+        "um suéter de cashmere cinza-mescla de altíssima qualidade",
+        "uma túnica clássica de veludo escuro e linhas simples"
+      ],
+      "postura": [
+        "em postura ereta e contemplativa",
+        "sentado de forma confortável e focada",
+        "em pé com os braços cruzados de maneira serena",
+        "inclinado levemente para frente com atenção plena"
+      ],
+      "expressao": [
+        "de profunda verdade e clareza mental",
+        "com um semblante calmo de quem domina o conhecimento",
+        "com um olhar atento e silencioso",
+        "com expressão de ponderação e sobriedade"
+      ],
+      "acao": [
+        "analisando minuciosamente um documento em silêncio",
+        "anotando uma reflexão em um pequeno diário de couro",
+        "ajustando sutilmente seus óculos de leitura de aro fino",
+        "observando pensativamente o ambiente"
+      ]
+    },
+    "terca_cenario": {
+      "tipo": ["interno", "interno", "externo", "interno"],
+      "localizacao": [
+        "dentro de uma biblioteca gótica silenciosa",
+        "dentro de um escritório minimalista moderno banhado por claraboias",
+        "no topo de uma montanha rochosa estóica sob o vento frio",
+        "dentro de um gabinete de estudos clássico e reservado"
+      ],
+      "textura_superficies": [
+        "paredes de pedra de arenito e prateleiras de carvalho escuro",
+        "superfícies de mármore branco polido e detalhes em vidro jateado",
+        "formações de rocha vulcânica exposta e contrastes de neve ao fundo",
+        "revestimentos de painéis de jacarandá rico e detalhes em latão polido"
+      ],
+      "profundidade": [
+        "prateleiras repletas de tomos antigos estendendo-se ao fundo",
+        "janelas panorâmicas que revelam uma linha do horizonte limpa e distante",
+        "horizontes infinitos e neblina cobrindo o vale distante",
+        "uma mesa de estudos perfeitamente organizada em segundo plano"
+      ]
+    },
+    "quinta_elementos": {
+      "objeto_principal": [
+        "um grande grimório aberto sobre uma mesa de madeira de lei",
+        "um caderno Moleskine aberto com uma caneta tinteiro dourada ao lado",
+        "um antigo astrolábio de metal polido nas mãos",
+        "uma ampulheta técnica de cobre com areia fina escorrendo"
+      ],
+      "objeto_secundario": [
+        "uma lupa clássica com cabo esculpido em madrepérola",
+        "um compasso de latão repousando sobre um mapa detalhado",
+        "um jogo de xadrez de basalto inacabado ao lado",
+        "uma xícara de porcelana escura emanando vapor sutil"
+      ],
+      "fauna_flora": [
+        "uma coruja mística de plumagem branca empoleirada silenciosamente",
+        "uma planta ornamental minimalista de folhas escuras no canto",
+        "musgo seco e sutil cobrindo a borda de uma rocha decorativa",
+        "um ramo seco de lavanda repousando de forma poética"
+      ]
+    },
+    "setima_estilo": {
+      "enquadramento": [
+        "Plano médio centralizado e simétrico de altíssima precisão",
+        "Retrato em plano americano com ângulo ligeiramente baixo",
+        "Plano médio-curto com enquadramento cinematográfico de luxo",
+        "Composição centralizada com linhas de perspectiva fortes"
+      ],
+      "luz": [
+        "iluminação dramática de três pontos com forte contraste",
+        "um feixe oblíquo e preciso de luz solar filtrada por uma janela alta",
+        "luz natural fria e difusa de um dia nublado que suaviza as sombras",
+        "o brilho quente e intimista de velas douradas criando sombras longas"
+      ],
+      "cores": [
+        "tons de azul-índigo profundo, cinza-ardósia e detalhes dourados",
+        "tons de marrom-argila, bege-areia e detalhes em cobre polido",
+        "tons de preto fosco, cinza-concreto e branco puro",
+        "tons de verde-musgo, terracota e âmbar"
+      ],
+      "estilo_visual": [
+        "estética dark academia sofisticada, profundidade de campo rasa com creamy bokeh, renderizado em 8k",
+        "fotografia cinematográfica premium de luxo, profundidade de campo marcante, textura de filme 35mm",
+        "estética minimalista de luxo silencioso, alta definição, foco nítido no sujeito e desfoque suave ao fundo",
+        "composição cinematográfica hiperdetalhada com atmosfera intimista e rica textura de grão de filme"
+      ]
+    }
+  }
 }

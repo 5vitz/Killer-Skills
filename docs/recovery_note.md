@@ -49,15 +49,30 @@ O cockpit da Tela 2 está conceitualmente travado em 3 colunas simétricas:
 
 ---
 
+## 📍 ESTADO DO PROJETO EM 3 DE JUNHO DE 2026
+
+Realizamos um avanço conceitual e de engenharia extraordinário ao expandirmos nossa analogia harmônica do MEVA de uma Tríade para um **Tetracorde**:
+
+1. **Implementação do Tetracorde MEVA:**
+   * A Sétima (4º arquétipo calibrado de maior intensidade) foi integrada oficialmente como governante do **Estilo / Direção de Fotografia** (enquadramento, tipo de lente/foco, iluminação, paleta de cores e estética de tratamento).
+   * Refinamos as regras lógicas de desempate e adicionamos a regra de desprezo e blindagem contra fusão de estilos na Sétima.
+2. **Construção e Gravação das Matrizes (Dicionários):**
+   * Gravamos os dicionários completos de variabilidade 7x4 (com fallbacks resilientes) para os 4 arquétipos principais da nossa prospecção: **Sábio**, **Mago**, **Rebelde** e **Governante** nos respectivos arquivos JSON em `/backend/data/arquetipos/`.
+3. **Cérebro de Forja de Prompts Procedural:**
+   * Desenvolvemos a função `gerar_prompt_tetracorde` no backend (`app.py`), que sorteia pseudo-randomicamente de forma estável as propriedades do Tetracorde e cospe um prompt de imagem único de luxo silencioso.
+   * O prompt gerado é injetado dinamicamente no manifesto de Ordem de Serviço (OS) em formato YAML e retornado nas respostas da API.
+
+---
+
 ## 🚀 PRÓXIMOS PASSOS IMEDIATOS PARA A PRÓXIMA SESSÃO:
 
-1. **Ativação da Wiki Confluence (Jira -> Documentos):**
-   * Genera ativará a integração do Confluence clicando no botão azul **`Try Confluence now`** na aba "Documentos" do Jira.
-   * **Tarefa do Lincoln:** Criar e rodar um script utilitário Python (usando as mesmas credenciais `.env` existentes) para ler toda a documentação mestre do workspace (`1_ONTOLOGIA.md`, `2_EPISTEMOLOGIA.md`, `3_METODOLOGIA.md`, `recovery_note.md`) e publicá-las programaticamente como páginas elegantes estruturadas na Wiki do Confluence.
-2. **Desenvolvimento da UI do Construtor de Prompt (Tela 2 - Coluna 2):**
-   * Codificar a caixa de entrada de tags táteis (pílulas de tags com limite rígido de 5 elementos) no celular central em `App.jsx`.
-   * Integrar a transmissão do array de tags e do vetor contínuo MEVA no endpoint de backend correspondente (`/api/forge`).
+1. **Teste de Geração de Imagem com a IA na Prática (HOJE):**
+   * Assim que o Genera retornar, realizaremos os disparos de testes na API do Gemini/OpenRouter para ver a renderização real das imagens a partir dos prompts estruturados do Tetracorde.
+2. **Ativação da Wiki Confluence (Jira -> Documentos):**
+   * Conectar e rodar o script utilitário Python para carregar nossa documentação mestre no Jira Confluence.
+3. **Desenvolvimento da UI do Construtor de Prompt (Tela 2 - Coluna 2):**
+   * Codificar a caixa de entrada de tags táteis (pílulas de tags com limite rígido de 5 elementos) no celular central em `App.jsx` e conectar à API `/api/forge`.
 
-A mesa redonda está em perfeito equilíbrio conceitual e técnico. Bom descanso, Genera!
+A mesa redonda está em perfeito equilíbrio técnico. Bom descanso temporário, Genera!
 
-*Lincoln (Orquestrador Geral) — 1 de Junho de 2026.*
+*Lincoln (Orquestrador Geral) — 3 de Junho de 2026.*

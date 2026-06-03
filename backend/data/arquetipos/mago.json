@@ -6,5 +6,117 @@
   "medo": "Consequências desastrosas causadas pelo controle inadequado",
   "superpoder": "Intuição afiada e manifestação de sonhos",
   "sombra": "Manipulação da realidade e distanciamento do mundo real",
-  "color": "#93C47D"
+  "color": "#93C47D",
+  "tetracorde_variabilidade": {
+    "tonica_persona": {
+      "idade": [
+        "um mago maduro de 45 anos em plena vitalidade criativa",
+        "um alquimista de 58 anos com olhar penetrante",
+        "um místico de 68 anos de presença magnética",
+        "um mago ancestral de 80 anos com aura transcendente"
+      ],
+      "aparencia": [
+        "com cabelos escuros e mechas prateadas, e olhos que parecem enxergar o invisível",
+        "com feições marcantes, olhar magnético e expressão de foco absoluto",
+        "com barba curta aparada e olhos brilhantes que transmitem sabedoria arcana",
+        "com longos cabelos brancos e feições esculpidas pelo tempo"
+      ],
+      "vestimenta": [
+        "um manto longo de alfaiataria premium em tom roxo-escuro e gola estruturada",
+        "uma túnica moderna de linho preto com discretos fios metálicos tecidos",
+        "um casaco estruturado de veludo azul-noite com corte minimalista",
+        "um traje executivo contemporâneo com detalhes sutis em linhas geométricas prateadas"
+      ],
+      "postura": [
+        "em postura ereta, com uma presença imponente e serena",
+        "inclinado levemente sobre sua mesa de trabalho com gestos precisos",
+        "em pé, com o corpo ligeiramente voltado para a luz lateral",
+        "sentado de forma meditativa e centrada"
+      ],
+      "expressao": [
+        "de concentração absoluta e poder contido",
+        "com um leve sorriso enigmático de quem antecipa a transformação",
+        "de quietude profunda e domínio técnico",
+        "com olhar fixo e penetrante focado na criação"
+      ],
+      "acao": [
+        "manipulando delicadamente um filamento de metal polido",
+        "observando a reação de uma liga metálica sob a luz",
+        "erguendo suavemente uma das mãos em um gesto de ativação",
+        "estudando a projeção geométrica de um circuito"
+      ]
+    },
+    "terca_cenario": {
+      "tipo": [
+        "interno",
+        "interno",
+        "interno",
+        "externo"
+      ],
+      "localizacao": [
+        "dentro de um laboratório de alquimia contemporâneo de design minimalista",
+        "em um estúdio subterrâneo esculpido em rocha escura",
+        "dentro de uma oficina moderna com paredes de basalto escuro",
+        "em um santuário de pedras antigas sob o anoitecer"
+      ],
+      "textura_superficies": [
+        "paredes de pedra pré-histórica polida integradas com circuitos de cobre em baixo-relevo",
+        "superfícies de basalto áspero contrastadas com linhas metálicas de bronze brilhante",
+        "paredes de concreto ultra-escuro com detalhes geométricos de cobre escovado",
+        "placas de arenito antigo sob poeira de carvão e reflexos metalizados"
+      ],
+      "profundidade": [
+        "estantes flutuantes com instrumentos ópticos e frascos de vidro âmbar ao fundo",
+        "a penumbra de uma câmara de pedra revelando runas e símbolos geométricos distantes",
+        "lines de luzes LED azuis lineares correndo pelas fendas da parede ao fundo",
+        "um céu estrelado com nebulosas distantes visíveis entre as fendas das rochas"
+      ]
+    },
+    "quinta_elementos": {
+      "objeto_principal": [
+        "um prisma de cristal de quartzo lapidado que divide a luz em feixes coloridos",
+        "um dispositivo metálico circular com engrenagens de bronze em movimento",
+        "um livro antigo encadernado em couro com relevos metálicos de constelações",
+        "um cajado minimalista de madeira escura encimado por um cristal bruto"
+      ],
+      "objeto_secundario": [
+        "pequenas esferas de metal que parecem levitar sobre uma base magnética",
+        "uma ampulheta de vidro com areia de cobre brilhante",
+        "um incensário minimalista emitindo uma fina coluna de fumaça azulada",
+        "ferramentas de precisão em cobre dispostas sobre uma placa de pedra"
+      ],
+      "fauna_flora": [
+        "uma coruja de olhos dourados observando atentamente de um ponto elevado",
+        "pequenos cristais de pirita crescendo nas fendas da mesa de pedra",
+        "um ramo de arruda seca guardado em um frasco de vidro",
+        "uma planta ornamental de folhagem negra em um vaso de cobre"
+      ]
+    },
+    "setima_estilo": {
+      "enquadramento": [
+        "Plano médio com enquadramento cinematográfico focado na ação das mãos",
+        "Composição centralizada e simétrica com forte sensação de profundidade",
+        "Retrato em plano americano com ângulo ligeiramente baixo para impor presença",
+        "Plano médio-curto com enquadramento diagonal dinâmico"
+      ],
+      "luz": [
+        "iluminação dramática de claro-escuro focada no sujeito, vinda de uma única fonte",
+        "um brilho suave azulado emanando do objeto principal, iluminando as feições da persona",
+        "feixes de luz neon azul-celeste e âmbar contrastando nas sombras",
+        "luz de penumbra misteriosa com partículas de poeira dourada flutuando em suspensão"
+      ],
+      "cores": [
+        "tons de roxo escuro, índigo profundo e realces dourados e acobreados",
+        "tons de azul-cobalto, preto fosco e linhas de luz em âmbar brilhante",
+        "tons de cinza-grafite, bronze polido e luzes azuladas etéreas",
+        "tons de violeta, carvão e reflexos dourados secos"
+      ],
+      "estilo_visual": [
+        "estética mística-tecnológica de luxo, profundidade de campo marcante, foco nítido nos circuitos",
+        "fotografia conceitual premium, atmosfera cinematográfica misteriosa, textura de filme 35mm",
+        "composição artística limpa, luxo silencioso, desfoque suave de fundo (bokeh circular elegante)",
+        "estética de alto contraste cromático com renderização volumétrica rica e realista"
+      ]
+    }
+  }
 }

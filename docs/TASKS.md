@@ -148,6 +148,8 @@ gantt
         *   *Coluna 1 (Esquerda):* Título Duplo Híbrido + O relatório de Persona compilado final.
         *   *Coluna 2 (Centro):* Visor do smartphone com portal estético reativo da Persona ou live work preview.
         *   *Coluna 3 (Direita):* Painel de seleção de Micro-serviços + Botão dourado de EMITIR ORDEM DE SERVIÇO.
+*   [ ] **Construção do Dicionário de Variabilidade Arquetípica MEVA (Os 12 Arquétipos):**
+    *   Redigir as 7x4 variações para os outros 11 arquétipos (Mago, Explorador, Criador, Herói, Rebelde, Amante, Tolo, Cuidador, Homem Comum, Inocente, Governante) seguindo o modelo do Tetracorde, definindo as propriedades de Persona (Tônica), Cenário (Terça), Elementos (Quinta) e Estilo/Fotografia (Sétima).
 
 ---
 *Lincoln (Orquestrador Geral) & Armando — Maio de 2026.*

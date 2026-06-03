@@ -6,5 +6,117 @@
   "medo": "Ser comum e impotente diante de padrões impostos",
   "superpoder": "Pensamento disruptivo e liberdade radical",
   "sombra": "Rebeldia vazia e destruição sem causa legítima",
-  "color": "#F6B26B"
+  "color": "#F6B26B",
+  "tetracorde_variabilidade": {
+    "tonica_persona": {
+      "idade": [
+        "um jovem rebelde de 28 anos com energia contestadora",
+        "um criador de 35 anos com postura de ruptura e atitude forte",
+        "um inconformista de 42 anos de expressão marcante",
+        "um veterano de 50 anos de olhar indomável e experiente"
+      ],
+      "aparencia": [
+        "com cabelo raspado nas laterais, olhar desafiador e maxilar marcado",
+        "com barba por fazer, expressão de desdém sutil e olhar penetrante",
+        "com traços fortes, postura decidida e olhar fixo de quem questiona o status quo",
+        "com mechas coloridas desbotadas no cabelo e olhar de determinação fria"
+      ],
+      "vestimenta": [
+        "uma jaqueta de couro preta estonada com detalhes de zíperes de metal",
+        "um sobretudo assimétrico de algodão pesado com capuz profundo",
+        "uma camisa jeans escura rasgada sutilmente com corte moderno de alfaiataria",
+        "um blazer preto desestruturado sobre uma camiseta com tipografia minimalista contestadora"
+      ],
+      "postura": [
+        "em postura relaxada, mas alerta, encostado em uma superfície",
+        "em pé com o corpo ligeiramente inclinado para frente em atitude ativa",
+        "sentado de forma despojada com um braço apoiado no joelho",
+        "caminhando em direção à câmera com passos firmes"
+      ],
+      "expressao": [
+        "de provocação inteligente e intensidade no olhar",
+        "com um semblante sério de quem desafia as convenções",
+        "de determinação fria e atitude firme",
+        "com um olhar irônico e confiante"
+      ],
+      "acao": [
+        "ajustando as golas de sua jaqueta de forma rebelde",
+        "cruzando os braços com atitude desafiadora",
+        "segurando uma lata de tinta spray de metal fosco",
+        "observando criticamente um painel de ideias rasuradas"
+      ]
+    },
+    "terca_cenario": {
+      "tipo": [
+        "interno",
+        "externo",
+        "interno",
+        "externo"
+      ],
+      "localizacao": [
+        "dentro de um loft urbano industrial com pé-direito alto",
+        "em um beco de metrópole contemporânea à noite",
+        "dentro de uma oficina de design desconstruída",
+        "em uma cobertura industrial abandonada com vista para a cidade"
+      ],
+      "textura_superficies": [
+        "paredes de tijolos expostos e chapas de cobre oxidado com texturas rústicas",
+        "concreto bruto com grafites artísticos sobrepostos por chapas de ferro escuro",
+        "paredes descascadas revelando metal enferrujado e concreto cinza",
+        "grades metálicas pretas e superfícies de madeira de demolição carbonizada"
+      ],
+      "profundidade": [
+        "a perspectiva de uma janela industrial com vidros aramados revelando a noite",
+        "luzes urbanas distantes e desfocadas criando um efeito bokeh de tráfego de carros",
+        "prateleiras de metal com latas de tinta e ferramentas industriais organizadas de forma caótica",
+        "silhuetas de arranha-céus na linha do horizonte sob um céu cinza de tempestade"
+      ]
+    },
+    "quinta_elementos": {
+      "objeto_principal": [
+        "uma lata de spray de metal escovado com respingos de tinta vermelha",
+        "uma guitarra elétrica preta fosca com detalhes em cobre oxidado",
+        "um manifesto impresso em papel craft com letras garrafais pretas",
+        "uma máscara de proteção respiratória industrial pendurada no pescoço"
+      ],
+      "objeto_secundario": [
+        "correntes de metal fino repousando sobre uma bancada",
+        "adesivos com slogans minimalistas colados nas superfícies",
+        "uma lâmpada de filamento exposta pendurada por um fio vermelho",
+        "um cinzeiro de metal com fumaça subindo sutilmente"
+      ],
+      "fauna_flora": [
+        "um cacto solitário em um vaso de concreto rústico trincado",
+        "um gato preto de olhar atento espreitando das sombras do fundo",
+        "hera trepadeira invadindo uma fenda na parede de tijolos",
+        "um ramo de espinhos secos disposto de forma artística em um pote de metal"
+      ]
+    },
+    "setima_estilo": {
+      "enquadramento": [
+        "Plano americano com ângulo baixo de câmera para acentuar a atitude",
+        "Plano médio dinâmico com enquadramento ligeiramente inclinado (ângulo holandês)",
+        "Retrato em close-up focado no olhar expressivo e desafiador",
+        "Composição assimétrica com forte contraste de linhas diagonais"
+      ],
+      "luz": [
+        "iluminação de alto contraste com neon vermelho-âmbar cortando o rosto",
+        "luz de contra (rim light) forte delineando a jaqueta de couro e a silhueta",
+        "luz direta de flash de estúdio dura, criando sombras pretas marcadas",
+        "iluminação de penumbra urbana reativa com brilho de faróis distantes"
+      ],
+      "cores": [
+        "tons de vermelho-âmbar, preto fosco, cobre oxidado e cinza-concreto",
+        "tons de carvão, ferrugem escuro e contrastes de vermelho puro",
+        "tons de azul-escuro urbano, cobre brilhante e iluminação âmbar",
+        "tons de cinza-chumbo, preto puro e flash de luz branca cortante"
+      ],
+      "estilo_visual": [
+        "estética urbana punk-luxo de alta costura, grão de filme áspero e realista",
+        "fotografia de moda conceitual de rua, alto contraste de luz, estilo analógico",
+        "estética desconstruída de luxo, profundidade de campo rasa e foco cirúrgico no sujeito",
+        "composição cinematográfica neo-noir com forte uso de sombras e reflexos em poças de água"
+      ]
+    }
+  }
 }
