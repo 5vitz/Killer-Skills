@@ -271,22 +271,22 @@ export default function App() {
   const compilarDiagnosticoMeva = () => {
     const { top1, top2, quintas, subtoms } = getTriadeHarmonica();
     
-    const tonicaText = `Sua identidade expressa a mensagem de ${top1.tag} (${top1.name}).`;
+    const tonicaText = `Sua marca pessoal irradia a mensagem de ${top1.tag.toLowerCase()} guiada pela essência do ${top1.name}.`;
     const tercaText = top2 
-      ? ` Suas produções se localizam no contexto de ${top2.tag} (${top2.name}),`
+      ? ` Suas narrativas ganham vida no cenário de ${top2.tag.toLowerCase()} do ${top2.name},`
       : "";
     
     let quintaText = "";
     if (quintas.length > 0) {
-      const qText = quintas.map(q => `${q.tag} (${q.name})`).join(" e ");
-      quintaText = `${top2 ? " materializadas" : " Materializadas"} através de elementos de ${qText}.`;
+      const qText = quintas.map(q => `${q.tag.toLowerCase()} do ${q.name}`).join(" e ");
+      quintaText = `${top2 ? " materializando-se" : " Materializando-se"} em detalhes de ${qText}.`;
     } else {
-      quintaText = `${top2 ? " com" : " Com"} uma estética minimalista, limpa e focada.`;
+      quintaText = `${top2 ? " sob" : " Sob"} uma estética silenciosa, minimalista e focada.`;
     }
     
     const subList = subtoms.slice(0, 2).map(s => s.name);
     const coloridoText = subList.length > 0
-      ? ` Nuances de ${subList.join(" e ")} dão o colorido sutil às suas atitudes.`
+      ? ` Pinceladas sutis de ${subList.join(" e ")} matizam com delicadeza sua atitude de comunicação.`
       : "";
       
     return `${tonicaText}${tercaText}${quintaText}${coloridoText}`;
@@ -869,8 +869,21 @@ ${subtomsSection}
 
                         {/* Diagnóstico Dinâmico de Persona compilado na base do card */}
                         <div className="relative z-10 flex flex-col justify-end pr-1 mt-4 select-text">
-                          <div className="font-poppins-light text-[12px] leading-relaxed text-justify whitespace-pre-line" style={{ color: '#FFFFFF' }}>
+                          <div className="font-poppins-light text-[12px] leading-relaxed text-justify whitespace-pre-line mb-3.5" style={{ color: '#FFFFFF' }}>
                             {compilarDiagnosticoMeva()}
+                          </div>
+                          
+                          {/* Seta discreta para voltar à calibração de sliders */}
+                          <div className="flex items-center gap-1.5 select-none shrink-0 border-t border-white/5 pt-2.5 mt-1">
+                            <button 
+                              onClick={() => {
+                                setActiveView("servicos");
+                                setOnboardingStep("matriz");
+                              }}
+                              className="text-[9px] font-poppins-light text-white/30 hover:text-white/70 flex items-center gap-1 duration-150 cursor-pointer"
+                            >
+                              <ChevronLeft className="w-3.5 h-3.5" /> Voltar para os sliders de calibração
+                            </button>
                           </div>
                         </div>
                       </>
