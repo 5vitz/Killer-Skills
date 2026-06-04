@@ -133,25 +133,25 @@ Eu trago a sabedoria do riso leve, aliviando os pesos do cotidiano.`;
 
 export default function App() {
   const servicosManual = [
-    { id: 1, name: "01. Upload de Mídia (Permanente)", premium: true },
-    { id: 2, name: "02. Compressor WebP Nativo", premium: false },
-    { id: 3, name: "03. Adequação de Proporções", premium: false },
-    { id: 4, name: "04. Criar Flow Manual", premium: false },
-    { id: 5, name: "05. Simular Flow Manual", premium: false }
+    { id: 1, name: "Upload de Mídia (Permanente)", premium: true },
+    { id: 2, name: "Compressor WebP Nativo", premium: false },
+    { id: 3, name: "Adequação de Proporções", premium: false },
+    { id: 4, name: "Criar Flow Manual", premium: false },
+    { id: 5, name: "Simular Flow Manual", premium: false }
   ];
 
   const servicosIA = [
-    { id: 6, name: "06. Curadoria Estética Grade (Grid IA)", premium: true },
-    { id: 7, name: "07. Criação de Legendas - IA", premium: true },
-    { id: 8, name: "08. Roteirização Reels (Director's Cut)", premium: true },
-    { id: 9, name: "09. Geração de Imagens - IA", premium: true },
-    { id: 10, name: "10. Geração de Vídeos - IA", premium: true },
-    { id: 11, name: "11. Flow Automatizado - IA", premium: true }
+    { id: 6, name: "Curadoria Estética Grade (Grid IA)", premium: true },
+    { id: 7, name: "Criação de Legendas - IA", premium: true },
+    { id: 8, name: "Roteirização Reels (Director's Cut)", premium: true },
+    { id: 9, name: "Geração de Imagens - IA", premium: true },
+    { id: 10, name: "Geração de Vídeos - IA", premium: true },
+    { id: 11, name: "Flow Automatizado - IA", premium: true }
   ];
 
   const servicosPostagem = [
-    { id: 12, name: "12. Postar VPS Automatizado", premium: true },
-    { id: 13, name: "13. Agendar Post Automatizado", premium: true }
+    { id: 12, name: "Postar VPS Automatizado", premium: true },
+    { id: 13, name: "Agendar Post Automatizado", premium: true }
   ];
 
   // --- CONFIGURAÇÃO EXPERIMENTAL DO DEGRADÊ DO COCKPIT ---
@@ -242,8 +242,8 @@ export default function App() {
   });
   const [tags, setTags] = useState(["luxo", "alta-costura"]);
   const [tagInput, setTagInput] = useState("");
-  const [expandedSection, setExpandedSection] = useState(null); // "pre", "pro", "pos"
-  const [expandedSvc, setExpandedSvc] = useState(null); // "manual", "ia", "postagem"
+  const [expandedSection, setExpandedSection] = useState("pre"); // "pre", "pro", "pos"
+  const [expandedSvc, setExpandedSvc] = useState("manual"); // "manual", "ia", "postagem"
   const [postType, setPostType] = useState("reels"); // "reels", "carrossel", "imagem_unica"
   const [postQty, setPostQty] = useState(0);
   const [personaConfirmed, setPersonaConfirmed] = useState(false);
@@ -618,6 +618,431 @@ ${subtomsSection}
     triggerGoogleAuthSequence(enteredEmail);
   };
 
+  const renderDefinicoesPost = () => {
+    return (
+      <div className="flex-1 flex flex-col gap-4 pt-2 overflow-y-auto pr-1 custom-scrollbar-visible">
+        
+        {/* CARD 1: PRÉ-PRODUÇÃO (DNA Institucional) */}
+        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+          <div 
+            onClick={() => setExpandedSection(expandedSection === "pre" ? null : "pre")}
+            className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+          >
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
+              PRÉ-PRODUÇÃO
+            </span>
+            <span className="text-[8px] text-white/30">
+              {expandedSection === "pre" ? "▼" : "▶"}
+            </span>
+          </div>
+          
+          <div className={`transition-all duration-300 overflow-hidden ${
+            expandedSection === "pre" ? "max-h-[160px] p-3 border-t border-white/5" : "max-h-0"
+          }`}>
+            <div className="flex flex-col gap-2">
+              <span className="text-[8px] uppercase tracking-wider text-white/30">
+                Validação da Persona (MEVA)
+              </span>
+              
+              {/* Botão Confirmar Persona */}
+              <button 
+                onClick={() => setPersonaConfirmed(!personaConfirmed)}
+                className={`w-full h-8 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 ${
+                  personaConfirmed 
+                    ? "bg-brand-blue/10 border border-brand-blue/30 text-brand-blue" 
+                    : "bg-white/5 border border-white/10 text-white/70 hover:bg-white/10"
+                }`}
+              >
+                {personaConfirmed ? (
+                  <>✓ PERSONA CONFIRMADA</>
+                ) : (
+                  <>✓ CONFIRMAR PERSONA</>
+                )}
+              </button>
+
+              {/* Botão Editar Sliders */}
+              <button 
+                disabled={!isPremium}
+                onClick={() => {
+                  setActiveView("servicos");
+                  setOnboardingStep("matriz");
+                }}
+                className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
+                  !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
+                }`}
+              >
+                ✎ EDITAR PERSONA {!isPremium && "🔒"}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* CARD 2: PRODUÇÃO (Tipos e Quantidades) */}
+        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+          <div 
+            onClick={() => setExpandedSection(expandedSection === "pro" ? null : "pro")}
+            className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+          >
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
+              PRODUÇÃO
+            </span>
+            <span className="text-[8px] text-white/30">
+              {expandedSection === "pro" ? "▼" : "▶"}
+            </span>
+          </div>
+
+          <div className={`transition-all duration-300 overflow-hidden ${
+            expandedSection === "pro" ? "max-h-[480px] p-3 border-t border-white/5" : "max-h-0"
+          }`}>
+            <div className="flex flex-col gap-3">
+              {/* Formato de Post */}
+              <div className="flex flex-col gap-1 text-left">
+                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                  Formato de Post
+                </span>
+                <select 
+                  value={postType}
+                  onChange={(e) => {
+                    const t = e.target.value;
+                    setPostType(t);
+                    setPostQty(0);
+                  }}
+                  className="w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white uppercase tracking-wider focus:outline-none focus:border-brand-blue/30 duration-200"
+                >
+                  <option value="reels">Reels (Vídeo)</option>
+                  <option value="carrossel">Carrossel (Imagens)</option>
+                  <option value="imagem_unica">Post Único (Imagem)</option>
+                </select>
+              </div>
+
+              {/* Quantidade Dinâmica */}
+              <div className="flex flex-col gap-1 text-left">
+                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                  {postType === "reels" && "Quantidade de Vídeos"}
+                  {postType === "carrossel" && "Quantidade de Slides (Imagens)"}
+                  {postType === "imagem_unica" && "Quantidade de Posts (Imagens)"}
+                </span>
+                
+                <div className="flex items-center gap-1">
+                  <button 
+                    onClick={() => {
+                      if (postQty > 0) setPostQty(prev => prev - 1);
+                    }}
+                    className="w-8 h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold font-mono duration-150 active:scale-90"
+                  >
+                    -
+                  </button>
+                  
+                  <div className="flex-1 h-8 bg-black/60 border border-white/5 rounded-lg flex items-center justify-center text-[10px] font-bold font-mono">
+                    {postQty} {postType === "carrossel" ? (postQty === 1 ? "Slide" : "Slides") : (postQty === 1 ? "Post" : "Posts")}
+                  </div>
+                  
+                  <button 
+                    onClick={() => {
+                      if (postQty < 10) setPostQty(prev => prev + 1);
+                    }}
+                    className="w-8 h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold font-mono duration-150 active:scale-90"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Modulação por Tags */}
+              <div className="flex flex-col gap-1.5 text-left border-t border-white/5 pt-3 mt-1">
+                <div className="flex justify-between items-center px-1">
+                  <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                    Modulação por Tags ({tags.length}/5)
+                  </span>
+                  <span className="text-[8px] uppercase tracking-wider text-white/15">Limite</span>
+                </div>
+
+                {/* Lista de Badges de Tags */}
+                <div className="flex flex-wrap gap-1.5 p-2 bg-white/[0.01] border border-white/5 rounded-lg min-h-[42px] max-h-[76px] overflow-y-auto scrollbar-none">
+                  {tags.map((tag, idx) => (
+                    <span 
+                      key={idx}
+                      className="bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-[8.5px] font-semibold flex items-center gap-1.5 text-white/70 animate-fade-in"
+                    >
+                      {tag}
+                      <button 
+                        onClick={() => setTags(prev => prev.filter((_, i) => i !== idx))}
+                        className="hover:text-brand-pink duration-150 font-bold text-[9px] focus:outline-none shrink-0"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                  {tags.length === 0 && (
+                    <span className="text-[8px] font-poppins-light text-white/20 italic self-center pl-1">
+                      Nenhuma tag ativa...
+                    </span>
+                  )}
+                </div>
+
+                {/* Input de Tags */}
+                <div className="relative">
+                  <input 
+                    type="text"
+                    disabled={tags.length >= 5}
+                    value={tagInput}
+                    onChange={(e) => setTagInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === ",") {
+                        e.preventDefault();
+                        const val = tagInput.trim().toLowerCase().replace(/[^a-z0-9-]/g, "");
+                        if (val && !tags.includes(val) && tags.length < 5) {
+                          setTags(prev => [...prev, val]);
+                        }
+                        setTagInput("");
+                      }
+                    }}
+                    placeholder={tags.length >= 5 ? "Limite atingido (5 tags)" : "Digitar tag (pressione Enter)"}
+                    className="w-full h-8 bg-white/[0.02] border border-white/10 rounded-lg px-3 text-[9px] text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
+                  />
+                </div>
+              </div>
+
+              {/* Botão de Adicionar à Esteira */}
+              <button 
+                onClick={handleAdicionarAoLote}
+                disabled={postQty === 0}
+                className={`w-full h-9 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 mt-3 select-none ${
+                  postQty === 0 
+                    ? "bg-white/5 border border-white/10 text-white/20 cursor-not-allowed" 
+                    : "bg-white/10 border border-white/20 hover:bg-white/15 text-white cursor-pointer active:scale-95"
+                }`}
+              >
+                Adicionar à Esteira ➔
+              </button>
+
+              {/* Fila do Lote Acumulado */}
+              {loteProducao.length > 0 && (
+                <div className="flex flex-col gap-2 border-t border-white/5 pt-3 mt-3">
+                  <div className="flex justify-between items-center px-1">
+                    <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                      Lote Acumulado na Esteira ({loteProducao.length})
+                    </span>
+                    <span className="text-[8px] uppercase tracking-wider text-white/15">Fila</span>
+                  </div>
+                  <div className="flex flex-col gap-1.5 max-h-[140px] overflow-y-auto custom-scrollbar-visible pr-1">
+                    {loteProducao.map((item) => (
+                      <div 
+                        key={item.id} 
+                        className="bg-white/5 border border-white/10 rounded-lg p-2 flex justify-between items-center text-[9px] text-white/80 animate-fade-in"
+                      >
+                        <div className="flex flex-col gap-0.5 text-left truncate">
+                          <span className="font-bold text-[#EFE5D3] uppercase tracking-wider">
+                            {item.quantidade}x {item.tipo === "reels" ? "Reels" : (item.tipo === "carrossel" ? "Carrossel" : "Post Único")}
+                          </span>
+                          {item.tags.length > 0 && (
+                            <span className="text-[7.5px] text-white/30 truncate">
+                              Tags: {item.tags.join(", ")}
+                            </span>
+                          )}
+                          {(item.agendamento.data || item.agendamento.hora) && (
+                            <span className="text-[7.5px] text-brand-gold/70 font-semibold uppercase tracking-wider">
+                              📅 {item.agendamento.data || "Sem data"} • ⏰ {item.agendamento.hora || "Sem hora"}
+                            </span>
+                          )}
+                        </div>
+                        <button 
+                          onClick={() => handleRemoverDoLote(item.id)}
+                          className="p-1 hover:text-brand-pink duration-150 font-bold text-xs shrink-0 select-none"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* CARD 3: PÓS-PRODUÇÃO (Fila de Envio) */}
+        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+          <div 
+            onClick={() => setExpandedSection(expandedSection === "pos" ? null : "pos")}
+            className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+          >
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
+              PÓS-PRODUÇÃO
+            </span>
+            <span className="text-[8px] text-white/30">
+              {expandedSection === "pos" ? "▼" : "▶"}
+            </span>
+          </div>
+
+          <div className={`transition-all duration-300 overflow-hidden ${
+            expandedSection === "pos" ? "max-h-[220px] p-3 border-t border-white/5" : "max-h-0"
+          }`}>
+            <div className="flex flex-col gap-2.5">
+              {/* Agendador Toggle */}
+              <div className="flex flex-col gap-1 text-left">
+                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                  Data da Publicação
+                </span>
+                <input 
+                  type="date"
+                  disabled={!isPremium}
+                  value={agendamentoData}
+                  onChange={(e) => setExpandedSection("pos") || setAgendamentoData(e.target.value)}
+                  className={`w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white uppercase focus:outline-none focus:border-brand-blue/30 duration-200 ${
+                    !isPremium ? "opacity-30 cursor-not-allowed" : ""
+                  }`}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1 text-left">
+                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
+                  Hora da Publicação
+                </span>
+                <input 
+                  type="time"
+                  disabled={!isPremium}
+                  value={agendamentoHora}
+                  onChange={(e) => setExpandedSection("pos") || setAgendamentoHora(e.target.value)}
+                  className={`w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white focus:outline-none focus:border-brand-blue/30 duration-200 ${
+                    !isPremium ? "opacity-30 cursor-not-allowed" : ""
+                  }`}
+                />
+              </div>
+              
+              <div className="text-[7.5px] text-white/20 uppercase tracking-widest pl-1 text-left">
+                {isPremium ? "✓ Conexão estável com VPS PM2" : "🔒 Agendamento restrito ao Premium"}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    );
+  };
+
+  const renderServicosPremium = () => {
+    return (
+      <div className="w-full flex-1 flex flex-col gap-2 overflow-hidden mb-3">
+        
+        {/* CATEGORIA 1: CRIAÇÃO - POST MANUAL */}
+        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+          <div 
+            onClick={() => setExpandedSvc(expandedSvc === "manual" ? null : "manual")}
+            className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+          >
+            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
+              CRIAÇÃO - POST MANUAL
+            </span>
+            <span className="text-[8px] text-white/30">
+              {expandedSvc === "manual" ? "▼" : "▶"}
+            </span>
+          </div>
+          
+          <div className={`transition-all duration-300 overflow-hidden ${
+            expandedSvc === "manual" ? "max-h-[220px] p-2 border-t border-white/5" : "max-h-0"
+          }`}>
+            <div className="flex flex-col gap-1.5">
+              {servicosManual.map((svc) => {
+                const isActive = isPremium || !svc.premium;
+                return (
+                  <div 
+                    key={svc.id} 
+                    className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
+                      isActive ? "text-white/80" : "text-white/20"
+                    }`}
+                  >
+                    <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
+                    <span className={isActive ? "text-brand-gold" : "text-white/20"}>
+                      {isActive ? "✓" : "🔒"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* CATEGORIA 2: CRIAÇÃO - POST COM IA */}
+        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+          <div 
+            onClick={() => setExpandedSvc(expandedSvc === "ia" ? null : "ia")}
+            className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+          >
+            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
+              CRIAÇÃO - POST COM IA
+            </span>
+            <span className="text-[8px] text-white/30">
+              {expandedSvc === "ia" ? "▼" : "▶"}
+            </span>
+          </div>
+          
+          <div className={`transition-all duration-300 overflow-hidden ${
+            expandedSvc === "ia" ? "max-h-[250px] p-2 border-t border-white/5" : "max-h-0"
+          }`}>
+            <div className="flex flex-col gap-1.5">
+              {servicosIA.map((svc) => {
+                const isActive = isPremium || !svc.premium;
+                return (
+                  <div 
+                    key={svc.id} 
+                    className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
+                      isActive ? "text-white/80" : "text-white/20"
+                    }`}
+                  >
+                    <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
+                    <span className={isActive ? "text-brand-gold" : "text-white/20"}>
+                      {isActive ? "✓" : "🔒"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* CATEGORIA 3: POSTAGEM */}
+        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+          <div 
+            onClick={() => setExpandedSvc(expandedSvc === "postagem" ? null : "postagem")}
+            className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+          >
+            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
+              POSTAGEM
+            </span>
+            <span className="text-[8px] text-white/30">
+              {expandedSvc === "postagem" ? "▼" : "▶"}
+            </span>
+          </div>
+          
+          <div className={`transition-all duration-300 overflow-hidden ${
+            expandedSvc === "postagem" ? "max-h-[120px] p-2 border-t border-white/5" : "max-h-0"
+          }`}>
+            <div className="flex flex-col gap-1.5">
+              {servicosPostagem.map((svc) => {
+                const isActive = isPremium || !svc.premium;
+                return (
+                  <div 
+                    key={svc.id} 
+                    className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
+                      isActive ? "text-white/80" : "text-white/20"
+                    }`}
+                  >
+                    <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
+                    <span className={isActive ? "text-brand-gold" : "text-white/20"}>
+                      {isActive ? "✓" : "🔒"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    );
+  };
+
   // 1. TELA DE LOGIN (SMARTPHONE DE GLOWS AZUL/DOURADO)
   if (!isLoggedIn) {
     return (
@@ -860,21 +1285,22 @@ ${subtomsSection}
         <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showPersonaCard ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
           {showPersonaCard && (
             <>
+              {/* TOPO FIXO: Título Geral */}
+              <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
+                <h2 
+                  className="text-sm uppercase tracking-wider text-white text-center"
+                  style={{ fontFamily: 'Poppins', fontWeight: 300 }}
+                >
+                  {activeView === "servicos_escolha" ? "MYSELF" : "Significado"}
+                </h2>
+              </div>
+
               {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col transition-all duration-500"
                   style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
-                  {/* TÍTULO INTERNO DO CARD ALINHADO */}
-                  <div className="w-full shrink-0 select-none mt-2 mb-3">
-                    <h2 
-                      className="text-[11px] uppercase tracking-widest text-white/50 text-center"
-                      style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                    >
-                      {activeView === "servicos_escolha" ? "MYSELF" : "Significado"}
-                    </h2>
-                  </div>
                   {activeView === "servicos_escolha" ? (() => {
                     const { top1, top2, quintas, top4, subtoms } = getTetracordeMeva();
                     return (
@@ -1229,128 +1655,12 @@ ${subtomsSection}
                     className="text-[11px] uppercase tracking-widest text-white/50 text-center"
                     style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                   >
-                    SERVIÇOS PREMIUM
+                    DEFINIÇÕES DO POST
                   </h2>
                 </div>
 
-                {/* Bloco Superior: Accordions de Serviços Ativados do Plano */}
-                <div className="w-full flex-1 flex flex-col gap-2 overflow-hidden mb-3">
-                  
-                  {/* CATEGORIA 1: CRIAÇÃO - POST MANUAL */}
-                  <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-                    <div 
-                      onClick={() => setExpandedSvc(expandedSvc === "manual" ? null : "manual")}
-                      className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-                    >
-                      <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
-                        CRIAÇÃO - POST MANUAL
-                      </span>
-                      <span className="text-[8px] text-white/30">
-                        {expandedSvc === "manual" ? "▼" : "▶"}
-                      </span>
-                    </div>
-                    
-                    <div className={`transition-all duration-300 overflow-hidden ${
-                      expandedSvc === "manual" ? "max-h-[220px] p-2 border-t border-white/5" : "max-h-0"
-                    }`}>
-                      <div className="flex flex-col gap-1.5">
-                        {servicosManual.map((svc) => {
-                          const isActive = isPremium || !svc.premium;
-                          return (
-                            <div 
-                              key={svc.id} 
-                              className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
-                                isActive ? "text-white/80" : "text-white/20"
-                              }`}
-                            >
-                              <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
-                              <span className={isActive ? "text-brand-gold" : "text-white/20"}>
-                                {isActive ? "✓" : "🔒"}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* CATEGORIA 2: CRIAÇÃO - POST COM IA */}
-                  <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-                    <div 
-                      onClick={() => setExpandedSvc(expandedSvc === "ia" ? null : "ia")}
-                      className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-                    >
-                      <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
-                        CRIAÇÃO - POST COM IA
-                      </span>
-                      <span className="text-[8px] text-white/30">
-                        {expandedSvc === "ia" ? "▼" : "▶"}
-                      </span>
-                    </div>
-                    
-                    <div className={`transition-all duration-300 overflow-hidden ${
-                      expandedSvc === "ia" ? "max-h-[250px] p-2 border-t border-white/5" : "max-h-0"
-                    }`}>
-                      <div className="flex flex-col gap-1.5">
-                        {servicosIA.map((svc) => {
-                          const isActive = isPremium || !svc.premium;
-                          return (
-                            <div 
-                              key={svc.id} 
-                              className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
-                                isActive ? "text-white/80" : "text-white/20"
-                              }`}
-                            >
-                              <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
-                              <span className={isActive ? "text-brand-gold" : "text-white/20"}>
-                                {isActive ? "✓" : "🔒"}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* CATEGORIA 3: POSTAGEM */}
-                  <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-                    <div 
-                      onClick={() => setExpandedSvc(expandedSvc === "postagem" ? null : "postagem")}
-                      className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-                    >
-                      <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
-                        POSTAGEM
-                      </span>
-                      <span className="text-[8px] text-white/30">
-                        {expandedSvc === "postagem" ? "▼" : "▶"}
-                      </span>
-                    </div>
-                    
-                    <div className={`transition-all duration-300 overflow-hidden ${
-                      expandedSvc === "postagem" ? "max-h-[120px] p-2 border-t border-white/5" : "max-h-0"
-                    }`}>
-                      <div className="flex flex-col gap-1.5">
-                        {servicosPostagem.map((svc) => {
-                          const isActive = isPremium || !svc.premium;
-                          return (
-                            <div 
-                              key={svc.id} 
-                              className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
-                                isActive ? "text-white/80" : "text-white/20"
-                              }`}
-                            >
-                              <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
-                              <span className={isActive ? "text-brand-gold" : "text-white/20"}>
-                                {isActive ? "✓" : "🔒"}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
+                {/* Bloco Superior: DEFINIÇÕES DO POST (PRÉ-PRODUÇÃO, PRODUÇÃO, PÓS-PRODUÇÃO) */}
+                {renderDefinicoesPost()}
 
                 {/* Bloco de Custo Estimado Reativo em Destaque Dourado Metalizado */}
                 <div className="w-full shrink-0 bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent border border-brand-gold/30 rounded-lg p-2 flex items-center justify-between text-left select-none mb-3">
@@ -1378,7 +1688,7 @@ ${subtomsSection}
               </div>
             </div>
 
-            {/* COLUNA LATERAL DIREITA: Definições do Post (Acordeões) */}
+            {/* COLUNA LATERAL DIREITA: Serviços Premium (Acordeões) */}
             <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
               
               {/* CONTEÚDO DO PORTAL: 3 Cards Expansíveis (Acordeões) */}
@@ -1394,309 +1704,12 @@ ${subtomsSection}
                         className="text-[11px] uppercase tracking-widest text-white/50 text-center"
                         style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                       >
-                        DEFINIÇÕES DO POST
+                        SERVIÇOS PREMIUM
                       </h2>
                     </div>
 
-                    {/* Acordeão Container */}
-                    <div className="flex-1 flex flex-col gap-4 pt-2 overflow-y-auto pr-1 custom-scrollbar-visible">
-                      
-                      {/* CARD 1: PRÉ-PRODUÇÃO (DNA Institucional) */}
-                      <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-                        <div 
-                          onClick={() => setExpandedSection(expandedSection === "pre" ? null : "pre")}
-                          className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-                        >
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
-                            A - Pré-Produção
-                          </span>
-                          <span className="text-[8px] text-white/30">
-                            {expandedSection === "pre" ? "▼" : "▶"}
-                          </span>
-                        </div>
-                        
-                        <div className={`transition-all duration-300 overflow-hidden ${
-                          expandedSection === "pre" ? "max-h-[160px] p-3 border-t border-white/5" : "max-h-0"
-                        }`}>
-                          <div className="flex flex-col gap-2">
-                            <span className="text-[8px] uppercase tracking-wider text-white/30">
-                              Validação da Persona (MEVA)
-                            </span>
-                            
-                            {/* Botão Confirmar Persona */}
-                            <button 
-                              onClick={() => setPersonaConfirmed(!personaConfirmed)}
-                              className={`w-full h-8 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 ${
-                                personaConfirmed 
-                                  ? "bg-brand-blue/10 border border-brand-blue/30 text-brand-blue" 
-                                  : "bg-white/5 border border-white/10 text-white/70 hover:bg-white/10"
-                              }`}
-                            >
-                              {personaConfirmed ? (
-                                <>✓ PERSONA CONFIRMADA</>
-                              ) : (
-                                <>✓ CONFIRMAR PERSONA</>
-                              )}
-                            </button>
-
-                            {/* Botão Editar Sliders */}
-                            <button 
-                              disabled={!isPremium}
-                              onClick={() => {
-                                setActiveView("servicos");
-                                setOnboardingStep("matriz");
-                              }}
-                              className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
-                                !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
-                              }`}
-                            >
-                              ✎ EDITAR PERSONA {!isPremium && "🔒"}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* CARD 2: PRODUÇÃO (Tipos e Quantidades) */}
-                      <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-                        <div 
-                          onClick={() => setExpandedSection(expandedSection === "pro" ? null : "pro")}
-                          className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-                        >
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
-                            B - Produção
-                          </span>
-                          <span className="text-[8px] text-white/30">
-                            {expandedSection === "pro" ? "▼" : "▶"}
-                          </span>
-                        </div>
-
-                        <div className={`transition-all duration-300 overflow-hidden ${
-                          expandedSection === "pro" ? "max-h-[480px] p-3 border-t border-white/5" : "max-h-0"
-                        }`}>
-                          <div className="flex flex-col gap-3">
-                            {/* Formato de Post */}
-                            <div className="flex flex-col gap-1 text-left">
-                              <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                                Formato de Post
-                              </span>
-                              <select 
-                                value={postType}
-                                onChange={(e) => {
-                                  const t = e.target.value;
-                                  setPostType(t);
-                                  setPostQty(0); // Reinicia a quantidade para 0 sempre que o tipo muda, conforme especificação
-                                }}
-                                className="w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white uppercase tracking-wider focus:outline-none focus:border-brand-blue/30 duration-200"
-                              >
-                                <option value="reels">Reels (Vídeo)</option>
-                                <option value="carrossel">Carrossel (Imagens)</option>
-                                <option value="imagem_unica">Post Único (Imagem)</option>
-                              </select>
-                            </div>
-
-                            {/* Quantidade Dinâmica */}
-                            <div className="flex flex-col gap-1 text-left">
-                              <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                                {postType === "reels" && "Quantidade de Vídeos"}
-                                {postType === "carrossel" && "Quantidade de Slides (Imagens)"}
-                                {postType === "imagem_unica" && "Quantidade de Posts (Imagens)"}
-                              </span>
-                              
-                              <div className="flex items-center gap-1">
-                                <button 
-                                  onClick={() => {
-                                    if (postQty > 0) setPostQty(prev => prev - 1);
-                                  }}
-                                  className="w-8 h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold font-mono duration-150 active:scale-90"
-                                >
-                                  -
-                                </button>
-                                
-                                <div className="flex-1 h-8 bg-black/60 border border-white/5 rounded-lg flex items-center justify-center text-[10px] font-bold font-mono">
-                                  {postQty} {postType === "carrossel" ? (postQty === 1 ? "Slide" : "Slides") : (postQty === 1 ? "Post" : "Posts")}
-                                </div>
-                                
-                                <button 
-                                  onClick={() => {
-                                    if (postQty < 10) setPostQty(prev => prev + 1);
-                                  }}
-                                  className="w-8 h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold font-mono duration-150 active:scale-90"
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* Modulação por Tags (Coluna 3) */}
-                            <div className="flex flex-col gap-1.5 text-left border-t border-white/5 pt-3 mt-1">
-                              <div className="flex justify-between items-center px-1">
-                                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                                  Modulação por Tags ({tags.length}/5)
-                                </span>
-                                <span className="text-[8px] uppercase tracking-wider text-white/15">Limite</span>
-                              </div>
-
-                              {/* Lista de Badges de Tags */}
-                              <div className="flex flex-wrap gap-1.5 p-2 bg-white/[0.01] border border-white/5 rounded-lg min-h-[42px] max-h-[76px] overflow-y-auto scrollbar-none">
-                                {tags.map((tag, idx) => (
-                                  <span 
-                                    key={idx}
-                                    className="bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-[8.5px] font-semibold flex items-center gap-1.5 text-white/70 animate-fade-in"
-                                  >
-                                    {tag}
-                                    <button 
-                                      onClick={() => setTags(prev => prev.filter((_, i) => i !== idx))}
-                                      className="hover:text-brand-pink duration-150 font-bold text-[9px] focus:outline-none shrink-0"
-                                    >
-                                      ×
-                                    </button>
-                                  </span>
-                                ))}
-                                {tags.length === 0 && (
-                                  <span className="text-[8px] font-poppins-light text-white/20 italic self-center pl-1">
-                                    Nenhuma tag ativa...
-                                  </span>
-                                )}
-                              </div>
-
-                              {/* Input de Tags */}
-                              <div className="relative">
-                                <input 
-                                  type="text"
-                                  disabled={tags.length >= 5}
-                                  value={tagInput}
-                                  onChange={(e) => setTagInput(e.target.value)}
-                                  onKeyDown={(e) => {
-                                    if (e.key === "Enter" || e.key === ",") {
-                                      e.preventDefault();
-                                      const val = tagInput.trim().toLowerCase().replace(/[^a-z0-9-]/g, "");
-                                      if (val && !tags.includes(val) && tags.length < 5) {
-                                        setTags(prev => [...prev, val]);
-                                      }
-                                      setTagInput("");
-                                    }
-                                  }}
-                                  placeholder={tags.length >= 5 ? "Limite atingido (5 tags)" : "Digitar tag (pressione Enter)"}
-                                  className="w-full h-8 bg-white/[0.02] border border-white/10 rounded-lg px-3 text-[9px] text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
-                                />
-                              </div>
-                            </div>
-
-                            {/* Botão de Adicionar à Esteira */}
-                            <button 
-                              onClick={handleAdicionarAoLote}
-                              disabled={postQty === 0}
-                              className={`w-full h-9 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 mt-3 select-none ${
-                                postQty === 0 
-                                  ? "bg-white/5 border border-white/10 text-white/20 cursor-not-allowed" 
-                                  : "bg-white/10 border border-white/20 hover:bg-white/15 text-white cursor-pointer active:scale-95"
-                              }`}
-                            >
-                              Adicionar à Esteira ➔
-                            </button>
-
-                            {/* Fila do Lote Acumulado */}
-                            {loteProducao.length > 0 && (
-                              <div className="flex flex-col gap-2 border-t border-white/5 pt-3 mt-3">
-                                <div className="flex justify-between items-center px-1">
-                                  <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                                    Lote Acumulado na Esteira ({loteProducao.length})
-                                  </span>
-                                  <span className="text-[8px] uppercase tracking-wider text-white/15">Fila</span>
-                                </div>
-                                <div className="flex flex-col gap-1.5 max-h-[140px] overflow-y-auto custom-scrollbar-visible pr-1">
-                                  {loteProducao.map((item) => (
-                                    <div 
-                                      key={item.id} 
-                                      className="bg-white/5 border border-white/10 rounded-lg p-2 flex justify-between items-center text-[9px] text-white/80 animate-fade-in"
-                                    >
-                                      <div className="flex flex-col gap-0.5 text-left truncate">
-                                        <span className="font-bold text-[#EFE5D3] uppercase tracking-wider">
-                                          {item.quantidade}x {item.tipo === "reels" ? "Reels" : (item.tipo === "carrossel" ? "Carrossel" : "Post Único")}
-                                        </span>
-                                        {item.tags.length > 0 && (
-                                          <span className="text-[7.5px] text-white/30 truncate">
-                                            Tags: {item.tags.join(", ")}
-                                          </span>
-                                        )}
-                                        {(item.agendamento.data || item.agendamento.hora) && (
-                                          <span className="text-[7.5px] text-brand-gold/70 font-semibold uppercase tracking-wider">
-                                            📅 {item.agendamento.data || "Sem data"} • ⏰ {item.agendamento.hora || "Sem hora"}
-                                          </span>
-                                        )}
-                                      </div>
-                                      <button 
-                                        onClick={() => handleRemoverDoLote(item.id)}
-                                        className="p-1 hover:text-brand-pink duration-150 font-bold text-xs shrink-0 select-none"
-                                      >
-                                        ✕
-                                      </button>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* CARD 3: PÓS-PRODUÇÃO (Fila de Envio) */}
-                      <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-                        <div 
-                          onClick={() => setExpandedSection(expandedSection === "pos" ? null : "pos")}
-                          className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-                        >
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
-                            C - Pós-Produção
-                          </span>
-                          <span className="text-[8px] text-white/30">
-                            {expandedSection === "pos" ? "▼" : "▶"}
-                          </span>
-                        </div>
-
-                        <div className={`transition-all duration-300 overflow-hidden ${
-                          expandedSection === "pos" ? "max-h-[220px] p-3 border-t border-white/5" : "max-h-0"
-                        }`}>
-                          <div className="flex flex-col gap-2.5">
-                            {/* Agendador Toggle */}
-                            <div className="flex flex-col gap-1 text-left">
-                              <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                                Data da Publicação
-                              </span>
-                              <input 
-                                type="date"
-                                disabled={!isPremium}
-                                value={agendamentoData}
-                                onChange={(e) => setExpandedSection("pos") || setAgendamentoData(e.target.value)}
-                                className={`w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white uppercase focus:outline-none focus:border-brand-blue/30 duration-200 ${
-                                  !isPremium ? "opacity-30 cursor-not-allowed" : ""
-                                }`}
-                              />
-                            </div>
-
-                            <div className="flex flex-col gap-1 text-left">
-                              <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                                Hora da Publicação
-                              </span>
-                              <input 
-                                type="time"
-                                disabled={!isPremium}
-                                value={agendamentoHora}
-                                onChange={(e) => setExpandedSection("pos") || setAgendamentoHora(e.target.value)}
-                                className={`w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white focus:outline-none focus:border-brand-blue/30 duration-200 ${
-                                  !isPremium ? "opacity-30 cursor-not-allowed" : ""
-                                }`}
-                              />
-                            </div>
-                            
-                            <div className="text-[7.5px] text-white/20 uppercase tracking-widest pl-1 text-left">
-                              {isPremium ? "✓ Conexão estável com VPS PM2" : "🔒 Agendamento restrito ao Premium"}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
+                    {/* Acordeões de Serviços */}
+                    {renderServicosPremium()}
                   </div>
 
                   {/* Botão de Upgrade para Free */}
