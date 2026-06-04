@@ -58,11 +58,8 @@ export default function App() {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [userEmail, setUserEmail] = useState("");
 
-  // Google Morph Login Sequence States
-  const [loginStage, setLoginStage] = useState("email"); // "email" ou "google"
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const passwordInputRef = useRef(null);
+  // Estado do E-mail de Acesso
+  const [enteredEmail, setEnteredEmail] = useState(() => localStorage.getItem("userEmail") || "");
   
   // Router Guard de Roteamento Dinâmico
   const [hasPersonaDefined, setHasPersonaDefined] = useState(false);
@@ -101,15 +98,7 @@ export default function App() {
     };
   }, [audio]);
 
-  // Garantia de Auto-Foco instantâneo na transição para a tela de senha (mecanismo à prova de falhas do browser)
-  useEffect(() => {
-    if (loginStage === "google" && passwordInputRef.current) {
-      const timer = setTimeout(() => {
-        passwordInputRef.current.focus();
-      }, 50);
-      return () => clearTimeout(timer);
-    }
-  }, [loginStage]);
+
 
   // Novo Onboarding de Dosagem de Personas
   const [dosagemPersona, setDosagemPersona] = useState({
@@ -318,6 +307,9 @@ ${subtomsSection}
     setIsLoggedIn(true);
     setIsAdminMode(email === "artz.genera@gmail.com" || email === "sinkando@gmail.com");
 
+    // Salvar e-mail no localStorage para lembrar na próxima visita
+    localStorage.setItem('userEmail', email);
+
     // Todos os acessos passam pelo Onboarding Perfeito de 5 telas (Login 1, Login 2, Vídeo, Contemplação, Sliders)
     setHasPersonaDefined(false);
     setOnboardingStep("video");
@@ -489,7 +481,7 @@ ${subtomsSection}
       
       const data = await res.json();
       if (res.ok && data.success) {
-        setLoginStage("google");
+        triggerGoogleAuthSequence(enteredEmail.trim());
       } else {
         alert(data.detail || "E-mail não cadastrado em nosso sistema!");
       }
@@ -499,13 +491,7 @@ ${subtomsSection}
     }
   };
 
-  const handlePasswordSubmit = () => {
-    if (loginPassword.trim() === "") {
-      alert("Por favor, digite sua senha para entrar!");
-      return;
-    }
-    triggerGoogleAuthSequence(enteredEmail);
-  };
+
 
   const renderDefinicoesPost = () => {
     return (
@@ -553,14 +539,9 @@ ${subtomsSection}
   if (!isLoggedIn) {
     return (
       <LoginScreen
-        loginStage={loginStage}
         enteredEmail={enteredEmail}
         setEnteredEmail={setEnteredEmail}
-        loginPassword={loginPassword}
-        setLoginPassword={setLoginPassword}
         handleEmailSubmit={handleEmailSubmit}
-        handlePasswordSubmit={handlePasswordSubmit}
-        passwordInputRef={passwordInputRef}
       />
     );
   }
