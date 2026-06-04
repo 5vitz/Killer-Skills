@@ -229,7 +229,7 @@ export default function App() {
   const [loteProducao, setLoteProducao] = useState([]);
   const isPremium = isLoggedIn && userEmail !== "free@killerskills.com.br";
 
-  const getTriadeHarmonica = () => {
+  const getTetracordeMeva = () => {
     const sorted = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
     
     const t1Id = sorted[0][0];
@@ -246,6 +246,8 @@ export default function App() {
     const quintas = [];
     if (t3Val > 50) {
       for (let i = 2; i < sorted.length; i++) {
+        // Se chegarmos no 4º elemento (índice 3), interrompemos para a Quinta não absorver a Sétima
+        if (i === 3) break;
         if (sorted[i][1] === t3Val) {
           const arch = ARCHETYPES.find(a => a.id === sorted[i][0]);
           if (arch) quintas.push(arch);
@@ -255,21 +257,27 @@ export default function App() {
       }
     }
 
+    // Sétima (4º lugar): Só ativa se > 50%
+    const t4Id = sorted[3] ? sorted[3][0] : null;
+    const t4Val = sorted[3] ? sorted[3][1] : 0;
+    const top4 = t4Val > 50 ? (ARCHETYPES.find(a => a.id === t4Id) || null) : null;
+
     // Subtoms: tudo o que sobrou (com valor estritamente acima do neutro de 50%)
-    // Excluímos a tônica, a terça (se ativa) e as quintas (se ativas)
+    // Excluímos a tônica, a terça, as quintas e a sétima (se ativas)
     const quintasIds = quintas.map(q => q.id);
     const subtoms = sorted.filter(([k, v]) => {
       if (k === t1Id) return false;
       if (top2 && k === top2.id) return false;
       if (quintasIds.includes(k)) return false;
+      if (top4 && k === top4.id) return false;
       return v > 50;
     }).map(([k, v]) => ARCHETYPES.find(a => a.id === k)).filter(Boolean);
 
-    return { top1, t1Val, top2, t2Val, quintas, t3Val, subtoms };
+    return { top1, t1Val, top2, t2Val, quintas, t3Val, top4, t4Val, subtoms };
   };
 
-  const compilarDiagnosticoMeva = () => {
-    const { top1, top2, quintas, subtoms } = getTriadeHarmonica();
+  const compilarDiagnosticoTetracorde = () => {
+    const { top1, top2, quintas, top4, subtoms } = getTetracordeMeva();
     
     const tonicaText = `Sua marca pessoal irradia a mensagem de ${top1.tag.toLowerCase()} guiada pela essência do ${top1.name}.`;
     const tercaText = top2 
@@ -283,17 +291,21 @@ export default function App() {
     } else {
       quintaText = `${top2 ? " sob" : " Sob"} uma estética silenciosa, minimalista e focada.`;
     }
+
+    const setimaText = top4
+      ? ` Todo o conjunto sob a direção de estilo ${top4.tag.toLowerCase()} do ${top4.name}.`
+      : "";
     
     const subList = subtoms.slice(0, 2).map(s => s.name);
     const coloridoText = subList.length > 0
       ? ` Pinceladas sutis de ${subList.join(" e ")} matizam com delicadeza sua atitude de comunicação.`
       : "";
       
-    return `${tonicaText}${tercaText}${quintaText}${coloridoText}`;
+    return `${tonicaText}${tercaText}${quintaText}${setimaText}${coloridoText}`;
   };
 
   const getPromptMestre = () => {
-    const { top1, t1Val, top2, t2Val, quintas, t3Val, subtoms } = getTriadeHarmonica();
+    const { top1, t1Val, top2, t2Val, quintas, t3Val, top4, t4Val, subtoms } = getTetracordeMeva();
     
     const tonicaSection = `- MENSAGEM / SIGNIFICADO (Tônica): ${top1.name} (Tag: ${top1.tag}, Dosagem: ${t1Val}%)`;
     const tercaSection = top2 
@@ -307,21 +319,27 @@ export default function App() {
       quintaSection = "- OBJETOS / ELEMENTOS (Quinta): NEUTRO (Abaixo do limite de 50%)";
     }
 
+    const setimaSection = top4
+      ? `- ESTILO / FOTOGRAFIA (Sétima): ${top4.name} (Tag: ${top4.tag}, Dosagem: ${t4Val}%)`
+      : "- ESTILO / FOTOGRAFIA (Sétima): NEUTRO (Abaixo do limite de 50%)";
+
     const subtomsSection = subtoms.length > 0
       ? `- COLORIDO / SUBTOMS: Pinceladas sutis de ${subtoms.map(s => s.name).slice(0, 3).join(", ")}`
       : "";
 
-    return `PROMPT DNA ARQUETÍPICO (TRÍADE HARMÔNICA MEVA):
+    return `PROMPT DNA ARQUETÍPICO (TETRACORDE HARMÔNICO MEVA):
 [DIRETRIZES DE ARQUITETURA VISUAL E VOZ]
 ${tonicaSection}
 ${tercaSection}
 ${quintaSection}
+${setimaSection}
 ${subtomsSection}
 
 [REGRAS DE PRODUÇÃO]
 - O tom falado e copy da legenda derivam da Tônica (${top1.name} - ${top1.tag}).
 - A atmosfera visual e o cenário do Reels/Carrossel derivam da Terça (${top2 ? `${top2.name} - ${top2.tag}` : "Neutro"}).
 - Os adereços e detalhes visuais da cena derivam da Quinta (${quintas.length > 0 ? quintas.map(q => q.name).join(" + ") : "Neutro"}).
+- A direção de fotografia e o verniz estético derivam da Sétima (${top4 ? `${top4.name} - ${top4.tag}` : "Neutro"}).
 - A coloração geral e sutileza de tom incorporam o colorido dos Subtoms.`;
   };
   const [storyboardData, setStoryboardData] = useState([
@@ -473,7 +491,7 @@ ${subtomsSection}
       return;
     }
 
-    const { top1, top2 } = getTriadeHarmonica();
+    const { top1, top2 } = getTetracordeMeva();
     const combinedTitle = top2 
       ? `${top1.name.toUpperCase()} / ${top2.name.toUpperCase()}`
       : top1.name.toUpperCase();
@@ -836,25 +854,31 @@ ${subtomsSection}
                   style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
                   {activeView === "servicos_escolha" ? (() => {
-                    const { top1, top2, quintas, subtoms } = getTriadeHarmonica();
+                    const { top1, top2, quintas, top4, subtoms } = getTetracordeMeva();
                     return (
                       <>
-                        {/* Sumário Visual da Tríade Harmônica (Respiração Visual na metade superior) */}
+                        {/* Sumário Visual do Tetracorde MEVA (Respiração Visual na metade superior) */}
                         <div className="relative z-10 flex flex-col gap-2.5 mb-auto select-none pt-2">
                           <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Mensagem (Texto)</span>
+                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Mensagem (Tônica)</span>
                             <span className="text-[10px] font-poppins-light tracking-wide text-brand-gold uppercase">{top1.tag}</span>
                           </div>
                           <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Cenário (Contexto)</span>
+                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Cenário (Terça)</span>
                             <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase">
                               {top2 ? top2.tag : "Neutro"}
                             </span>
                           </div>
                           <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Objetos (Elementos)</span>
+                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Elementos (Quinta)</span>
                             <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase text-right truncate max-w-[140px]">
                               {quintas.length > 0 ? quintas.map(q => q.tag).join(" + ") : "Neutro"}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Estilo (Sétima)</span>
+                            <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase">
+                              {top4 ? top4.tag : "Neutro"}
                             </span>
                           </div>
                           {subtoms.length > 0 && (
@@ -870,7 +894,7 @@ ${subtomsSection}
                         {/* Diagnóstico Dinâmico de Persona compilado na base do card */}
                         <div className="relative z-10 flex flex-col justify-end pr-1 mt-4 select-text">
                           <div className="font-poppins-light text-[12px] leading-relaxed text-justify whitespace-pre-line mb-3.5" style={{ color: '#FFFFFF' }}>
-                            {compilarDiagnosticoMeva()}
+                            {compilarDiagnosticoTetracorde()}
                           </div>
                           
                           {/* Seta discreta para voltar à calibração de sliders */}
@@ -941,7 +965,7 @@ ${subtomsSection}
         {/* TELA 1: SERVIÇOS AI (SMARTPHONE DE PLAYBACK - RITUAL GERAR PERSONA) */}
         {activeView === "servicos" && (() => {
           // Lógica do Título de Persona Combinado para a Matriz de Síntese
-          const { top1, top2 } = getTriadeHarmonica();
+          const { top1, top2 } = getTetracordeMeva();
           const combinedTitle = top2 
             ? `${top1.name} ${top2.name}`
             : top1.name;
