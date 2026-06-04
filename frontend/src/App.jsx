@@ -5,131 +5,16 @@ import {
   Info, Cpu, FolderOpen, Image as ImageIcon, Send, Sliders, RefreshCw, User,
   Volume2, VolumeX
 } from 'lucide-react';
+import { ARCHETYPES, ARCHETYPE_DETAILS, SEED_IMAGES, TEXTO_PADRAO } from './data/archetypes';
+import AudioControls from './components/AudioControls';
+import LoginScreen from './components/LoginScreen';
+import DefinicoesPost from './components/DefinicoesPost';
+import ServicosPremium from './components/ServicosPremium';
+import MyselfSidebar from './components/MyselfSidebar';
 
 const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
   ? "http://localhost:8000" 
   : "";
-
-// Seeds de Mídias para a Biblioteca / Almoxarifado
-const SEED_IMAGES = [
-  { id: 1, url: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500", name: "Jeep Renegade (Aventura)" },
-  { id: 2, url: "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=500", name: "Hyundai Ioniq (Futurista)" },
-  { id: 3, url: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500", name: "BYD Song Plus (Estilo)" },
-  { id: 4, url: "https://images.unsplash.com/photo-1621007947382-cc347941150e?w=500", name: "Toyota Hilux (Lamas)" },
-  { id: 5, url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500", name: "Porsche Taycan (Estética)" }
-];
-
-const ARCHETYPES = [
-  { id: 'sabio', name: 'Sábio', tag: 'Verdade', desc: 'O Sábio é aquela parte de você que busca silenciar o barulho do mundo para escutar a própria verdade. Ele representa a sua capacidade de refletir antes de agir, de observar além do óbvio e de valorizar o aprendizado constante. Ter esse lado ativo significa que você encontra paz na quietude, prefere conversas profundas e busca entender a lógica das coisas. Mas cuidado: o excesso de racionalidade pode afastar você das suas emoções. Use sua sabedoria para iluminar o seu caminho, mantendo sempre o coração aberto.', color: '#D4AF37', shadow: 'Sombra: Isolamento na frieza da mente e distanciamento das emoções.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp' },
-  { id: 'inocente', name: 'Inocente', tag: 'Simplicidade', desc: 'O Inocente é aquela parte de você que escolhe enxergar a beleza e a pureza nas coisas simples da vida. Ele representa o seu otimismo espontâneo, a capacidade de confiar e a busca constante pela felicidade leve e sem complicações. Ter esse lado forte significa que você mantém viva a fé no futuro e o dom de recomeçar sempre com o coração limpo. Mas atenção: a busca por um mundo perfeito pode fazer você negar realidades difíceis. Preserve sua leveza, mantendo os pés firmes no chão.', color: '#4D90FE', shadow: 'Sombra: Ingenuidade excessiva e negação de realidades dolorosas.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp' },
-  { id: 'explorador', name: 'Explorador', tag: 'Liberdade', desc: 'O Explorador é aquela chama interna que impulsiona você a buscar liberdade e a descobrir novos caminhos na jornada da vida. Ele representa a sua coragem de romper a rotina, o desejo de autenticidade e o amor pela independência. Ter esse lado ativo significa que você se renova com o desconhecido e detesta qualquer sentimento de aprisionamento. Mas cuidado: o medo de criar raízes pode gerar uma eterna inconstância. Lembre-se de que a maior de todas as viagens acontece dentro de você.', color: '#34A853', shadow: 'Sombra: Inconstância e dispersão pelo medo de criar raízes.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp' },
-  { id: 'cuidador', name: 'Cuidador', tag: 'Acolhimento', desc: 'O Cuidador é aquela força amorosa em você que encontra propósito em apoiar, proteger e nutrir a vida ao seu redor. Ele representa a sua generosidade natural, a compaixão sincera e a capacidade de criar ambientes seguros e acolhedores. Ter esse lado ativo significa que o bem-estar do outro é sagrado para você. Mas preste atenção: doar-se sem limites pode levar ao esquecimento das suas próprias necessidades. Lembre-se de que cuidar de si mesmo é o primeiro passo para poder cuidar do mundo.', color: '#EA4335', shadow: 'Sombra: Martírio e esgotamento por negligenciar a si próprio.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp' },
-  { id: 'heroi', name: 'Herói', tag: 'Superação', desc: 'O Herói é aquela força guerreira em você que se recusa a desistir diante dos obstáculos e das injustices. Ele representa a sua determinação obstinada, a coragem de assumir batalhas difíceis e a busca constante por superação pessoal. Ter esse lado ativo significa que você se fortalece no desafio e busca proteger quem ama. Mas fique alerta: a necessidade constante de lutar pode transformá-lo em alguém rígido ou obcecado por vitórias. Aprenda que a verdadeira força também sabe quando descansar.', color: '#E06666', shadow: 'Sombra: Rigor excessivo e obsessão por estar sempre em combate.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp' },
-  { id: 'mago', name: 'Mago', tag: 'Transformação', desc: 'O Mago é aquela parte intuitiva de você que acredita que a reality pode ser transformada a partir de uma visão interna profunda. Ele representa a sua capacidade de manifestar sonhos, de compreender o invisível e de catalisar mudanças profundas na vida cotidiana. Ter esse lado ativo significa que você enxerga conexões onde outros veem caos e busca criar o extraordinário. Mas atenção: o apego ao controle mental pode afastar você da simplicidade do mundo físico. Use sua magia com os pés no chão.', color: '#93C47D', shadow: 'Sombra: Manipulação da realidade e distanciamento do mundo real.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp' },
-  { id: 'rebelde', name: 'Rebelde', tag: 'Ruptura', desc: 'O Rebelde é aquela voz autêntica em você que questiona as regras vazias e se recusa a viver sob moldes impostos pelos outros. Ele representa a sua liberdade de pensar diferente, a coragem de quebrar padrões obsoletos e o desejo de revolução pessoal. Ter esse lado ativo significa que você valoriza a sua individualidade acima de tudo e busca a mudança real. Mas cuidado: a revolta cega pode levar ao isolamento ou à destruição sem propósito. Direcione sua força para construir o novo.', color: '#F6B26B', shadow: 'Sombra: Rebeldia vazia e destruição sem causa legítima.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp' },
-  { id: 'criador', name: 'Criador', tag: 'Originalidade', desc: 'O Criador é aquela força expressiva em você que sente a necessidade urgente de dar forma à imaginação e de trazer algo novo ao mundo. Ele representa o seu impulso artístico, a busca pela originalidade e o desejo de deixar uma marca pessoal duradoura. Ter esse lado ativo significa que você enxerga potencial criativo em cada detalhe da vida. Mas preste atenção: o perfeccionismo extremo pode paralisar as suas mãos e impedir você de entregar sua arte. Liberte suas criações com amor.', color: '#FFD966', shadow: 'Sombra: Perfeccionismo extremo que paralisa e impede a entrega.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp' },
-  { id: 'amante', name: 'Amante', tag: 'Conexão', desc: 'O Amante é aquela energia sensível em você que busca conexão profunda, beleza e harmonia em todas as relações humanas. Ele representa a sua capacidade de se entregar com paixão, de valorizar o afeto e de viver com intensidade sensorial e emocional. Ter esse lado ativo significa que você coloca o amor e a beleza no centro do seu caminho. Mas cuidado: o medo de ficar só ou de ser rejeitado pode fazer você anular a sua própria identidade. Lembre-se de amar a si mesmo primeiro.', color: '#C27BA0', shadow: 'Sombra: Anulação pessoal e perda de identidade para agradar.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp' },
-  { id: 'tolo', name: 'Tolo', tag: 'Leveza', desc: 'O Tolo é aquela parte leve e espontânea de você que escolhe viver o momento presente com alegria, humor e diversão contagiante. Ele representa a sua capacidade de rir de si mesmo, de simplificar o que parece pesado e de trazer sorrisos ao dia a dia. Ter esse lado active significa que você valoriza a leveza e sabe que a vida é um jogo belo. Mas atenção: usar o riso como escudo pode esconder sentimentos que precisam ser acolhidos com seriedade. Divirta-se sem fugir de si.', color: '#8E7CC3', shadow: 'Sombra: Frivolidade excessiva e fuga de responsabilidades sérias.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp' },
-  { id: 'homem_comum', name: 'Homem Comum', tag: 'Realismo', desc: 'O Homem Comum é aquela parte realista e acolhedora em você que valoriza a igualdade, a simplicidade e a conexão genuína com os outros. Ele representa o seu senso de comunidade, a empatia pé no chão e o desejo de pertencer sem precisar fingir ser quem não é. Ter esse lado ativo significa que você é confiável, valoriza a honestidade simples e respeita a todos igualmente. Mas cuidado: o medo de se destacar pode apagar o brilho da sua voz individual. Lembre-se de sua singularidade.', color: '#858585', shadow: 'Sombra: Conformismo excessivo e perda da voz própria.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp' },
-  { id: 'governante', name: 'Governante', tag: 'Autoridade', desc: 'O Governante é aquela força de liderança em você que busca criar ordem, estabilidade e prosperidade para a sua família e comunidade. Ele representa a sua capacidade de assumir responsabilidades, de organizar o caos e de guiar com segurança e clareza. Ter esse lado ativo significa que você é o pilar que sustenta e protege os outros nos momentos difíceis. Mas fique atento: a obsessão pelo controle pode gerar rigidez e afastar as pessoas. Lidere sempre com o coração aberto.', color: '#E09E25', shadow: 'Sombra: Rigidez controladora e autoritarismo defensivo.', seedUrl: 'https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp' }
-];
-
-const ARCHETYPE_DETAILS = {
-  sabio: {
-    desejo: "Silenciar o barulho do mundo e encontrar a verdade interna",
-    medo: "Viver na ilusão e ser guiado pela ignorância",
-    superpoder: "Observação profunda e discernimento intuitivo",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Sabio.webp",
-    sombra: "Isolamento na frieza da mente e distanciamento das emoções"
-  },
-  inocente: {
-    desejo: "Viver com espontaneidade, leveza e otimismo pleno",
-    medo: "Ser punido ou contaminado pela maldade e dureza do mundo",
-    superpoder: "Fé inabalável e pureza no recomeçar",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Inocente.webp",
-    sombra: "Ingenuidade excessiva e negação de realidades dolorosas"
-  },
-  explorador: {
-    desejo: "Viver com liberdade e descobrir sua própria verdade",
-    medo: "Ficar preso no conformismo e na rotina sufocante",
-    superpoder: "Coragem de desbravar novos caminhos",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Explorador.webp",
-    sombra: "Inconstância e dispersão pelo medo de criar raízes"
-  },
-  cuidador: {
-    desejo: "Proteger e nutrir aqueles que ama",
-    medo: "O egoísmo e a ingratidão dos que estão ao redor",
-    superpoder: "Generosidade e acolhimento incondicional",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Cuidador.webp",
-    sombra: "Martírio e esgotamento por negligenciar a si próprio"
-  },
-  heroi: {
-    desejo: "Superar desafios e proteger quem ama",
-    medo: "Fraqueza e fracasso diante dos obstáculos",
-    superpoder: "Determinação inabalável e coragem de lutar",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Heroi.webp",
-    sombra: "Rigor excessivo e obsessão por estar sempre em combate"
-  },
-  mago: {
-    desejo: "Transformar a realidade a partir de uma visão interior",
-    medo: "Consequências desastrosas causadas pelo controle inadequado",
-    superpoder: "Intuição afiada e manifestação de sonhos",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Mago.webp",
-    sombra: "Manipulação da realidade e distanciamento do world real"
-  },
-  rebelde: {
-    desejo: "Questionar regras obsoletas e provocar a mudança real",
-    medo: "Ser comum e impotente diante de padrões impostos",
-    superpoder: "Pensamento disruptivo e liberdade radical",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Rebelde.webp",
-    sombra: "Rebeldia vazia e destruição sem causa legítima"
-  },
-  criador: {
-    desejo: "Dar forma à imaginação e criar algo com alma",
-    medo: "Mediocridade e incapacidade de expressar sua visão",
-    superpoder: "Criatividade fluida e poder de dar vida às ideias",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Criador.webp",
-    sombra: "Perfeccionismo extremo que paralisa e impede a entrega"
-  },
-  amante: {
-    desejo: "Vivenciar o afeto, a sintonia e a entrega mútua",
-    medo: "A solidão profunda e a dor de não ser aceito ou desejado",
-    superpoder: "Sensibilidade, afeto e compromisso de alma",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Amante.webp",
-    sombra: "Anulação pessoal e perda de identidade para agradar"
-  },
-  tolo: {
-    desejo: "Alegria espontânea, riso leve e descontração plena",
-    medo: "A seriedade rígida e o tédio existencial",
-    superpoder: "Humor inteligente e habilidade de aliviar pesos",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tolo.webp",
-    sombra: "Frivolidade excessiva e fuga de responsabilidades sérias"
-  },
-  homem_comum: {
-    desejo: "Conectar-se com a simplicidade e pertencer com sinceridade",
-    medo: "Ser excluído do grupo ou rejeitado por sua simplicidade",
-    superpoder: "Empatia pé no chão e fidelidade ao cotidiano",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/CaraComum.webp",
-    sombra: "Conformismo excessivo e perda da voz própria"
-  },
-  governante: {
-    desejo: "Organizar o caos, guiar e prosperar coletivamente",
-    medo: "A perda de controle, a ruína e a desordem do ambiente",
-    superpoder: "Liderança responsável e poder de prover segurança",
-    imagem: "https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Governante.webp",
-    sombra: "Rigidez controladora e autoritarismo defensivo"
-  }
-};
-const TEXTO_PADRAO = `Eu tenho o dom de ver além do óbvio, trazendo clareza para a vida. Minha essência irradia otimismo puro, renovando a leveza de recomeçar. Minha jornada busca novos caminhos rumo à minha liberdade interior.
-
-Eu sei acolher com generosidade, sendo porto seguro para as pessoas. Eu ajo com coragem inabalável, determinado a vencer com honra. Eu tenho a força sutil de transformar meus sonhos em realidade.
-
-Eu penso fora dos padrões com ousadia, abrindo caminhos para o novo. Minha força criativa dá forma à imaginação, superando barreiras. Meu valor reside no afeto profundo que dedico a todas as relações.
-
-Eu trago a sabedoria do riso leve, aliviando os pesos do cotidiano.`;
-
-
-
 
 export default function App() {
   const servicosManual = [
@@ -620,539 +505,59 @@ ${subtomsSection}
 
   const renderDefinicoesPost = () => {
     return (
-      <div className="flex-1 flex flex-col gap-4 pt-2 overflow-y-auto pr-1 custom-scrollbar-visible">
-        
-        {/* CARD 1: PRÉ-PRODUÇÃO (DNA Institucional) */}
-        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-          <div 
-            onClick={() => setExpandedSection(expandedSection === "pre" ? null : "pre")}
-            className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-          >
-            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
-              PRÉ-PRODUÇÃO
-            </span>
-            <span className="text-[8px] text-white/30">
-              {expandedSection === "pre" ? "▼" : "▶"}
-            </span>
-          </div>
-          
-          <div className={`transition-all duration-300 overflow-hidden ${
-            expandedSection === "pre" ? "max-h-[160px] p-3 border-t border-white/5" : "max-h-0"
-          }`}>
-            <div className="flex flex-col gap-2">
-              <span className="text-[8px] uppercase tracking-wider text-white/30">
-                Validação da Persona (MEVA)
-              </span>
-              
-              {/* Botão Confirmar Persona */}
-              <button 
-                onClick={() => setPersonaConfirmed(!personaConfirmed)}
-                className={`w-full h-8 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 ${
-                  personaConfirmed 
-                    ? "bg-brand-blue/10 border border-brand-blue/30 text-brand-blue" 
-                    : "bg-white/5 border border-white/10 text-white/70 hover:bg-white/10"
-                }`}
-              >
-                {personaConfirmed ? (
-                  <>✓ PERSONA CONFIRMADA</>
-                ) : (
-                  <>✓ CONFIRMAR PERSONA</>
-                )}
-              </button>
-
-              {/* Botão Editar Sliders */}
-              <button 
-                disabled={!isPremium}
-                onClick={() => {
-                  setActiveView("servicos");
-                  setOnboardingStep("matriz");
-                }}
-                className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
-                  !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
-                }`}
-              >
-                ✎ EDITAR PERSONA {!isPremium && "🔒"}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* CARD 2: PRODUÇÃO (Tipos e Quantidades) */}
-        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-          <div 
-            onClick={() => setExpandedSection(expandedSection === "pro" ? null : "pro")}
-            className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-          >
-            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
-              PRODUÇÃO
-            </span>
-            <span className="text-[8px] text-white/30">
-              {expandedSection === "pro" ? "▼" : "▶"}
-            </span>
-          </div>
-
-          <div className={`transition-all duration-300 overflow-hidden ${
-            expandedSection === "pro" ? "max-h-[480px] p-3 border-t border-white/5" : "max-h-0"
-          }`}>
-            <div className="flex flex-col gap-3">
-              {/* Formato de Post */}
-              <div className="flex flex-col gap-1 text-left">
-                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                  Formato de Post
-                </span>
-                <select 
-                  value={postType}
-                  onChange={(e) => {
-                    const t = e.target.value;
-                    setPostType(t);
-                    setPostQty(0);
-                  }}
-                  className="w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white uppercase tracking-wider focus:outline-none focus:border-brand-blue/30 duration-200"
-                >
-                  <option value="reels">Reels (Vídeo)</option>
-                  <option value="carrossel">Carrossel (Imagens)</option>
-                  <option value="imagem_unica">Post Único (Imagem)</option>
-                </select>
-              </div>
-
-              {/* Quantidade Dinâmica */}
-              <div className="flex flex-col gap-1 text-left">
-                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                  {postType === "reels" && "Quantidade de Vídeos"}
-                  {postType === "carrossel" && "Quantidade de Slides (Imagens)"}
-                  {postType === "imagem_unica" && "Quantidade de Posts (Imagens)"}
-                </span>
-                
-                <div className="flex items-center gap-1">
-                  <button 
-                    onClick={() => {
-                      if (postQty > 0) setPostQty(prev => prev - 1);
-                    }}
-                    className="w-8 h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold font-mono duration-150 active:scale-90"
-                  >
-                    -
-                  </button>
-                  
-                  <div className="flex-1 h-8 bg-black/60 border border-white/5 rounded-lg flex items-center justify-center text-[10px] font-bold font-mono">
-                    {postQty} {postType === "carrossel" ? (postQty === 1 ? "Slide" : "Slides") : (postQty === 1 ? "Post" : "Posts")}
-                  </div>
-                  
-                  <button 
-                    onClick={() => {
-                      if (postQty < 10) setPostQty(prev => prev + 1);
-                    }}
-                    className="w-8 h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold font-mono duration-150 active:scale-90"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-
-              {/* Modulação por Tags */}
-              <div className="flex flex-col gap-1.5 text-left border-t border-white/5 pt-3 mt-1">
-                <div className="flex justify-between items-center px-1">
-                  <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                    Modulação por Tags ({tags.length}/5)
-                  </span>
-                  <span className="text-[8px] uppercase tracking-wider text-white/15">Limite</span>
-                </div>
-
-                {/* Lista de Badges de Tags */}
-                <div className="flex flex-wrap gap-1.5 p-2 bg-white/[0.01] border border-white/5 rounded-lg min-h-[42px] max-h-[76px] overflow-y-auto scrollbar-none">
-                  {tags.map((tag, idx) => (
-                    <span 
-                      key={idx}
-                      className="bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-[8.5px] font-semibold flex items-center gap-1.5 text-white/70 animate-fade-in"
-                    >
-                      {tag}
-                      <button 
-                        onClick={() => setTags(prev => prev.filter((_, i) => i !== idx))}
-                        className="hover:text-brand-pink duration-150 font-bold text-[9px] focus:outline-none shrink-0"
-                      >
-                        ×
-                      </button>
-                    </span>
-                  ))}
-                  {tags.length === 0 && (
-                    <span className="text-[8px] font-poppins-light text-white/20 italic self-center pl-1">
-                      Nenhuma tag ativa...
-                    </span>
-                  )}
-                </div>
-
-                {/* Input de Tags */}
-                <div className="relative">
-                  <input 
-                    type="text"
-                    disabled={tags.length >= 5}
-                    value={tagInput}
-                    onChange={(e) => setTagInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === ",") {
-                        e.preventDefault();
-                        const val = tagInput.trim().toLowerCase().replace(/[^a-z0-9-]/g, "");
-                        if (val && !tags.includes(val) && tags.length < 5) {
-                          setTags(prev => [...prev, val]);
-                        }
-                        setTagInput("");
-                      }
-                    }}
-                    placeholder={tags.length >= 5 ? "Limite atingido (5 tags)" : "Digitar tag (pressione Enter)"}
-                    className="w-full h-8 bg-white/[0.02] border border-white/10 rounded-lg px-3 text-[9px] text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
-                  />
-                </div>
-              </div>
-
-              {/* Botão de Adicionar à Esteira */}
-              <button 
-                onClick={handleAdicionarAoLote}
-                disabled={postQty === 0}
-                className={`w-full h-9 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 mt-3 select-none ${
-                  postQty === 0 
-                    ? "bg-white/5 border border-white/10 text-white/20 cursor-not-allowed" 
-                    : "bg-white/10 border border-white/20 hover:bg-white/15 text-white cursor-pointer active:scale-95"
-                }`}
-              >
-                Adicionar à Esteira ➔
-              </button>
-
-              {/* Fila do Lote Acumulado */}
-              {loteProducao.length > 0 && (
-                <div className="flex flex-col gap-2 border-t border-white/5 pt-3 mt-3">
-                  <div className="flex justify-between items-center px-1">
-                    <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                      Lote Acumulado na Esteira ({loteProducao.length})
-                    </span>
-                    <span className="text-[8px] uppercase tracking-wider text-white/15">Fila</span>
-                  </div>
-                  <div className="flex flex-col gap-1.5 max-h-[140px] overflow-y-auto custom-scrollbar-visible pr-1">
-                    {loteProducao.map((item) => (
-                      <div 
-                        key={item.id} 
-                        className="bg-white/5 border border-white/10 rounded-lg p-2 flex justify-between items-center text-[9px] text-white/80 animate-fade-in"
-                      >
-                        <div className="flex flex-col gap-0.5 text-left truncate">
-                          <span className="font-bold text-[#EFE5D3] uppercase tracking-wider">
-                            {item.quantidade}x {item.tipo === "reels" ? "Reels" : (item.tipo === "carrossel" ? "Carrossel" : "Post Único")}
-                          </span>
-                          {item.tags.length > 0 && (
-                            <span className="text-[7.5px] text-white/30 truncate">
-                              Tags: {item.tags.join(", ")}
-                            </span>
-                          )}
-                          {(item.agendamento.data || item.agendamento.hora) && (
-                            <span className="text-[7.5px] text-brand-gold/70 font-semibold uppercase tracking-wider">
-                              📅 {item.agendamento.data || "Sem data"} • ⏰ {item.agendamento.hora || "Sem hora"}
-                            </span>
-                          )}
-                        </div>
-                        <button 
-                          onClick={() => handleRemoverDoLote(item.id)}
-                          className="p-1 hover:text-brand-pink duration-150 font-bold text-xs shrink-0 select-none"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* CARD 3: PÓS-PRODUÇÃO (Fila de Envio) */}
-        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-          <div 
-            onClick={() => setExpandedSection(expandedSection === "pos" ? null : "pos")}
-            className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-          >
-            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
-              PÓS-PRODUÇÃO
-            </span>
-            <span className="text-[8px] text-white/30">
-              {expandedSection === "pos" ? "▼" : "▶"}
-            </span>
-          </div>
-
-          <div className={`transition-all duration-300 overflow-hidden ${
-            expandedSection === "pos" ? "max-h-[220px] p-3 border-t border-white/5" : "max-h-0"
-          }`}>
-            <div className="flex flex-col gap-2.5">
-              {/* Agendador Toggle */}
-              <div className="flex flex-col gap-1 text-left">
-                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                  Data da Publicação
-                </span>
-                <input 
-                  type="date"
-                  disabled={!isPremium}
-                  value={agendamentoData}
-                  onChange={(e) => setExpandedSection("pos") || setAgendamentoData(e.target.value)}
-                  className={`w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white uppercase focus:outline-none focus:border-brand-blue/30 duration-200 ${
-                    !isPremium ? "opacity-30 cursor-not-allowed" : ""
-                  }`}
-                />
-              </div>
-
-              <div className="flex flex-col gap-1 text-left">
-                <span className="text-[8px] uppercase tracking-wider text-white/30 pl-1">
-                  Hora da Publicação
-                </span>
-                <input 
-                  type="time"
-                  disabled={!isPremium}
-                  value={agendamentoHora}
-                  onChange={(e) => setExpandedSection("pos") || setAgendamentoHora(e.target.value)}
-                  className={`w-full h-8 bg-[#050505] border border-white/10 rounded-lg px-2 text-[9px] text-white focus:outline-none focus:border-brand-blue/30 duration-200 ${
-                    !isPremium ? "opacity-30 cursor-not-allowed" : ""
-                  }`}
-                />
-              </div>
-              
-              <div className="text-[7.5px] text-white/20 uppercase tracking-widest pl-1 text-left">
-                {isPremium ? "✓ Conexão estável com VPS PM2" : "🔒 Agendamento restrito ao Premium"}
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <DefinicoesPost
+        expandedSection={expandedSection}
+        setExpandedSection={setExpandedSection}
+        personaConfirmed={personaConfirmed}
+        setPersonaConfirmed={setPersonaConfirmed}
+        isPremium={isPremium}
+        setActiveView={setActiveView}
+        setOnboardingStep={setOnboardingStep}
+        postType={postType}
+        setPostType={setPostType}
+        postQty={postQty}
+        setPostQty={setPostQty}
+        tags={tags}
+        setTags={setTags}
+        tagInput={tagInput}
+        setTagInput={setTagInput}
+        loteProducao={loteProducao}
+        handleAdicionarAoLote={handleAdicionarAoLote}
+        handleRemoverDoLote={handleRemoverDoLote}
+        agendamentoData={agendamentoData}
+        setAgendamentoData={setAgendamentoData}
+        agendamentoHora={agendamentoHora}
+        setAgendamentoHora={setAgendamentoHora}
+      />
     );
   };
 
   const renderServicosPremium = () => {
     return (
-      <div className="w-full flex-1 flex flex-col gap-2 overflow-hidden mb-3">
-        
-        {/* CATEGORIA 1: CRIAÇÃO - POST MANUAL */}
-        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-          <div 
-            onClick={() => setExpandedSvc(expandedSvc === "manual" ? null : "manual")}
-            className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-          >
-            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
-              CRIAÇÃO - POST MANUAL
-            </span>
-            <span className="text-[8px] text-white/30">
-              {expandedSvc === "manual" ? "▼" : "▶"}
-            </span>
-          </div>
-          
-          <div className={`transition-all duration-300 overflow-hidden ${
-            expandedSvc === "manual" ? "max-h-[220px] p-2 border-t border-white/5" : "max-h-0"
-          }`}>
-            <div className="flex flex-col gap-1.5">
-              {servicosManual.map((svc) => {
-                const isActive = isPremium || !svc.premium;
-                return (
-                  <div 
-                    key={svc.id} 
-                    className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
-                      isActive ? "text-white/80" : "text-white/20"
-                    }`}
-                  >
-                    <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
-                    <span className={isActive ? "text-brand-gold" : "text-white/20"}>
-                      {isActive ? "✓" : "🔒"}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* CATEGORIA 2: CRIAÇÃO - POST COM IA */}
-        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-          <div 
-            onClick={() => setExpandedSvc(expandedSvc === "ia" ? null : "ia")}
-            className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-          >
-            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
-              CRIAÇÃO - POST COM IA
-            </span>
-            <span className="text-[8px] text-white/30">
-              {expandedSvc === "ia" ? "▼" : "▶"}
-            </span>
-          </div>
-          
-          <div className={`transition-all duration-300 overflow-hidden ${
-            expandedSvc === "ia" ? "max-h-[250px] p-2 border-t border-white/5" : "max-h-0"
-          }`}>
-            <div className="flex flex-col gap-1.5">
-              {servicosIA.map((svc) => {
-                const isActive = isPremium || !svc.premium;
-                return (
-                  <div 
-                    key={svc.id} 
-                    className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
-                      isActive ? "text-white/80" : "text-white/20"
-                    }`}
-                  >
-                    <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
-                    <span className={isActive ? "text-brand-gold" : "text-white/20"}>
-                      {isActive ? "✓" : "🔒"}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* CATEGORIA 3: POSTAGEM */}
-        <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
-          <div 
-            onClick={() => setExpandedSvc(expandedSvc === "postagem" ? null : "postagem")}
-            className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
-          >
-            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
-              POSTAGEM
-            </span>
-            <span className="text-[8px] text-white/30">
-              {expandedSvc === "postagem" ? "▼" : "▶"}
-            </span>
-          </div>
-          
-          <div className={`transition-all duration-300 overflow-hidden ${
-            expandedSvc === "postagem" ? "max-h-[120px] p-2 border-t border-white/5" : "max-h-0"
-          }`}>
-            <div className="flex flex-col gap-1.5">
-              {servicosPostagem.map((svc) => {
-                const isActive = isPremium || !svc.premium;
-                return (
-                  <div 
-                    key={svc.id} 
-                    className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
-                      isActive ? "text-white/80" : "text-white/20"
-                    }`}
-                  >
-                    <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
-                    <span className={isActive ? "text-brand-gold" : "text-white/20"}>
-                      {isActive ? "✓" : "🔒"}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <ServicosPremium
+        expandedSvc={expandedSvc}
+        setExpandedSvc={setExpandedSvc}
+        isPremium={isPremium}
+        servicosManual={servicosManual}
+        servicosIA={servicosIA}
+        servicosPostagem={servicosPostagem}
+      />
     );
   };
 
   // 1. TELA DE LOGIN (SMARTPHONE DE GLOWS AZUL/DOURADO)
   if (!isLoggedIn) {
     return (
-      <div className="relative w-screen h-screen flex justify-center items-center bg-black overflow-hidden select-none animate-fade-in">
-        {/* Breathing Lilac & Emerald Sacred Background */}
-        <div className="smoke-bg-container">
-          <div className="smoke-cloud-1" />
-          <div className="smoke-cloud-2" />
-          <div className="smoke-cloud-3" />
-        </div>
-
-        {/* Smartphone Container */}
-        <div 
-          className="relative w-[340px] h-[550px] bg-[#0A0A0C] border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-500"
-        >
-          {/* Visor Interno */}
-          <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 text-center z-10 text-white relative">
-            {loginStage === "email" ? (
-              /* ETAPA 1: DIGITAR E-MAIL DE ACESSO */
-              <form 
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  await handleEmailSubmit();
-                }}
-                className="w-full flex flex-col items-center justify-center animate-fade-in"
-              >
-                {/* Cabeçalho da Tela 0 (Âncora de Altura Fixa para Sincronia Espacial - Deslocado 30px para Cima) */}
-                <div className="h-[96px] flex flex-col items-center justify-center mb-[54px]">
-                  {/* Logo Metálica */}
-                  <div className="text-3xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-white to-brand-blue mb-1">
-                    KILLER SKILLS
-                  </div>
-                  <div className="text-[9px] font-bold tracking-widest text-[#1E60FF] uppercase">
-                    KS Studio
-                  </div>
-                </div>
-
-                {/* Entrada de Email */}
-                <div className="w-full flex flex-col gap-1.5 text-left mb-6">
-                  <input 
-                    type="email" 
-                    autoFocus
-                    value={enteredEmail}
-                    onChange={(e) => setEnteredEmail(e.target.value)}
-                    placeholder="nome@exemplo.com"
-                    className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-lg px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
-                  />
-                </div>
-
-                {/* Botão de Avanço */}
-                <button 
-                  type="submit"
-                  className="btn-login-avancar mb-6"
-                >
-                  AVANÇAR <ArrowRight className="w-4 h-4" />
-                </button>
-              </form>
-            ) : (
-              /* ETAPA 2: GOOGLE SIGN-IN MORPH */
-              <form 
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handlePasswordSubmit();
-                }}
-                className="w-full flex flex-col items-center justify-center animate-fade-in"
-              >
-                {/* Cabeçalho da Tela 0A (Symmetrical height and spacing - Deslocado 30px para Cima) */}
-                <div className="h-[96px] flex flex-col items-center justify-center mb-[54px]">
-                  {/* Google Logo SVG - Ampliado e Elevado */}
-                  <svg className="w-12 h-12 mb-3.5" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                  </svg>
-
-                  <h3 className="text-[10px] font-poppins-light text-white/50 uppercase tracking-widest">
-                    Entre Com a Conta Desejada
-                  </h3>
-                </div>
-
-                {/* Entrada de Senha */}
-                <div className="w-full flex flex-col gap-1.5 text-left mb-6">
-                  <input 
-                    type="password"
-                    ref={passwordInputRef}
-                    autoFocus
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                    placeholder="Digite sua Senha"
-                    className="w-full h-11 bg-white/[0.03] border border-white/10 rounded-lg px-4 text-xs text-white placeholder-white/20 focus:outline-none focus:border-brand-blue/50 duration-200"
-                  />
-                </div>
-
-                {/* Botão de Entrada */}
-                <button 
-                  type="submit"
-                  className="w-full btn-login-avancar mb-6"
-                >
-                  ENTRAR
-                </button>
-              </form>
-            )}
-
-            <div className="text-[9px] font-bold text-white/10 tracking-widest uppercase">
-              KS STUDIO v4.0
-            </div>
-          </div>
-        </div>
-      </div>
+      <LoginScreen
+        loginStage={loginStage}
+        enteredEmail={enteredEmail}
+        setEnteredEmail={setEnteredEmail}
+        loginPassword={loginPassword}
+        setLoginPassword={setLoginPassword}
+        handleEmailSubmit={handleEmailSubmit}
+        handlePasswordSubmit={handlePasswordSubmit}
+        passwordInputRef={passwordInputRef}
+      />
     );
   }
 
@@ -1182,230 +587,19 @@ ${subtomsSection}
       </div>
 
       {/* 1. BARRA LATERAL METÁLICA PREMIUM */}
-      <div className="w-[320px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A] relative overflow-hidden transition-all duration-500">
-        
-        {/* ESTADO A: MENU PADRÃO */}
-        <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showPersonaCard ? "opacity-0 scale-95 pointer-events-none absolute inset-5" : "opacity-100 scale-100"}`}>
-          <div className="flex flex-col">
-            {/* Bloco de Identidade: Marca + Conta do Usuário (Espaçamento Luxuoso) */}
-            <div className="flex flex-col gap-8">
-              {/* Título do Cockpit */}
-              <div className="text-center">
-                <div className="text-2xl font-bold tracking-tight text-white/90">Killer Skills</div>
-                <div className="text-[9px] font-bold tracking-wider uppercase text-brand-blue">
-                  KS STUDIO
-                </div>
-              </div>
-
-              {/* Card do Usuário (Mesma Altura e Estilo dos Itens do Menu) */}
-              <div className="w-full h-11 px-4 rounded-lg flex items-center justify-start gap-3 bg-white/5 border border-white/5 shrink-0">
-                <div className={`w-5 h-5 rounded-full flex justify-center items-center font-bold text-[9px] shrink-0 ${isAdminMode ? "bg-brand-gold text-black" : "bg-brand-blue text-white"}`}>
-                  {userEmail.substring(0, 2).toUpperCase()}
-                </div>
-                <div className="text-xs font-semibold text-white/70 overflow-hidden text-ellipsis whitespace-nowrap">
-                  {userEmail}
-                </div>
-              </div>
-            </div>
-
-            {/* Divisor de Seção (Posicionado Mais Abaixo para Dar uma Respirada) */}
-            <hr className="border-white/10 mt-10 mb-8" />
-
-            {/* Menu de Áreas de Trabalho (Deslocado mais para baixo com espaçamento amplo) */}
-            <div className="flex flex-col gap-2 pt-2">
-              
-              <button 
-                onClick={() => setActiveView("servicos")}
-                className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-                  activeView === "servicos" 
-                    ? "bg-white/5 border border-white/5 text-white" 
-                    : "text-white/60 hover:bg-white/5 hover:text-white"
-                }`}
-              >
-                <User className="w-4 h-4 shrink-0" /> PERSONA
-              </button>
-
-              <button 
-                onClick={() => setActiveView("servicos_escolha")}
-                className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-                  activeView === "servicos_escolha" 
-                    ? "bg-white/5 border border-white/5 text-white" 
-                    : "text-white/60 hover:bg-white/5 hover:text-white"
-                }`}
-              >
-                <Cpu className="w-4 h-4 shrink-0" /> SERVIÇOS
-              </button>
-
-              <button 
-                onClick={() => setActiveView("storyboard")}
-                className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
-                  activeView === "storyboard" 
-                    ? "bg-white/5 border border-white/5 text-white" 
-                    : "text-white/60 hover:bg-white/5 hover:text-white"
-                }`}
-              >
-                <Sparkles className="w-4 h-4 shrink-0" /> KS STUDIO
-              </button>
-            </div>
-          </div>
-
-          {/* Rodapé da Sidebar */}
-          <div className="flex flex-col gap-1.5 border-t border-white/10 pt-4">
-            {/* Alternador Administrativo de Cockpit */}
-            <button 
-              onClick={() => {
-                if (isAdminMode) {
-                  triggerGoogleAuthSequence("scalla_records@gmail.com");
-                } else {
-                  triggerGoogleAuthSequence("artz.genera@gmail.com");
-                }
-              }}
-              className="w-full h-11 px-4 rounded-lg text-left text-[10px] font-bold uppercase tracking-widest flex items-center gap-3 duration-200 text-white/40 hover:bg-white/5 hover:text-white"
-            >
-              <ShieldCheck className="w-4 h-4 shrink-0 text-white/40" /> PAINEL ADM
-            </button>
-
-            <button 
-              onClick={handleLogout}
-              className="w-full h-11 px-4 rounded-lg text-left text-[10px] font-bold uppercase tracking-widest flex items-center gap-3 duration-200 text-white/40 hover:bg-brand-pink/10 hover:text-brand-pink"
-            >
-              <LogOut className="w-4 h-4 shrink-0 text-white/40" /> ENCERRAR SESSÃO
-            </button>
-
-            <div className="w-full h-11 px-4 flex items-center gap-3 text-white/40 select-none">
-              <div className="w-4 flex justify-center items-center shrink-0">
-                <span className="w-2 h-2 bg-green-500 rounded-full active-pulse" />
-              </div>
-              <span className="text-[10px] font-bold uppercase tracking-widest">ONLINE NA WEB</span>
-            </div>
-          </div>
-        </div>
-
-        {/* ESTADO B: GUIA FINO E DETALHADO (ARQUÉTIPOS TEXTOS) */}
-        <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showPersonaCard ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
-          {showPersonaCard && (
-            <>
-              {/* TOPO FIXO: Título Geral */}
-              <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
-                <h2 
-                  className="text-sm uppercase tracking-wider text-white text-center"
-                  style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                >
-                  {activeView === "servicos_escolha" ? "MYSELF" : "Significado"}
-                </h2>
-              </div>
-
-              {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
-              <div className="flex-1 flex flex-col gap-4 overflow-hidden">
-                <div 
-                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col transition-all duration-500"
-                  style={{ background: ACTIVE_COCKPIT_GRADIENT }}
-                >
-                  {activeView === "servicos_escolha" ? (() => {
-                    const { top1, top2, quintas, top4, subtoms } = getTetracordeMeva();
-                    return (
-                      <>
-                        {/* Sumário Visual do Tetracorde MEVA (Respiração Visual na metade superior) */}
-                        <div className="relative z-10 flex flex-col gap-2.5 mb-auto select-none pt-2">
-                          <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Mensagem (Tônica)</span>
-                            <span className="text-[10px] font-poppins-light tracking-wide text-brand-gold uppercase">{top1.tag}</span>
-                          </div>
-                          <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Cenário (Terça)</span>
-                            <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase">
-                              {top2 ? top2.tag : "Neutro"}
-                            </span>
-                          </div>
-                          <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Elementos (Quinta)</span>
-                            <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase text-right truncate max-w-[140px]">
-                              {quintas.length > 0 ? quintas.map(q => q.tag).join(" + ") : "Neutro"}
-                            </span>
-                          </div>
-                          <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Estilo (Sétima)</span>
-                            <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase">
-                              {top4 ? top4.tag : "Neutro"}
-                            </span>
-                          </div>
-                          {subtoms.length > 0 && (
-                            <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                              <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Colorido (Subtoms)</span>
-                              <span className="text-[9px] font-poppins-light tracking-wide text-white/40 uppercase truncate max-w-[140px]">
-                                {subtoms.slice(0, 2).map(s => s.name).join(", ")}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Diagnóstico Dinâmico de Persona compilado na base do card */}
-                        <div className="relative z-10 flex flex-col justify-end pr-1 mt-4 select-text">
-                          <div className="font-poppins-light text-[12px] leading-relaxed text-justify whitespace-pre-line mb-3.5" style={{ color: '#FFFFFF' }}>
-                            {compilarDiagnosticoTetracorde()}
-                          </div>
-                          
-                          {/* Seta discreta para voltar à calibração de sliders */}
-                          <div className="flex items-center gap-1.5 select-none shrink-0 border-t border-white/5 pt-2.5 mt-1">
-                            <button 
-                              onClick={() => {
-                                setActiveView("servicos");
-                                setOnboardingStep("matriz");
-                              }}
-                              className="text-[9px] font-poppins-light text-white/30 hover:text-white/70 flex items-center gap-1 duration-150 cursor-pointer"
-                            >
-                              <ChevronLeft className="w-3.5 h-3.5" /> Voltar para os sliders de calibração
-                            </button>
-                          </div>
-                        </div>
-                      </>
-                    );
-                  })() : (
-                    <>
-                      {/* Descrição Ontológica Poética (Ajustada para preenchimento natural sem scroll) */}
-                      <p className="relative z-10 font-poppins-light text-[12px] leading-relaxed text-justify mb-4" style={{ color: '#FFFFFF' }}>
-                        {activeArch.desc}
-                      </p>
-
-                      {/* Fichas Técnicas Delicadas */}
-                      <div className="relative z-10 flex flex-col gap-2.5 pt-3 border-t border-white/5 mt-auto">
-                        <div className="flex flex-col text-left">
-                          <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Desejo Central</span>
-                          <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
-                            {ARCHETYPE_DETAILS[activeArch.id]?.desejo}
-                          </span>
-                        </div>
-
-                        <div className="flex flex-col text-left">
-                          <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Maior Medo</span>
-                          <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
-                            {ARCHETYPE_DETAILS[activeArch.id]?.medo}
-                          </span>
-                        </div>
-
-                        <div className="flex flex-col text-left">
-                          <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Superpoder</span>
-                          <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
-                            {ARCHETYPE_DETAILS[activeArch.id]?.superpoder}
-                          </span>
-                        </div>
-
-                        <div className="flex flex-col text-left">
-                          <span className="text-[8px] tracking-wider uppercase font-poppins-light" style={{ color: '#FFFFFF' }}>Sombra</span>
-                          <span className="text-[10px] font-poppins-light leading-tight" style={{ color: '#FFFFFF' }}>
-                            {ARCHETYPE_DETAILS[activeArch.id]?.sombra}
-                          </span>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-
-      </div>
+      <MyselfSidebar
+        showPersonaCard={showPersonaCard}
+        activeView={activeView}
+        setActiveView={setActiveView}
+        userEmail={userEmail}
+        isAdminMode={isAdminMode}
+        triggerGoogleAuthSequence={triggerGoogleAuthSequence}
+        handleLogout={handleLogout}
+        getTetracordeMeva={getTetracordeMeva}
+        compilarDiagnosticoTetracorde={compilarDiagnosticoTetracorde}
+        setOnboardingStep={setOnboardingStep}
+        activeArch={activeArch}
+      />
 
       {/* 2. CONTEÚDO PRINCIPAL (COMPLETAMENTE ADAPTÁVEL) */}
       <div className="flex-1 bg-[#050505] p-10 flex flex-col justify-center items-center overflow-hidden">
@@ -1606,34 +800,12 @@ ${subtomsSection}
                   </div>
                 </div>
 
-                {/* ALWAYS-VISIBLE AUDIO CONTROLS & BRAND SIGNATURE */}
-                <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4 shrink-0">
-                  <div className="flex items-center gap-3 text-white/40">
-                    <div className="flex items-center gap-1 shrink-0">
-                      <button 
-                        onClick={() => setIsMuted(!isMuted)} 
-                        className="p-1 rounded-lg hover:bg-white/5 hover:text-white transition duration-200 shrink-0"
-                      >
-                        {isMuted ? <VolumeX className="w-3.5 h-3.5 text-brand-pink" /> : <Volume2 className="w-3.5 h-3.5 text-brand-blue" />}
-                      </button>
-                      <span className="text-[9px] font-black uppercase tracking-wider whitespace-nowrap">
-                        {isMuted ? "Áudio Mutado" : "Trilha Sonora"}
-                      </span>
-                    </div>
-                    <input 
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.01"
-                      value={volume}
-                      onChange={(e) => setVolume(parseFloat(e.target.value))}
-                      className="flex-1 premium-slider min-w-[60px]"
-                    />
-                  </div>
-                  <div className="text-[8px] font-black tracking-widest text-center text-white/15 uppercase mt-1">
-                    Killer Skills v4.0 • Direção de Arte AI
-                  </div>
-                </div>
+                <AudioControls
+                  isMuted={isMuted}
+                  setIsMuted={setIsMuted}
+                  volume={volume}
+                  setVolume={setVolume}
+                />
               </div>
 
             </div>
@@ -1727,34 +899,12 @@ ${subtomsSection}
                 </div>
               </div>
 
-              {/* ALWAYS-VISIBLE AUDIO CONTROLS & BRAND SIGNATURE */}
-              <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4 shrink-0">
-                <div className="flex items-center gap-3 text-white/40">
-                  <div className="flex items-center gap-1 shrink-0">
-                    <button 
-                      onClick={() => setIsMuted(!isMuted)} 
-                      className="p-1 rounded-lg hover:bg-white/5 hover:text-white transition duration-200 shrink-0"
-                    >
-                      {isMuted ? <VolumeX className="w-3.5 h-3.5 text-brand-pink" /> : <Volume2 className="w-3.5 h-3.5 text-brand-blue" />}
-                    </button>
-                    <span className="text-[9px] font-black uppercase tracking-wider whitespace-nowrap">
-                      {isMuted ? "Áudio Mutado" : "Trilha Sonora"}
-                    </span>
-                  </div>
-                  <input 
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={volume}
-                    onChange={(e) => setVolume(parseFloat(e.target.value))}
-                    className="flex-1 premium-slider min-w-[60px]"
-                  />
-                </div>
-                <div className="text-[8px] font-black tracking-widest text-center text-white/15 uppercase mt-1">
-                  Killer Skills v4.0 • Direção de Arte AI
-                </div>
-              </div>
+              <AudioControls
+                isMuted={isMuted}
+                setIsMuted={setIsMuted}
+                volume={volume}
+                setVolume={setVolume}
+              />
             </div>
 
           </div>
@@ -1848,34 +998,12 @@ ${subtomsSection}
                 </div>
               </div>
 
-              {/* ALWAYS-VISIBLE AUDIO CONTROLS & BRAND SIGNATURE */}
-              <div className="flex flex-col gap-2 pt-4 border-t border-white/10 mt-4 shrink-0">
-                <div className="flex items-center gap-3 text-white/40">
-                  <div className="flex items-center gap-1 shrink-0">
-                    <button 
-                      onClick={() => setIsMuted(!isMuted)} 
-                      className="p-1 rounded-lg hover:bg-white/5 hover:text-white transition duration-200 shrink-0"
-                    >
-                      {isMuted ? <VolumeX className="w-3.5 h-3.5 text-brand-pink" /> : <Volume2 className="w-3.5 h-3.5 text-brand-blue" />}
-                    </button>
-                    <span className="text-[9px] font-black uppercase tracking-wider whitespace-nowrap">
-                      {isMuted ? "Áudio Mutado" : "Trilha Sonora"}
-                    </span>
-                  </div>
-                  <input 
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={volume}
-                    onChange={(e) => setVolume(parseFloat(e.target.value))}
-                    className="flex-1 premium-slider min-w-[60px]"
-                  />
-                </div>
-                <div className="text-[8px] font-black tracking-widest text-center text-white/15 uppercase mt-1">
-                  Killer Skills v4.0 • Direção de Arte AI
-                </div>
-              </div>
+              <AudioControls
+                isMuted={isMuted}
+                setIsMuted={setIsMuted}
+                volume={volume}
+                setVolume={setVolume}
+              />
             </div>
 
           </div>
