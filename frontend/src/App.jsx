@@ -11,6 +11,10 @@ import LoginScreen from './components/LoginScreen';
 import DefinicoesPost from './components/DefinicoesPost';
 import ServicosPremium from './components/ServicosPremium';
 import MyselfSidebar from './components/MyselfSidebar';
+import EspelhoDaAlma from './components/EspelhoDaAlma';
+import PortalPersona from './components/PortalPersona';
+import KsStudio from './components/KsStudio';
+import Almoxarifado from './components/Almoxarifado';
 
 const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
   ? "http://localhost:8000" 
@@ -606,207 +610,28 @@ ${subtomsSection}
         
         {/* TELA 1: SERVIÇOS AI (SMARTPHONE DE PLAYBACK - RITUAL GERAR PERSONA) */}
         {activeView === "servicos" && (() => {
-          // Lógica do Título de Persona Combinado para a Matriz de Síntese
-          const { top1, top2 } = getTetracordeMeva();
-          const combinedTitle = top2 
-            ? `${top1.name} ${top2.name}`
-            : top1.name;
-
           const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || ARCHETYPES[0]) : null;
-
           return (
             <div className="relative w-full h-full flex justify-center items-center">
+              
+              <EspelhoDaAlma
+                onboardingStep={onboardingStep}
+                setOnboardingStep={setOnboardingStep}
+                dosagemPersona={dosagemPersona}
+                setDosagemPersona={setDosagemPersona}
+                setHoveredArchetype={setHoveredArchetype}
+                activeArch={activeArch}
+                setHasPersonaDefined={setHasPersonaDefined}
+                setActiveView={setActiveView}
+              />
 
-              {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-              <div 
-                className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30" 
-              >
-                {/* Visor Interno */}
-                {/* Visor Interno (Fundo preto removido em Tela1A e Tela1B para renderização direta no Player) */}
-                <div 
-                  className="w-full h-full flex flex-col justify-between relative overflow-hidden z-10 select-none text-white bg-transparent border-0 p-0"
-                >
-                  {onboardingStep === "video" ? (
-                    /* TELA 1A - LETREIRO 1 (OS ARQUÉTIPOS DE JUNG) */
-                    <div key="screen-1a" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
-                      
-                      {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
-                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-white/[0.02] mb-4">
-                        <img 
-                          key="img-1a"
-                          src="https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tela1A.webp" 
-                          className="w-full h-full object-cover brightness-[0.6]" 
-                          alt="AI Guide"
-                        />
-                        {/* Letreiro 1 Overlay Inside Card (Top Position) */}
-                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/80 backdrop-blur-[2px] py-3 border-y border-white/[0.06] z-20">
-                          <div className="inline-block whitespace-nowrap animate-marquee text-[20px] font-poppins-light text-gold-dress tracking-widest uppercase">
-                            ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ Os 12 Arquétipos de Jung ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Botão de Avanço para a Identificação */}
-                      <button 
-                        onClick={() => setOnboardingStep("identificacao")}
-                        className="btn-dashboard-avancar z-10 mt-auto"
-                      >
-                        AVANÇAR <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ) : onboardingStep === "identificacao" ? (
-                    /* TELA 1B - LETREIRO 2 (COM QUAIS ARQUÉTIPOS VOCÊ SE IDENTIFICA?) */
-                    <div key="screen-1b" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
-                      
-                      {/* Card da Imagem com Bordas Arredondadas e Cinza Clarinho (Flex-1 para preencher todo o espaço) */}
-                      <div className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-white/[0.02] mb-4">
-                        <img 
-                          key="img-1b"
-                          src="https://storage.googleapis.com/gen-lang-client-0513318140.firebasestorage.app/bibliotecas/scalla_records/scallarecords/Tela1B.webp" 
-                          className="w-full h-full object-cover brightness-[0.6] translate-y-[30px]" 
-                          alt="Archetype Study"
-                        />
-                        {/* Letreiro 2 Overlay Inside Card (Top Position) */}
-                        <div className="absolute top-3 left-0 right-0 w-full overflow-hidden whitespace-nowrap bg-black/80 backdrop-blur-[2px] py-3 border-y border-white/[0.06] z-20">
-                          <div className="inline-block whitespace-nowrap animate-marquee text-[20px] font-poppins-light text-gold-dress tracking-widest uppercase" style={{ animationDuration: "25s" }}>
-                            ♥ O quanto você se identifica com cada Arquétipo? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ O quanto você se identifica com cada Arquétipo? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ O quanto você se identifica com cada Arquétipo? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                            ♥ O quanto você se identifica com cada Arquétipo? ♥ &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Botão de Avanço para a Matriz */}
-                      <button 
-                        onClick={() => setOnboardingStep("matriz")}
-                        className="btn-dashboard-avancar z-10 mt-auto"
-                      >
-                        AVANÇAR <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ) : (
-                    /* PASSO 3: PAINEL MATRIZ DE SÍNTESE (CALIBRAÇÃO DIRETA COM FUNDO PRETO PREMIUM) */
-                    <div key="screen-1c" className="w-full h-full flex flex-col justify-between p-0 select-none relative">
-                      
-                      {/* Card da Matriz com Bordas Arredondadas e Fundo Grafite Sólido Luxuoso */}
-                      <div 
-                        className="relative w-full flex-1 rounded-lg overflow-hidden border border-white/10 shadow-2xl mb-4 flex flex-col pt-1 pb-0 px-0 justify-between"
-                        style={{ background: ACTIVE_PLAYER_GRADIENT }}
-                      >
-                        {/* Header do Player Central */}
-                        <div className="w-full shrink-0 select-none mt-4 mb-2">
-                          <h2 
-                            className="text-sm uppercase tracking-wider text-white text-center"
-                            style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                          >
-                            ESPELHO DA ALMA
-                          </h2>
-                        </div>
-                        
-                        {/* Lista de Gradações dos 12 Sliders (Sem Scroll, Totalmente Encaixados e Compactados com Alturas Fixas Simétricas) */}
-                        <div className="mb-4 mt-auto overflow-hidden flex flex-col gap-0 h-[384px]">
-                          {ARCHETYPES.map((arch) => {
-                            return (
-                              <div 
-                                key={arch.id} 
-                                onMouseEnter={() => setHoveredArchetype(arch)}
-                                onMouseLeave={() => setHoveredArchetype(null)}
-                                className={`flex items-center justify-between text-left border-b border-white/[0.05] px-4 hover:bg-white/[0.08] transition-all duration-200 h-[32px] ${
-                                  activeArch?.id === arch.id ? "bg-white/[0.05]" : "bg-white/[0.01]"
-                                }`}
-                              >
-                                {/* Bloco 1 (Nome): Largura fixa de 78px sem o ponto a esquerda e sem negrito para evitar truncamento e corte de perninhas */}
-                                <div className="w-[78px] shrink-0 flex items-center text-[11px] font-poppins-light leading-tight">
-                                  <span style={{ color: "#EFE5D3" }}>{arch.id === 'homem_comum' ? 'Comum' : arch.name}</span>
-                                </div>
-
-                                {/* Bloco 2 (Slider): Se estica para preencher todo o meio do card */}
-                                <input 
-                                  type="range" 
-                                  min="0" 
-                                  max="100" 
-                                  value={dosagemPersona[arch.id]}
-                                  onChange={(e) => {
-                                    const val = parseInt(e.target.value);
-                                    setDosagemPersona(prev => ({ ...prev, [arch.id]: val }));
-                                  }}
-                                  className="flex-1 premium-slider-palha mx-2"
-                                />
-
-                                {/* Bloco 3 (Porcentagem): Largura fixa de 24px alinhada na direita */}
-                                <div className="w-6 shrink-0 text-right text-[9px] font-black text-[#EFE5D3]/70 leading-none">
-                                  {dosagemPersona[arch.id]}%
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      {/* Botão de Finalização Gerar Persona */}
-                      <button 
-                        onClick={() => {
-                          // Conclui Onboarding e envia diretamente para Tela 2A (Serviços)
-                          setHasPersonaDefined(true);
-                          setActiveView("servicos_escolha");
-                        }}
-                        className="btn-dashboard-avancar z-30"
-                      >
-                        INTEGRAR <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Portal da Persona) */}
-              <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
-                
-                {/* TOPO FIXO: Título Geral (Dinâmico na Tela 1C refletindo o arquétipo ativo por padrão ou foco) */}
-                <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
-                  <h2 
-                    className="text-sm uppercase tracking-wider text-white text-center"
-                    style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                  >
-                    {activeArch ? activeArch.name : "Arquétipos"}
-                  </h2>
-                </div>
-
-                {/* CONTEÚDO DO PORTAL ABAIXO (SEM SCROLL, APENAS FOTO STRETCHED) */}
-                <div className="flex-1 flex flex-col gap-4 overflow-hidden">
-                  {/* Image Card (Flex-1 para preenchimento vertical perfeito) */}
-                  <div 
-                    className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg group transition-colors duration-500"
-                    style={{ backgroundColor: activeArch ? "transparent" : "#090C15" }}
-                  >
-                    <img 
-                      src={
-                        activeArch 
-                          ? (ARCHETYPE_DETAILS[activeArch.id]?.imagem || activeArch.seedUrl)
-                          : "/images/ImagemCapa.jpg"
-                      } 
-                      className={`w-full h-full duration-700 ${
-                        activeArch 
-                          ? "object-cover group-hover:scale-105 brightness-[0.8] contrast-[1.05]" 
-                          : "object-contain p-4 brightness-[1.0] contrast-[1.0] scale-95"
-                      }`}
-                      alt={activeArch ? activeArch.name : "Portal da Persona"}
-                    />
-
-                  </div>
-                </div>
-
-                <AudioControls
-                  isMuted={isMuted}
-                  setIsMuted={setIsMuted}
-                  volume={volume}
-                  setVolume={setVolume}
-                />
-              </div>
+              <PortalPersona
+                activeArch={activeArch}
+                isMuted={isMuted}
+                setIsMuted={setIsMuted}
+                volume={volume}
+                setVolume={setVolume}
+              />
 
             </div>
           );
@@ -912,141 +737,25 @@ ${subtomsSection}
 
         {/* TELA 3: KS STUDIO (STORYBOARD + INSIGHTS + SIMULADOR DE FEED) */}
         {activeView === "storyboard" && (
-          <div className="relative w-full h-full flex justify-center items-center">
-
-            {/* Mockup do Celular Central (Posicionado Fixed para Centramento Perfeito) */}
-            <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[340px] h-[550px] bg-[#0A0A0C] border border-white/10 rounded-lg p-4 flex flex-col justify-between items-center shadow-2xl transition-all duration-300 z-30">
-              {/* Visor Interno: Modo Forja/Manifesto ou Modo Padrão */}
-              {forgeProgress > 0 ? (
-                <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-between items-center p-5 relative overflow-hidden z-10 text-center">
-                  <div className="flex flex-col items-center gap-3 mt-4 w-full shrink-0">
-                    <Cpu className="w-9 h-9 text-brand-gold animate-pulse shrink-0" />
-                    <div>
-                      <h2 
-                        className="text-sm uppercase tracking-wider text-white text-center"
-                        style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                      >
-                        A Criação está ativada...
-                      </h2>
-                      <p className="text-[7px] font-bold text-brand-blue uppercase tracking-widest mt-1">Orquestrador Central assimilando agentes</p>
-                    </div>
-
-                    {/* Barra de Progresso */}
-                    <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden border border-white/5 mt-1 shrink-0">
-                      <div 
-                        className="bg-brand-gold h-full duration-500 transition-all" 
-                        style={{ width: `${forgeProgress}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Console de Saída YAML do Manifest */}
-                  {forgeData ? (
-                    <div className="w-full flex-1 bg-[#050507] border border-white/10 rounded-lg p-3 text-[8px] font-mono text-[#8A95A5] overflow-y-auto text-left whitespace-pre-wrap leading-normal mt-3 mb-3 select-text scrollbar-thin">
-                      {forgeData.manifest}
-                    </div>
-                  ) : (
-                    <div className="flex-1 flex items-center justify-center text-white/30 text-[8px] uppercase tracking-widest select-none">
-                      Compilando ordem de serviço...
-                    </div>
-                  )}
-
-                  {/* Botão de Conclusão e Simulação */}
-                  {forgeProgress === 100 && (
-                    <button 
-                      onClick={handleSimularEsteira}
-                      className="w-full h-10 bg-brand-gold text-black font-extrabold text-[9px] tracking-widest rounded-lg hover:scale-[1.02] active:scale-95 duration-200 shadow-lg shadow-brand-gold/15 shrink-0 uppercase"
-                    >
-                      Simular Esteira em Prod ➔
-                    </button>
-                  )}
-                </div>
-              ) : (
-                /* Visor Interno de Reels Vazio (Padrão) */
-                <div className="w-full h-full bg-[#050505] rounded-lg border border-white/5 flex flex-col justify-center items-center p-6 relative overflow-hidden z-10 select-none text-center">
-                  <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex justify-center items-center mb-4">
-                    <Sparkles className="w-5 h-5 text-brand-blue" />
-                  </div>
-                  <h3 className="text-xs font-black uppercase tracking-widest text-white mb-2">KS STUDIO</h3>
-                  <p className="text-[9px] text-white/40 leading-relaxed uppercase tracking-wider max-w-[200px]">
-                    Direção estética e simulação de reels. Acesse os painéis laterais para calibração.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* COLUNA LATERAL DIREITA: Painel Estritamente Simétrico ao Menu Esquerdo (Área com o Card Vazio) */}
-            <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
-              {/* TOPO FIXO: Título Geral */}
-              <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
-                <h2 
-                  className="text-sm uppercase tracking-wider text-white text-center font-extralight"
-                  style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                >
-                  KS Studio
-                </h2>
-              </div>
-
-              {/* CONTEÚDO DO PORTAL ABAIXO (CARD VAZIO) */}
-              <div className="flex-1 flex flex-col gap-4 overflow-hidden">
-                <div className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 bg-[#050505] flex flex-col justify-center items-center p-5 text-center shadow-lg">
-                  <Sparkles className="w-8 h-8 text-white/15 mb-3" />
-                  <span className="text-[9px] font-black tracking-widest uppercase text-white/30 mb-1">Cockpit Vazio</span>
-                  <span className="text-[9px] font-semibold text-white/20 uppercase tracking-wider leading-relaxed max-w-[150px]">
-                    Card reservado para forja estética AI
-                  </span>
-                </div>
-              </div>
-
-              <AudioControls
-                isMuted={isMuted}
-                setIsMuted={setIsMuted}
-                volume={volume}
-                setVolume={setVolume}
-              />
-            </div>
-
-          </div>
+          <KsStudio
+            forgeProgress={forgeProgress}
+            forgeData={forgeData}
+            handleSimularEsteira={handleSimularEsteira}
+            isMuted={isMuted}
+            setIsMuted={setIsMuted}
+            volume={volume}
+            setVolume={setVolume}
+          />
         )}
 
         {/* TELA 3: ALMOXARIFADO / UPLOADS LIBRARY */}
         {activeView === "almoxarifado" && (
-          <div className="w-full h-full flex flex-col gap-6 animate-fade-in">
-            <div>
-              <h1 className="text-3xl font-bold">Almoxarifado</h1>
-              <p className="text-xs text-white/40">Selecione uma imagem para inseri-la no carrossel ativo ({activeSlot !== null ? `Slot ${activeSlot + 1}` : 'Nenhum slot selecionado'}).</p>
-            </div>
-
-            <div className="grid grid-cols-5 gap-6">
-              {SEED_IMAGES.map((img) => (
-                <div 
-                  key={img.id}
-                  onClick={() => selectMediaFromLibrary(img.url)}
-                  className="bg-[#0A0A0C] border border-white/10 hover:border-brand-blue rounded-lg p-3 flex flex-col gap-3 cursor-pointer hover:scale-[1.03] duration-200 group"
-                >
-                  <div className="aspect-square bg-black rounded-lg overflow-hidden">
-                    <img src={img.url} className="w-full h-full object-cover group-hover:scale-110 duration-500" alt={img.name} />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold leading-tight truncate">{img.name}</div>
-                    <div className="text-[9px] text-white/30 uppercase tracking-widest mt-1">Biblioteca Pública</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {activeSlot !== null && (
-              <button 
-                onClick={() => {
-                  setActiveSlot(null);
-                  setActiveView("storyboard");
-                }}
-                className="w-48 h-11 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold"
-              >
-                Voltar sem selecionar
-              </button>
-            )}
-          </div>
+          <Almoxarifado
+            activeSlot={activeSlot}
+            selectMediaFromLibrary={selectMediaFromLibrary}
+            setActiveSlot={setActiveSlot}
+            setActiveView={setActiveView}
+          />
         )}
       </div>
 
