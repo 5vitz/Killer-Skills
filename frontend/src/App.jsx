@@ -242,8 +242,8 @@ export default function App() {
   });
   const [tags, setTags] = useState(["luxo", "alta-costura"]);
   const [tagInput, setTagInput] = useState("");
-  const [expandedSection, setExpandedSection] = useState("pre"); // "pre", "pro", "pos"
-  const [expandedSvc, setExpandedSvc] = useState("manual"); // "manual", "ia", "postagem"
+  const [expandedSection, setExpandedSection] = useState(null); // "pre", "pro", "pos"
+  const [expandedSvc, setExpandedSvc] = useState(null); // "manual", "ia", "postagem"
   const [postType, setPostType] = useState("reels"); // "reels", "carrossel", "imagem_unica"
   const [postQty, setPostQty] = useState(0);
   const [personaConfirmed, setPersonaConfirmed] = useState(false);
@@ -860,22 +860,21 @@ ${subtomsSection}
         <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showPersonaCard ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
           {showPersonaCard && (
             <>
-              {/* TOPO FIXO: Título Geral */}
-              <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
-                <h2 
-                  className="text-sm uppercase tracking-wider text-white text-center"
-                  style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                >
-                  {activeView === "servicos_escolha" ? "MYSELF" : "Significado"}
-                </h2>
-              </div>
-
               {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
                   className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col transition-all duration-500"
                   style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
+                  {/* TÍTULO INTERNO DO CARD ALINHADO */}
+                  <div className="w-full shrink-0 select-none mt-2 mb-3">
+                    <h2 
+                      className="text-[11px] uppercase tracking-widest text-white/50 text-center"
+                      style={{ fontFamily: 'Poppins', fontWeight: 300 }}
+                    >
+                      {activeView === "servicos_escolha" ? "MYSELF" : "Significado"}
+                    </h2>
+                  </div>
                   {activeView === "servicos_escolha" ? (() => {
                     const { top1, top2, quintas, top4, subtoms } = getTetracordeMeva();
                     return (
@@ -1382,16 +1381,6 @@ ${subtomsSection}
             {/* COLUNA LATERAL DIREITA: Definições do Post (Acordeões) */}
             <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
               
-              {/* TOPO FIXO: Título Geral */}
-              <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
-                <h2 
-                  className="text-sm uppercase tracking-wider text-white text-center font-extralight"
-                  style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                >
-                  Definições do Post
-                </h2>
-              </div>
-
               {/* CONTEÚDO DO PORTAL: 3 Cards Expansíveis (Acordeões) */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
                 <div 
@@ -1399,8 +1388,18 @@ ${subtomsSection}
                   style={{ background: ACTIVE_COCKPIT_GRADIENT }}
                 >
                   <div className="flex flex-col gap-2.5 relative z-10 flex-1 overflow-hidden">
+                    {/* TÍTULO INTERNO DO CARD ALINHADO */}
+                    <div className="w-full shrink-0 select-none mt-2 mb-3">
+                      <h2 
+                        className="text-[11px] uppercase tracking-widest text-white/50 text-center"
+                        style={{ fontFamily: 'Poppins', fontWeight: 300 }}
+                      >
+                        DEFINIÇÕES DO POST
+                      </h2>
+                    </div>
+
                     {/* Acordeão Container */}
-                    <div className="flex-1 flex flex-col gap-4 pt-8 overflow-y-auto pr-1 custom-scrollbar-visible">
+                    <div className="flex-1 flex flex-col gap-4 pt-2 overflow-y-auto pr-1 custom-scrollbar-visible">
                       
                       {/* CARD 1: PRÉ-PRODUÇÃO (DNA Institucional) */}
                       <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
