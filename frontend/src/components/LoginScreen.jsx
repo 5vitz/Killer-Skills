@@ -8,7 +8,7 @@ export default function LoginScreen({
     const initializeGoogleSignIn = () => {
       if (typeof window.google !== 'undefined') {
         window.google.accounts.id.initialize({
-          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+          client_id: "350473010460-g0bhksc9d8dm2s363slvpqsgb2o4huk9.apps.googleusercontent.com",
           callback: (response) => {
             try {
               // O token JWT retornado pelo Google
