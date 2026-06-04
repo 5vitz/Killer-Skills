@@ -39,7 +39,7 @@ export default function LoginScreen({
                 <img 
                   src="/images/LOGO_metal.png" 
                   alt="KILLER SKILLS" 
-                  className="h-16 object-contain mb-1.5"
+                  className="h-20 object-contain mb-1.5"
                 />
                 <div className="text-[9px] font-bold tracking-widest text-[#1E60FF] uppercase">
                   KS Studio
