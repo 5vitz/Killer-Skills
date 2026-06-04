@@ -36,9 +36,11 @@ export default function LoginScreen({
               {/* Cabeçalho da Tela 0 (Âncora de Altura Fixa para Sincronia Espacial - Deslocado 30px para Cima) */}
               <div className="h-[96px] flex flex-col items-center justify-center mb-[54px]">
                 {/* Logo Metálica */}
-                <div className="text-3xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-white to-brand-blue mb-1">
-                  KILLER SKILLS
-                </div>
+                <img 
+                  src="/images/LOGO_metal.png" 
+                  alt="KILLER SKILLS" 
+                  className="h-10 object-contain mb-1.5"
+                />
                 <div className="text-[9px] font-bold tracking-widest text-[#1E60FF] uppercase">
                   KS Studio
                 </div>
