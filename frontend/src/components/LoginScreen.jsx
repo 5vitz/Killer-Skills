@@ -34,12 +34,12 @@ export default function LoginScreen({
               className="w-full flex flex-col items-center justify-center animate-fade-in"
             >
               {/* Cabeçalho da Tela 0 (Âncora de Altura Fixa para Sincronia Espacial - Deslocado 30px para Cima) */}
-              <div className="h-[96px] flex flex-col items-center justify-center mb-[54px] mt-[-24px]">
+              <div className="h-[136px] flex flex-col items-center justify-center mb-[36px] mt-[-24px]">
                 {/* Logo Metálica */}
                 <img 
                   src="/images/LOGO_metal.png" 
                   alt="KILLER SKILLS" 
-                  className="h-20 object-contain mb-1.5"
+                  className="h-[120px] object-contain mb-1.5"
                 />
                 <div className="text-[9px] font-bold tracking-widest text-[#1E60FF] uppercase">
                   KS Studio
@@ -76,7 +76,7 @@ export default function LoginScreen({
               className="w-full flex flex-col items-center justify-center animate-fade-in"
             >
               {/* Cabeçalho da Tela 0A (Symmetrical height and spacing - Deslocado 30px para Cima) */}
-              <div className="h-[96px] flex flex-col items-center justify-center mb-[54px] mt-[-24px]">
+              <div className="h-[136px] flex flex-col items-center justify-center mb-[36px] mt-[-24px]">
                 {/* Google Logo SVG - Ampliado e Elevado */}
                 <svg className="w-12 h-12 mb-3.5" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
