@@ -466,22 +466,19 @@ ${subtomsSection}
 
   // --- RENDERS DE TELA ---
 
-  const handleEmailSubmit = async () => {
-    if (enteredEmail.trim() === "" || !enteredEmail.includes("@")) {
-      alert("Por favor, insira um e-mail válido!");
-      return;
-    }
+  const onGoogleLoginSuccess = async (email, idToken) => {
+    if (!email) return;
     
     try {
       const res = await fetch(`${API_BASE}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: enteredEmail.trim() })
+        body: JSON.stringify({ email: email })
       });
       
       const data = await res.json();
       if (res.ok && data.success) {
-        triggerGoogleAuthSequence(enteredEmail.trim());
+        triggerGoogleAuthSequence(email);
       } else {
         alert(data.detail || "E-mail não cadastrado em nosso sistema!");
       }
@@ -539,9 +536,7 @@ ${subtomsSection}
   if (!isLoggedIn) {
     return (
       <LoginScreen
-        enteredEmail={enteredEmail}
-        setEnteredEmail={setEnteredEmail}
-        handleEmailSubmit={handleEmailSubmit}
+        onGoogleLoginSuccess={onGoogleLoginSuccess}
       />
     );
   }

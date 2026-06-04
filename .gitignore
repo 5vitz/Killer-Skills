@@ -7,3 +7,5 @@ frontend/dist/
 Antigravity-x64/
 scratch/
 *.log
+client_secret_*.json
+
