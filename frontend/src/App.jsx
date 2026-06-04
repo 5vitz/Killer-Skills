@@ -132,6 +132,28 @@ Eu trago a sabedoria do riso leve, aliviando os pesos do cotidiano.`;
 
 
 export default function App() {
+  const servicosManual = [
+    { id: 1, name: "01. Upload de Mídia (Permanente)", premium: true },
+    { id: 2, name: "02. Compressor WebP Nativo", premium: false },
+    { id: 3, name: "03. Adequação de Proporções", premium: false },
+    { id: 4, name: "04. Criar Flow Manual", premium: false },
+    { id: 5, name: "05. Simular Flow Manual", premium: false }
+  ];
+
+  const servicosIA = [
+    { id: 6, name: "06. Curadoria Estética Grade (Grid IA)", premium: true },
+    { id: 7, name: "07. Criação de Legendas - IA", premium: true },
+    { id: 8, name: "08. Roteirização Reels (Director's Cut)", premium: true },
+    { id: 9, name: "09. Geração de Imagens - IA", premium: true },
+    { id: 10, name: "10. Geração de Vídeos - IA", premium: true },
+    { id: 11, name: "11. Flow Automatizado - IA", premium: true }
+  ];
+
+  const servicosPostagem = [
+    { id: 12, name: "12. Postar VPS Automatizado", premium: true },
+    { id: 13, name: "13. Agendar Post Automatizado", premium: true }
+  ];
+
   // --- CONFIGURAÇÃO EXPERIMENTAL DO DEGRADÊ DO COCKPIT ---
   // Para alternar ou reverter, basta trocar as variáveis abaixo:
   const GRADIENT_2_TONES = "linear-gradient(to bottom, #383838 0%, #0D0D0D 25%)";
@@ -221,6 +243,7 @@ export default function App() {
   const [tags, setTags] = useState(["luxo", "alta-costura"]);
   const [tagInput, setTagInput] = useState("");
   const [expandedSection, setExpandedSection] = useState("pre"); // "pre", "pro", "pos"
+  const [expandedSvc, setExpandedSvc] = useState("manual"); // "manual", "ia", "postagem"
   const [postType, setPostType] = useState("reels"); // "reels", "carrossel", "imagem_unica"
   const [postQty, setPostQty] = useState(0);
   const [personaConfirmed, setPersonaConfirmed] = useState(false);
@@ -1207,50 +1230,127 @@ ${subtomsSection}
                     className="text-[11px] uppercase tracking-widest text-white/50 text-center"
                     style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                   >
-                    ESTEIRA DE PRODUÇÃO
+                    SERVIÇOS PREMIUM
                   </h2>
                 </div>
 
-                {/* Bloco Superior: Listagem de Serviços Ativados do Plano */}
-                <div className="w-full flex-1 flex flex-col gap-1 overflow-hidden mb-3">
-                  <div 
-                    className="w-full flex-1 bg-black/60 border border-white/5 rounded-lg p-2 overflow-y-auto custom-scrollbar-visible pr-1 flex flex-col gap-1.5"
-                  >
-                    {[
-                      { id: 1, name: "01. Elaborar Persona - MEVA", premium: false },
-                      { id: 2, name: "02. Persona Integralizada (Myself)", premium: false },
-                      { id: 3, name: "03. Criar Prompt Ontológico - IA", premium: true },
-                      { id: 4, name: "04. Fagulhas Criativas Semanais", premium: true },
-                      { id: 5, name: "05. Upload de Mídia (Permanente)", premium: true },
-                      { id: 6, name: "06. Compressor WebP Nativo", premium: false },
-                      { id: 7, name: "07. Adequação de Proporções", premium: false },
-                      { id: 8, name: "08. Criar Flow Manual", premium: false },
-                      { id: 9, name: "09. Simular Flow Manual", premium: false },
-                      { id: 10, name: "10. Curadoria Estética Grade (Grid IA)", premium: true },
-                      { id: 11, name: "11. Criação de Legendas - IA", premium: true },
-                      { id: 12, name: "12. Roteirização Reels (Director's)", premium: true },
-                      { id: 13, name: "13. Geração de Imagens - IA", premium: true },
-                      { id: 14, name: "14. Geração de Vídeos - IA", premium: true },
-                      { id: 15, name: "15. Flow Automatizado - IA", premium: true },
-                      { id: 16, name: "16. Postar VPS Automatizado", premium: true },
-                      { id: 17, name: "17. Agendar Post Automatizado", premium: true }
-                    ].map((svc) => {
-                      const isActive = isPremium || !svc.premium;
-                      return (
-                        <div 
-                          key={svc.id} 
-                          className={`flex items-center justify-between text-[11px] transition-all px-2 py-1.5 border-b border-white/[0.02] last:border-b-0 ${
-                            isActive ? "text-white/80" : "text-white/20"
-                          }`}
-                        >
-                          <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
-                          <span className={isActive ? "text-brand-gold font-bold" : "text-white/20"}>
-                            {isActive ? "✓" : "🔒"}
-                          </span>
-                        </div>
-                      );
-                    })}
+                {/* Bloco Superior: Accordions de Serviços Ativados do Plano */}
+                <div className="w-full flex-1 flex flex-col gap-2 overflow-hidden mb-3">
+                  
+                  {/* CATEGORIA 1: CRIAÇÃO - POST MANUAL */}
+                  <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+                    <div 
+                      onClick={() => setExpandedSvc(expandedSvc === "manual" ? null : "manual")}
+                      className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+                    >
+                      <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
+                        CRIAÇÃO - POST MANUAL
+                      </span>
+                      <span className="text-[8px] text-white/30">
+                        {expandedSvc === "manual" ? "▼" : "▶"}
+                      </span>
+                    </div>
+                    
+                    <div className={`transition-all duration-300 overflow-hidden ${
+                      expandedSvc === "manual" ? "max-h-[220px] p-2 border-t border-white/5" : "max-h-0"
+                    }`}>
+                      <div className="flex flex-col gap-1.5">
+                        {servicosManual.map((svc) => {
+                          const isActive = isPremium || !svc.premium;
+                          return (
+                            <div 
+                              key={svc.id} 
+                              className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
+                                isActive ? "text-white/80" : "text-white/20"
+                              }`}
+                            >
+                              <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
+                              <span className={isActive ? "text-brand-gold" : "text-white/20"}>
+                                {isActive ? "✓" : "🔒"}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
+
+                  {/* CATEGORIA 2: CRIAÇÃO - POST COM IA */}
+                  <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+                    <div 
+                      onClick={() => setExpandedSvc(expandedSvc === "ia" ? null : "ia")}
+                      className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+                    >
+                      <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
+                        CRIAÇÃO - POST COM IA
+                      </span>
+                      <span className="text-[8px] text-white/30">
+                        {expandedSvc === "ia" ? "▼" : "▶"}
+                      </span>
+                    </div>
+                    
+                    <div className={`transition-all duration-300 overflow-hidden ${
+                      expandedSvc === "ia" ? "max-h-[250px] p-2 border-t border-white/5" : "max-h-0"
+                    }`}>
+                      <div className="flex flex-col gap-1.5">
+                        {servicosIA.map((svc) => {
+                          const isActive = isPremium || !svc.premium;
+                          return (
+                            <div 
+                              key={svc.id} 
+                              className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
+                                isActive ? "text-white/80" : "text-white/20"
+                              }`}
+                            >
+                              <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
+                              <span className={isActive ? "text-brand-gold" : "text-white/20"}>
+                                {isActive ? "✓" : "🔒"}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CATEGORIA 3: POSTAGEM */}
+                  <div className="border border-white/10 rounded-lg overflow-hidden shrink-0 bg-black/20">
+                    <div 
+                      onClick={() => setExpandedSvc(expandedSvc === "postagem" ? null : "postagem")}
+                      className="flex items-center justify-between p-2 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
+                    >
+                      <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
+                        POSTAGEM
+                      </span>
+                      <span className="text-[8px] text-white/30">
+                        {expandedSvc === "postagem" ? "▼" : "▶"}
+                      </span>
+                    </div>
+                    
+                    <div className={`transition-all duration-300 overflow-hidden ${
+                      expandedSvc === "postagem" ? "max-h-[120px] p-2 border-t border-white/5" : "max-h-0"
+                    }`}>
+                      <div className="flex flex-col gap-1.5">
+                        {servicosPostagem.map((svc) => {
+                          const isActive = isPremium || !svc.premium;
+                          return (
+                            <div 
+                              key={svc.id} 
+                              className={`flex items-center justify-between text-[12px] transition-all px-2 py-0.5 border-b border-white/[0.02] last:border-b-0 ${
+                                isActive ? "text-white/80" : "text-white/20"
+                              }`}
+                            >
+                              <span className="truncate max-w-[230px] font-poppins-light">{svc.name}</span>
+                              <span className={isActive ? "text-brand-gold" : "text-white/20"}>
+                                {isActive ? "✓" : "🔒"}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
 
                 {/* Bloco de Custo Estimado Reativo em Destaque Dourado Metalizado */}
