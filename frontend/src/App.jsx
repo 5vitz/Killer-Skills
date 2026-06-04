@@ -628,7 +628,7 @@ ${subtomsSection}
             onClick={() => setExpandedSection(expandedSection === "pre" ? null : "pre")}
             className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
           >
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
+            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
               PRÉ-PRODUÇÃO
             </span>
             <span className="text-[8px] text-white/30">
@@ -683,7 +683,7 @@ ${subtomsSection}
             onClick={() => setExpandedSection(expandedSection === "pro" ? null : "pro")}
             className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
           >
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
+            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
               PRODUÇÃO
             </span>
             <span className="text-[8px] text-white/30">
@@ -867,7 +867,7 @@ ${subtomsSection}
             onClick={() => setExpandedSection(expandedSection === "pos" ? null : "pos")}
             className="flex items-center justify-between p-2.5 bg-white/[0.02] cursor-pointer hover:bg-white/5 duration-150 select-none"
           >
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#EFE5D3]">
+            <span className="text-[10px] font-light uppercase tracking-widest text-[#EFE5D3] font-poppins-light">
               PÓS-PRODUÇÃO
             </span>
             <span className="text-[8px] text-white/30">
