@@ -8,8 +8,10 @@ from fastapi.staticfiles import StaticFiles
 BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(BACKEND_DIR)
 
-if os.path.exists(os.path.join(BACKEND_DIR, "killer_skills")):
+if BACKEND_DIR not in sys.path:
     sys.path.append(BACKEND_DIR)
+
+if os.path.exists(os.path.join(BACKEND_DIR, "killer_skills")):
     sys.path.append(os.path.join(BACKEND_DIR, "killer_skills"))
 else:
     sys.path.append(os.path.join(ROOT_DIR, "APP"))
