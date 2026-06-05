@@ -635,6 +635,19 @@ ${subtomsSection}
 
                 {/* Bloco Superior: DEFINIÇÕES DO POST (PRÉ-PRODUÇÃO, PRODUÇÃO, PÓS-PRODUÇÃO) */}
                 {renderDefinicoesPost()}
+
+                {/* Botão de Emissão de OS na base */}
+                <button 
+                  onClick={triggerForge}
+                  disabled={loteProducao.length === 0 && postQty === 0}
+                  className={`w-full h-10 rounded-lg text-black text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 shrink-0 shadow-lg duration-200 ${
+                    loteProducao.length === 0 && postQty === 0 
+                      ? "bg-white/5 border border-white/10 text-white/20 cursor-not-allowed active:scale-100" 
+                      : "bg-[#EFE5D3] hover:bg-[#F7EFE2] active:scale-95 cursor-pointer"
+                  }`}
+                >
+                  Emitir Ordem de Serviço <ArrowRight className="w-3.5 h-3.5" />
+                </button>
               </div>
             </div>
 
@@ -662,7 +675,7 @@ ${subtomsSection}
                     {renderServicosPremium()}
                   </div>
 
-                  {/* BLOCOS MOVIDOS: Custo + Emissão de OS no Rodapé do Card */}
+                  {/* BLOCOS MOVIDOS: Custo no Rodapé do Card */}
                   <div className="relative z-10 flex flex-col gap-3 mt-3 pt-3 border-t border-white/5 shrink-0">
                     {/* Bloco de Custo Estimado Reativo em Destaque Dourado Metalizado */}
                     <div className="w-full bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent border border-brand-gold/30 rounded-lg p-2 flex items-center justify-between text-left select-none">
@@ -674,19 +687,6 @@ ${subtomsSection}
                       </div>
                       <span className="text-sm select-none">💰</span>
                     </div>
-
-                    {/* Botão de Emissão de OS na base */}
-                    <button 
-                      onClick={triggerForge}
-                      disabled={loteProducao.length === 0 && postQty === 0}
-                      className={`w-full h-10 rounded-lg text-black text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 shrink-0 shadow-lg duration-200 ${
-                        loteProducao.length === 0 && postQty === 0 
-                          ? "bg-white/5 border border-white/10 text-white/20 cursor-not-allowed active:scale-100" 
-                          : "bg-[#EFE5D3] hover:bg-[#F7EFE2] active:scale-95 cursor-pointer"
-                      }`}
-                    >
-                      Emitir Ordem de Serviço <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
                   </div>
 
                   {/* Botão de Upgrade para Free */}
