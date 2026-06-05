@@ -28,3 +28,13 @@ Estes manifestos servem como **modelos e insumos ontológicos** para calibrar a 
 * **[Image Prompt Engineer](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/design-image-prompt-engineer.md):** Direção de fotografia, pós-processamento, colorização e iluminação cinematográfica de IA de luxo.
 * **[Whimsy Injector](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/design-whimsy-injector.md):** Framework de capricho para refinar a UX/UI com micro-interações cativantes e personalidade de marca.
 * **[Content Creator](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/marketing-content-creator.md):** Especialista em escrita persuasiva e copywriting multi-plataforma.
+
+---
+
+## 🏗️ Agentes Especialistas de Engenharia (Infraestrutura & Código)
+
+* **[Backend Architect](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/engineering-backend-architect.md):** Engenharia de schemas de dados e indexações robustas.
+* **[Database Optimizer](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/engineering-database-optimizer.md):** Otimização de consultas, normalização e planejamento NoSQL/SQL.
+* **[Minimal Change Engineer](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/engineering-minimal-change-engineer.md):** Defensoria do menor diff viável, combate à engenharia especulativa e escopo inflado.
+* **[Software Architect](file:///home/artz/Documentos/Antigravity/Killer-Skills/docs/referencias_agentes/engineering-software-architect.md):** Arquiteturas modulares limpas, bounded contexts e decisões de trade-offs.
+

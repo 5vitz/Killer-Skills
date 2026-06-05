@@ -325,8 +325,6 @@ ${subtomsSection}
     setUserEmail("");
     setIsAdminMode(false);
     setActiveView("storyboard");
-    setLoginStage("email");
-    setLoginPassword("");
     setIsMuted(true); // Silencia a trilha sonora no logout
   };
 
