@@ -15,7 +15,10 @@ export default function MyselfSidebar({
   getTetracordeMeva,
   compilarDiagnosticoTetracorde,
   setOnboardingStep,
-  activeArch
+  activeArch,
+  personaConfirmed,
+  setPersonaConfirmed,
+  isPremium
 }) {
   const GRADIENT_3_TONES = "linear-gradient(to bottom, #383838 0%, #222222 20%, #000000 40%)";
   const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES;
@@ -124,22 +127,22 @@ export default function MyselfSidebar({
       <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showPersonaCard ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
         {showPersonaCard && (
           <>
-            {/* TOPO FIXO: Título Geral */}
-            <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
-              <h2 
-                className="text-sm uppercase tracking-wider text-white text-center"
-                style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-              >
-                {activeView === "servicos_escolha" ? "MYSELF" : "Significado"}
-              </h2>
-            </div>
-
             {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
             <div className="flex-1 flex flex-col gap-4 overflow-hidden">
               <div 
                 className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col transition-all duration-500"
                 style={{ background: ACTIVE_COCKPIT_GRADIENT }}
               >
+                {/* TÍTULO INTERNO DO CARD ALINHADO */}
+                <div className="w-full shrink-0 select-none mt-2 mb-3">
+                  <h2 
+                    className="text-[11px] uppercase tracking-widest text-white/50 text-center"
+                    style={{ fontFamily: 'Poppins', fontWeight: 300 }}
+                  >
+                    {activeView === "servicos_escolha" ? "MYSELF" : "SIGNIFICADO"}
+                  </h2>
+                </div>
+
                 {activeView === "servicos_escolha" ? (() => {
                   const { top1, top2, quintas, top4, subtoms } = getTetracordeMeva();
                   return (
@@ -184,16 +187,32 @@ export default function MyselfSidebar({
                           {compilarDiagnosticoTetracorde()}
                         </div>
                         
-                        {/* Seta discreta para voltar à calibração de sliders */}
-                        <div className="flex items-center gap-1.5 select-none shrink-0 border-t border-white/5 pt-2.5 mt-1">
+                        {/* Botões de Confirmação e Edição da Persona */}
+                        <div className="flex flex-col gap-2 mt-2 select-none border-t border-white/5 pt-3 shrink-0">
+                          {/* Botão Confirmar Persona */}
                           <button 
+                            onClick={() => setPersonaConfirmed(!personaConfirmed)}
+                            className={`w-full h-8 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 ${
+                              personaConfirmed 
+                                ? "bg-brand-blue/10 border border-brand-blue/30 text-brand-blue" 
+                                : "bg-white/5 border border-white/10 text-white/70 hover:bg-white/10"
+                            }`}
+                          >
+                            {personaConfirmed ? "✓ PERSONA CONFIRMADA" : "✓ CONFIRMAR PERSONA"}
+                          </button>
+
+                          {/* Botão Editar Persona */}
+                          <button 
+                            disabled={!isPremium}
                             onClick={() => {
                               setActiveView("servicos");
                               setOnboardingStep("matriz");
                             }}
-                            className="text-[9px] font-poppins-light text-white/30 hover:text-white/70 flex items-center gap-1 duration-150 cursor-pointer"
+                            className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
+                              !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
+                            }`}
                           >
-                            <ChevronLeft className="w-3.5 h-3.5" /> Voltar para os sliders de calibração
+                            ✎ EDITAR PERSONA {!isPremium && "🔒"}
                           </button>
                         </div>
                       </div>
