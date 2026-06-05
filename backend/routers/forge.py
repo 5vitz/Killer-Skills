@@ -23,6 +23,8 @@ class ForgeRequest(BaseModel):
     agendamento_hora: Optional[str] = None
     persona_confirmada: Optional[bool] = None
     lote: Optional[List[Dict[str, Any]]] = None
+    carrossel_frames: Optional[List[Dict[str, Any]]] = None
+
 
 def gerar_prompt_tetracorde(dosagem: Dict[str, float]) -> str:
     if not dosagem:
@@ -233,7 +235,36 @@ def forge_order(req: ForgeRequest):
     lote_items_yaml = ""
     total_cost = 0
     
-    if req.lote and len(req.lote) > 0:
+    if req.carrossel_frames and len(req.carrossel_frames) > 0:
+        # Modo Carrossel Híbrido Individualizado
+        qty = len(req.carrossel_frames)
+        t_type = "carrossel"
+        total_cost = qty * 25
+        logistica = f"{req.agendamento_data} às {req.agendamento_hora}" if req.agendamento_data else "IMEDIATO (Publicação VPS Contabo)"
+        
+        lote_items_yaml = f"\n  ESTEIRA_CARROSSEL_HIBRIDO ({qty} slides):"
+        for i, frame in enumerate(req.carrossel_frames, 1):
+            metodo_str = frame.get("metodo", "persona").upper()
+            ref_str = frame.get("imagemReferencia") or "N/A"
+            upload_str = frame.get("imagemUpload") or "N/A"
+            
+            f_tags = frame.get("tags", {})
+            tonica_t = f_tags.get("tonica") or "N/A"
+            terca_t = f_tags.get("terca") or "N/A"
+            quinta_t = f_tags.get("quinta") or "N/A"
+            setima_t = f_tags.get("setima") or "N/A"
+            
+            lote_items_yaml += f"""
+    - SLIDE {i}:
+        METODO_PRODUCAO: "{metodo_str}"
+        IMAGEM_REFERENCIA: "{ref_str}"
+        IMAGEM_UPLOAD: "{upload_str}"
+        TAGS_REFINAMENTO_MEVA:
+          TONICA_PERSONA: "{tonica_t}"
+          TERCA_CENARIO: "{terca_t}"
+          QUINTA_ELEMENTOS: "{quinta_t}"
+          SETIMA_ESTILO: "{setima_t}\""""
+    elif req.lote and len(req.lote) > 0:
         # Modo Lote Acumulado
         lote_items_yaml = f"\n  ESTEIRA_DE_PRODUCAO_LOTE ({len(req.lote)} itens):"
         for i, item in enumerate(req.lote, 1):
@@ -270,6 +301,7 @@ def forge_order(req: ForgeRequest):
     CUSTO_ESTIMADO: "{total_cost} créditos"
     LOGISTICA_ENTREGA: "{logistica}"
     TAGS_TATEIS_DIRECIONAMENTO: "{tags_list}\""""
+
 
     manifest_yaml = f"""---
 ORDEM_DE_SERVICO:

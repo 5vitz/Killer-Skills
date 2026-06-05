@@ -128,7 +128,22 @@ export default function App() {
   const [agendamentoData, setAgendamentoData] = useState("");
   const [agendamentoHora, setAgendamentoHora] = useState("");
   const [loteProducao, setLoteProducao] = useState([]);
+  const [carrosselFrames, setCarrosselFrames] = useState(() => 
+    Array.from({ length: 5 }, (_, i) => ({
+      metodo: "persona", // "persona", "referencia", "upload"
+      imagemReferencia: null,
+      imagemUpload: null,
+      tags: {
+        tonica: "",
+        terca: "",
+        quinta: "",
+        setima: ""
+      }
+    }))
+  );
   const isPremium = isLoggedIn && userEmail !== "free@killerskills.com.br";
+
+
 
   const getTetracordeMeva = () => {
     const sorted = Object.entries(dosagemPersona).sort((a, b) => b[1] - a[1]);
@@ -371,24 +386,29 @@ ${subtomsSection}
 
   const triggerForge = async () => {
     let loteEnvio = [...loteProducao];
-    
-    // Salvaguarda: se houver configuração ativa na tela que não foi adicionada, inclui no lote final
-    if (postQty > 0) {
-      const itemPendente = {
-        id: Date.now(),
-        tipo: postType,
-        quantidade: postQty,
-        tags: [...tags],
-        agendamento: {
-          data: agendamentoData,
-          hora: agendamentoHora
-        },
-        custo: postType === "reels" ? postQty * 35 : (postType === "carrossel" ? postQty * 25 : postQty * 15)
-      };
-      loteEnvio.push(itemPendente);
+    let carrosselEnvio = null;
+
+    if (postType === "carrossel") {
+      carrosselEnvio = carrosselFrames;
+    } else {
+      // Salvaguarda: se houver configuração ativa na tela que não foi adicionada, inclui no lote final
+      if (postQty > 0) {
+        const itemPendente = {
+          id: Date.now(),
+          tipo: postType,
+          quantidade: postQty,
+          tags: [...tags],
+          agendamento: {
+            data: agendamentoData,
+            hora: agendamentoHora
+          },
+          custo: postType === "reels" ? postQty * 35 : postQty * 15
+        };
+        loteEnvio.push(itemPendente);
+      }
     }
 
-    if (loteEnvio.length === 0) {
+    if (postType !== "carrossel" && loteEnvio.length === 0) {
       alert("Sua esteira de produção está vazia! Configure um post e clique em Adicionar à Esteira primeiro.");
       return;
     }
@@ -413,7 +433,8 @@ ${subtomsSection}
             ...microServicesState
           },
           dosagem: dosagemPersona,
-          lote: loteEnvio, // Envia o lote completo de posts estruturados!
+          lote: postType === "carrossel" ? [] : loteEnvio, // Envia o lote completo se não for carrossel
+          carrossel_frames: carrosselEnvio,
           persona_confirmada: personaConfirmed
         })
       });
@@ -513,6 +534,10 @@ ${subtomsSection}
         setAgendamentoData={setAgendamentoData}
         agendamentoHora={agendamentoHora}
         setAgendamentoHora={setAgendamentoHora}
+        carrosselFrames={carrosselFrames}
+        setCarrosselFrames={setCarrosselFrames}
+        currentSlideIdx={currentSlideIdx}
+        setCurrentSlideIdx={setCurrentSlideIdx}
       />
     );
   };
@@ -639,9 +664,9 @@ ${subtomsSection}
                 {/* Botão de Emissão de OS na base */}
                 <button 
                   onClick={triggerForge}
-                  disabled={loteProducao.length === 0 && postQty === 0}
+                  disabled={postType !== "carrossel" && loteProducao.length === 0 && postQty === 0}
                   className={`w-full h-10 rounded-lg text-black text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 shrink-0 shadow-lg duration-200 ${
-                    loteProducao.length === 0 && postQty === 0 
+                    (postType !== "carrossel" && loteProducao.length === 0 && postQty === 0)
                       ? "bg-white/5 border border-white/10 text-white/20 cursor-not-allowed active:scale-100" 
                       : "bg-[#EFE5D3] hover:bg-[#F7EFE2] active:scale-95 cursor-pointer"
                   }`}
@@ -682,7 +707,7 @@ ${subtomsSection}
                       <div className="flex flex-col">
                         <span className="text-[7px] font-bold text-brand-gold/80 uppercase tracking-wider">Custo da Ordem de Serviço</span>
                         <span className="text-[9.5px] font-black text-brand-gold uppercase tracking-wide">
-                          Créditos Consumidos: {loteProducao.reduce((sum, item) => sum + item.custo, 0) + (postQty === 0 ? 0 : (postType === "reels" ? postQty * 35 : (postType === "carrossel" ? postQty * 25 : postQty * 15)))} cr
+                          Créditos Consumidos: {loteProducao.reduce((sum, item) => sum + item.custo, 0) + (postType === "carrossel" ? 125 : (postQty === 0 ? 0 : (postType === "reels" ? postQty * 35 : postQty * 15)))} cr
                         </span>
                       </div>
                       <span className="text-sm select-none">💰</span>
