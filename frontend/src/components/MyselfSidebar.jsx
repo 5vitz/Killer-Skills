@@ -18,7 +18,12 @@ export default function MyselfSidebar({
   activeArch,
   personaConfirmed,
   setPersonaConfirmed,
-  isPremium
+  isPremium,
+  isIntegrated,
+  setIsIntegrated,
+  tagsRefino,
+  setTagsRefino,
+  handleConfirmarPersona
 }) {
   const GRADIENT_3_TONES = "linear-gradient(to bottom, #383838 0%, #222222 20%, #000000 40%)";
   const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES;
@@ -139,37 +144,54 @@ export default function MyselfSidebar({
                     className="text-[11px] uppercase tracking-widest text-white/50 text-center"
                     style={{ fontFamily: 'Poppins', fontWeight: 300 }}
                   >
-                    {activeView === "servicos_escolha" ? "MYSELF" : "SIGNIFICADO"}
+                    {(activeView === "servicos_escolha" || isIntegrated) ? "MYSELF" : "SIGNIFICADO"}
                   </h2>
                 </div>
 
-                {activeView === "servicos_escolha" ? (() => {
+                {(activeView === "servicos_escolha" || isIntegrated) ? (() => {
                   const { top1, top2, quintas, top4, subtoms } = getTetracordeMeva();
                   return (
                     <>
-                      {/* Sumário Visual do Tetracorde MEVA (Respiração Visual na metade superior) */}
+                      {/* Sumário Visual do Tetracorde MEVA (Transformado em Inputs de Refino) */}
                       <div className="relative z-10 flex flex-col gap-2.5 mb-auto select-none pt-2">
-                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2 text-left">
                           <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Mensagem (Tônica)</span>
-                          <span className="text-[10px] font-poppins-light tracking-wide text-brand-gold uppercase">{top1.tag}</span>
+                          <input 
+                            type="text" 
+                            value={tagsRefino.tonica}
+                            onChange={(e) => setTagsRefino({...tagsRefino, tonica: e.target.value})}
+                            className="bg-transparent border-0 border-b border-transparent focus:border-brand-gold/40 text-right uppercase text-[10px] font-poppins-light tracking-wide text-brand-gold focus:outline-none focus:ring-0 w-[160px] p-0"
+                          />
                         </div>
-                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2 text-left">
                           <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Cenário (Terça)</span>
-                          <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase">
-                            {top2 ? top2.tag : "Neutro"}
-                          </span>
+                          <input 
+                            type="text" 
+                            value={tagsRefino.terca}
+                            onChange={(e) => setTagsRefino({...tagsRefino, terca: e.target.value})}
+                            className="bg-transparent border-0 border-b border-transparent focus:border-white/30 text-right uppercase text-[10px] font-poppins-light tracking-wide text-white/70 focus:outline-none focus:ring-0 w-[160px] p-0"
+                            placeholder="Neutro"
+                          />
                         </div>
-                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2 text-left">
                           <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Elementos (Quinta)</span>
-                          <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase text-right truncate max-w-[140px]">
-                            {quintas.length > 0 ? quintas.map(q => q.tag).join(" + ") : "Neutro"}
-                          </span>
+                          <input 
+                            type="text" 
+                            value={tagsRefino.quinta}
+                            onChange={(e) => setTagsRefino({...tagsRefino, quinta: e.target.value})}
+                            className="bg-transparent border-0 border-b border-transparent focus:border-white/30 text-right uppercase text-[10px] font-poppins-light tracking-wide text-white/70 focus:outline-none focus:ring-0 w-[160px] p-0"
+                            placeholder="Neutro"
+                          />
                         </div>
-                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2 text-left">
                           <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Estilo (Sétima)</span>
-                          <span className="text-[10px] font-poppins-light tracking-wide text-white/70 uppercase">
-                            {top4 ? top4.tag : "Neutro"}
-                          </span>
+                          <input 
+                            type="text" 
+                            value={tagsRefino.setima}
+                            onChange={(e) => setTagsRefino({...tagsRefino, setima: e.target.value})}
+                            className="bg-transparent border-0 border-b border-transparent focus:border-white/30 text-right uppercase text-[10px] font-poppins-light tracking-wide text-white/70 focus:outline-none focus:ring-0 w-[160px] p-0"
+                            placeholder="Neutro"
+                          />
                         </div>
                         {subtoms.length > 0 && (
                           <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
@@ -191,29 +213,28 @@ export default function MyselfSidebar({
                         <div className="flex flex-col gap-2 mt-2 select-none border-t border-white/5 pt-3 shrink-0">
                           {/* Botão Confirmar Persona */}
                           <button 
-                            onClick={() => setPersonaConfirmed(!personaConfirmed)}
-                            className={`w-full h-8 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200 ${
-                              personaConfirmed 
-                                ? "bg-brand-blue/10 border border-brand-blue/30 text-brand-blue" 
-                                : "bg-white/5 border border-white/10 text-white/70 hover:bg-white/10"
-                            }`}
+                            onClick={handleConfirmarPersona}
+                            className="w-full h-8 bg-brand-blue/10 border border-brand-blue/30 text-brand-blue hover:bg-brand-blue/20 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200"
                           >
-                            {personaConfirmed ? "✓ PERSONA CONFIRMADA" : "✓ CONFIRMAR PERSONA"}
+                            ✓ CONFIRMAR PERSONA
                           </button>
 
-                          {/* Botão Editar Persona */}
-                          <button 
-                            disabled={!isPremium}
-                            onClick={() => {
-                              setActiveView("servicos");
-                              setOnboardingStep("matriz");
-                            }}
-                            className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
-                              !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
-                            }`}
-                          >
-                            ✎ EDITAR PERSONA {!isPremium && "🔒"}
-                          </button>
+                          {/* Botão Editar Persona (Apenas se não estiver na tela de sliders) */}
+                          {activeView !== "servicos" && (
+                            <button 
+                              disabled={!isPremium}
+                              onClick={() => {
+                                setActiveView("servicos");
+                                setOnboardingStep("matriz");
+                                setIsIntegrated(true);
+                              }}
+                              className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
+                                !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
+                              }`}
+                            >
+                              ✎ EDITAR PERSONA {!isPremium && "🔒"}
+                            </button>
+                          )}
                         </div>
                       </div>
                     </>

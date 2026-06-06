@@ -10,7 +10,10 @@ export default function EspelhoDaAlma({
   setHoveredArchetype,
   activeArch,
   setHasPersonaDefined,
-  setActiveView
+  setActiveView,
+  setIsIntegrated,
+  setTagsRefino,
+  getTetracordeMeva
 }) {
   const GRADIENT_3_TONES_INVERTED = "linear-gradient(to bottom, #000000 0%, #000000 60%, #222222 80%, #383838 100%)";
   const ACTIVE_PLAYER_GRADIENT = GRADIENT_3_TONES_INVERTED;
@@ -147,9 +150,15 @@ export default function EspelhoDaAlma({
             {/* Botão de Finalização Gerar Persona */}
             <button 
               onClick={() => {
-                // Conclui Onboarding e envia diretamente para Tela 2A (Serviços)
-                setHasPersonaDefined(true);
-                setActiveView("servicos_escolha");
+                // Calcula o Tetracorde e preenche as tags de refino
+                const meva = getTetracordeMeva();
+                setTagsRefino({
+                  tonica: meva.top1.tag,
+                  terca: meva.top2 ? meva.top2.tag : "",
+                  quinta: meva.quintas.length > 0 ? meva.quintas.map(q => q.tag).join(" + ") : "",
+                  setima: meva.top4 ? meva.top4.tag : ""
+                });
+                setIsIntegrated(true);
               }}
               className="btn-dashboard-avancar z-30"
             >

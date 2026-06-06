@@ -112,6 +112,14 @@ export default function App() {
   const [selectedPersonaIdx, setSelectedPersonaIdx] = useState(0);
   const [isPortalOpen, setIsPortalOpen] = useState(false);
   const [currentSlideIdx, setCurrentSlideIdx] = useState(0);
+
+  const [isIntegrated, setIsIntegrated] = useState(false);
+  const [tagsRefino, setTagsRefino] = useState({
+    tonica: "",
+    terca: "",
+    quinta: "",
+    setima: ""
+  });
   const [microServicesState, setMicroServicesState] = useState({
     legendas: true,
     roteiro: false,
@@ -341,6 +349,12 @@ ${subtomsSection}
     setIsAdminMode(false);
     setActiveView("storyboard");
     setIsMuted(true); // Silencia a trilha sonora no logout
+  };
+
+  const handleConfirmarPersona = () => {
+    setPersonaConfirmed(true);
+    setHasPersonaDefined(true);
+    setActiveView("storyboard");
   };
 
   const runAiAnalysis = async () => {
@@ -577,7 +591,7 @@ ${subtomsSection}
   const currentPersona = activePersonasList[selectedPersonaIdx] || activePersonasList[0];
   const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || ARCHETYPES[0]) : null;
   const isMetamorphosed = activeView === "servicos" && onboardingStep === "matriz" && activeArch;
-  const showPersonaCard = isMetamorphosed || (activeView === "servicos_escolha");
+  const showPersonaCard = isMetamorphosed || isIntegrated || (activeView === "servicos_escolha");
 
 
   return (
@@ -605,6 +619,11 @@ ${subtomsSection}
         personaConfirmed={personaConfirmed}
         setPersonaConfirmed={setPersonaConfirmed}
         isPremium={isPremium}
+        isIntegrated={isIntegrated}
+        setIsIntegrated={setIsIntegrated}
+        tagsRefino={tagsRefino}
+        setTagsRefino={setTagsRefino}
+        handleConfirmarPersona={handleConfirmarPersona}
       />
 
       {/* 2. CONTEÚDO PRINCIPAL (COMPLETAMENTE ADAPTÁVEL) */}
@@ -625,6 +644,9 @@ ${subtomsSection}
                 activeArch={activeArch}
                 setHasPersonaDefined={setHasPersonaDefined}
                 setActiveView={setActiveView}
+                setIsIntegrated={setIsIntegrated}
+                setTagsRefino={setTagsRefino}
+                getTetracordeMeva={getTetracordeMeva}
               />
 
               <PortalPersona
