@@ -36,7 +36,7 @@ Elevamos a gerência de projeto da Killer Skills para uma infraestrutura ágil d
    JIRA_EMAIL="sinkando@gmail.com"
    JIRA_API_TOKEN="[TOKEN_SEGURO_SALVO_AQUI]"
    ```
-3. **Importação Programática do Backlog:** Desenvolvemos e rodamos um script utilitário (`scratch/jira_importer.py`) que consumiu o `docs/TASKS.md` e importou **7 cartões técnicos altamente detalhados** (da chave `KAN-4` à `KAN-10`) diretamente para a coluna **A FAZER** do Kanban do Genera.
+3. **Importação Programática do Backlog:** Desenvolvemos e rodamos um script utilitário (`scratch/jira_importer.py`) que consumiu o `docs/skills/4_metodologia/TASKS.md` e importou **7 cartões técnicos altamente detalhados** (da chave `KAN-4` à `KAN-10`) diretamente para a coluna **A FAZER** do Kanban do Genera.
 
 ---
 

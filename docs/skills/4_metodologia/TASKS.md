@@ -92,7 +92,7 @@ gantt
 *   [x] **Botão de Simulação Master:** Criação do botão `Simular Esteira em Prod ➔` na base interna do celular após a conclusão (100%), permitindo o reset suave do visor.
 
 ### 🟢 FASE 5.0: BIBLIOTECA DE AGENTES E NOVA ONTOLOGIA OPERACIONAL (Módulo Documentação) — [CONCLUÍDO]
-*   [x] **Criação do Diretório Local:** `/docs/referencias_agentes/` integrado nativamente ao repositório local.
+*   [x] **Criação do Diretório Local:** `/docs/skills/5_agentes/` integrado nativamente ao repositório local.
 *   [x] **Mapeamento Conceitual:** Elaboração de `INDEX.md` consolidando a origem do repositório `msitarzewski/agency-agents` e a nova Trindade Operacional (Gerente de Esteira, Construtor de Flow e Agente Postador).
 *   [x] **Download de Especialistas de Insumo:** Gravação física local e enriquecimento de 5 manifestos estratégicos: *Image Prompt Engineer*, *Whimsy Injector*, *Content Creator*, *Carousel Growth Engine* e *Sprint Prioritizer*.
 
@@ -107,7 +107,7 @@ gantt
 ## 🎯 PONTO DE PARADA OPERACIONAL (ONDE PARAMOS HOJE)
 *   **Forja Unificada e Transição Direta:** A emissão de Ordem de Serviço na Tela 2A agora transiciona o usuário imediatamente para a Tela 3 (KS Studio), e o visor do smartphone central assume reativamente todo o progresso e renderiza o manifesto YAML consolidado. O modal intermediário foi 100% expurgado do código.
 *   **Botão de Simulação Integrado:** Adicionado o botão dourado `Simular Esteira em Prod ➔` na base interna do celular, resetando os estados e retornando o visor ao modo padrão de forma fluida.
-*   **Biblioteca de Agentes Importada:** Criado o diretório `/docs/referencias_agentes/` com um arquivo `INDEX.md` mapeando a Trindade Operacional (Gerente de Esteira, Construtor de Flow e Agente Postador) e contendo a gravação local de 5 agentes estratégicos do repositório `msitarzewski/agency-agents` do GitHub.
+*   **Biblioteca de Agentes Importada:** Criado o diretório `/docs/skills/5_agentes/` com um arquivo `INDEX.md` mapeando a Trindade Operacional (Gerente de Esteira, Construtor de Flow e Agente Postador) e contendo a gravação local de 5 agentes estratégicos do repositório `msitarzewski/agency-agents` do GitHub.
 *   **Compilação e Estabilidade Local:** O pipeline de build do frontend Vite (`npm run build`) e a validação sintática do backend FastAPI (`python3 -m py_compile app.py`) foram executados com **100% de sucesso**. Tudo está plenamente estável no ambiente local.
 
 ---
