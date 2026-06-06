@@ -28,11 +28,14 @@ export default function MyselfSidebar({
   const GRADIENT_3_TONES = "linear-gradient(to bottom, #383838 0%, #222222 20%, #000000 40%)";
   const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES;
 
+  const showMenuPadrao = !showPersonaCard && activeView !== "storyboard";
+  const showDiagnosticoCard = showPersonaCard && activeView !== "storyboard";
+
   return (
     <div className="w-[320px] z-10 flex flex-col justify-between p-5 border-r border-white/10 bg-[#0A0A0A] relative overflow-hidden transition-all duration-500 shrink-0">
       
       {/* ESTADO A: MENU PADRÃO */}
-      <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showPersonaCard ? "opacity-0 scale-95 pointer-events-none absolute inset-5" : "opacity-100 scale-100"}`}>
+      <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showMenuPadrao ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
         <div className="flex flex-col">
           {/* Bloco de Identidade: Marca + Conta do Usuário (Espaçamento Luxuoso) */}
           <div className="flex flex-col gap-8">
@@ -129,7 +132,7 @@ export default function MyselfSidebar({
       </div>
 
       {/* ESTADO B: GUIA FINO E DETALHADO (ARQUÉTIPOS TEXTOS) */}
-      <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showPersonaCard ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
+      <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showDiagnosticoCard ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
         {showPersonaCard && (
           <>
             {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
@@ -235,6 +238,18 @@ export default function MyselfSidebar({
                               ✎ EDITAR PERSONA {!isPremium && "🔒"}
                             </button>
                           )}
+
+                          {/* Botão Voltar ao Vídeo Onboarding */}
+                          <button 
+                            onClick={() => {
+                              setActiveView("servicos");
+                              setOnboardingStep("video");
+                              setIsIntegrated(false);
+                            }}
+                            className="w-full h-8 bg-white/5 border border-white/10 hover:bg-brand-pink/10 hover:text-brand-pink hover:border-brand-pink/20 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none text-white/40 flex items-center justify-center gap-1 mt-1"
+                          >
+                            <ChevronLeft className="w-3.5 h-3.5" /> Voltar ao Vídeo
+                          </button>
                         </div>
                       </div>
                     </>
@@ -283,6 +298,34 @@ export default function MyselfSidebar({
           </>
         )}
       </div>
+
+      {/* ESTADO C: TELA 3 (KS STUDIO) LIMPO COM BOTÃO VOLTAR */}
+      {activeView === "storyboard" && (
+        <div className="w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out">
+          {/* Header */}
+          <div className="w-full shrink-0 select-none mt-2 mb-3">
+            <h2 
+              className="text-[11px] uppercase tracking-widest text-white/50 text-center"
+              style={{ fontFamily: 'Poppins', fontWeight: 300 }}
+            >
+              KS Studio
+            </h2>
+          </div>
+
+          {/* Área Central Vazia de Respiro */}
+          <div className="flex-1 flex flex-col justify-center items-center opacity-10 select-none">
+            <div className="text-xl font-bold tracking-tight text-white/50">Killer Skills</div>
+          </div>
+          
+          {/* Botão VOLTAR no rodapé */}
+          <button 
+            onClick={() => setActiveView("servicos_escolha")}
+            className="w-full h-10 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-1.5 duration-200 text-white/70"
+          >
+            <ChevronLeft className="w-4 h-4" /> Voltar ao Painel
+          </button>
+        </div>
+      )}
 
     </div>
   );
