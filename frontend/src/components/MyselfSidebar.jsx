@@ -139,21 +139,22 @@ export default function MyselfSidebar({
       <div className={`w-full h-full flex flex-col justify-between transition-all duration-500 ease-in-out ${showDiagnosticoCard ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute inset-5"}`}>
         {showPersonaCard && (
           <>
+            {/* TOPO FIXO: Título Geral Simétrico */}
+            <div className="flex flex-col gap-1 w-full shrink-0 select-none mb-3">
+              <h2 
+                className="text-sm uppercase tracking-wider text-white text-center"
+                style={{ fontFamily: 'Poppins', fontWeight: 300 }}
+              >
+                {(activeView === "servicos_escolha" || isIntegrated) ? "MYSELF" : "SIGNIFICADO"}
+              </h2>
+            </div>
+
             {/* CONTEÚDO DO PORTAL ABAIXO (TEXT PLAYER CARD) */}
             <div className="flex-1 flex flex-col gap-4 overflow-hidden">
               <div 
                 className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-5 flex flex-col transition-all duration-500"
                 style={{ background: ACTIVE_COCKPIT_GRADIENT }}
               >
-                {/* TÍTULO INTERNO DO CARD ALINHADO */}
-                <div className="w-full shrink-0 select-none mt-2 mb-3">
-                  <h2 
-                    className="text-[11px] uppercase tracking-widest text-white/50 text-center"
-                    style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                  >
-                    {(activeView === "servicos_escolha" || isIntegrated) ? "MYSELF" : "SIGNIFICADO"}
-                  </h2>
-                </div>
 
                 {(activeView === "servicos_escolha" || isIntegrated) ? (() => {
                   const { top1, top2, quintas, top4, subtoms } = getTetracordeMeva();
