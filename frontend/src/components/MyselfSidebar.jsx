@@ -28,7 +28,7 @@ export default function MyselfSidebar({
   const GRADIENT_3_TONES = "linear-gradient(to bottom, #383838 0%, #222222 20%, #000000 40%)";
   const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES;
 
-  const showMenuPadrao = !showPersonaCard && activeView !== "storyboard";
+  const showMenuPadrao = !showPersonaCard && activeView !== "storyboard" && activeView !== "servicos_escolha";
   const showDiagnosticoCard = showPersonaCard && activeView !== "storyboard";
 
   return (
@@ -65,7 +65,11 @@ export default function MyselfSidebar({
           <div className="flex flex-col gap-2 pt-2">
             
             <button 
-              onClick={() => setActiveView("servicos")}
+              onClick={() => {
+                setIsIntegrated(false);
+                setOnboardingStep("matriz");
+                setActiveView("servicos");
+              }}
               className={`w-full h-11 px-4 rounded-lg text-left text-xs font-semibold flex items-center gap-3 duration-200 ${
                 activeView === "servicos" 
                   ? "bg-white/5 border border-white/5 text-white" 

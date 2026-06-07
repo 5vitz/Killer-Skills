@@ -354,7 +354,7 @@ ${subtomsSection}
   const handleConfirmarPersona = () => {
     setPersonaConfirmed(true);
     setHasPersonaDefined(true);
-    setActiveView("storyboard");
+    setActiveView("servicos_escolha");
   };
 
   const runAiAnalysis = async () => {
@@ -591,7 +591,7 @@ ${subtomsSection}
   const currentPersona = activePersonasList[selectedPersonaIdx] || activePersonasList[0];
   const activeArch = onboardingStep === "matriz" ? (hoveredArchetype || ARCHETYPES[0]) : null;
   const isMetamorphosed = activeView === "servicos" && onboardingStep === "matriz" && activeArch;
-  const showPersonaCard = isMetamorphosed || isIntegrated || (activeView === "servicos_escolha");
+  const showPersonaCard = isMetamorphosed || (activeView === "servicos" && isIntegrated);
 
 
   return (

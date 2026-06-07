@@ -2,6 +2,17 @@
 
 Toda a interação em Desktop é estruturada sob a **Simetria Estática de Três Colunas**, mantendo o smartphone virtual perfeitamente centralizado fisicamente no centro da tela (`fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2`). As transições de tela ocorrem por crossfade exclusivo dentro do visor do celular virtual, enquanto os metadados, instruções de onboarding, relatórios de persona e botões de avanço são distribuídos ergonomicamente entre a barra lateral esquerda (Coluna 1) e a barra lateral direita (Coluna 3).
 
+### Tabela de Mapeamento de Conteúdos por Tela:
+
+| Nome da Tela | Coluna 1 (Sidebar Esquerda) | Coluna 2 (Smartphone Central) | Coluna 3 (Sidebar Direita) |
+| :--- | :--- | :--- | :--- |
+| **Tela 1A** *(Iniciação AI)* | **Menu Padrão** (Inativo; botões do dashboard trancados). | **Avatar de Guia IA** + Letreiro 1 em loop (`♥ Os 12 Arquétipos de Jung ♥`) + Botão **`AVANÇAR`**. | **Imagem de Capa padrão** + Controle de Áudio (`Trilha_Arquetipos.mp3` com Mute e Volume). |
+| **Tela 1B** *(Identificação)* | **Menu Padrão** (Inativo; botões do dashboard trancados). | **Imagem conceitual de mãos de IA** + Letreiro 2 em loop (`♥ O quanto você se identifica...? ♥`) + Botão **`AVANÇAR`**. | **Imagem de Capa padrão** + Controle de Áudio. |
+| **Tela 1C** *(Dosador)* | **Guia de Significado** (Metamorfose do menu em hover, exibindo descrição, desejo, medo, superpoder e sombra) **OU** **Menu Padrão** (sem hover). | Título `ESPELHO DA ALMA` + Grid com os **12 Sliders Arquetípicos** (0% a 100%) + Botão **`INTEGRAR`**. | **Título dinâmico** do arquétipo em foco + **Imagem arquetípica** reativa + Controle de Áudio. |
+| **Tela 1D** *(Diagnóstico)* | **Painel MYSELF / OURSELVES** (Título Híbrido, inputs de refino do Tetracorde, diagnóstico dinâmico de 4-6 linhas, botões **`CONFIRMAR PERSONA`**, **`EDITAR PERSONA`** e **`Voltar ao Vídeo`**). | Título `ESPELHO DA ALMA` + **Grid dos sliders travados** em modo de visualização. | **Título dinâmico** do arquétipo + **Imagem arquetípica** + Controle de Áudio. |
+| **Tela 2** *(Cockpit)* | **Limpa** (Espaço de respiro reservado para futuras informações). | Título `DEFINIÇÕES DO POST` + **Configurações Físicas** (Formato do Post, Quantidade, pílulas de tags táteis) + Botão dourado **`EMITIR ORDEM DE SERVIÇO`**. | **Selo do Plano** + **Painel de Serviços Ativados** (17 Serviços em acordeões com `✓ ATIVO` ou `🔒 TRANCADO`) + **Custo da OS em créditos** + Controle de Áudio. |
+
+
 ### E.0. Lógica de Dispositivo Dual (isMobile Viewport)
 *   **Desktop (`isMobile === false`):** Exibe a simetria de 3 colunas com o smartphone virtual centralizado de luxo.
 *   **Mobile (`isMobile === true`):** Destrói o smartphone virtual. A própria tela do dispositivo físico do usuário torna-se a viewport principal de forma nativa e ergonômica, utilizando um menu inferior e sliders táteis robustos de ponta a ponta.
