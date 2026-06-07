@@ -214,6 +214,23 @@ export default function MyselfSidebar({
                         
                         {/* Botões de Confirmação e Edição da Persona */}
                         <div className="flex flex-col gap-2 mt-2 select-none border-t border-white/5 pt-3 shrink-0">
+                          {/* Botão Editar Persona (Acima do Confirmar Persona, disponível em ambas as telas) */}
+                          <button 
+                            disabled={!isPremium}
+                            onClick={() => {
+                              setIsIntegrated(false); // Retorna a Coluna 1 ao modo SIGNIFICADO
+                              if (activeView !== "servicos") {
+                                setActiveView("servicos");
+                                setOnboardingStep("matriz");
+                              }
+                            }}
+                            className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
+                              !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
+                            }`}
+                          >
+                            ✎ EDITAR PERSONA {!isPremium && "🔒"}
+                          </button>
+
                           {/* Botão Confirmar Persona */}
                           <button 
                             onClick={handleConfirmarPersona}
@@ -222,34 +239,32 @@ export default function MyselfSidebar({
                             ✓ CONFIRMAR PERSONA
                           </button>
 
-                          {/* Botão Editar Persona (Apenas se não estiver na tela de sliders) */}
-                          {activeView !== "servicos" && (
+                          {/* Botão VOLTAR no rodapé da Tela 2 */}
+                          {activeView === "servicos_escolha" && (
                             <button 
-                              disabled={!isPremium}
                               onClick={() => {
                                 setActiveView("servicos");
                                 setOnboardingStep("matriz");
-                                setIsIntegrated(true);
                               }}
-                              className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
-                                !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
-                              }`}
+                              className="w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none text-white/40 flex items-center justify-center gap-1 mt-1"
                             >
-                              ✎ EDITAR PERSONA {!isPremium && "🔒"}
+                              <ChevronLeft className="w-3.5 h-3.5" /> Voltar aos Sliders
                             </button>
                           )}
 
-                          {/* Botão Voltar ao Vídeo Onboarding */}
-                          <button 
-                            onClick={() => {
-                              setActiveView("servicos");
-                              setOnboardingStep("video");
-                              setIsIntegrated(false);
-                            }}
-                            className="w-full h-8 bg-white/5 border border-white/10 hover:bg-brand-pink/10 hover:text-brand-pink hover:border-brand-pink/20 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none text-white/40 flex items-center justify-center gap-1 mt-1"
-                          >
-                            <ChevronLeft className="w-3.5 h-3.5" /> Voltar ao Vídeo
-                          </button>
+                          {/* Botão Voltar ao Vídeo Onboarding (Apenas na Tela 1) */}
+                          {activeView === "servicos" && (
+                            <button 
+                              onClick={() => {
+                                setActiveView("servicos");
+                                setOnboardingStep("video");
+                                setIsIntegrated(false);
+                              }}
+                              className="w-full h-8 bg-white/5 border border-white/10 hover:bg-brand-pink/10 hover:text-brand-pink hover:border-brand-pink/20 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none text-white/40 flex items-center justify-center gap-1 mt-1"
+                            >
+                              <ChevronLeft className="w-3.5 h-3.5" /> Voltar ao Vídeo
+                            </button>
+                          )}
                         </div>
                       </div>
                     </>
