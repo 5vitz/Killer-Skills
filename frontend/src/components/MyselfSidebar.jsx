@@ -338,7 +338,11 @@ export default function MyselfSidebar({
           
           {/* Botão VOLTAR no rodapé */}
           <button 
-            onClick={() => setActiveView("servicos_escolha")}
+            onClick={() => {
+              setIsIntegrated(true);
+              setOnboardingStep("matriz");
+              setActiveView("servicos");
+            }}
             className="w-full h-10 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-1.5 duration-200 text-white/70"
           >
             <ChevronLeft className="w-4 h-4" /> Voltar ao Painel
