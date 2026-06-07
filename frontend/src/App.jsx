@@ -698,57 +698,12 @@ ${subtomsSection}
               </div>
             </div>
 
-            {/* COLUNA LATERAL DIREITA: Serviços Premium (Acordeões) */}
+            {/* COLUNA LATERAL DIREITA: Limpa (Controle de Áudio na base) */}
             <div className="absolute -right-10 -top-10 -bottom-10 w-[320px] border-l border-white/10 bg-[#0A0A0A] p-5 flex flex-col justify-between z-20 text-left animate-fade-in text-white shadow-2xl">
               
-              {/* CONTEÚDO DO PORTAL: 3 Cards Expansíveis (Acordeões) */}
+              {/* CONTEÚDO DO PORTAL: Vazio */}
               <div className="flex-1 flex flex-col gap-4 overflow-hidden">
-                <div 
-                  className="flex-1 w-full relative rounded-lg overflow-hidden border border-white/10 shadow-lg p-4 flex flex-col justify-between transition-all duration-500"
-                  style={{ background: ACTIVE_COCKPIT_GRADIENT }}
-                >
-                  <div className="flex flex-col gap-2.5 relative z-10 flex-1 overflow-hidden">
-                    {/* TÍTULO INTERNO DO CARD ALINHADO */}
-                    <div className="w-full shrink-0 select-none mt-2 mb-3">
-                      <h2 
-                        className="text-[11px] uppercase tracking-widest text-white/50 text-center"
-                        style={{ fontFamily: 'Poppins', fontWeight: 300 }}
-                      >
-                        SERVIÇOS PREMIUM
-                      </h2>
-                    </div>
-
-                    {/* Acordeões de Serviços */}
-                    {renderServicosPremium()}
-                  </div>
-
-                  {/* BLOCOS MOVIDOS: Custo no Rodapé do Card */}
-                  <div className="relative z-10 flex flex-col gap-3 mt-3 pt-3 border-t border-white/5 shrink-0">
-                    {/* Bloco de Custo Estimado Reativo em Destaque Dourado Metalizado */}
-                    <div className="w-full bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent border border-brand-gold/30 rounded-lg p-2 flex items-center justify-between text-left select-none">
-                      <div className="flex flex-col">
-                        <span className="text-[7px] font-bold text-brand-gold/80 uppercase tracking-wider">Custo da Ordem de Serviço</span>
-                        <span className="text-[9.5px] font-black text-brand-gold uppercase tracking-wide">
-                          Créditos Consumidos: {loteProducao.reduce((sum, item) => sum + item.custo, 0) + (postType === "carrossel" ? 125 : (postQty === 0 ? 0 : (postType === "reels" ? postQty * 35 : postQty * 15)))} cr
-                        </span>
-                      </div>
-                      <span className="text-sm select-none">💰</span>
-                    </div>
-                  </div>
-
-                  {/* Botão de Upgrade para Free */}
-                  {!isPremium && (
-                    <button 
-                      onClick={() => {
-                        setActiveView("servicos");
-                        setOnboardingStep("video");
-                      }}
-                      className="w-full h-11 bg-brand-gold hover:bg-[#F0C547] active:scale-95 duration-200 rounded-lg text-black text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 relative z-10 mt-3 shrink-0 shadow-lg shadow-brand-gold/15"
-                    >
-                      Fazer Upgrade para Premium <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  )}
-                </div>
+                {/* Limpo (Espaço reservado para futuras informações) */}
               </div>
 
               <AudioControls
