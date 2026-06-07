@@ -25,7 +25,6 @@ export default function MyselfSidebar({
   setTagsRefino,
   handleConfirmarPersona
 }) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const GRADIENT_3_TONES = "linear-gradient(to bottom, #383838 0%, #222222 20%, #000000 40%)";
   const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES;
 
@@ -166,90 +165,8 @@ export default function MyselfSidebar({
                           {compilarDiagnosticoTetracorde()}
                         </div>
                       </div>
-
-                      {/* Card Chassi Unificado com as 4 caixas de Refino */}
-                      <div className="relative z-10 flex flex-col gap-3 bg-white/[0.01] border border-white/10 rounded-lg p-3.5 select-none mt-2 mb-auto">
-                        
-                        {/* Caixa 1: Persona */}
-                        <div className="flex flex-col gap-1 text-left">
-                          <span className="text-[7.5px] uppercase tracking-wider text-white/40 font-poppins-light">Persona</span>
-                          <input 
-                            type="text" 
-                            value={tagsRefino.tonica}
-                            onChange={(e) => setTagsRefino({...tagsRefino, tonica: e.target.value})}
-                            className="w-full bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[10px] text-white focus:outline-none focus:ring-0 font-poppins-light focus:border-brand-gold/40 transition-all"
-                          />
-                        </div>
-
-                        {/* Caixa 2: Cenário */}
-                        <div className="flex flex-col gap-1 text-left">
-                          <span className="text-[7.5px] uppercase tracking-wider text-white/40 font-poppins-light">Cenário</span>
-                          <input 
-                            type="text" 
-                            value={tagsRefino.terca}
-                            onChange={(e) => setTagsRefino({...tagsRefino, terca: e.target.value})}
-                            className="w-full bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[10px] text-white focus:outline-none focus:ring-0 font-poppins-light focus:border-brand-gold/40 transition-all"
-                            placeholder="Neutro"
-                          />
-                        </div>
-
-                        {/* Caixa 3: Elementos/Objetos */}
-                        <div className="flex flex-col gap-1 text-left">
-                          <span className="text-[7.5px] uppercase tracking-wider text-white/40 font-poppins-light">Elementos/Objetos</span>
-                          <input 
-                            type="text" 
-                            value={tagsRefino.quinta}
-                            onChange={(e) => setTagsRefino({...tagsRefino, quinta: e.target.value})}
-                            className="w-full bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[10px] text-white focus:outline-none focus:ring-0 font-poppins-light focus:border-brand-gold/40 transition-all"
-                            placeholder="Neutro"
-                          />
-                        </div>
-
-                        {/* Caixa 4: Estilo Artístico da Mídia (Dropdown com hover elegante) */}
-                        <div 
-                          className="relative flex flex-col gap-1 text-left"
-                          onMouseEnter={() => setIsDropdownOpen(true)}
-                          onMouseLeave={() => setIsDropdownOpen(false)}
-                        >
-                          <span className="text-[7.5px] uppercase tracking-wider text-white/40 font-poppins-light">Estilo Artístico da Mídia</span>
-                          <div className="relative">
-                            <input 
-                              type="text" 
-                              readOnly
-                              value={tagsRefino.setima || "Selecionar Estilo..."}
-                              className="w-full bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[10px] text-white focus:outline-none focus:ring-0 font-poppins-light cursor-pointer text-left transition-all"
-                            />
-                            {isDropdownOpen && (
-                              <div className="absolute left-0 right-0 bottom-full mb-1 bg-[#0A0A0C] border border-white/10 rounded shadow-2xl z-50 py-1 animate-fade-in max-h-[150px] overflow-y-auto custom-scrollbar-visible">
-                                {[
-                                  "Cinematográfico",
-                                  "Intimista",
-                                  "Vintage",
-                                  "Minimalista",
-                                  "Cyber-Luxury",
-                                  "Editorial de Moda"
-                                ].map((estilo) => (
-                                  <button
-                                    key={estilo}
-                                    type="button"
-                                    onClick={() => {
-                                      setTagsRefino({ ...tagsRefino, setima: estilo });
-                                      setIsDropdownOpen(false);
-                                    }}
-                                    className="w-full text-left px-3 py-1.5 text-[9px] font-poppins-light uppercase tracking-wider hover:bg-brand-gold/10 hover:text-brand-gold transition-colors duration-150"
-                                  >
-                                    {estilo}
-                                  </button>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-
-                      </div>
-
-                      {/* Botões de Confirmação e Edição da Persona */}
-                      <div className="flex flex-col gap-2 mt-3 select-none border-t border-white/5 pt-3 shrink-0">
+                      {/* Botões de Edição da Persona */}
+                      <div className="flex flex-col gap-2 mt-auto select-none border-t border-white/5 pt-3 shrink-0">
                         {/* Botão Editar Persona */}
                         <button 
                           disabled={!isPremium}
@@ -265,14 +182,6 @@ export default function MyselfSidebar({
                           }`}
                         >
                           ✎ EDITAR PERSONA {!isPremium && "🔒"}
-                        </button>
-
-                        {/* Botão Confirmar Persona */}
-                        <button 
-                          onClick={handleConfirmarPersona}
-                          className="w-full h-8 bg-brand-blue/10 border border-brand-blue/30 text-brand-blue hover:bg-brand-blue/20 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200"
-                        >
-                          ✓ CONFIRMAR PERSONA
                         </button>
                       </div>
                     </>

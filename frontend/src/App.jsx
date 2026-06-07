@@ -655,6 +655,11 @@ ${subtomsSection}
                 setIsMuted={setIsMuted}
                 volume={volume}
                 setVolume={setVolume}
+                isIntegrated={isIntegrated}
+                activeView={activeView}
+                tagsRefino={tagsRefino}
+                setTagsRefino={setTagsRefino}
+                handleConfirmarPersona={handleConfirmarPersona}
               />
 
             </div>
