@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   User, Cpu, Sparkles, ShieldCheck, LogOut, ChevronLeft 
 } from 'lucide-react';
@@ -25,6 +25,7 @@ export default function MyselfSidebar({
   setTagsRefino,
   handleConfirmarPersona
 }) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const GRADIENT_3_TONES = "linear-gradient(to bottom, #383838 0%, #222222 20%, #000000 40%)";
   const ACTIVE_COCKPIT_GRADIENT = GRADIENT_3_TONES;
 
@@ -159,117 +160,120 @@ export default function MyselfSidebar({
                   const { top1, top2, quintas, top4, subtoms } = getTetracordeMeva();
                   return (
                     <>
-                      {/* Sumário Visual do Tetracorde MEVA (Transformado em Inputs de Refino) */}
-                      <div className="relative z-10 flex flex-col gap-2.5 mb-auto select-none pt-2">
-                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2 text-left">
-                          <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Mensagem (Tônica)</span>
+                      {/* Diagnóstico Dinâmico de Persona compilado no topo do card */}
+                      <div className="relative z-10 flex flex-col text-justify select-text pt-1 mb-2">
+                        <div className="font-poppins-light text-[12px] leading-relaxed text-white/95">
+                          {compilarDiagnosticoTetracorde()}
+                        </div>
+                      </div>
+
+                      {/* Card Chassi Unificado com as 4 caixas de Refino */}
+                      <div className="relative z-10 flex flex-col gap-3 bg-white/[0.01] border border-white/10 rounded-lg p-3.5 select-none mt-2 mb-auto">
+                        
+                        {/* Caixa 1: Persona */}
+                        <div className="flex flex-col gap-1 text-left">
+                          <span className="text-[7.5px] uppercase tracking-wider text-white/40 font-poppins-light">Persona</span>
                           <input 
                             type="text" 
                             value={tagsRefino.tonica}
                             onChange={(e) => setTagsRefino({...tagsRefino, tonica: e.target.value})}
-                            className="bg-transparent border-0 border-b border-transparent focus:border-brand-gold/40 text-right uppercase text-[10px] font-poppins-light tracking-wide text-brand-gold focus:outline-none focus:ring-0 w-[160px] p-0"
+                            className="w-full bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[10px] text-white focus:outline-none focus:ring-0 font-poppins-light focus:border-brand-gold/40 transition-all"
                           />
                         </div>
-                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2 text-left">
-                          <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Cenário (Terça)</span>
+
+                        {/* Caixa 2: Cenário */}
+                        <div className="flex flex-col gap-1 text-left">
+                          <span className="text-[7.5px] uppercase tracking-wider text-white/40 font-poppins-light">Cenário</span>
                           <input 
                             type="text" 
                             value={tagsRefino.terca}
                             onChange={(e) => setTagsRefino({...tagsRefino, terca: e.target.value})}
-                            className="bg-transparent border-0 border-b border-transparent focus:border-white/30 text-right uppercase text-[10px] font-poppins-light tracking-wide text-white/70 focus:outline-none focus:ring-0 w-[160px] p-0"
+                            className="w-full bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[10px] text-white focus:outline-none focus:ring-0 font-poppins-light focus:border-brand-gold/40 transition-all"
                             placeholder="Neutro"
                           />
                         </div>
-                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2 text-left">
-                          <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Elementos (Quinta)</span>
+
+                        {/* Caixa 3: Elementos/Objetos */}
+                        <div className="flex flex-col gap-1 text-left">
+                          <span className="text-[7.5px] uppercase tracking-wider text-white/40 font-poppins-light">Elementos/Objetos</span>
                           <input 
                             type="text" 
                             value={tagsRefino.quinta}
                             onChange={(e) => setTagsRefino({...tagsRefino, quinta: e.target.value})}
-                            className="bg-transparent border-0 border-b border-transparent focus:border-white/30 text-right uppercase text-[10px] font-poppins-light tracking-wide text-white/70 focus:outline-none focus:ring-0 w-[160px] p-0"
+                            className="w-full bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[10px] text-white focus:outline-none focus:ring-0 font-poppins-light focus:border-brand-gold/40 transition-all"
                             placeholder="Neutro"
                           />
                         </div>
-                        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2 text-left">
-                          <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Estilo (Sétima)</span>
-                          <input 
-                            type="text" 
-                            value={tagsRefino.setima}
-                            onChange={(e) => setTagsRefino({...tagsRefino, setima: e.target.value})}
-                            className="bg-transparent border-0 border-b border-transparent focus:border-white/30 text-right uppercase text-[10px] font-poppins-light tracking-wide text-white/70 focus:outline-none focus:ring-0 w-[160px] p-0"
-                            placeholder="Neutro"
-                          />
-                        </div>
-                        {subtoms.length > 0 && (
-                          <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-                            <span className="text-[8px] uppercase tracking-wider text-white/30 font-poppins-light">Colorido (Subtoms)</span>
-                            <span className="text-[9px] font-poppins-light tracking-wide text-white/40 uppercase truncate max-w-[140px]">
-                              {subtoms.slice(0, 2).map(s => s.name).join(", ")}
-                            </span>
+
+                        {/* Caixa 4: Estilo Artístico da Mídia (Dropdown com hover elegante) */}
+                        <div 
+                          className="relative flex flex-col gap-1 text-left"
+                          onMouseEnter={() => setIsDropdownOpen(true)}
+                          onMouseLeave={() => setIsDropdownOpen(false)}
+                        >
+                          <span className="text-[7.5px] uppercase tracking-wider text-white/40 font-poppins-light">Estilo Artístico da Mídia</span>
+                          <div className="relative">
+                            <input 
+                              type="text" 
+                              readOnly
+                              value={tagsRefino.setima || "Selecionar Estilo..."}
+                              className="w-full bg-black/40 border border-white/10 rounded px-2.5 py-1 text-[10px] text-white focus:outline-none focus:ring-0 font-poppins-light cursor-pointer text-left transition-all"
+                            />
+                            {isDropdownOpen && (
+                              <div className="absolute left-0 right-0 bottom-full mb-1 bg-[#0A0A0C] border border-white/10 rounded shadow-2xl z-50 py-1 animate-fade-in max-h-[150px] overflow-y-auto custom-scrollbar-visible">
+                                {[
+                                  "Cinematográfico",
+                                  "Intimista",
+                                  "Vintage",
+                                  "Minimalista",
+                                  "Cyber-Luxury",
+                                  "Editorial de Moda"
+                                ].map((estilo) => (
+                                  <button
+                                    key={estilo}
+                                    type="button"
+                                    onClick={() => {
+                                      setTagsRefino({ ...tagsRefino, setima: estilo });
+                                      setIsDropdownOpen(false);
+                                    }}
+                                    className="w-full text-left px-3 py-1.5 text-[9px] font-poppins-light uppercase tracking-wider hover:bg-brand-gold/10 hover:text-brand-gold transition-colors duration-150"
+                                  >
+                                    {estilo}
+                                  </button>
+                                ))}
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </div>
+
                       </div>
 
-                      {/* Diagnóstico Dinâmico de Persona compilado na base do card */}
-                      <div className="relative z-10 flex flex-col justify-end pr-1 mt-4 select-text">
-                        <div className="font-poppins-light text-[12px] leading-relaxed text-justify whitespace-pre-line mb-3.5" style={{ color: '#FFFFFF' }}>
-                          {compilarDiagnosticoTetracorde()}
-                        </div>
-                        
-                        {/* Botões de Confirmação e Edição da Persona */}
-                        <div className="flex flex-col gap-2 mt-2 select-none border-t border-white/5 pt-3 shrink-0">
-                          {/* Botão Editar Persona (Acima do Confirmar Persona, disponível em ambas as telas) */}
-                          <button 
-                            disabled={!isPremium}
-                            onClick={() => {
-                              setIsIntegrated(false); // Retorna a Coluna 1 ao modo SIGNIFICADO
-                              if (activeView !== "servicos") {
-                                setActiveView("servicos");
-                                setOnboardingStep("matriz");
-                              }
-                            }}
-                            className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
-                              !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
-                            }`}
-                          >
-                            ✎ EDITAR PERSONA {!isPremium && "🔒"}
-                          </button>
+                      {/* Botões de Confirmação e Edição da Persona */}
+                      <div className="flex flex-col gap-2 mt-3 select-none border-t border-white/5 pt-3 shrink-0">
+                        {/* Botão Editar Persona */}
+                        <button 
+                          disabled={!isPremium}
+                          onClick={() => {
+                            setIsIntegrated(false); // Retorna a Coluna 1 ao modo SIGNIFICADO
+                            if (activeView !== "servicos") {
+                              setActiveView("servicos");
+                              setOnboardingStep("matriz");
+                            }
+                          }}
+                          className={`w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none ${
+                            !isPremium ? "opacity-30 cursor-not-allowed" : "text-white/70"
+                          }`}
+                        >
+                          ✎ EDITAR PERSONA {!isPremium && "🔒"}
+                        </button>
 
-                          {/* Botão Confirmar Persona */}
-                          <button 
-                            onClick={handleConfirmarPersona}
-                            className="w-full h-8 bg-brand-blue/10 border border-brand-blue/30 text-brand-blue hover:bg-brand-blue/20 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200"
-                          >
-                            ✓ CONFIRMAR PERSONA
-                          </button>
-
-                          {/* Botão VOLTAR no rodapé da Tela 2 */}
-                          {activeView === "servicos_escolha" && (
-                            <button 
-                              onClick={() => {
-                                setActiveView("servicos");
-                                setOnboardingStep("matriz");
-                              }}
-                              className="w-full h-8 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none text-white/40 flex items-center justify-center gap-1 mt-1"
-                            >
-                              <ChevronLeft className="w-3.5 h-3.5" /> Voltar aos Sliders
-                            </button>
-                          )}
-
-                          {/* Botão Voltar ao Vídeo Onboarding (Apenas na Tela 1) */}
-                          {activeView === "servicos" && (
-                            <button 
-                              onClick={() => {
-                                setActiveView("servicos");
-                                setOnboardingStep("video");
-                                setIsIntegrated(false);
-                              }}
-                              className="w-full h-8 bg-white/5 border border-white/10 hover:bg-brand-pink/10 hover:text-brand-pink hover:border-brand-pink/20 rounded-lg text-[9px] font-bold uppercase tracking-wider duration-200 select-none text-white/40 flex items-center justify-center gap-1 mt-1"
-                            >
-                              <ChevronLeft className="w-3.5 h-3.5" /> Voltar ao Vídeo
-                            </button>
-                          )}
-                        </div>
+                        {/* Botão Confirmar Persona */}
+                        <button 
+                          onClick={handleConfirmarPersona}
+                          className="w-full h-8 bg-brand-blue/10 border border-brand-blue/30 text-brand-blue hover:bg-brand-blue/20 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 duration-200"
+                        >
+                          ✓ CONFIRMAR PERSONA
+                        </button>
                       </div>
                     </>
                   );
@@ -314,9 +318,37 @@ export default function MyselfSidebar({
                 ) : null}
               </div>
             </div>
+
+            {isIntegrated && activeView === "servicos" && (
+              <button 
+                onClick={() => {
+                  setIsIntegrated(false);
+                  setOnboardingStep("matriz");
+                }}
+                className="w-full h-8 flex items-center justify-center gap-1 text-[9px] font-bold uppercase tracking-wider text-white/40 hover:text-white/70 duration-200 select-none mt-2 shrink-0"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" /> VOLTAR
+              </button>
+            )}
           </>
         )}
       </div>
+
+      {/* ESTADO D: TELA 2 (COCKPIT) LIMPA COM BOTÃO VOLTAR NO RODAPÉ */}
+      {activeView === "servicos_escolha" && (
+        <div className="w-full h-full flex flex-col justify-end transition-all duration-500 ease-in-out">
+          <button 
+            onClick={() => {
+              setIsIntegrated(true);
+              setOnboardingStep("matriz");
+              setActiveView("servicos");
+            }}
+            className="w-full h-8 flex items-center justify-center gap-1 text-[9px] font-bold uppercase tracking-wider text-white/40 hover:text-white/70 duration-200 select-none shrink-0"
+          >
+            <ChevronLeft className="w-3.5 h-3.5" /> VOLTAR
+          </button>
+        </div>
+      )}
 
       {/* ESTADO C: TELA 3 (KS STUDIO) LIMPO COM BOTÃO VOLTAR */}
       {activeView === "storyboard" && (
